@@ -1,0 +1,8 @@
+{
+  "name": "@cere-games-sdk/playground",
+  "version": "0.0.0",
+  "dependencies": {},
+  "scripts": {
+    "start": "echo 'Not implemented'"
+  }
+}

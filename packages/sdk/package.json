@@ -1,0 +1,16 @@
+{
+  "name": "@cere/games-sdk",
+  "version": "0.0.0",
+  "types": "./src",
+  "main": "./dist/cjs",
+  "exports": {
+    "import": "./dist/esm",
+    "require": "./dist/cjs"
+  },
+  "dependencies": {},
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc --project ./tsconfig.json",
+    "build:cjs": "tsc --project ./tsconfig.cjs.json"
+  }
+}
