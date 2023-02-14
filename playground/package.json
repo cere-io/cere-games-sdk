@@ -1,8 +1,20 @@
 {
   "name": "@cere-games-sdk/playground",
   "version": "0.0.0",
-  "dependencies": {},
   "scripts": {
-    "start": "echo 'Not implemented'"
+    "start": "craco start"
+  },
+  "dependencies": {
+    "@cere/games-sdk": "*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "react-scripts": "^5.0.1",
+    "@craco/craco": "^7.0.0",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.10",
+    "node-polyfill-webpack-plugin": "^2.0.1",
+    "tsconfig-paths-webpack-plugin": "^4.0.0"
   }
 }

@@ -16,7 +16,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@cere/*": ["packages/*/src"]
+      "@cere/games-sdk": ["packages/sdk/src"],
+      "@cere/games-sdk-ui": ["packages/ui/src"]
     }
   },
   "include": ["packages", "playground"]

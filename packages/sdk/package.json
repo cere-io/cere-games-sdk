@@ -1,6 +1,6 @@
 {
   "name": "@cere/games-sdk",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "types": "./src",
   "main": "./dist/cjs",
   "exports": {

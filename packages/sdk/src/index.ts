@@ -1,3 +1,3 @@
-class CereGamesSDK {}
-
-export default CereGamesSDK;
+export class CereGamesSDK {
+  name = 'Cere Games SDK';
+}
