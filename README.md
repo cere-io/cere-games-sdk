@@ -1,2 +1,3 @@
-# games-sdk
-Cere Games SDK
+# cere-games-sdk
+
+Cere Games SDK mono-repository
