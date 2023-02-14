@@ -5,10 +5,10 @@
 ## Checklist (Mandatory):
 
 - [ ] I have a JIRA issue for this PR ([link]())
-- [ ] I have added a record to the CHANGELOG.md
+- [ ] I have added a record to the `CHANGELOG.md`
 - [ ] I have tested new code locally
 - [ ] I have done a smoke test of the larger feature locally
-- [ ] I have merged the dev (parent) branch into my feature branch and resolved all conflicts
+- [ ] I have merged the `master` (parent) branch into my feature branch and resolved all conflicts
 - [ ] I have added tests that prove my fix/implementation is effective or that my feature works
 
 ## Checklist (Optional):
