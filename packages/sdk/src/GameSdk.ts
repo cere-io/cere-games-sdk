@@ -1,10 +1,25 @@
-export type SdkOptions = {};
+export type SdkOptions = {
+  onReady?: (sdk: GamesSDK) => void;
+};
+
 export type InitParams = {};
 
 export class GamesSDK {
   constructor(private options: SdkOptions = {}) {}
 
   async init(params: InitParams = {}) {
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // Mock implementation
+    const { register } = await import('@cere/games-sdk-ui');
+
+    register();
+
+    this.options.onReady?.(this);
+  }
+
+  async showPreloader() {
+    const modal = document.createElement('cere-modal');
+    const preloader = document.createElement('cere-preloader');
+
+    modal.appendChild(preloader);
+    document.body.appendChild(modal);
   }
 }
