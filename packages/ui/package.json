@@ -7,7 +7,17 @@
     "import": "./dist/esm",
     "require": "./dist/cjs"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@emotion/cache": "^11.10.5",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.10"
+  },
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
     "build:esm": "tsc --project ./tsconfig.json",

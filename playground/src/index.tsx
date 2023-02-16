@@ -3,7 +3,14 @@ import { createTheme, ThemeProvider, CssBaseline } from '@mui/material';
 
 import { Playground } from './Playground';
 
-const theme = createTheme({});
+const theme = createTheme({
+  typography: {
+    button: {
+      textTransform: 'none',
+    },
+  },
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
