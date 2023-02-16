@@ -12,6 +12,16 @@ module.exports = {
        */
       config.resolve.plugins = [new TsconfigPathsPlugin()];
 
+      /**
+       * Let Babel compile outside of `src`
+       */
+      const { match } = getLoader(config, loaderByName('babel-loader'));
+
+      Object.assign(match.loader, {
+        include: undefined,
+        exclude: /node_modules/,
+      });
+
       return config;
     },
   },

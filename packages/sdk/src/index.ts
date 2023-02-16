@@ -1,3 +1,1 @@
-export class CereGamesSDK {
-  name = 'Cere Games SDK';
-}
+export * from './GameSdk';
