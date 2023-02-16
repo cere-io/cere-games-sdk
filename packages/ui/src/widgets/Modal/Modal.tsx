@@ -7,20 +7,10 @@ const Backdrop = styled.div({
   left: 0,
   bottom: 0,
   right: 0,
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  backgroundColor: 'rgba(0, 0, 0, 0.8)',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
 });
 
-const Content = styled.div({
-  backgroundColor: '#FFFFFF',
-  borderRadius: 8,
-  padding: 16,
-});
-
-export const Modal = ({ children }: PropsWithChildren<{}>) => (
-  <Backdrop>
-    <Content>{children}</Content>
-  </Backdrop>
-);
+export const Modal = ({ children }: PropsWithChildren<{}>) => <Backdrop>{children}</Backdrop>;

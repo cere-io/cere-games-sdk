@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 
+import { ThemeProvider } from './theme';
+
 export const createElement = (Component: ComponentType<any>) => {
   class CustomElement extends HTMLElement {
     private mountPoint = document.createElement('div');
@@ -14,7 +16,9 @@ export const createElement = (Component: ComponentType<any>) => {
 
       createRoot(this.mountPoint).render(
         <CacheProvider value={this.stylesCache}>
-          <Component>{children}</Component>
+          <ThemeProvider>
+            <Component>{children}</Component>
+          </ThemeProvider>
         </CacheProvider>,
       );
 
