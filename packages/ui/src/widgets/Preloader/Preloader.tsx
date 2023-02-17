@@ -1,18 +1,21 @@
 import styled from '@emotion/styled';
 
+import defaultPreloaderImage from '../../assets/preloaderImage.png';
 import { Button, Stack, Typography } from '../../components';
 
 const Widget = styled(Stack)(({ theme }) => ({
   width: 450,
-  background: 'linear-gradient(-45deg, #7B1345 0%, #050407 100%)',
+  background: 'linear-gradient(180deg, rgba(176, 138, 255, 0.2) 0%, rgba(37, 121, 255, 0) 100%), #111523',
+  boxShadow: '0px 5px 40px rgba(0, 0, 0, 0.4)',
   borderRadius: theme.borderRadius(5),
-  padding: theme.spacing(6, 4, 4, 4),
+  padding: theme.spacing(4),
 }));
 
 const Image = styled.div({
-  width: 320,
-  height: 165,
-  backgroundColor: '#7B1345',
+  height: 200,
+  alignSelf: 'stretch',
+  backgroundImage: `url(${defaultPreloaderImage})`,
+  backgroundSize: 'cover',
   borderRadius: 12,
 });
 
@@ -23,9 +26,9 @@ export type PreloaderProps = {
 
 export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
   return (
-    <Widget spacing={3} align="center">
+    <Widget spacing={4} align="center">
       <Image />
-      <Stack spacing={1} padding={[0, 4]}>
+      <Stack spacing={1} padding={[0, 3]}>
         <Typography align="center" variant="h2">
           Play now & win
         </Typography>
@@ -34,7 +37,7 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
         </Typography>
       </Stack>
 
-      <Button disabled={!ready} onClick={onStartClick}>
+      <Button loading={!ready} onClick={onStartClick}>
         {ready ? 'Start' : 'Game loading...'}
       </Button>
     </Widget>

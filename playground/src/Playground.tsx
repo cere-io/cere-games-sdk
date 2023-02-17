@@ -17,7 +17,7 @@ export const Playground = () => {
   const handleShowPreloader = useCallback(async () => {
     const preloader = await sdk.showPreloader();
 
-    setTimeout(() => preloader.setReady(), 1000);
+    setTimeout(preloader.setReady, 2000);
   }, [sdk]);
 
   return (
