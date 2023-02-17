@@ -6,7 +6,11 @@ import createCache from '@emotion/cache';
 import { ThemeProvider } from './theme';
 import { WidgetMap, WidgetType } from './types';
 
-export const createElement = <P extends {} = {}>(Component: ComponentType<P>) => {
+interface WidgetConstructor<P> {
+  new (): WidgetType<P>;
+}
+
+export const createElement = <P extends {} = {}>(Component: ComponentType<P>): WidgetConstructor<P> => {
   class CustomElement extends HTMLElement implements WidgetType<P> {
     private componentProps: any = {};
     private mountPoint = document.createElement('div');

@@ -1,14 +1,13 @@
 {
   "name": "@cere/games-sdk",
   "version": "0.0.1",
-  "types": "./src",
   "main": "./dist/cjs",
   "exports": {
     "import": "./dist/esm",
     "require": "./dist/cjs"
   },
   "dependencies": {
-    "@cere/games-sdk-ui": "*"
+    "@cere/games-sdk-ui": "0.0.1"
   },
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
