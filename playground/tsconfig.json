@@ -1,4 +1,10 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["./src"]
+  "include": ["./src"],
+  "compilerOptions": {
+    "paths": {
+      "@cere/games-sdk": ["packages/sdk/src"],
+      "@cere/games-sdk-ui": ["packages/ui/src"]
+    }
+  }
 }

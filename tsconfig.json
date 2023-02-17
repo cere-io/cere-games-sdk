@@ -14,11 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "paths": {
-      "@cere/games-sdk": ["packages/sdk/src"],
-      "@cere/games-sdk-ui": ["packages/ui/src"]
-    }
+    "jsx": "react-jsx"
   },
   "include": ["packages", "playground"]
 }

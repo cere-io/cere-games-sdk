@@ -9,8 +9,9 @@
   },
   "scripts": {
     "start": "npm start --workspace=@cere-games-sdk/playground",
-    "build": "npm run build --workspaces --if-present",
-    "lint": "eslint --quiet '**/*.{ts,tsx,js,jsx}'"
+    "build": "npm run build --workspace=@cere/games-sdk-ui --workspace=@cere/games-sdk",
+    "lint": "eslint --quiet '**/*.{ts,tsx,js,jsx}'",
+    "sdk:publish": "npm publish --workspace=@cere/games-sdk-ui --workspace=@cere/games-sdk"
   },
   "workspaces": [
     "playground",
