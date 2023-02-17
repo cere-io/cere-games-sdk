@@ -1,12 +1,10 @@
-import * as widgets from './widgets';
 import { createElement, registerElement } from './elements';
-
-const Preloader = createElement(widgets.Preloader);
-const Leaderboard = createElement(widgets.Leaderboard);
-const Modal = createElement(widgets.Modal);
+import { Leaderboard, Preloader, Modal } from './widgets';
 
 export const register = () => {
-  registerElement('cere-preloader', Preloader);
-  registerElement('cere-leaderboard', Leaderboard);
-  registerElement('cere-modal', Modal);
+  registerElement('cere-preloader', createElement(Preloader));
+  registerElement('cere-leaderboard', createElement(Leaderboard));
+  registerElement('cere-modal', createElement(Modal));
 };
+
+export type { Widget } from './types';

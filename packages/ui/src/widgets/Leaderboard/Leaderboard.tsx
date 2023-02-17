@@ -4,6 +4,8 @@ const Label = styled.div({
   color: 'green',
 });
 
-export const Leaderboard = () => {
+export type LeaderboardProps = {};
+
+export const Leaderboard = (props: LeaderboardProps) => {
   return <Label>Leaderboard Widget</Label>;
 };

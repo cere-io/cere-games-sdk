@@ -4,32 +4,58 @@ import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 
 import { ThemeProvider } from './theme';
+import { WidgetMap, WidgetType } from './types';
 
-export const createElement = (Component: ComponentType<any>) => {
-  class CustomElement extends HTMLElement {
+export const createElement = <P extends {} = {}>(Component: ComponentType<P>) => {
+  class CustomElement extends HTMLElement implements WidgetType<P> {
+    private componentProps: any = {};
     private mountPoint = document.createElement('div');
+    private root = createRoot(this.mountPoint);
     private stylesCache = createCache({ key: 'element', container: this.mountPoint });
+
+    get props() {
+      return this.componentProps;
+    }
+
+    withProps(props: P) {
+      return this.update(props);
+    }
+
+    update(props: Partial<P>) {
+      this.componentProps = { ...this.props, ...props };
+
+      return this.render();
+    }
 
     connectedCallback() {
       this.attachShadow({ mode: 'open' }).appendChild(this.mountPoint);
-      const children = this.innerHTML && <div dangerouslySetInnerHTML={{ __html: this.innerHTML }} />;
 
-      createRoot(this.mountPoint).render(
+      this.render();
+    }
+
+    private render() {
+      if (!this.isConnected) {
+        return this;
+      }
+
+      this.root.render(
         <CacheProvider value={this.stylesCache}>
           <ThemeProvider>
-            <Component>{children}</Component>
+            <Component {...this.props}>
+              <slot />
+            </Component>
           </ThemeProvider>
         </CacheProvider>,
       );
 
-      console.log(this.innerHTML);
+      return this;
     }
   }
 
   return CustomElement;
 };
 
-export const registerElement = (tagName: string, element: CustomElementConstructor) => {
+export const registerElement = (tagName: keyof WidgetMap, element: CustomElementConstructor) => {
   const existing = customElements.get(tagName);
 
   if (existing && existing !== element) {

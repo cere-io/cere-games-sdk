@@ -16,7 +16,12 @@ const Image = styled.div({
   borderRadius: 12,
 });
 
-export const Preloader = () => {
+export type PreloaderProps = {
+  ready?: boolean;
+  onStartClick?: () => void;
+};
+
+export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
   return (
     <Widget spacing={3} align="center">
       <Image />
@@ -29,7 +34,9 @@ export const Preloader = () => {
         </Typography>
       </Stack>
 
-      <Button>Start</Button>
+      <Button disabled={!ready} onClick={onStartClick}>
+        {ready ? 'Start' : 'Game loading...'}
+      </Button>
     </Widget>
   );
 };
