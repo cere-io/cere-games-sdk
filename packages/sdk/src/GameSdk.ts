@@ -17,9 +17,21 @@ export class GamesSDK {
 
   async showPreloader() {
     const modal = document.createElement('cere-modal');
-    const preloader = document.createElement('cere-preloader');
+    const preloader = document.createElement('cere-preloader').withProps({
+      ready: false,
+      onStartClick: () => modal.remove(),
+    });
 
     modal.appendChild(preloader);
     document.body.appendChild(modal);
+
+    return {
+      get ready() {
+        return preloader.props.ready ?? false;
+      },
+
+      setReady: (ready = true) => preloader.update({ ready }),
+      close: () => modal.remove(),
+    };
   }
 }

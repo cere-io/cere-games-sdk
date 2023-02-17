@@ -4,23 +4,14 @@ import { PropsWithChildren } from 'react';
 const Backdrop = styled.div({
   position: 'absolute',
   top: 0,
-  left: 0,
-  bottom: 0,
-  right: 0,
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  width: '100vw',
+  height: '100vh',
+  backgroundColor: 'rgba(0, 0, 0, 0.8)',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
 });
 
-const Content = styled.div({
-  backgroundColor: '#FFFFFF',
-  borderRadius: 8,
-  padding: 16,
-});
+export type ModalProps = PropsWithChildren<{}>;
 
-export const Modal = ({ children }: PropsWithChildren<{}>) => (
-  <Backdrop>
-    <Content>{children}</Content>
-  </Backdrop>
-);
+export const Modal = ({ children }: ModalProps) => <Backdrop>{children}</Backdrop>;

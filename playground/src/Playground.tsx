@@ -1,6 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { GamesSDK } from '@cere/games-sdk';
-import { Card, CardContent, CardHeader } from '@mui/material';
 
 import { Layout, AsyncButton } from './components';
 
@@ -15,6 +14,12 @@ export const Playground = () => {
     [],
   );
 
+  const handleShowPreloader = useCallback(async () => {
+    const preloader = await sdk.showPreloader();
+
+    setTimeout(preloader.setReady, 2000);
+  }, [sdk]);
+
   return (
     <Layout>
       <Layout.Section title="Bootstrap">
@@ -23,33 +28,7 @@ export const Playground = () => {
 
       {ready && (
         <Layout.Section title="Actions">
-          <AsyncButton onClick={() => sdk.showPreloader()}>Show Preloader</AsyncButton>
-        </Layout.Section>
-      )}
-
-      {ready && (
-        <Layout.Section title="Widgets">
-          <Card variant="outlined">
-            <CardHeader title="Preloader" />
-            <CardContent>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: '<cere-preloader></cere-preloader>',
-                }}
-              />
-            </CardContent>
-          </Card>
-
-          <Card variant="outlined">
-            <CardHeader title="Leader Board" />
-            <CardContent>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: '<cere-leaderboard></cere-leaderboard>',
-                }}
-              />
-            </CardContent>
-          </Card>
+          <AsyncButton onClick={handleShowPreloader}>Show Preloader</AsyncButton>
         </Layout.Section>
       )}
     </Layout>
