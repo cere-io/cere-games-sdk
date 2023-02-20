@@ -15,7 +15,7 @@ export const createElement = <P extends {} = {}>(Component: ComponentType<P>): W
     private componentProps: any = {};
     private mountPoint = document.createElement('div');
     private root = createRoot(this.mountPoint);
-    private stylesCache = createCache({ key: 'element', container: this.mountPoint });
+    private stylesCache = createCache({ key: Component.name.toLowerCase(), container: this.mountPoint });
 
     get props() {
       return this.componentProps;

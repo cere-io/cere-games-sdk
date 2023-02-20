@@ -2,6 +2,7 @@
   "extends": "../tsconfig.json",
   "include": ["./src"],
   "compilerOptions": {
+    "noEmit": true,
     "paths": {
       "@cere/games-sdk": ["packages/sdk/src"],
       "@cere/games-sdk-ui": ["packages/ui/src"]
