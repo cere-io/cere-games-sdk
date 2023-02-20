@@ -3,14 +3,12 @@
   "version": "0.0.1",
   "main": "./dist",
   "types": "./dist/types",
-  "dependencies": {
+  "devDependencies": {
     "@emotion/cache": "^11.10.5",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
+    "react-dom": "^18.2.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.10",
     "ts-loader": "^9.4.2",
