@@ -34,7 +34,7 @@ export class GamesSDK {
 
   showLeaderboard() {
     const leaderboard = document.createElement('cere-leaderboard');
-    const { open, ...modal } = UI.createModal(leaderboard);
+    const { open, ...modal } = UI.createModal(leaderboard, { hasClose: true });
 
     open();
 
@@ -42,8 +42,8 @@ export class GamesSDK {
   }
 
   connectWallet() {
-    const leaderboard = document.createElement('cere-connect-wallet');
-    const { open, ...modal } = UI.createModal(leaderboard);
+    const connectWallet = document.createElement('cere-connect-wallet');
+    const { open, ...modal } = UI.createModal(connectWallet, { hasClose: true });
 
     open();
 

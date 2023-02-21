@@ -14,6 +14,7 @@ declare module '@emotion/react' {
 
     palette: {
       text: Record<TextColor, string>;
+      border: string;
     };
 
     typography: Record<TypographyVariant, CSSObject> & {

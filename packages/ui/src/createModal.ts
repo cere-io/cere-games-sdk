@@ -4,6 +4,10 @@ export type Modal = {
   close: () => void;
 };
 
+export type ModalOptions = {
+  hasClose?: boolean;
+};
+
 function appendToBody(element: HTMLElement) {
   if (document.body) {
     document.body.appendChild(element);
@@ -12,8 +16,16 @@ function appendToBody(element: HTMLElement) {
   }
 }
 
-export const createModal = (contentElement: HTMLElement): Modal => {
+export const createModal = (contentElement: HTMLElement, options: ModalOptions = {}): Modal => {
   const modal = document.createElement('cere-modal');
+
+  if (options.hasClose) {
+    modal.update({
+      hasClose: true,
+      onRequestClose: () => modal.remove(),
+    });
+  }
+
   modal.appendChild(contentElement);
 
   return {
