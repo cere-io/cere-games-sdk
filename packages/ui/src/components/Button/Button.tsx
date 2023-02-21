@@ -1,7 +1,11 @@
 import styled from '@emotion/styled';
-import { ComponentProps, PropsWithChildren } from 'react';
+import { ComponentProps } from 'react';
 
 import { Spinner } from '../Spinner';
+
+type ButtonProps = ComponentProps<typeof ButtonBase> & {
+  loading?: boolean;
+};
 
 const ButtonBase = styled.button(
   {
@@ -26,19 +30,13 @@ const ButtonBase = styled.button(
   }),
 );
 
-export type ButtonProps = PropsWithChildren<ComponentProps<'button'>> & {
-  loading?: boolean;
-};
-
 const Content = styled.div(({ theme }) => ({
   padding: theme.spacing(0, 1),
 }));
 
-export const Button = ({ loading = false, disabled = loading, children, ...props }: ButtonProps) => {
-  return (
-    <ButtonBase {...props} disabled={disabled}>
-      {loading && <Spinner />}
-      <Content>{children}</Content>
-    </ButtonBase>
-  );
-};
+export const Button = ({ loading = false, disabled = loading, children, ...props }: ButtonProps) => (
+  <ButtonBase {...props} disabled={disabled}>
+    {loading && <Spinner />}
+    <Content>{children}</Content>
+  </ButtonBase>
+);

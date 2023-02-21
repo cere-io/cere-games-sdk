@@ -15,20 +15,32 @@ export const Playground = () => {
   );
 
   const handleShowPreloader = useCallback(async () => {
-    const preloader = await sdk.showPreloader();
+    const preloader = sdk.showPreloader();
 
     setTimeout(preloader.setReady, 2000);
+  }, [sdk]);
+
+  const handleShowLeaderboard = useCallback(async () => {
+    sdk.showLeaderboard();
+  }, [sdk]);
+
+  const handleConnectWallet = useCallback(async () => {
+    sdk.connectWallet();
   }, [sdk]);
 
   return (
     <Layout>
       <Layout.Section title="Bootstrap">
-        <AsyncButton onClick={() => sdk.init()}>Init SDK</AsyncButton>
+        <AsyncButton disabled={ready} onClick={() => sdk.init()}>
+          Init SDK
+        </AsyncButton>
       </Layout.Section>
 
       {ready && (
         <Layout.Section title="Actions">
           <AsyncButton onClick={handleShowPreloader}>Show Preloader</AsyncButton>
+          <AsyncButton onClick={handleShowLeaderboard}>Show Leaderboard</AsyncButton>
+          <AsyncButton onClick={handleConnectWallet}>Connect Wallet</AsyncButton>
         </Layout.Section>
       )}
     </Layout>
