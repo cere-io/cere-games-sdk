@@ -2,7 +2,6 @@ import type { PreloaderProps, LeaderboardProps, ModalProps } from './widgets';
 
 export interface WidgetType<P = {}> extends HTMLElement {
   readonly props: P;
-  withProps(props: P): this;
   update(props: Partial<P>): this;
 }
 
