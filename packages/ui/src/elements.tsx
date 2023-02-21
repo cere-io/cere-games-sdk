@@ -21,10 +21,6 @@ export const createElement = <P extends {} = {}>(Component: ComponentType<P>): W
       return this.componentProps;
     }
 
-    withProps(props: P) {
-      return this.update(props);
-    }
-
     update(props: Partial<P>) {
       this.componentProps = { ...this.props, ...props };
 

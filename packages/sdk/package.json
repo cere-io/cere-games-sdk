@@ -1,10 +1,10 @@
 {
   "name": "@cere/games-sdk",
-  "version": "0.0.1",
+  "version": "0.0.1-rc.1",
   "main": "./dist",
   "types": "./dist",
   "dependencies": {
-    "@cere/games-sdk-ui": "0.0.1"
+    "@cere/games-sdk-ui": "*"
   },
   "scripts": {
     "build": "tsc"

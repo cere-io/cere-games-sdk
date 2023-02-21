@@ -1,3 +1,5 @@
+import * as UI from '@cere/games-sdk-ui';
+
 export type SdkOptions = {
   onReady?: (sdk: GamesSDK) => void;
 };
@@ -8,30 +10,29 @@ export class GamesSDK {
   constructor(private options: SdkOptions = {}) {}
 
   async init(params: InitParams = {}) {
-    const { register } = await import('@cere/games-sdk-ui');
-
-    register();
+    await UI.register();
 
     this.options.onReady?.(this);
   }
 
-  async showPreloader() {
-    const modal = document.createElement('cere-modal');
-    const preloader = document.createElement('cere-preloader').withProps({
+  showPreloader() {
+    const preloader = document.createElement('cere-preloader');
+    const modal = UI.createModal(preloader);
+
+    preloader.update({
       ready: false,
-      onStartClick: () => modal.remove(),
+      onStartClick: modal.close,
     });
 
-    modal.appendChild(preloader);
-    document.body.appendChild(modal);
+    modal.open();
 
     return {
+      close: modal.close,
+      setReady: (ready = true) => preloader.update({ ready }),
+
       get ready() {
         return preloader.props.ready ?? false;
       },
-
-      setReady: (ready = true) => preloader.update({ ready }),
-      close: () => modal.remove(),
     };
   }
 }
