@@ -11,10 +11,12 @@ type TypographyProps = {
 
 export const Typography = styled.div<TypographyProps>(
   ({ theme, variant = 'body1', color = 'primary', align = 'left', inline = false }) => ({
+    lineHeight: 1.5,
     ...theme.typography[variant],
-    display: inline ? 'inline-block' : 'block',
-    textAlign: align,
     color: theme.palette.text[color],
     fontFamily: theme.typography.fontFamily,
+
+    display: inline ? 'inline-block' : 'block',
+    textAlign: align,
   }),
 );
