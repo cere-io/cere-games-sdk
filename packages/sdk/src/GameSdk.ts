@@ -7,10 +7,12 @@ export type SdkOptions = {
 export type InitParams = {};
 
 export class GamesSDK {
+  private context = UI.createContext();
+
   constructor(private options: SdkOptions = {}) {}
 
   async init(params: InitParams = {}) {
-    await UI.register();
+    await UI.register(this.context);
 
     this.options.onReady?.(this);
   }

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { Button, Stack, Typography } from '../../components';
+import { useWalletContext } from '../../hooks';
 import { CereIcon, TrophyIcon } from '../../icons';
 
 export type ConnectWalletProps = {};
@@ -11,6 +12,8 @@ const Connect = styled(Button)(() => ({
 }));
 
 export const ConnectWallet = (props: ConnectWalletProps) => {
+  const context = useWalletContext();
+
   return (
     <Stack spacing={4} align="stretch">
       <Stack spacing={3}>
@@ -32,7 +35,7 @@ export const ConnectWallet = (props: ConnectWalletProps) => {
 
       <Stack spacing={2} align="stretch">
         <Connect variant="outlined" icon={<CereIcon fontSize={25} />}>
-          Cere Wallet
+          {context || 'Cere Wallet'}
         </Connect>
         <Button disabled>Next</Button>
       </Stack>

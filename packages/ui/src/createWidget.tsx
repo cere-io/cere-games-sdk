@@ -1,16 +1,22 @@
-import { ComponentType } from 'react';
+import { ComponentType, createContext } from 'react';
 import { createRoot } from 'react-dom/client';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 
 import { ThemeProvider } from './theme';
-import { WidgetMap, WidgetType } from './types';
+import { WidgetType } from './types';
+import { Context } from './createContext';
 
 interface WidgetConstructor<P> {
   new (): WidgetType<P>;
 }
 
-export const createElement = <P extends {} = {}>(Component: ComponentType<P>): WidgetConstructor<P> => {
+export const WidgetContext = createContext<Context | null>(null);
+
+export const createWidget = <P extends {} = {}>(
+  Component: ComponentType<P>,
+  context: Context | null = null,
+): WidgetConstructor<P> => {
   class CustomElement extends HTMLElement implements WidgetType<P> {
     private componentProps: any = {};
     private mountPoint = document.createElement('div');
@@ -41,9 +47,11 @@ export const createElement = <P extends {} = {}>(Component: ComponentType<P>): W
       this.root.render(
         <CacheProvider value={this.stylesCache}>
           <ThemeProvider>
-            <Component {...this.props}>
-              <slot />
-            </Component>
+            <WidgetContext.Provider value={context}>
+              <Component {...this.props}>
+                <slot />
+              </Component>
+            </WidgetContext.Provider>
           </ThemeProvider>
         </CacheProvider>,
       );
@@ -53,14 +61,4 @@ export const createElement = <P extends {} = {}>(Component: ComponentType<P>): W
   }
 
   return CustomElement;
-};
-
-export const registerElement = (tagName: keyof WidgetMap, element: CustomElementConstructor) => {
-  const existing = customElements.get(tagName);
-
-  if (existing && existing !== element) {
-    throw new Error(`An element with tag name ${tagName} is already registered`);
-  }
-
-  customElements.define(tagName, element);
 };
