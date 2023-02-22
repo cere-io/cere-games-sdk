@@ -19,6 +19,8 @@ export const createTheme = (): Theme => ({
       secondary: '#9A9A9A',
       caption: '#CCCCCC',
     },
+
+    border: 'rgba(255, 255, 255, 0.3)',
   },
 
   typography: {
@@ -43,8 +45,8 @@ export const createTheme = (): Theme => ({
 
     button: {
       fontWeight: 'bold',
-      fontSize: 20,
-      lineHeight: 2.8,
+      fontSize: 16,
+      lineHeight: 3.5,
     },
   },
 });

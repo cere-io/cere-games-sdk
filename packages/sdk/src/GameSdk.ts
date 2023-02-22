@@ -17,22 +17,36 @@ export class GamesSDK {
 
   showPreloader() {
     const preloader = document.createElement('cere-preloader');
-    const modal = UI.createModal(preloader);
+    const { open, ...modal } = UI.createModal(preloader);
 
     preloader.update({
       ready: false,
       onStartClick: modal.close,
     });
 
-    modal.open();
+    open();
 
     return {
-      close: modal.close,
+      ...modal,
       setReady: (ready = true) => preloader.update({ ready }),
-
-      get ready() {
-        return preloader.props.ready ?? false;
-      },
     };
+  }
+
+  showLeaderboard() {
+    const leaderboard = document.createElement('cere-leaderboard');
+    const { open, ...modal } = UI.createModal(leaderboard, { hasClose: true });
+
+    open();
+
+    return modal;
+  }
+
+  connectWallet() {
+    const connectWallet = document.createElement('cere-connect-wallet');
+    const { open, ...modal } = UI.createModal(connectWallet, { hasClose: true });
+
+    open();
+
+    return modal;
   }
 }

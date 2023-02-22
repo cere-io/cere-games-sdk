@@ -1,17 +1,5 @@
-import styled from '@emotion/styled';
-import { PropsWithChildren } from 'react';
+import { Modal as UIModal, ModalProps as UIModalProps } from '../../components';
 
-const Backdrop = styled.div({
-  position: 'absolute',
-  top: 0,
-  width: '100vw',
-  height: '100vh',
-  backgroundColor: 'rgba(0, 0, 0, 0.8)',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-});
+export type ModalProps = Omit<UIModalProps, 'children'>;
 
-export type ModalProps = PropsWithChildren<{}>;
-
-export const Modal = ({ children }: ModalProps) => <Backdrop>{children}</Backdrop>;
+export const Modal = (props: ModalProps) => <UIModal {...props} />;
