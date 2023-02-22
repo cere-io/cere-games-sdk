@@ -1,6 +1,6 @@
 {
   "name": "@cere/games-sdk-ui",
-  "version": "0.0.1-rc.1",
+  "version": "0.0.1-rc.2",
   "main": "./dist",
   "types": "./dist/types",
   "devDependencies": {
