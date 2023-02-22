@@ -4,6 +4,7 @@
   "main": "./dist",
   "types": "./dist",
   "dependencies": {
+    "@cere/embed-wallet": "^0.1.0",
     "@cere/games-sdk-ui": "*"
   },
   "scripts": {

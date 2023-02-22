@@ -25,7 +25,7 @@ export const Playground = () => {
   }, [sdk]);
 
   const handleConnectWallet = useCallback(async () => {
-    sdk.connectWallet();
+    sdk.showConnectWallet();
   }, [sdk]);
 
   return (

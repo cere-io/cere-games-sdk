@@ -1,7 +1,20 @@
-export type Context = {
-  readonly subscribe: (handler: () => void) => () => void;
-
+export type WalletContext = {
+  loading: boolean;
   address?: string;
+};
+
+export type ContextState = {
+  wallet: WalletContext;
+};
+
+export type Context = ContextState & {
+  readonly subscribe: (handler: () => void) => () => void;
+};
+
+const defaultState: ContextState = {
+  wallet: {
+    loading: false,
+  },
 };
 
 export const createProxy = (context: Context, onChange: () => void) => {
@@ -26,7 +39,7 @@ export const createProxy = (context: Context, onChange: () => void) => {
   return new Proxy(context, handler);
 };
 
-export const createContext = (): Context => {
+export const createContext = (initState = defaultState): Context => {
   const events = new EventTarget();
   const context: Context = {
     subscribe: (handler) => {
@@ -34,6 +47,8 @@ export const createContext = (): Context => {
 
       return () => events.removeEventListener('change', handler);
     },
+
+    ...initState,
   };
 
   return createProxy(context, () => {

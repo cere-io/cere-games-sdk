@@ -5,6 +5,7 @@ import { Spinner } from '../Spinner';
 
 type ButtonProps = {
   loading?: boolean;
+  readOnly?: boolean;
   icon?: ReactElement;
   variant?: 'filled' | 'outlined';
 };
@@ -14,13 +15,12 @@ const ButtonBase = styled.button<ButtonProps>(
     outline: 'none',
     border: 'none',
     color: '#FFFFFF',
-    cursor: 'pointer',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
   },
-  ({ theme, disabled, variant = 'filled' }) => ({
+  ({ theme, readOnly, disabled, variant = 'filled' }) => ({
     ...theme.typography.button,
 
     ...(variant === 'filled' && {
@@ -34,13 +34,14 @@ const ButtonBase = styled.button<ButtonProps>(
       background: 'transparent',
     }),
 
-    ...(disabled && {
-      cursor: 'default',
-      background: 'rgba(255, 255, 255, 0.1)',
-    }),
+    ...(disabled &&
+      !readOnly && {
+        background: 'rgba(255, 255, 255, 0.1)',
+      }),
 
-    borderRadius: 100,
+    cursor: readOnly || disabled ? 'default' : 'pointer',
     padding: theme.spacing(0, 2),
+    borderRadius: 100,
   }),
 );
 
@@ -51,12 +52,13 @@ const Content = styled.div(({ theme }) => ({
 export const Button = ({
   loading = false,
   disabled = loading,
+  readOnly = false,
   icon,
   children,
   ...props
 }: ComponentProps<typeof ButtonBase>) => (
-  <ButtonBase {...props} disabled={disabled}>
-    {loading ? <Spinner /> : icon}
+  <ButtonBase {...props} disabled={disabled || readOnly} readOnly={readOnly}>
+    {loading ? <Spinner size={25} /> : icon}
     <Content>{children}</Content>
   </ButtonBase>
 );

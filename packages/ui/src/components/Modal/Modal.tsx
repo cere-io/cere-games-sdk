@@ -6,7 +6,7 @@ import { Backdrop } from '../Backdrop';
 import { Stack } from '../Stack';
 
 export type ModalProps = PropsWithChildren<{
-  maxWidth?: number;
+  maxWidth?: number | string;
   hasClose?: boolean;
   onRequestClose?: () => void;
 }>;
@@ -35,7 +35,7 @@ const Content = styled.div<ModalProps>(({ theme }) => ({
   padding: theme.spacing(4),
 }));
 
-export const Modal = ({ children, onRequestClose, maxWidth = 450, hasClose = false }: ModalProps) => (
+export const Modal = ({ children, onRequestClose, maxWidth = '80vw', hasClose = false }: ModalProps) => (
   <Backdrop>
     <Content style={{ maxWidth }}>
       {hasClose && (

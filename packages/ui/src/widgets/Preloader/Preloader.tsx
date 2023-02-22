@@ -11,13 +11,17 @@ const Image = styled.div({
   borderRadius: 12,
 });
 
+const Widget = styled(Stack)({
+  maxWidth: 380,
+});
+
 export type PreloaderProps = {
   ready?: boolean;
   onStartClick?: () => void;
 };
 
 export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => (
-  <Stack spacing={4} align="center">
+  <Widget spacing={4} align="center">
     <Image />
     <Stack spacing={1} padding={[0, 3]}>
       <Typography align="center" variant="h2">
@@ -31,5 +35,5 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => (
     <Button loading={!ready} onClick={onStartClick}>
       {ready ? 'Start' : 'Game loading...'}
     </Button>
-  </Stack>
+  </Widget>
 );
