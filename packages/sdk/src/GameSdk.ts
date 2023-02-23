@@ -67,20 +67,35 @@ export class GamesSDK {
     return modal;
   }
 
-  showConnectWallet() {
+  showConnectWallet(onConnect?: () => void) {
     const connectWallet = document.createElement('cere-connect-wallet');
     const { open, ...modal } = UI.createModal(connectWallet, { hasClose: true });
 
     connectWallet.update({
-      onConnect: () => this.wallet.connect(),
+      onConnect: () => {
+        this.wallet.connect();
+      },
+
       onNext: () => {
+        onConnect?.();
         modal.close();
-        this.showLeaderboard();
       },
     });
 
     open();
 
     return modal;
+  }
+
+  /**
+   * Fake implementation
+   * TODO: implement properly
+   */
+  async saveScore(score: number) {
+    if (this.wallet.status === 'connected') {
+      return;
+    }
+
+    return new Promise<void>((resolve) => this.showConnectWallet(resolve));
   }
 }
