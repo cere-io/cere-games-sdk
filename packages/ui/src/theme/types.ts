@@ -3,7 +3,9 @@ import { CSSObject } from '@emotion/react';
 import { ToShorthand, Spacing } from './toShorthand';
 
 export type TextColor = 'primary' | 'secondary' | 'caption';
-export type TypographyVariant = 'body1' | 'body2' | 'h1' | 'h2' | 'button';
+export type TypographyVariant = 'body1' | 'body2' | 'caption' | 'h1' | 'h2' | 'button';
+export type TypographyWeight = 'regular' | 'medium' | 'bold';
+
 export type { Spacing };
 
 declare module '@emotion/react' {
@@ -19,6 +21,7 @@ declare module '@emotion/react' {
 
     typography: Record<TypographyVariant, CSSObject> & {
       fontFamily: string;
+      fontWeight: Record<TypographyWeight, number | string>;
     };
   }
 }

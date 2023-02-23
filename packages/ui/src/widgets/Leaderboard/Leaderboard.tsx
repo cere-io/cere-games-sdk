@@ -1,18 +1,23 @@
 import styled from '@emotion/styled';
 
-import { Typography } from '../../components';
+import { Table, TableProps } from '../../components';
+// import { useWalletContext } from '../../hooks';
 
-export type LeaderboardProps = {};
+export type LeaderboardProps = Pick<TableProps, 'data'>;
 
 const Widget = styled.div({
-  width: 800,
+  width: '80vw',
+  maxWidth: 660,
   height: 800,
 });
 
-export const Leaderboard = (props: LeaderboardProps) => {
+export const Leaderboard = ({ data }: LeaderboardProps) => {
+  // const { address } = useWalletContext();
+  const address = '0xb05C3839202a314Cb7CC87c7FF7e216d6743aD5b'; // TODO: Use real address
+
   return (
     <Widget>
-      <Typography>Leaderboard</Typography>
+      <Table data={data} activeAddress={address} />
     </Widget>
   );
 };

@@ -26,12 +26,22 @@ export const createTheme = (): Theme => ({
   typography: {
     fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
 
+    fontWeight: {
+      bold: 700,
+      medium: 500,
+      regular: 400,
+    },
+
     body1: {
       fontSize: 16,
     },
 
     body2: {
       fontSize: 14,
+    },
+
+    caption: {
+      fontSize: 12,
     },
 
     h1: {

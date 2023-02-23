@@ -4,9 +4,9 @@ import { registerWidget } from './registerWidget';
 import { Leaderboard, Preloader, Modal, ConnectWallet } from './widgets';
 
 export const register = async (context: Context) => {
-  registerWidget('cere-preloader', createWidget(Preloader));
-  registerWidget('cere-leaderboard', createWidget(Leaderboard));
-  registerWidget('cere-modal', createWidget(Modal));
+  registerWidget('cere-preloader', createWidget(Preloader, context));
+  registerWidget('cere-leaderboard', createWidget(Leaderboard, context));
+  registerWidget('cere-modal', createWidget(Modal, context));
   registerWidget('cere-connect-wallet', createWidget(ConnectWallet, context));
 };
 

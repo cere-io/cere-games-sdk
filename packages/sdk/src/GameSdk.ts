@@ -1,6 +1,8 @@
 import { EmbedWallet } from '@cere/embed-wallet';
 import * as UI from '@cere/games-sdk-ui';
 
+import leaderboardMockData from './leaderboardMock.json';
+
 export type SdkOptions = {
   onReady?: (sdk: GamesSDK) => void;
 };
@@ -55,6 +57,10 @@ export class GamesSDK {
   showLeaderboard() {
     const leaderboard = document.createElement('cere-leaderboard');
     const { open, ...modal } = UI.createModal(leaderboard, { hasClose: true });
+
+    leaderboard.update({
+      data: leaderboardMockData,
+    });
 
     open();
 
