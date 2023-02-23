@@ -13,7 +13,7 @@ export type ModalProps = PropsWithChildren<{
 const Header = styled(Stack)(({ theme }) => ({
   height: 24,
   position: 'relative',
-  marginBottom: theme.spacing(1),
+  marginBottom: theme.spacing(2),
   marginTop: theme.spacing(-1),
 }));
 

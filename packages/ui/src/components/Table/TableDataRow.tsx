@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 
+import { Truncate } from '../Truncate';
 import { Typography } from '../Typography';
 import { Rank, RankProps } from './Rank';
 import { TableRow } from './TableRow';
@@ -16,7 +17,6 @@ export type TableDataRowProps = {
 };
 
 const Wrapper = styled.div<Pick<TableDataRowProps, 'active'>>(({ theme, active = false }) => ({
-  fontWeight: 700,
   backgroundColor: 'rgba(233, 204, 255, 0.05)',
   marginBottom: 1,
 
@@ -34,7 +34,9 @@ export const TableDataRow = ({ data, active }: TableDataRowProps) => (
     <TableRow
       columns={[
         <Rank rankColor={rankColors[data.rank - 1]}>{data.rank}</Rank>,
-        <Typography variant="body2">{data.address}</Typography>,
+        <Typography variant="body2">
+          <Truncate variant="hex" maxLength={10} text={data.address} />
+        </Typography>,
         <Typography variant="body2" fontWight="bold">
           {data.score}
         </Typography>,

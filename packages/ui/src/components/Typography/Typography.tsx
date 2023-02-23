@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import { TextColor, TypographyVariant, TypographyWeight } from '../../theme';
 
-type TypographyProps = {
+export type TypographyProps = {
   color?: TextColor;
   variant?: TypographyVariant;
   fontWight?: TypographyWeight;
@@ -12,23 +12,17 @@ type TypographyProps = {
 };
 
 export const Typography = styled.div<TypographyProps>(
-  ({
-    theme,
-    variant = 'body1',
-    fontWight = 'regular',
-    color = 'primary',
-    align = 'left',
-    inline = false,
-    uppercase = false,
-  }) => ({
+  ({ theme, fontWight, variant = 'body1', color = 'primary', align = 'left', inline = false, uppercase = false }) => ({
     lineHeight: 1.5,
     ...theme.typography[variant],
     color: theme.palette.text[color],
     fontFamily: theme.typography.fontFamily,
-    fontWeight: theme.typography.fontWeight[fontWight],
-
     textTransform: uppercase ? 'uppercase' : 'none',
     display: inline ? 'inline-block' : 'block',
     textAlign: align,
+
+    ...(fontWight && {
+      fontWeight: theme.typography.fontWeight[fontWight],
+    }),
   }),
 );

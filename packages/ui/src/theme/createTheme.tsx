@@ -46,6 +46,7 @@ export const createTheme = (): Theme => ({
 
     h1: {
       fontSize: 34,
+      fontWeight: 700,
     },
 
     h2: {
@@ -55,7 +56,7 @@ export const createTheme = (): Theme => ({
 
     button: {
       fontWeight: 'bold',
-      fontSize: 16,
+      fontSize: 20,
       lineHeight: 3.5,
     },
   },
