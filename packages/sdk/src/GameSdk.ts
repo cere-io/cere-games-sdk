@@ -59,11 +59,12 @@ export class GamesSDK {
     };
   }
 
-  showLeaderboard() {
+  showLeaderboard(onPlayAgain?: () => void) {
     const leaderboard = document.createElement('cere-leaderboard');
     const { open, ...modal } = UI.createModal(leaderboard, { hasClose: true });
 
     leaderboard.update({
+      onPlayAgain,
       data: leaderboardMockData,
     });
 
