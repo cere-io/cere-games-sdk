@@ -6,7 +6,6 @@ import { Backdrop } from '../Backdrop';
 import { Stack } from '../Stack';
 
 export type ModalProps = PropsWithChildren<{
-  maxWidth?: number | string;
   hasClose?: boolean;
   onRequestClose?: () => void;
 }>;
@@ -14,7 +13,7 @@ export type ModalProps = PropsWithChildren<{
 const Header = styled(Stack)(({ theme }) => ({
   height: 24,
   position: 'relative',
-  marginBottom: theme.spacing(1),
+  marginBottom: theme.spacing(2),
   marginTop: theme.spacing(-1),
 }));
 
@@ -33,11 +32,12 @@ const Content = styled.div<ModalProps>(({ theme }) => ({
   boxShadow: '0px 5px 40px rgba(0, 0, 0, 0.4)',
   borderRadius: theme.borderRadius(5),
   padding: theme.spacing(4),
+  margin: theme.spacing(4),
 }));
 
-export const Modal = ({ children, onRequestClose, maxWidth = '80vw', hasClose = false }: ModalProps) => (
+export const Modal = ({ children, onRequestClose, hasClose = false }: ModalProps) => (
   <Backdrop>
-    <Content style={{ maxWidth }}>
+    <Content>
       {hasClose && (
         <Header direction="row" spacing={2}>
           <Close onClick={onRequestClose} />

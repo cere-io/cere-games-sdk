@@ -5,11 +5,11 @@ import { useWalletContext } from '../../hooks';
 import { CereIcon, TrophyIcon } from '../../icons';
 
 export type ConnectWalletProps = {
-  onNext?: () => void;
   onConnect?: () => void;
 };
 
-const Connect = styled(Button)(() => ({
+const Connect = styled(Button)(({ theme }) => ({
+  ...theme.typography.body1,
   lineHeight: 2.9,
   justifyContent: 'flex-start',
 }));
@@ -18,16 +18,10 @@ const Widget = styled(Stack)({
   maxWidth: 380,
 });
 
-const truncateAddress = (address: string, maxLength = 30, endingLength = 4) => {
-  const ending = address.slice(-endingLength);
-  const truncated = address.slice(0, maxLength - endingLength);
+export const ConnectWallet = ({ onConnect }: ConnectWalletProps) => {
+  const { isReady, connecting } = useWalletContext();
 
-  return [truncated, ending].filter(Boolean).join('...');
-};
-
-export const ConnectWallet = ({ onConnect, onNext }: ConnectWalletProps) => {
-  const { address, loading } = useWalletContext();
-  const truncatedAddress = address && truncateAddress(address);
+  console.log({ isReady, connecting });
 
   return (
     <Widget spacing={4} align="stretch">
@@ -49,17 +43,12 @@ export const ConnectWallet = ({ onConnect, onNext }: ConnectWalletProps) => {
       </Stack>
 
       <Stack spacing={2} align="stretch">
-        <Connect
-          readOnly={!!address}
-          loading={loading}
-          variant="outlined"
-          icon={<CereIcon fontSize={25} />}
-          onClick={onConnect}
-        >
-          {truncatedAddress || 'Cere Wallet'}
+        <Connect readOnly variant="outlined" icon={<CereIcon fontSize={25} />}>
+          Cere Wallet
         </Connect>
-        <Button disabled={!address} onClick={onNext}>
-          Next
+
+        <Button loading={!isReady || connecting} onClick={onConnect}>
+          {!isReady ? 'Preparing... Please wait' : 'Connect'}
         </Button>
       </Stack>
     </Widget>

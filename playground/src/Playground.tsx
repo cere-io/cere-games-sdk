@@ -28,6 +28,12 @@ export const Playground = () => {
     sdk.showConnectWallet();
   }, [sdk]);
 
+  const handleSaveScore = useCallback(async () => {
+    await sdk.saveScore(25);
+
+    sdk.showLeaderboard();
+  }, [sdk]);
+
   return (
     <Layout>
       <Layout.Section title="Bootstrap">
@@ -41,6 +47,7 @@ export const Playground = () => {
           <AsyncButton onClick={handleShowPreloader}>Show Preloader</AsyncButton>
           <AsyncButton onClick={handleShowLeaderboard}>Show Leaderboard</AsyncButton>
           <AsyncButton onClick={handleConnectWallet}>Connect Wallet</AsyncButton>
+          <AsyncButton onClick={handleSaveScore}>Save Score & Show Leaderboard</AsyncButton>
         </Layout.Section>
       )}
     </Layout>

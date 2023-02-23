@@ -1,6 +1,8 @@
 import { EmbedWallet } from '@cere/embed-wallet';
 import * as UI from '@cere/games-sdk-ui';
 
+import leaderboardMockData from './leaderboardMock.json';
+
 export type SdkOptions = {
   onReady?: (sdk: GamesSDK) => void;
 };
@@ -8,17 +10,14 @@ export type SdkOptions = {
 export type InitParams = {};
 
 export class GamesSDK {
-  private ui = UI.createContext({
-    wallet: {
-      loading: true,
-    },
-  });
+  private ui = UI.createContext();
 
   readonly wallet = new EmbedWallet();
 
   constructor(private options: SdkOptions = {}) {
     this.wallet.subscribe('status-update', async () => {
-      this.ui.wallet.loading = this.wallet.status === 'connecting' || this.wallet.status === 'not-ready';
+      this.ui.wallet.isReady = this.wallet.status !== 'not-ready';
+      this.ui.wallet.connecting = this.wallet.status === 'connecting';
 
       if (this.wallet.status === 'connected') {
         const [ethAccount] = await this.wallet.getAccounts();
@@ -31,17 +30,25 @@ export class GamesSDK {
   async init(params: InitParams = {}) {
     await UI.register(this.ui);
 
-    this.wallet.init({ env: 'dev' });
+    this.initWallet();
+
     this.options.onReady?.(this);
   }
 
-  showPreloader() {
+  private async initWallet() {
+    await this.wallet.init({ env: 'dev' });
+  }
+
+  showPreloader(onStart?: () => void) {
     const preloader = document.createElement('cere-preloader');
     const { open, ...modal } = UI.createModal(preloader);
 
     preloader.update({
       ready: false,
-      onStartClick: modal.close,
+      onStartClick: () => {
+        modal.close();
+        onStart?.();
+      },
     });
 
     open();
@@ -52,29 +59,49 @@ export class GamesSDK {
     };
   }
 
-  showLeaderboard() {
+  showLeaderboard(onPlayAgain?: () => void) {
     const leaderboard = document.createElement('cere-leaderboard');
     const { open, ...modal } = UI.createModal(leaderboard, { hasClose: true });
+
+    leaderboard.update({
+      onPlayAgain,
+      data: leaderboardMockData,
+    });
 
     open();
 
     return modal;
   }
 
-  showConnectWallet() {
+  showConnectWallet(onConnect?: () => void) {
     const connectWallet = document.createElement('cere-connect-wallet');
     const { open, ...modal } = UI.createModal(connectWallet, { hasClose: true });
 
     connectWallet.update({
-      onConnect: () => this.wallet.connect(),
-      onNext: () => {
-        modal.close();
-        this.showLeaderboard();
+      onConnect: async () => {
+        try {
+          await this.wallet.connect();
+
+          modal.close();
+          onConnect?.();
+        } catch {}
       },
     });
 
     open();
 
     return modal;
+  }
+
+  /**
+   * Fake implementation
+   * TODO: implement properly
+   */
+  async saveScore(score: number) {
+    if (this.wallet.status === 'connected') {
+      return;
+    }
+
+    return new Promise<void>((resolve) => this.showConnectWallet(resolve));
   }
 }

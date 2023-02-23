@@ -26,6 +26,12 @@ export const createTheme = (): Theme => ({
   typography: {
     fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
 
+    fontWeight: {
+      bold: 700,
+      medium: 500,
+      regular: 400,
+    },
+
     body1: {
       fontSize: 16,
     },
@@ -34,8 +40,13 @@ export const createTheme = (): Theme => ({
       fontSize: 14,
     },
 
+    caption: {
+      fontSize: 12,
+    },
+
     h1: {
       fontSize: 34,
+      fontWeight: 700,
     },
 
     h2: {
@@ -45,7 +56,7 @@ export const createTheme = (): Theme => ({
 
     button: {
       fontWeight: 'bold',
-      fontSize: 16,
+      fontSize: 20,
       lineHeight: 3.5,
     },
   },
