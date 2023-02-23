@@ -1,5 +1,6 @@
 export type WalletContext = {
-  loading: boolean;
+  isReady: boolean;
+  connecting: boolean;
   address?: string;
 };
 
@@ -13,7 +14,8 @@ export type Context = ContextState & {
 
 const defaultState: ContextState = {
   wallet: {
-    loading: false,
+    connecting: false,
+    isReady: false,
   },
 };
 
