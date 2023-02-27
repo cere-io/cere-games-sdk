@@ -19,9 +19,12 @@ export const Rank = styled.div<RankProps>(({ theme, rankColor }) => ({
   borderRadius: theme.borderRadius(2),
   padding: theme.spacing(0, 1),
 
-  lineHeight: 2.1,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  height: 28,
   minWidth: 32,
-  textAlign: 'center',
 
   background: rankColor ? rankBackgrounds[rankColor] : 'rgba(255, 255, 255, 0.2)',
   color: rankColor ? '#000000' : theme.palette.text.primary,

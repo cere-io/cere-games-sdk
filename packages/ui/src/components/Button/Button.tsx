@@ -19,6 +19,7 @@ const ButtonBase = styled.button<ButtonProps>(
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
+    minHeight: 52,
   },
   ({ theme, readOnly, disabled, variant = 'filled' }) => ({
     ...theme.typography.button,
@@ -40,7 +41,7 @@ const ButtonBase = styled.button<ButtonProps>(
       }),
 
     cursor: readOnly || disabled ? 'default' : 'pointer',
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(1, 2),
     borderRadius: 100,
   }),
 );

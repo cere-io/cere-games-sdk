@@ -45,19 +45,30 @@ export const createTheme = (): Theme => ({
     },
 
     h1: {
-      fontSize: 34,
+      fontSize: 32,
       fontWeight: 700,
+
+      '@media (max-width: 600px)': {
+        fontSize: 24,
+      },
     },
 
     h2: {
       fontSize: 28,
       fontWeight: 600,
+
+      '@media (max-width: 600px)': {
+        fontSize: 24,
+      },
     },
 
     button: {
       fontWeight: 'bold',
       fontSize: 20,
-      lineHeight: 3.5,
+
+      '@media (max-width: 600px)': {
+        fontSize: 16,
+      },
     },
   },
 });

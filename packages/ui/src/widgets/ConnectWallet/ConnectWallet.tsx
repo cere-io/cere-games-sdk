@@ -10,8 +10,8 @@ export type ConnectWalletProps = {
 
 const Connect = styled(Button)(({ theme }) => ({
   ...theme.typography.body1,
-  lineHeight: 2.9,
   justifyContent: 'flex-start',
+  height: 48,
 }));
 
 const Widget = styled(Stack)({
@@ -20,8 +20,6 @@ const Widget = styled(Stack)({
 
 export const ConnectWallet = ({ onConnect }: ConnectWalletProps) => {
   const { isReady, connecting } = useWalletContext();
-
-  console.log({ isReady, connecting });
 
   return (
     <Widget spacing={4} align="stretch">

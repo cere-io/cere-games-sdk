@@ -11,6 +11,10 @@ export type LeaderboardProps = Pick<TableProps, 'data'> & {
 const Widget = styled.div({
   width: '80vw',
   maxWidth: 660,
+
+  '@media (max-width: 600px)': {
+    width: 'auto',
+  },
 });
 
 export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
