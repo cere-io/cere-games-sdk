@@ -19,7 +19,7 @@ const Widget = styled(Stack)({
 });
 
 export const ConnectWallet = ({ onConnect }: ConnectWalletProps) => {
-  const isLandscape = useMediaQuery('(orientation: landscape)');
+  const isLandscape = useMediaQuery('(max-height: 400px)');
   const { isReady, connecting } = useWalletContext();
 
   return (
