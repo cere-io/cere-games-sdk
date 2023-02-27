@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 import { Button, Stack, Typography } from '../../components';
-import { useWalletContext } from '../../hooks';
+import { useMediaQuery, useWalletContext } from '../../hooks';
 import { CereIcon, TrophyIcon } from '../../icons';
 
 export type ConnectWalletProps = {
@@ -19,12 +19,13 @@ const Widget = styled(Stack)({
 });
 
 export const ConnectWallet = ({ onConnect }: ConnectWalletProps) => {
+  const isLandscape = useMediaQuery('(orientation: landscape)');
   const { isReady, connecting } = useWalletContext();
 
   return (
-    <Widget spacing={4} align="stretch">
+    <Widget spacing={isLandscape ? 2 : 4} align="stretch">
       <Stack spacing={3}>
-        <TrophyIcon fontSize={90} />
+        {!isLandscape && <TrophyIcon fontSize={90} />}
 
         <Stack spacing={1}>
           <Typography align="center" variant="h2">
