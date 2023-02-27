@@ -1,11 +1,11 @@
 {
   "name": "@cere/games-sdk",
-  "version": "0.0.1-rc.4",
+  "version": "0.0.1-rc.5",
   "main": "./dist",
   "types": "./dist",
   "dependencies": {
     "@cere/embed-wallet": "^0.1.0",
-    "@cere/games-sdk-ui": "0.0.1-rc.4"
+    "@cere/games-sdk-ui": "0.0.1-rc.5"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json"
