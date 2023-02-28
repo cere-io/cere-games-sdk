@@ -16,7 +16,7 @@ const Header = styled(Stack)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   marginTop: theme.spacing(-1),
 
-  '@media (max-width: 600px) or (max-height: 400px)': {
+  '@media (max-width: 600px), (max-height: 440px)': {
     marginRight: theme.spacing(1),
     marginTop: theme.spacing(0),
   },
@@ -39,7 +39,7 @@ const Content = styled.div<ModalProps>(({ theme }) => ({
   padding: theme.spacing(4),
   margin: theme.spacing(4),
 
-  '@media (max-width: 600px) or (max-height: 400px)': {
+  '@media (max-width: 600px), (max-height: 440px)': {
     padding: theme.spacing(2),
     margin: theme.spacing(1),
   },

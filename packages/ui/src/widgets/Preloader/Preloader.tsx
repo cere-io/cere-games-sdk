@@ -12,7 +12,7 @@ const Image = styled.div({
   backgroundPosition: 'center',
   borderRadius: 12,
 
-  '@media (max-height: 400px)': {
+  '@media (max-height: 440px)': {
     height: 130,
   },
 });
@@ -27,7 +27,7 @@ export type PreloaderProps = {
 };
 
 export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
-  const isLandscape = useMediaQuery('(max-height: 400px)');
+  const isLandscape = useMediaQuery('(max-height: 440px)');
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="center">
