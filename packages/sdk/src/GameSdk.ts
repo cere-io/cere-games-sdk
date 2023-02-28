@@ -1,9 +1,11 @@
 import { EmbedWallet } from '@cere/embed-wallet';
 import * as UI from '@cere/games-sdk-ui';
 
-import leaderboardMockData from './leaderboardMock.json';
+import { GAME_SERVICE_URL } from './constants';
+import { LeaderBoardApi } from './api';
 
 export type SdkOptions = {
+  gameId: string;
   onReady?: (sdk: GamesSDK) => void;
 };
 
@@ -13,8 +15,12 @@ export class GamesSDK {
   private ui = UI.createContext();
 
   readonly wallet = new EmbedWallet();
+  readonly leaderBoard = new LeaderBoardApi({
+    gameId: this.options.gameId,
+    baseUrl: GAME_SERVICE_URL,
+  });
 
-  constructor(private options: SdkOptions = {}) {
+  constructor(private options: SdkOptions) {
     this.wallet.subscribe('status-update', async () => {
       this.ui.wallet.isReady = this.wallet.status !== 'not-ready';
       this.ui.wallet.connecting = this.wallet.status === 'connecting';
@@ -64,8 +70,12 @@ export class GamesSDK {
     const { open, ...modal } = UI.createModal(leaderboard);
 
     leaderboard.update({
+      data: [],
       onPlayAgain,
-      data: leaderboardMockData,
+    });
+
+    this.leaderBoard.getData().then((data) => {
+      leaderboard.update({ data });
     });
 
     open();
@@ -93,15 +103,12 @@ export class GamesSDK {
     return modal;
   }
 
-  /**
-   * Fake implementation
-   * TODO: implement properly
-   */
   async saveScore(score: number) {
-    if (this.wallet.status === 'connected') {
-      return;
+    if (this.wallet.status !== 'connected') {
+      await new Promise<void>((resolve) => this.showConnectWallet(resolve));
     }
 
-    return new Promise<void>((resolve) => this.showConnectWallet(resolve));
+    const [ethAddress] = await this.wallet.getAccounts();
+    await this.leaderBoard.saveScore(ethAddress.address, score);
   }
 }
