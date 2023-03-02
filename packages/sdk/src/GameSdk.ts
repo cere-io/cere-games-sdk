@@ -21,6 +21,7 @@ type ShowConnectWalletOptions = {
 
 export type SdkOptions = {
   gameId: string;
+  env?: 'dev' | 'stage' | 'prod';
   onReady?: (sdk: GamesSDK) => void;
 };
 
@@ -58,7 +59,7 @@ export class GamesSDK {
 
   private async initWallet() {
     await this.wallet.init({
-      env: 'dev',
+      env: this.options.env || 'prod',
       connectOptions: {
         mode: 'modal',
       },

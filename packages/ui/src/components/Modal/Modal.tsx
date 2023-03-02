@@ -5,7 +5,6 @@ import { CloseIcon } from '../../icons';
 import { Backdrop } from '../Backdrop';
 import { Spinner } from '../Spinner';
 import { Stack } from '../Stack';
-import { Typography } from '../Typography';
 
 export type ModalProps = PropsWithChildren<{
   hasClose?: boolean;
