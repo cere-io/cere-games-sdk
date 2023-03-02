@@ -1,14 +1,19 @@
 const path = require('path');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
   mode: 'production',
   entry: './src/index.ts',
+
   output: {
     clean: true,
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.umd.js',
-    library: { name: 'CereGamesSdkUI', type: 'umd' },
+    library: { name: 'CereGamesSDK', type: 'umd' },
   },
+
+  plugins: [new NodePolyfillPlugin()],
+
   module: {
     rules: [
       {
@@ -21,12 +26,9 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.png/,
-        type: 'asset/inline',
-      },
     ],
   },
+
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
