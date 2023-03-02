@@ -17,10 +17,12 @@ const Overlay = styled.div({
   overscrollBehavior: 'contain',
 });
 
-const Content = styled.div({
+const Content = styled.div(({ theme }) => ({
   flexShrink: 0,
   margin: 'auto',
-});
+
+  color: theme.palette.text.primary,
+}));
 
 export const Backdrop = ({ children }: BackdropProps) => (
   <Overlay>

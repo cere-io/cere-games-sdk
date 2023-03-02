@@ -16,7 +16,10 @@ function appendToBody(element: HTMLElement) {
   }
 }
 
-export const createModal = (contentElement: HTMLElement, options: ModalOptions = {}): Modal => {
+export const createModal = (
+  contentElement: HTMLElement | (() => Promise<HTMLElement>),
+  options: ModalOptions = {},
+): Modal => {
   const modal = document.createElement('cere-modal');
 
   if (options.hasClose) {
@@ -26,7 +29,16 @@ export const createModal = (contentElement: HTMLElement, options: ModalOptions =
     });
   }
 
-  modal.appendChild(contentElement);
+  if (typeof contentElement === 'function') {
+    modal.update({ loading: true });
+
+    Promise.resolve(contentElement()).then((element) => {
+      modal.appendChild(element);
+      modal.update({ loading: false });
+    });
+  } else {
+    modal.appendChild(contentElement);
+  }
 
   return {
     get isOpen() {

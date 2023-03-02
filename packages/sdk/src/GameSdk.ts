@@ -4,6 +4,21 @@ import * as UI from '@cere/games-sdk-ui';
 import { GAME_SERVICE_URL } from './constants';
 import { LeaderBoardApi } from './api';
 
+type AsyncCallback = () => Promise<void> | void;
+
+type ShowLeaderboardOptions = {
+  onPlayAgain?: AsyncCallback;
+  onBeforeLoad?: AsyncCallback;
+};
+
+type ShowPreloaderOptions = {
+  onStart?: AsyncCallback;
+};
+
+type ShowConnectWalletOptions = {
+  onConnect?: AsyncCallback;
+};
+
 export type SdkOptions = {
   gameId: string;
   onReady?: (sdk: GamesSDK) => void;
@@ -50,15 +65,15 @@ export class GamesSDK {
     });
   }
 
-  showPreloader(onStart?: () => void) {
+  showPreloader({ onStart }: ShowPreloaderOptions = {}) {
     const preloader = document.createElement('cere-preloader');
     const { open, ...modal } = UI.createModal(preloader);
 
     preloader.update({
       ready: false,
-      onStartClick: () => {
+      onStartClick: async () => {
+        await onStart?.();
         modal.close();
-        onStart?.();
       },
     });
 
@@ -70,17 +85,16 @@ export class GamesSDK {
     };
   }
 
-  showLeaderboard(onPlayAgain?: () => void) {
-    const leaderboard = document.createElement('cere-leaderboard');
-    const { open, ...modal } = UI.createModal(leaderboard);
+  showLeaderboard({ onPlayAgain, onBeforeLoad }: ShowLeaderboardOptions = {}) {
+    const { open, ...modal } = UI.createModal(async () => {
+      const leaderboard = document.createElement('cere-leaderboard');
 
-    leaderboard.update({
-      data: [],
-      onPlayAgain,
-    });
+      await Promise.resolve(onBeforeLoad?.());
+      const data = await this.leaderBoard.getData();
 
-    this.leaderBoard.getData().then((data) => {
-      leaderboard.update({ data });
+      leaderboard.update({ data, onPlayAgain });
+
+      return leaderboard;
     });
 
     open();
@@ -88,7 +102,7 @@ export class GamesSDK {
     return modal;
   }
 
-  showConnectWallet(onConnect?: () => void) {
+  showConnectWallet({ onConnect }: ShowConnectWalletOptions = {}) {
     const connectWallet = document.createElement('cere-connect-wallet');
     const { open, ...modal } = UI.createModal(connectWallet, { hasClose: true });
 
@@ -96,9 +110,9 @@ export class GamesSDK {
       onConnect: async () => {
         try {
           await this.wallet.connect();
+          await onConnect?.();
 
           modal.close();
-          onConnect?.();
         } catch {}
       },
     });
@@ -109,11 +123,19 @@ export class GamesSDK {
   }
 
   async saveScore(score: number) {
-    if (this.wallet.status !== 'connected') {
-      await new Promise<void>((resolve) => this.showConnectWallet(resolve));
+    const save = async () => {
+      const [ethAddress] = await this.wallet.getAccounts();
+      await this.leaderBoard.saveScore(ethAddress.address, score);
+    };
+
+    if (this.wallet.status === 'connected') {
+      return save();
     }
 
-    const [ethAddress] = await this.wallet.getAccounts();
-    await this.leaderBoard.saveScore(ethAddress.address, score);
+    await new Promise<void>((resolve) =>
+      this.showConnectWallet({
+        onConnect: () => save().then(resolve),
+      }),
+    );
   }
 }
