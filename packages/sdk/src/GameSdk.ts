@@ -42,7 +42,12 @@ export class GamesSDK {
   }
 
   private async initWallet() {
-    await this.wallet.init({ env: 'dev' });
+    await this.wallet.init({
+      env: 'dev',
+      connectOptions: {
+        mode: 'modal',
+      },
+    });
   }
 
   showPreloader(onStart?: () => void) {
