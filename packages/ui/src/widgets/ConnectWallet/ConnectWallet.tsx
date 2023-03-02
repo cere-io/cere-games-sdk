@@ -40,11 +40,10 @@ export const ConnectWallet = ({ onConnect }: ConnectWalletProps) => {
             Connect & Collect rewards
           </Typography>
           <Typography align="center" color="secondary">
-            Connect your wallet to collect your
-            <Typography inline color="primary">
-              NFT, achievements, Cere tokens
-            </Typography>{' '}
-            see your place on the leaderboard!
+            Connect or create a wallet to collect
+            <Typography inline color="primary" fontWight="medium">
+              NFTs, achievements and $CERE tokens
+            </Typography>
           </Typography>
         </Stack>
       </Stack>
@@ -61,3 +60,7 @@ export const ConnectWallet = ({ onConnect }: ConnectWalletProps) => {
     </Widget>
   );
 };
+
+//Connect or create a wallet to collect
+
+// NFTs, achievements and $CERE tokens

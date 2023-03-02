@@ -15,6 +15,7 @@ const Overlay = styled.div({
   backgroundColor: 'rgba(0, 0, 0, 0.8)',
   WebkitTapHighlightColor: 'transparent',
   overscrollBehavior: 'contain',
+  zIndex: 999,
 });
 
 const Content = styled.div(({ theme }) => ({
