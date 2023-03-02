@@ -26,7 +26,9 @@ const NftWrapper = styled(Stack)(() => ({
   border: '1px solid rgba(255, 255, 255, 0.2)',
   backdropFilter: 'blur(5px)',
   borderRadius: '12px',
-  marginBottom: '24px',
+  '@media (max-width: 600px)': {
+    marginBottom: '24px',
+  },
 }));
 
 const Image = styled('img')(() => ({
