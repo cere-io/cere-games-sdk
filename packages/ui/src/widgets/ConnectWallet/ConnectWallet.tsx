@@ -37,7 +37,7 @@ export const ConnectWallet = ({ onConnect }: ConnectWalletProps) => {
 
         <Stack spacing={1}>
           <Typography align="center" variant="h2">
-            Connect & Collect rewards
+            Claim your leaderboard spot!
           </Typography>
           <Typography align="center" color="secondary">
             Connect or create a wallet to collect
