@@ -3,10 +3,12 @@ import { PropsWithChildren } from 'react';
 
 import { CloseIcon } from '../../icons';
 import { Backdrop } from '../Backdrop';
+import { Spinner } from '../Spinner';
 import { Stack } from '../Stack';
 
 export type ModalProps = PropsWithChildren<{
   hasClose?: boolean;
+  loading?: boolean;
   onRequestClose?: () => void;
 }>;
 
@@ -45,16 +47,20 @@ const Content = styled.div<ModalProps>(({ theme }) => ({
   },
 }));
 
-export const Modal = ({ children, onRequestClose, hasClose = false }: ModalProps) => (
+export const Modal = ({ children, onRequestClose, hasClose = false, loading = false }: ModalProps) => (
   <Backdrop>
-    <Content>
-      {hasClose && (
-        <Header direction="row" spacing={2}>
-          <Close onClick={onRequestClose} />
-        </Header>
-      )}
+    {loading ? (
+      <Spinner size={40} />
+    ) : (
+      <Content>
+        {hasClose && (
+          <Header direction="row" spacing={2}>
+            <Close onClick={onRequestClose} />
+          </Header>
+        )}
 
-      {children}
-    </Content>
+        {children}
+      </Content>
+    )}
   </Backdrop>
 );

@@ -2,7 +2,7 @@ import { LoadingButton, LoadingButtonProps } from '@mui/lab';
 import { useCallback, useState } from 'react';
 
 export type AsyncButtonProps = Omit<LoadingButtonProps, 'onClick' | 'loading'> & {
-  onClick?: () => Promise<any>;
+  onClick?: () => any | Promise<any>;
 };
 
 export const AsyncButton = ({ onClick, ...props }: AsyncButtonProps) => {
