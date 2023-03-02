@@ -31,6 +31,7 @@ const NftWrapper = styled(Stack)(() => ({
 
 const Image = styled('img')(() => ({
   width: '100%',
+  borderRadius: ' 12px',
 }));
 
 const AccentText = styled(Typography)(() => ({
