@@ -24,8 +24,9 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
     <Widget>
       <Stack direction="row" spacing={2} margin={[0, 0, 4]}>
         <Button icon={<RepeatIcon />} onClick={onPlayAgain}>
-          {/* TODO: Fix */}
-          <div style={{ whiteSpace: 'nowrap' }}>Play again</div>
+          <Typography variant="inherit" noWrap>
+            Play again
+          </Typography>
         </Button>
         <Button disabled>
           Game Portal
