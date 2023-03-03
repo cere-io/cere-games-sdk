@@ -42,6 +42,7 @@ export const createTheme = (): Theme => ({
 
     caption: {
       fontSize: 12,
+      lineHeight: 1.2,
     },
 
     h1: {

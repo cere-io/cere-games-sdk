@@ -41,7 +41,7 @@ const ButtonBase = styled.button<ButtonProps>(
       }),
 
     cursor: readOnly || disabled ? 'default' : 'pointer',
-    padding: theme.spacing(1, 2),
+    padding: theme.spacing(0.5, 2),
     borderRadius: 100,
   }),
 );
