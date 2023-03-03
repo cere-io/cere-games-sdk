@@ -16,7 +16,7 @@ const Connect = styled(Button)(({ theme }) => ({
 }));
 
 const Widget = styled(Stack)({
-  maxWidth: 380,
+  maxWidth: 400,
 });
 
 export const ConnectWallet = ({ onConnect }: ConnectWalletProps) => {

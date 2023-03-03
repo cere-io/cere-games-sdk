@@ -18,7 +18,7 @@ const Image = styled.div({
 });
 
 const Widget = styled(Stack)({
-  maxWidth: 380,
+  maxWidth: 400,
 });
 
 export type PreloaderProps = {
