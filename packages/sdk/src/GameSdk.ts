@@ -105,7 +105,7 @@ export class GamesSDK {
 
   showConnectWallet({ onConnect }: ShowConnectWalletOptions = {}) {
     const connectWallet = document.createElement('cere-connect-wallet');
-    const { open, ...modal } = UI.createModal(connectWallet, { hasClose: true });
+    const { open, ...modal } = UI.createFullscreenModal(connectWallet, { hasClose: true });
 
     connectWallet.update({
       onConnect: async () => {
