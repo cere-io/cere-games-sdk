@@ -30,7 +30,8 @@ export const Playground = () => {
   }, [sdk]);
 
   const handleConnectWallet = useCallback(async () => {
-    sdk.showConnectWallet({
+    await sdk.showConnectWallet({
+      score: 25,
       onConnect: () => new Promise((resolve) => setTimeout(resolve, 1000)),
     });
   }, [sdk]);

@@ -17,6 +17,7 @@ type ShowPreloaderOptions = {
 
 type ShowConnectWalletOptions = {
   onConnect?: AsyncCallback;
+  score?: number;
 };
 
 export type SdkOptions = {
@@ -103,17 +104,24 @@ export class GamesSDK {
     return modal;
   }
 
-  showConnectWallet({ onConnect }: ShowConnectWalletOptions = {}) {
+  async showConnectWallet({ onConnect, score }: ShowConnectWalletOptions = {}) {
     const connectWallet = document.createElement('cere-connect-wallet');
     const { open, ...modal } = UI.createFullscreenModal(connectWallet, { hasClose: true });
 
+    const isWalletConnected = this.wallet.status === 'connected';
+    const rank = await this.leaderBoard.getRank(score as number);
     connectWallet.update({
+      isWalletConnected,
+      rank,
+      score,
       onConnect: async () => {
         try {
           await this.wallet.connect();
           await onConnect?.();
 
-          modal.close();
+          if (this.wallet.status === 'connected') {
+            connectWallet.update({ rank, score, isWalletConnected: true });
+          }
         } catch {}
       },
     });
