@@ -9,8 +9,8 @@ import { PrizesList } from '../../components/PrizesList';
 
 export type ConnectWalletProps = {
   onConnect?: () => Promise<void> | void;
-  rank: number;
-  score: number;
+  rank?: number;
+  score?: number;
   isWalletConnected: boolean;
   balance?: number;
 };
@@ -103,12 +103,16 @@ export const ConnectWallet = ({ isWalletConnected = false, balance, onConnect, r
         <WalletHeader>
           <Stack spacing={1}>
             <Stack>
-              <ScoreText align="center" variant="h2">
-                Your Rank: <StyledNumber>{rank}</StyledNumber>
-              </ScoreText>
-              <ScoreText align="center" variant="h2">
-                Score: <StyledNumber>{score}</StyledNumber>
-              </ScoreText>
+              {rank && (
+                <ScoreText align="center" variant="h2">
+                  Your Rank: <StyledNumber>{rank}</StyledNumber>
+                </ScoreText>
+              )}
+              {score && (
+                <ScoreText align="center" variant="h2">
+                  Score: <StyledNumber>{score}</StyledNumber>
+                </ScoreText>
+              )}
             </Stack>
             <ArrowIcon />
           </Stack>

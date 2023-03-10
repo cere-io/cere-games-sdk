@@ -143,6 +143,7 @@ export class GamesSDK {
 
     await new Promise<void>((resolve) =>
       this.showConnectWallet({
+        score,
         onConnect: () => save().then(resolve),
       }),
     );
