@@ -25,6 +25,9 @@ const Header = styled(Stack)(({ theme }) => ({
 
 const Close = styled(CloseIcon)(({ theme }) => ({
   color: theme.palette.text.primary,
+  background: 'rgba(255, 255, 255, 0.2)',
+  backdropFilter: 'blur(27.1828px)',
+  borderRadius: '100px',
   fontSize: 14,
   padding: 7,
   right: -7,
@@ -35,15 +38,17 @@ const Close = styled(CloseIcon)(({ theme }) => ({
 
 const Content = styled.div<FullscreenModalProps>(({ theme }) => ({
   background:
-    'url(https://assets.cms.freeport.dev.cere.network/background_claim_prizes_full_03715eef9b.png), linear-gradient(180deg, rgba(138, 143, 255, 0.2) 0%, rgba(17, 21, 35, 0) 100%), #111523',
+    'url(https://assets.cms.freeport.dev.cere.network/confetti_background_min_9df623fb87.png), linear-gradient(180deg, #5E009F 0%, #111523 100%);',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   boxShadow: '0px 5px 40px rgba(0, 0, 0, 0.4)',
-  borderRadius: theme.borderRadius(5),
+  borderRadius: theme.borderRadius(4),
   padding: theme.spacing(4),
   margin: theme.spacing(4),
+  width: 600,
 
   '@media (max-width: 600px), (max-height: 440px)': {
+    width: 'auto',
     padding: theme.spacing(3),
     margin: 0,
     borderRadius: 0,

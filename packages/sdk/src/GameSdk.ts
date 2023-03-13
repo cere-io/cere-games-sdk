@@ -109,19 +109,15 @@ export class GamesSDK {
     const { open, ...modal } = UI.createFullscreenModal(connectWallet, { hasClose: true });
 
     const isWalletConnected = this.wallet.status === 'connected';
-    const rank = await this.leaderBoard.getRank(score as number);
     connectWallet.update({
       isWalletConnected,
-      rank,
       score,
       onConnect: async () => {
         try {
           await this.wallet.connect();
           await onConnect?.();
 
-          if (this.wallet.status === 'connected') {
-            connectWallet.update({ rank, score, isWalletConnected: true });
-          }
+          modal.close();
         } catch {}
       },
     });
