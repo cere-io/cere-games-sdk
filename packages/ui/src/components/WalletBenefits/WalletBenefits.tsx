@@ -25,10 +25,15 @@ const Item = styled.div({
   },
 });
 
+const IconBlock = styled.div({
+  width: 64,
+  height: 64,
+  background: 'url(https://assets.cms.freeport.dev.cere.network/back_light_1c2a02de4b.png)',
+  backgroundSize: '100% 135%',
+});
+
 const StyledImage = styled.img({
-  background: 'url(https://assets.cms.freeport.dev.cere.network/back_light_c5c86cb236.png) no-repeat',
-  backgroundSize: '60px 95px',
-  maxHeight: 65,
+  maxHeight: 64,
 });
 
 const benefits: { title: string; url: string }[] = [
@@ -51,7 +56,9 @@ export const WalletBenefits = () => (
     {benefits.map(({ title, url }) => {
       return (
         <Item key={title}>
-          <StyledImage src={url} alt={title} />
+          <IconBlock>
+            <StyledImage src={url} alt={title} />
+          </IconBlock>
           <span>{title}</span>
         </Item>
       );

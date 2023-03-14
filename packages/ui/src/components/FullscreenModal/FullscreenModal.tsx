@@ -24,6 +24,7 @@ const Header = styled(Stack)(({ theme }) => ({
 }));
 
 const Close = styled(CloseIcon)(({ theme }) => ({
+  zIndex: 4,
   color: theme.palette.text.primary,
   background: 'rgba(255, 255, 255, 0.2)',
   backdropFilter: 'blur(27.1828px)',
@@ -37,8 +38,7 @@ const Close = styled(CloseIcon)(({ theme }) => ({
 }));
 
 const Content = styled.div<FullscreenModalProps>(({ theme }) => ({
-  background:
-    'url(https://assets.cms.freeport.dev.cere.network/confetti_background_min_9df623fb87.png), linear-gradient(180deg, #5E009F 0%, #111523 100%);',
+  background: 'linear-gradient(180deg, #5E009F 0%, #111523 100%);',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   boxShadow: '0px 5px 40px rgba(0, 0, 0, 0.4)',
@@ -49,6 +49,7 @@ const Content = styled.div<FullscreenModalProps>(({ theme }) => ({
 
   '@media (max-width: 600px), (max-height: 440px)': {
     width: 'auto',
+    height: '100vh',
     padding: theme.spacing(3),
     margin: 0,
     borderRadius: 0,

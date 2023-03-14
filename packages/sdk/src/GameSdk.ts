@@ -88,7 +88,7 @@ export class GamesSDK {
   }
 
   showLeaderboard({ onPlayAgain, onBeforeLoad }: ShowLeaderboardOptions = {}) {
-    const { open, ...modal } = UI.createModal(async () => {
+    const { open, ...modal } = UI.createFullscreenModal(async () => {
       const leaderboard = document.createElement('cere-leaderboard');
 
       await Promise.resolve(onBeforeLoad?.());
@@ -108,9 +108,7 @@ export class GamesSDK {
     const connectWallet = document.createElement('cere-connect-wallet');
     const { open, ...modal } = UI.createFullscreenModal(connectWallet, { hasClose: true });
 
-    const isWalletConnected = this.wallet.status === 'connected';
     connectWallet.update({
-      isWalletConnected,
       score,
       onConnect: async () => {
         try {

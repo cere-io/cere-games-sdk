@@ -1,24 +1,8 @@
-import { css, Theme } from '@emotion/react';
+import { Theme } from '@emotion/react';
 
 import toShorthand from './toShorthand';
 
-const GlobalStyles = css`
-  @font-face {
-    font-family: 'Lexend', sans-serif;
-    src: url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;700&display=swap');
-    font-weight: 400;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'Bebas Neue', sans-serif;
-    src: url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-    font-weight: 400;
-    font-style: normal;
-  }
-`;
-
 export const createTheme = (): Theme => ({
-  ...GlobalStyles,
   spacing: toShorthand(8),
   borderRadius: toShorthand(4),
 
@@ -34,16 +18,18 @@ export const createTheme = (): Theme => ({
       primary: '#FFFFFF',
       secondary: '#9A9A9A',
       caption: '#CCCCCC',
+      'text-primary': '#131B32',
     },
 
     border: 'rgba(255, 255, 255, 0.3)',
   },
 
   typography: {
-    fontFamily: '"Lexend","Bebas Neue",sans-serif',
+    fontFamily: 'Lexend, sans-serif',
 
     fontWeight: {
       bold: 700,
+      'semi-bold': 600,
       medium: 500,
       regular: 400,
     },

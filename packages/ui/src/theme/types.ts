@@ -2,9 +2,9 @@ import { CSSObject } from '@emotion/react';
 
 import { ToShorthand, Spacing } from './toShorthand';
 
-export type TextColor = 'primary' | 'secondary' | 'caption';
+export type TextColor = 'primary' | 'secondary' | 'caption' | 'text-primary';
 export type TypographyVariant = 'body1' | 'body2' | 'caption' | 'h1' | 'h2' | 'button';
-export type TypographyWeight = 'regular' | 'medium' | 'bold';
+export type TypographyWeight = 'regular' | 'medium' | 'semi-bold' | 'bold';
 
 export type { Spacing };
 

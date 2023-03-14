@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { Button, Stack, Typography } from '../../components';
 import { useMediaQuery, useWalletContext } from '../../hooks';
@@ -16,6 +16,7 @@ const Connect = styled(Button)(() => ({
 }));
 
 const Widget = styled(Stack)({
+  position: 'relative',
   maxWidth: 600,
   '@media (max-width: 600px)': {
     maxWidth: '100%',
@@ -23,6 +24,22 @@ const Widget = styled(Stack)({
     height: '100vh',
   },
 });
+
+const AnimationBlock = styled.div(({ showConfetti }: { showConfetti: boolean }) => ({
+  zIndex: 2,
+  position: 'absolute',
+  top: '-30%',
+  width: '100%',
+  height: '100%',
+  background: showConfetti
+    ? 'url(https://assets.cms.freeport.dev.cere.network/animation_640_lf88b7kr_aa5d097cd4.gif)'
+    : '',
+  backgroundSize: 'contain',
+  backgroundRepeat: 'no-repeat',
+  '@media (max-width: 600px)': {
+    top: '-15%',
+  },
+}));
 
 const StyledNumber = styled.span({
   background: 'linear-gradient(79.06deg, #75ACFF 0%, #27E3C1 100%)',
@@ -66,7 +83,12 @@ const ByCereText = styled.span({
 export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [busy, setBusy] = useState(false);
+  const [showConfetti, setShow] = useState(true);
   const { isReady, connecting } = useWalletContext();
+
+  useEffect(() => {
+    setTimeout(() => setShow(false), 1500);
+  });
 
   const handleConnect = useCallback(async () => {
     setBusy(true);
@@ -76,7 +98,7 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="stretch">
-      <div id="lottie" />
+      <AnimationBlock showConfetti={showConfetti} />
       <Stack spacing={4}>
         <Stack>
           <Stack>

@@ -7,3 +7,4 @@ export * from './Table';
 export * from './Truncate';
 export * from './Address';
 export * from './FullscreenModal';
+export * from './Alert';
