@@ -18,16 +18,18 @@ export const createTheme = (): Theme => ({
       primary: '#FFFFFF',
       secondary: '#9A9A9A',
       caption: '#CCCCCC',
+      'text-primary': '#131B32',
     },
 
     border: 'rgba(255, 255, 255, 0.3)',
   },
 
   typography: {
-    fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
+    fontFamily: 'Lexend, sans-serif',
 
     fontWeight: {
       bold: 700,
+      'semi-bold': 600,
       medium: 500,
       regular: 400,
     },

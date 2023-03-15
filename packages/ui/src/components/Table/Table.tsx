@@ -17,7 +17,7 @@ export const Table = ({ data, activeAddress }: TableProps) => {
 
   return (
     <Container>
-      <TableHeader columns={['Rank', 'Player', 'Score']} />
+      <TableHeader columns={['Rank', 'Player', 'Prize', 'Score']} />
       {activeRow && <TableDataRow active data={activeRow} />}
       {rows.map((row) => (
         <TableDataRow key={row.address} data={row} />

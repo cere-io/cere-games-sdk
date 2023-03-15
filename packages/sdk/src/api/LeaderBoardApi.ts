@@ -6,6 +6,8 @@ export type LeaderBoardRecord = {
 
 export type LeaderBoard = LeaderBoardRecord[];
 
+export type Rank = number;
+
 export type LeaderBoardApiOptions = {
   baseUrl: string;
   gameId: string;
@@ -45,5 +47,13 @@ export class LeaderBoardApi {
       },
       body: JSON.stringify(payload),
     });
+  }
+
+  async getRank(score: number) {
+    const endpoint = this.createEndpoint(`/leader-board/games/${this.options.gameId}/scores/${score}`);
+    const response = await fetch(endpoint);
+    const data: Rank = await response.json();
+
+    return data;
   }
 }

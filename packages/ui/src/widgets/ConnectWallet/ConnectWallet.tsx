@@ -1,28 +1,94 @@
 import styled from '@emotion/styled';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { Button, Stack, Typography } from '../../components';
 import { useMediaQuery, useWalletContext } from '../../hooks';
-import { CereIcon, TrophyIcon } from '../../icons';
+import { WalletBenefits } from '../../components/WalletBenefits';
 
 export type ConnectWalletProps = {
   onConnect?: () => Promise<void> | void;
+  score?: number;
+  isWalletConnected: boolean;
 };
 
-const Connect = styled(Button)(({ theme }) => ({
-  ...theme.typography.body1,
-  justifyContent: 'flex-start',
-  height: 48,
+const Connect = styled(Button)(() => ({
+  marginBottom: '20px!important',
 }));
 
 const Widget = styled(Stack)({
-  maxWidth: 400,
+  position: 'relative',
+  maxWidth: 600,
+  '@media (max-width: 600px)': {
+    maxWidth: '100%',
+    width: '100%',
+    height: '100vh',
+  },
 });
 
-export const ConnectWallet = ({ onConnect }: ConnectWalletProps) => {
+const AnimationBlock = styled.div(({ showConfetti }: { showConfetti: boolean }) => ({
+  zIndex: 2,
+  position: 'absolute',
+  top: '-30%',
+  width: '100%',
+  height: '100%',
+  background: showConfetti
+    ? 'url(https://assets.cms.freeport.dev.cere.network/animation_640_lf88b7kr_aa5d097cd4.gif)'
+    : '',
+  backgroundSize: 'contain',
+  backgroundRepeat: 'no-repeat',
+  '@media (max-width: 600px)': {
+    top: '-15%',
+  },
+}));
+
+const StyledNumber = styled.span({
+  background: 'linear-gradient(79.06deg, #75ACFF 0%, #27E3C1 100%)',
+  backgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+});
+
+const HeaderTitle = styled(Typography)({
+  fontFamily: 'Bebas Neue, sans-serif',
+  fontSize: '32px',
+  lineHeight: '38px',
+  textAlign: 'center',
+  letterSpacing: '0.01em',
+  textTransform: 'uppercase',
+  color: 'rgba(255, 255, 255, 0.9)',
+});
+
+const HeaderSubTitle = styled(HeaderTitle)({
+  fontStyle: 'normal',
+  fontSize: '46px',
+  lineHeight: '55px',
+});
+
+const ConnectDetailsText = styled(Typography)({
+  fontWeight: 700,
+  fontSize: '14px',
+  lineHeight: '18px',
+  textAlign: 'center',
+  textTransform: 'uppercase',
+});
+
+const ByCereText = styled.span({
+  fontWeight: 400,
+  fontSize: 12,
+  lineHeight: '20px',
+  letterSpacing: '0.01em',
+  color: '#CBCBCB',
+  textAlign: 'center',
+});
+
+export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [busy, setBusy] = useState(false);
+  const [showConfetti, setShow] = useState(true);
   const { isReady, connecting } = useWalletContext();
+
+  useEffect(() => {
+    setTimeout(() => setShow(false), 1500);
+  });
 
   const handleConnect = useCallback(async () => {
     setBusy(true);
@@ -32,30 +98,26 @@ export const ConnectWallet = ({ onConnect }: ConnectWalletProps) => {
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="stretch">
-      <Stack spacing={3}>
-        {!isLandscape && <TrophyIcon fontSize={90} />}
-
-        <Stack spacing={1}>
-          <Typography align="center" variant="h2">
-            Claim your leaderboard spot!
-          </Typography>
-          <Typography align="center" color="secondary">
-            Connect or create a wallet to collect
-            <Typography inline color="primary" fontWight="medium">
-              NFTs, achievements and $CERE tokens
-            </Typography>
-          </Typography>
+      <AnimationBlock showConfetti={showConfetti} />
+      <Stack spacing={4}>
+        <Stack>
+          <Stack>
+            <HeaderTitle>Congratulations!</HeaderTitle>
+            <HeaderSubTitle>
+              Your score: <StyledNumber>{score}</StyledNumber>
+            </HeaderSubTitle>
+          </Stack>
+        </Stack>
+        <Stack spacing={2}>
+          <ConnectDetailsText>CONNECT your wallet to:</ConnectDetailsText>
+          <WalletBenefits />
         </Stack>
       </Stack>
-
-      <Stack spacing={2} align="stretch">
-        <Connect readOnly variant="outlined" icon={<CereIcon fontSize={25} />}>
-          Cere Wallet
+      <Stack spacing={2}>
+        <Connect loading={!isReady || connecting || busy} onClick={handleConnect}>
+          {!isReady ? 'Preparing... Please wait' : 'Claim 20 free tokens'}
         </Connect>
-
-        <Button loading={!isReady || connecting || busy} onClick={handleConnect}>
-          {!isReady ? 'Preparing... Please wait' : 'Connect'}
-        </Button>
+        <ByCereText>Powered by Cere Gaming Cloud</ByCereText>
       </Stack>
     </Widget>
   );

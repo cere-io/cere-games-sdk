@@ -20,6 +20,7 @@ export const TableRow = ({ columns }: TableRowProps) => (
   <Row direction="row" align="center">
     <Column style={{ width: 90 }}>{columns[0]}</Column>
     <Column style={{ flex: 1 }}>{columns[1]}</Column>
-    <Column style={{ width: 90, justifyContent: 'end' }}>{columns[2]}</Column>
+    <Column style={{ justifyContent: 'end' }}>{columns[2]}</Column>
+    <Column style={{ width: 90, justifyContent: 'end' }}>{columns[3]}</Column>
   </Row>
 );

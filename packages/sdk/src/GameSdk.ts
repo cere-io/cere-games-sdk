@@ -17,6 +17,7 @@ type ShowPreloaderOptions = {
 
 type ShowConnectWalletOptions = {
   onConnect?: AsyncCallback;
+  score?: number;
 };
 
 export type SdkOptions = {
@@ -87,7 +88,7 @@ export class GamesSDK {
   }
 
   showLeaderboard({ onPlayAgain, onBeforeLoad }: ShowLeaderboardOptions = {}) {
-    const { open, ...modal } = UI.createModal(async () => {
+    const { open, ...modal } = UI.createFullscreenModal(async () => {
       const leaderboard = document.createElement('cere-leaderboard');
 
       await Promise.resolve(onBeforeLoad?.());
@@ -103,11 +104,12 @@ export class GamesSDK {
     return modal;
   }
 
-  showConnectWallet({ onConnect }: ShowConnectWalletOptions = {}) {
+  async showConnectWallet({ onConnect, score }: ShowConnectWalletOptions = {}) {
     const connectWallet = document.createElement('cere-connect-wallet');
-    const { open, ...modal } = UI.createModal(connectWallet, { hasClose: true });
+    const { open, ...modal } = UI.createFullscreenModal(connectWallet, { hasClose: true });
 
     connectWallet.update({
+      score,
       onConnect: async () => {
         try {
           await this.wallet.connect();
@@ -135,6 +137,7 @@ export class GamesSDK {
 
     await new Promise<void>((resolve) =>
       this.showConnectWallet({
+        score,
         onConnect: () => save().then(resolve),
       }),
     );
