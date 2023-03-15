@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { keyframes } from '@emotion/react';
 
 import { Typography } from '../Typography';
 import { CloseIcon } from '../../icons';
@@ -52,9 +53,25 @@ const ProgressContainer = styled.div({
   marginLeft: 6,
   background: '#D6D6D6',
 });
-const ProgressBar = styled.div(({ width }: { width: number }) => ({
+
+const ProgressBar = styled.div(() => ({
+  animationName: keyframes({
+    from: {
+      width: 0,
+    },
+
+    to: {
+      width: '100%',
+    },
+  }),
+
+  animationDuration: '5s',
+  animationIterationCount: 1,
+  transitionProperty: 'width',
+  animationTimingFunction: 'linear',
+
   display: 'block',
-  width: `${width}%`,
+  width: 0,
   borderRadius: '0 0 12px 12px',
   height: 3,
   background: 'linear-gradient(79.06deg, #E34DC5 0%, #9227E3 100%)',
@@ -68,41 +85,22 @@ const ProgressBar = styled.div(({ width }: { width: number }) => ({
   },
 }));
 
-let interval: NodeJS.Timer | undefined = undefined;
-
 export const Alert = () => {
   const [visible, setVisibility] = useState(true);
-  const [width, setWidth] = useState(1);
-
-  useEffect(() => {
-    if (visible) {
-      interval = setInterval(() => {
-        setWidth((prev) => prev + 1);
-      }, 50);
-    } else {
-      clearInterval(interval);
-    }
-  }, [visible]);
-
-  useEffect(() => {
-    if (width === 100) {
-      setVisibility(false);
-      clearInterval(interval);
-    }
-  }, [width]);
 
   if (!visible) {
     return null;
   }
+
   return (
     <Container>
       <span>🎉</span>
       <StyledTypography variant="body2" color="text-primary">
-        You received <b>20 CERE</b> tokens for setting up your wallet!
+        You received <b>20 $CERE</b> tokens for setting up your wallet!
       </StyledTypography>
       <CloseAlert onClick={() => setVisibility(false)} />
       <ProgressContainer>
-        <ProgressBar width={width} />
+        <ProgressBar onAnimationEnd={() => setVisibility(false)} />
       </ProgressContainer>
     </Container>
   );
