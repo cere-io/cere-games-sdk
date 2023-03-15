@@ -27,7 +27,9 @@ export const Playground = () => {
   }, [sdk]);
 
   const handleShowLeaderboard = useCallback(async () => {
-    sdk.showLeaderboard();
+    const modal = sdk.showLeaderboard({
+      onPlayAgain: () => modal.close(),
+    });
   }, [sdk]);
 
   const handleConnectWallet = useCallback(async () => {
@@ -40,7 +42,9 @@ export const Playground = () => {
   const handleSaveScore = useCallback(async () => {
     await sdk.saveScore(25);
 
-    sdk.showLeaderboard();
+    const modal = sdk.showLeaderboard({
+      onPlayAgain: () => modal.close(),
+    });
   }, [sdk]);
 
   return (

@@ -1,8 +1,8 @@
 import { EmbedWallet, WalletAccount, WalletBalance } from '@cere/embed-wallet';
 import * as UI from '@cere/games-sdk-ui';
 
-import { GAME_SERVICE_URL } from './constants';
-import { LeaderBoardApi } from './api';
+import { GAME_SERVICE_URL, GAME_SESSION_DEPOSIT_ADDRESS, GAME_SESSION_PRICE } from './constants';
+import { GamesApi } from './api';
 
 type AsyncCallback = () => Promise<void> | void;
 
@@ -30,9 +30,8 @@ export type InitParams = {};
 
 export class GamesSDK {
   private ui = UI.createContext();
-
   readonly wallet = new EmbedWallet();
-  readonly leaderBoard = new LeaderBoardApi({
+  readonly api = new GamesApi({
     gameId: this.options.gameId,
     baseUrl: GAME_SERVICE_URL,
   });
@@ -43,7 +42,7 @@ export class GamesSDK {
     });
 
     this.wallet.subscribe('balance-update', ({ amount }: WalletBalance) => {
-      this.ui.wallet.balance = amount.toString();
+      this.ui.wallet.balance = amount.toNumber();
     });
 
     this.wallet.subscribe('status-update', () => {
@@ -67,6 +66,18 @@ export class GamesSDK {
         mode: 'modal',
       },
     });
+  }
+
+  private async payForSession() {
+    const [ethAccount, cereAccount] = await this.wallet.getAccounts();
+
+    const txHash = await this.wallet.transfer({
+      token: 'CERE',
+      to: GAME_SESSION_DEPOSIT_ADDRESS,
+      amount: GAME_SESSION_PRICE,
+    });
+
+    await this.api.saveSessionTX(txHash, [ethAccount.address, cereAccount.address]);
   }
 
   showPreloader({ onStart }: ShowPreloaderOptions = {}) {
@@ -93,10 +104,17 @@ export class GamesSDK {
     const { open, ...modal } = UI.createFullscreenModal(async () => {
       const leaderboard = document.createElement('cere-leaderboard');
 
-      await Promise.resolve(onBeforeLoad?.());
-      const data = await this.leaderBoard.getData();
+      await onBeforeLoad?.();
+      const data = await this.api.getLeaderboard();
 
-      leaderboard.update({ data, onPlayAgain });
+      leaderboard.update({
+        data,
+        sessionPrice: GAME_SESSION_PRICE,
+        onPlayAgain: async () => {
+          await this.payForSession();
+          await onPlayAgain?.();
+        },
+      });
 
       return leaderboard;
     });
@@ -130,7 +148,7 @@ export class GamesSDK {
   async saveScore(score: number) {
     const save = async () => {
       const [ethAddress] = await this.wallet.getAccounts();
-      await this.leaderBoard.saveScore(ethAddress.address, score);
+      await this.api.saveScore(ethAddress.address, score);
     };
 
     if (this.wallet.status === 'connected') {

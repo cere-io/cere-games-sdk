@@ -8,19 +8,19 @@ export type LeaderBoard = LeaderBoardRecord[];
 
 export type Rank = number;
 
-export type LeaderBoardApiOptions = {
+export type GamesApiOptions = {
   baseUrl: string;
   gameId: string;
 };
 
-export class LeaderBoardApi {
-  constructor(private options: LeaderBoardApiOptions) {}
+export class GamesApi {
+  constructor(private options: GamesApiOptions) {}
 
   private createEndpoint(path: string) {
     return new URL(path, this.options.baseUrl);
   }
 
-  async getData() {
+  async getLeaderboard() {
     const endpoint = this.createEndpoint(`/leader-board/game-id/${this.options.gameId}`);
     const response = await fetch(endpoint);
     const data: LeaderBoard = await response.json();
@@ -49,11 +49,19 @@ export class LeaderBoardApi {
     });
   }
 
-  async getRank(score: number) {
+  async getLeaderboardRank(score: number) {
     const endpoint = this.createEndpoint(`/leader-board/games/${this.options.gameId}/scores/${score}`);
     const response = await fetch(endpoint);
     const data: Rank = await response.json();
 
     return data;
+  }
+
+  async saveSessionTX(txHash: string, [ethAddress, cereAddress]: string[]) {
+    // TODO: Save the information to the backend
+
+    console.log('Transaction hash', txHash);
+    console.log('Ethereum address', ethAddress);
+    console.log('Cere address', cereAddress);
   }
 }
