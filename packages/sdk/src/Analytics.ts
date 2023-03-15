@@ -9,8 +9,15 @@ declare global {
   }
 }
 
+const waitBodyReady = () =>
+  new Promise<void>((resolve) =>
+    document.body ? resolve() : window.addEventListener('DOMContentLoaded', () => resolve()),
+  );
+
 export class Analytics {
   async init({ gtmId }: AnalyticsOptions) {
+    await waitBodyReady();
+
     TagManager.initialize({ gtmId });
   }
 
