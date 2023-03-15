@@ -7,7 +7,7 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@cere/embed-wallet": "0.1.3",
+    "@cere/embed-wallet": "0.1.4",
     "@cere/games-sdk-ui": "0.0.1-rc.18"
   },
   "devDependencies": {

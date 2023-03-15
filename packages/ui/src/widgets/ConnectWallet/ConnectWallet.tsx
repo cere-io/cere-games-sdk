@@ -1,14 +1,12 @@
 import styled from '@emotion/styled';
 import { useCallback, useEffect, useState } from 'react';
 
-import { Button, Stack, Typography } from '../../components';
+import { Button, Stack, Typography, WalletBenefits } from '../../components';
 import { useMediaQuery, useWalletContext } from '../../hooks';
-import { WalletBenefits } from '../../components/WalletBenefits';
 
 export type ConnectWalletProps = {
   onConnect?: () => Promise<void> | void;
   score?: number;
-  isWalletConnected: boolean;
 };
 
 const Connect = styled(Button)(() => ({
@@ -87,7 +85,11 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
   const { isReady, connecting } = useWalletContext();
 
   useEffect(() => {
-    setTimeout(() => setShow(false), 1500);
+    const timeoutId = setTimeout(() => setShow(false), 1500);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   });
 
   const handleConnect = useCallback(async () => {
@@ -122,7 +124,3 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
     </Widget>
   );
 };
-
-//Connect or create a wallet to collect
-
-// NFTs, achievements and $CERE tokens

@@ -2,6 +2,7 @@ export type WalletContext = {
   isReady: boolean;
   connecting: boolean;
   address?: string;
+  balance?: string;
 };
 
 export type ContextState = {

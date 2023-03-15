@@ -9,6 +9,7 @@ export const Playground = () => {
   const sdk = useMemo(
     () =>
       new GamesSDK({
+        env: 'dev',
         gameId: 'games-sdk-playground',
         onReady: () => setReady(true),
       }),

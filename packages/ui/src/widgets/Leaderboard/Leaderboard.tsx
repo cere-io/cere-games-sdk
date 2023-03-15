@@ -90,7 +90,7 @@ const StyledTypography = styled(Typography)({
 });
 
 export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
-  const { address } = useWalletContext();
+  const { address, balance } = useWalletContext();
 
   return (
     <Widget>
@@ -123,7 +123,7 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
           </Container>
           <Container direction="column" spacing={1}>
             <BalanceText>
-              Your balance: <b>20 $CERE</b>
+              Your balance: <b>{balance} $CERE</b>
             </BalanceText>
             <Button icon={<RepeatIcon />} onClick={onPlayAgain}>
               <Typography variant="inherit" noWrap>

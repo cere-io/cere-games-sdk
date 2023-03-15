@@ -1,4 +1,4 @@
-import { EmbedWallet } from '@cere/embed-wallet';
+import { EmbedWallet, WalletAccount, WalletBalance } from '@cere/embed-wallet';
 import * as UI from '@cere/games-sdk-ui';
 
 import { GAME_SERVICE_URL } from './constants';
@@ -38,15 +38,17 @@ export class GamesSDK {
   });
 
   constructor(private options: SdkOptions) {
-    this.wallet.subscribe('status-update', async () => {
+    this.wallet.subscribe('accounts-update', ([ethAccount]: WalletAccount[]) => {
+      this.ui.wallet.address = ethAccount?.address;
+    });
+
+    this.wallet.subscribe('balance-update', ({ amount }: WalletBalance) => {
+      this.ui.wallet.balance = amount.toString();
+    });
+
+    this.wallet.subscribe('status-update', () => {
       this.ui.wallet.isReady = this.wallet.status !== 'not-ready';
       this.ui.wallet.connecting = this.wallet.status === 'connecting';
-
-      if (this.wallet.status === 'connected') {
-        const [ethAccount] = await this.wallet.getAccounts();
-
-        this.ui.wallet.address = ethAccount.address;
-      }
     });
   }
 
