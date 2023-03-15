@@ -66,7 +66,7 @@ export const createTheme = (): Theme => ({
     },
 
     button: {
-      fontWeight: 'bold',
+      fontWeight: 600,
       fontSize: 20,
 
       '@media (max-width: 600px)': {

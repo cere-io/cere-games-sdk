@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
+import { useCallback, useState } from 'react';
 
 import { Alert, Address, Button, Stack, Table, TableProps, Typography } from '../../components';
 import { RepeatIcon, CereGamingIcon } from '../../icons';
 import { useWalletContext } from '../../hooks';
 
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
-  onPlayAgain?: () => void;
+  sessionPrice?: number;
+  onPlayAgain?: () => Promise<void> | void;
 };
 
 const Widget = styled.div({
@@ -89,8 +91,15 @@ const StyledTypography = styled(Typography)({
   fontFamily: 'Bebas Neue',
 });
 
-export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
-  const { address, balance } = useWalletContext();
+export const Leaderboard = ({ data, sessionPrice = 0, onPlayAgain }: LeaderboardProps) => {
+  const [busy, setBusy] = useState(false);
+  const { address, balance = 0 } = useWalletContext();
+
+  const handlePlayAgain = useCallback(async () => {
+    setBusy(true);
+    await onPlayAgain?.();
+    setBusy(false);
+  }, [onPlayAgain]);
 
   return (
     <Widget>
@@ -125,9 +134,14 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
             <BalanceText>
               Your balance: <b>{balance} $CERE</b>
             </BalanceText>
-            <Button icon={<RepeatIcon />} onClick={onPlayAgain}>
+            <Button disabled={balance < sessionPrice} loading={busy} icon={<RepeatIcon />} onClick={handlePlayAgain}>
               <Typography variant="inherit" noWrap>
-                Play again
+                Play again{' '}
+                {sessionPrice && (
+                  <Typography inline variant="inherit" fontWight="bold">
+                    {sessionPrice} $CERE
+                  </Typography>
+                )}
               </Typography>
             </Button>
           </Container>

@@ -1,1 +1,1 @@
-export * from './LeaderBoardApi';
+export * from './GamesApi';
