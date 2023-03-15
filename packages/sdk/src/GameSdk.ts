@@ -1,8 +1,15 @@
 import { EmbedWallet, WalletAccount, WalletBalance } from '@cere/embed-wallet';
 import * as UI from '@cere/games-sdk-ui';
 
-import { GAME_SERVICE_URL, GAME_SESSION_DEPOSIT_ADDRESS, GAME_SESSION_PRICE } from './constants';
+import {
+  ANALYTICS_EVENTS,
+  GAME_SERVICE_URL,
+  GAME_SESSION_DEPOSIT_ADDRESS,
+  GAME_SESSION_PRICE,
+  GMT_ID,
+} from './constants';
 import { GamesApi } from './api';
+import { Analytics } from './Analytics';
 
 type AsyncCallback = () => Promise<void> | void;
 
@@ -29,9 +36,11 @@ export type SdkOptions = {
 export type InitParams = {};
 
 export class GamesSDK {
-  private ui = UI.createContext();
   readonly wallet = new EmbedWallet();
-  readonly api = new GamesApi({
+
+  private readonly ui = UI.createContext();
+  private readonly analytics = new Analytics();
+  private readonly api = new GamesApi({
     gameId: this.options.gameId,
     baseUrl: GAME_SERVICE_URL,
   });
@@ -55,6 +64,7 @@ export class GamesSDK {
     await UI.register(this.ui);
 
     this.initWallet();
+    this.analytics.init({ gtmId: GMT_ID });
 
     this.options.onReady?.(this);
   }
@@ -134,6 +144,14 @@ export class GamesSDK {
         try {
           await this.wallet.connect();
           await onConnect?.();
+
+          /**
+           * Send wallet connected events to analytics
+           *
+           * TODO: Send only for new wallets
+           */
+          const { email } = await this.wallet.getUserInfo();
+          this.analytics.trackEvent(ANALYTICS_EVENTS.walletCompleted, { userEmail: email });
 
           modal.close();
         } catch {}
