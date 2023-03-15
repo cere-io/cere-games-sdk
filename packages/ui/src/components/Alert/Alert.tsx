@@ -37,6 +37,7 @@ const CloseAlert = styled(CloseIcon)(() => ({
 }));
 
 const StyledTypography = styled(Typography)({
+  color: '#131B32',
   maxWidth: 207,
   '@media (max-width: 600px)': {
     maxWidth: '100%',
@@ -97,7 +98,7 @@ export const Alert = () => {
   return (
     <Container>
       <span>🎉</span>
-      <StyledTypography variant="body2" color="text-primary">
+      <StyledTypography variant="body2">
         You received <b>20 CERE</b> tokens for setting up your wallet!
       </StyledTypography>
       <CloseAlert onClick={() => setVisibility(false)} />

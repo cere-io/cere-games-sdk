@@ -18,7 +18,6 @@ export const createTheme = (): Theme => ({
       primary: '#FFFFFF',
       secondary: '#9A9A9A',
       caption: '#CCCCCC',
-      'text-primary': '#131B32',
     },
 
     border: 'rgba(255, 255, 255, 0.3)',
