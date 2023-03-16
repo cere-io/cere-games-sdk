@@ -27,6 +27,7 @@ const Content = styled.div(({ theme }) => ({
   '@media (max-width: 600px)': {
     margin: 'auto',
     width: '100%',
+    height: '100%',
   },
 }));
 
