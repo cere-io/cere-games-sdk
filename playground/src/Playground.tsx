@@ -10,7 +10,7 @@ export const Playground = () => {
     () =>
       new GamesSDK({
         env: 'dev',
-        gameId: 'tower-game',
+        gameId: 'games-sdk-playground',
         onReady: () => setReady(true),
       }),
     [],
