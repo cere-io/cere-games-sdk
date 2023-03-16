@@ -49,7 +49,6 @@ const Content = styled.div<FullscreenModalProps>(({ theme }) => ({
 
   '@media (max-width: 600px)': {
     width: 'auto',
-    height: '100%',
     padding: theme.spacing(3),
     margin: 0,
     borderRadius: 0,
