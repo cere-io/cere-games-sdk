@@ -39,6 +39,13 @@ const AnimationBlock = styled.div(({ showConfetti }: { showConfetti: boolean }) 
   },
 }));
 
+const CrownImage = styled.img({
+  position: 'absolute',
+  width: 95,
+  zIndex: 1,
+  left: -65,
+});
+
 const StyledNumber = styled.span({
   background: 'linear-gradient(79.06deg, #75ACFF 0%, #27E3C1 100%)',
   backgroundClip: 'text',
@@ -102,8 +109,9 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
     <Widget spacing={isLandscape ? 2 : 4} align="stretch">
       <AnimationBlock showConfetti={showConfetti} />
       <Stack spacing={4}>
-        <Stack>
-          <Stack>
+        <Stack style={{ position: 'relative' }}>
+          <CrownImage src="https://assets.cms.freeport.dev.cere.network/crown_image_ceeef25fb4.png" />
+          <Stack style={{ zIndex: 2 }}>
             <HeaderTitle>Congratulations!</HeaderTitle>
             <HeaderSubTitle>
               Your score: <StyledNumber>{score}</StyledNumber>

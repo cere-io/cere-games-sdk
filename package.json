@@ -1,6 +1,6 @@
 {
   "name": "cere-games-sdk",
-  "version": "0.0.1-rc.23",
+  "version": "0.0.1-rc.24",
   "private": true,
   "devDependencies": {
     "eslint": "^8.34.0",
