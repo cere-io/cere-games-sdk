@@ -6,6 +6,7 @@ import { Typography } from '../Typography';
 import { CloseIcon } from '../../icons';
 
 const Container = styled.div({
+  zIndex: 100,
   position: 'absolute',
   right: 39,
   top: 32,
@@ -38,7 +39,7 @@ const CloseAlert = styled(CloseIcon)(() => ({
 }));
 
 const StyledTypography = styled(Typography)({
-  maxWidth: 207,
+  maxWidth: 220,
   '@media (max-width: 600px)': {
     maxWidth: '100%',
   },

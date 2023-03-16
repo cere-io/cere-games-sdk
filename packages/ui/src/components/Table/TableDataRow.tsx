@@ -37,8 +37,8 @@ const CurrentPlayer = styled.div({
 });
 
 const Prize = styled.img({
-  width: 26,
-  height: 26,
+  width: 36,
+  height: 36,
 });
 
 const rankColors: RankProps['rankColor'][] = ['gold', 'silver', 'bronze'];
@@ -54,7 +54,7 @@ export const TableDataRow = ({ data, active }: TableDataRowProps) => (
             {active && <CurrentPlayerIcon />}
           </CurrentPlayer>
         </Typography>,
-        <Prize src="https://assets.cms.freeport.dev.cere.network/box_22e9d83042.png" />,
+        <Prize src="https://assets.cms.freeport.dev.cere.network/mystery_box_21d18c2011.png" />,
         <Typography variant="body2" fontWight="bold">
           {data.score}
         </Typography>,

@@ -5,3 +5,5 @@ export * from './AddressIcon';
 export * from './RepeatIcon';
 export * from './CereGamingIcon';
 export * from './CurrentPlayerIcon';
+export * from './InsertLinkIcon';
+export * from './TwitterIcon';

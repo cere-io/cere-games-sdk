@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useCallback, useState } from 'react';
 
 import { Alert, Address, Button, Stack, Table, TableProps, Typography } from '../../components';
-import { RepeatIcon, CereGamingIcon } from '../../icons';
+import { RepeatIcon, InsertLinkIcon, TwitterIcon } from '../../icons';
 import { useWalletContext } from '../../hooks';
 
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
@@ -21,23 +21,14 @@ const Widget = styled.div({
 
 const Tournament = styled.div({
   width: '100%',
-  background:
-    'url(https://assets.cms.freeport.dev.cere.network/background_claim_prizes_full_b7ff007b86.png), linear-gradient(84.77deg, #8B00EC 2.91%, rgba(139, 0, 236, 0.2) 94.57%)',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center right',
-  backgroundRepeat: 'no-repeat',
-  borderRadius: '12px',
-  padding: 16,
+  padding: '16px 12px 0 38px',
 });
 
-const Row = styled.div({
+const Row = styled.div(({ columns }: { columns: string }) => ({
+  position: 'relative',
   display: 'grid',
-  gridTemplateColumns: '190px auto',
-  gridColumnGap: '15%',
-  '@media (max-width: 600px)': {
-    gridColumnGap: '10%',
-  },
-});
+  gridTemplateColumns: columns,
+}));
 
 const TimeLeftText = styled(Typography)({
   fontSize: 10,
@@ -51,8 +42,14 @@ const TimeLeftText = styled(Typography)({
 });
 
 const StyledImage = styled.img({
-  width: 120,
-  height: 120,
+  position: 'absolute',
+  right: 0,
+  top: -45,
+});
+
+const MysteryBlock = styled.div({
+  height: 148,
+  width: '100%',
 });
 
 const Container = styled(Stack)({
@@ -61,7 +58,6 @@ const Container = styled(Stack)({
 
 const GamePortalButton = styled(Button)({
   background: 'linear-gradient(90deg, rgba(245, 187, 255, 0.3) 0%, rgba(245, 187, 255, 0) 93.55%)',
-  borderRadius: 12,
   padding: '18.5px 16px',
   justifyContent: 'flex-start',
   textTransform: 'uppercase',
@@ -72,11 +68,16 @@ const GamePortalButton = styled(Button)({
   },
 });
 
+const TweetButton = styled(Button)({
+  border: '1px solid #1DA1F2',
+  filter: 'drop-shadow(0px 0px 80px rgba(125, 35, 214, 0.8))',
+});
+
 const BalanceText = styled.p({
-  fontWeight: 400,
+  fontWeight: 500,
   fontSize: '12px',
   lineHeight: '16px',
-  color: '#CBCBCB',
+  color: '#FFFFFF',
   marginTop: 0,
   '& > span': {
     fontWeight: 500,
@@ -89,6 +90,9 @@ const StyledStack = styled(Stack)({
 
 const StyledTypography = styled(Typography)({
   fontFamily: 'Bebas Neue',
+  fontSize: 24,
+  lineHeight: '29px',
+  letterSpacing: '0.01em',
 });
 
 export const Leaderboard = ({ data, sessionPrice = 0, onPlayAgain }: LeaderboardProps) => {
@@ -101,6 +105,11 @@ export const Leaderboard = ({ data, sessionPrice = 0, onPlayAgain }: Leaderboard
     setBusy(false);
   }, [onPlayAgain]);
 
+  const handleShareClick = useCallback(() => {
+    const tweetBody =
+      'text=Do you think you can beat my Metaverse Dash Run high-score? Play it straight from your browser here: https://node-0.v2.cdn.devnet.cere.network/ddc/buc/23/file/a85ef422-5bc6-4cc5-9a3f-abfc9339258b/index.html&hashtags=metaversadash,web3,gamer';
+    window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
+  }, []);
   return (
     <Widget>
       <Stack spacing={4}>
@@ -108,7 +117,7 @@ export const Leaderboard = ({ data, sessionPrice = 0, onPlayAgain }: Leaderboard
           <Container spacing={2}>
             <Alert />
             <Tournament>
-              <Row>
+              <Row columns="1fr 1fr">
                 <div>
                   <Stack spacing={2} align="start">
                     <Stack spacing={1} align="start">
@@ -120,28 +129,33 @@ export const Leaderboard = ({ data, sessionPrice = 0, onPlayAgain }: Leaderboard
                       </TimeLeftText>
                     </Stack>
                     <StyledTypography variant="h1" uppercase>
-                      TOP 20 players <br />
-                      win UNIQUE NFT
+                      TOP 20 players wins <br /> UNIQUE NFT
                     </StyledTypography>
                   </Stack>
                 </div>
-                <StyledImage src="https://assets.cms.freeport.dev.cere.network/box_22e9d83042.png" alt="" />
+                <MysteryBlock>
+                  <StyledImage src="https://assets.cms.freeport.dev.cere.network/mystery_box_21d18c2011.png" alt="" />
+                </MysteryBlock>
+              </Row>
+              <Row columns="auto 200px">
+                <GamePortalButton icon={<InsertLinkIcon />}>cere game PORTAL</GamePortalButton>
+                <TweetButton icon={<TwitterIcon />} variant="outlined" onClick={handleShareClick}>
+                  Tweet
+                </TweetButton>
               </Row>
             </Tournament>
-            <GamePortalButton icon={<CereGamingIcon />}>cere game PORTAL</GamePortalButton>
           </Container>
-          <Container direction="column" spacing={1}>
-            <BalanceText>
-              Your balance: <b>{balance} $CERE</b>
-            </BalanceText>
-            <Button disabled={balance < sessionPrice} loading={busy} icon={<RepeatIcon />} onClick={handlePlayAgain}>
+          <Container direction="column" spacing={3}>
+            <BalanceText>2 tokens to PLAY (tokens balance: {balance})</BalanceText>
+            <Button
+              disabled={balance < sessionPrice}
+              loading={busy}
+              icon={<RepeatIcon />}
+              onClick={handlePlayAgain}
+              style={{ width: 243 }}
+            >
               <Typography variant="inherit" noWrap>
-                Play again{' '}
-                {sessionPrice && (
-                  <Typography inline variant="inherit" fontWight="bold">
-                    {sessionPrice} $CERE
-                  </Typography>
-                )}
+                Play again
               </Typography>
             </Button>
           </Container>

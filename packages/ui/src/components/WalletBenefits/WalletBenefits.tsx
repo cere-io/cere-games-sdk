@@ -23,6 +23,10 @@ const Item = styled.div({
     letterSpacing: '0.01em',
     textTransform: 'uppercase',
   },
+
+  '@media (max-width: 600px)': {
+    width: '100%',
+  },
 });
 
 const IconBlock = styled.div({
