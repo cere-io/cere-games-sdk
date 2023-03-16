@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 
 import { Alert, Address, Button, Stack, Table, TableProps, Typography } from '../../components';
 import { RepeatIcon, InsertLinkIcon, TwitterIcon } from '../../icons';
-import { useWalletContext } from '../../hooks';
+import { useMediaQuery, useWalletContext } from '../../hooks';
 
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
   sessionPrice?: number;
@@ -21,13 +21,18 @@ const Widget = styled.div({
 
 const Tournament = styled.div({
   width: '100%',
-  padding: '16px 12px 0 38px',
+  padding: '0 12px 0 38px',
+  '@media (max-width: 600px)': {
+    paddingLeft: 0,
+    paddingRight: 0,
+  },
 });
 
 const Row = styled.div(({ columns }: { columns: string }) => ({
   position: 'relative',
   display: 'grid',
   gridTemplateColumns: columns,
+  alignItems: 'center',
 }));
 
 const TimeLeftText = styled(Typography)({
@@ -41,15 +46,11 @@ const TimeLeftText = styled(Typography)({
   },
 });
 
-const StyledImage = styled.img({
-  position: 'absolute',
-  right: 0,
-  top: -45,
-});
-
 const MysteryBlock = styled.div({
   height: 148,
   width: '100%',
+  background: 'url(https://assets.cms.freeport.dev.cere.network/box_2eb322256d.png) no-repeat',
+  backgroundSize: 'contain',
 });
 
 const Container = styled(Stack)({
@@ -58,13 +59,12 @@ const Container = styled(Stack)({
 
 const GamePortalButton = styled(Button)({
   background: 'linear-gradient(90deg, rgba(245, 187, 255, 0.3) 0%, rgba(245, 187, 255, 0) 93.55%)',
-  padding: '18.5px 16px',
+  padding: '15px 19px',
   justifyContent: 'flex-start',
-  textTransform: 'uppercase',
+  whiteSpace: 'nowrap',
   '& > div': {
-    fontFamily: 'Bebas Neue',
-    fontSize: 24,
-    lineHeight: '32px',
+    fontSize: 14,
+    lineHeight: '18px',
   },
 });
 
@@ -99,6 +99,8 @@ export const Leaderboard = ({ data, sessionPrice = 0, onPlayAgain }: Leaderboard
   const [busy, setBusy] = useState(false);
   const { address, balance = 0 } = useWalletContext();
 
+  const isMobile = useMediaQuery('(max-width: 600px)');
+
   const handlePlayAgain = useCallback(async () => {
     setBusy(true);
     await onPlayAgain?.();
@@ -116,7 +118,7 @@ export const Leaderboard = ({ data, sessionPrice = 0, onPlayAgain }: Leaderboard
           <Container spacing={2}>
             <Alert />
             <Tournament>
-              <Row columns="1fr 1fr">
+              <Row columns={isMobile ? 'auto 140px' : '1fr 1fr'}>
                 <div>
                   <Stack spacing={2} align="start">
                     <Stack spacing={1} align="start">
@@ -132,12 +134,10 @@ export const Leaderboard = ({ data, sessionPrice = 0, onPlayAgain }: Leaderboard
                     </StyledTypography>
                   </Stack>
                 </div>
-                <MysteryBlock>
-                  <StyledImage src="https://assets.cms.freeport.dev.cere.network/mystery_box_21d18c2011.png" alt="" />
-                </MysteryBlock>
+                <MysteryBlock />
               </Row>
-              <Row columns="auto 200px">
-                <GamePortalButton icon={<InsertLinkIcon />}>cere game PORTAL</GamePortalButton>
+              <Row columns={isMobile ? 'auto 128px' : 'auto 200px'}>
+                <GamePortalButton icon={<InsertLinkIcon />}>Cere game portal</GamePortalButton>
                 <TweetButton icon={<TwitterIcon />} variant="outlined" onClick={handleShareClick}>
                   Tweet
                 </TweetButton>

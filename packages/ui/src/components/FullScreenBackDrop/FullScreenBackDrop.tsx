@@ -11,7 +11,8 @@ const Overlay = styled.div({
   left: 0,
   display: 'flex',
   flexDirection: 'column',
-  overflow: 'visible',
+  overflowY: 'auto',
+  overflowX: 'visible',
   backgroundColor: 'rgba(0, 0, 0, 0.8)',
   WebkitTapHighlightColor: 'transparent',
   overscrollBehavior: 'contain',
@@ -24,7 +25,9 @@ const Content = styled.div(({ theme }) => ({
 
   color: theme.palette.text.primary,
   '@media (max-width: 600px)': {
-    margin: 0,
+    margin: 'auto',
+    width: '100%',
+    height: '100%',
   },
 }));
 
