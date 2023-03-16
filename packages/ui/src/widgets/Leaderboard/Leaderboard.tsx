@@ -106,8 +106,7 @@ export const Leaderboard = ({ data, sessionPrice = 0, onPlayAgain }: Leaderboard
   }, [onPlayAgain]);
 
   const handleShareClick = useCallback(() => {
-    const tweetBody =
-      'text=Do you think you can beat my Metaverse Dash Run high-score? Play it straight from your browser here: https://node-0.v2.cdn.devnet.cere.network/ddc/buc/23/file/a85ef422-5bc6-4cc5-9a3f-abfc9339258b/index.html&hashtags=metaversadash,web3,gamer';
+    const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score? Play it straight from your browser here: ${window.location.href}&hashtags=metaversadash,web3,gamer`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
   }, []);
   return (
