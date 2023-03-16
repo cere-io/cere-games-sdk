@@ -1,12 +1,11 @@
-export type LeaderBoardRecord = {
+type LeaderBoardRecord = {
   walletId: string;
   score: number;
   gameId: string;
 };
 
-export type LeaderBoard = LeaderBoardRecord[];
-
-export type Rank = number;
+type LeaderBoard = LeaderBoardRecord[];
+type Rank = number;
 
 export type GamesApiOptions = {
   baseUrl: string;
@@ -18,6 +17,16 @@ export class GamesApi {
 
   private createEndpoint(path: string) {
     return new URL(path, this.options.baseUrl);
+  }
+
+  private post<T = any>(endpoint: string | URL, payload: T) {
+    return fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
   }
 
   async getLeaderboard() {
@@ -34,18 +43,11 @@ export class GamesApi {
 
   async saveScore(walletAddress: string, score: number) {
     const endpoint = this.createEndpoint('/leader-board');
-    const payload: LeaderBoardRecord = {
+
+    await this.post<LeaderBoardRecord>(endpoint, {
       score,
       walletId: walletAddress,
       gameId: this.options.gameId,
-    };
-
-    await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
     });
   }
 
@@ -58,10 +60,11 @@ export class GamesApi {
   }
 
   async saveSessionTX(txHash: string, [ethAddress, cereAddress]: string[]) {
-    // TODO: Save the information to the backend
+    const endpoint = this.createEndpoint('/leader-board/create-order');
 
-    console.log('Transaction hash', txHash);
-    console.log('Ethereum address', ethAddress);
-    console.log('Cere address', cereAddress);
+    await this.post(endpoint, {
+      txHash,
+      cereWalletId: cereAddress,
+    });
   }
 }
