@@ -2,8 +2,8 @@
 
 The repository includes several packages related to `Cere Games SDK`:
 
-- [Cere Games SDK](#) - the SDK itself
-- [Cere Games SDK UI](#) - the SDK UI elements
+- [Cere Games SDK](https://github.com/cere-io/cere-games-sdk/tree/master/packages/sdk) - the SDK itself
+- [Cere Games SDK UI](https://github.com/cere-io/cere-games-sdk/tree/master/packages/ui) - the SDK UI elements
 - Other utility packages
 
 ## Quick start
