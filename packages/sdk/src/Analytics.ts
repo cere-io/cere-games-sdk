@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import TagManager, { TagManagerArgs } from 'react-gtm-module';
 
 export { ANALYTICS_EVENTS } from './constants';
