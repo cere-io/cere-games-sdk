@@ -34,9 +34,6 @@ const AnimationBlock = styled.div(({ showConfetti }: { showConfetti: boolean }) 
     : '',
   backgroundSize: 'contain',
   backgroundRepeat: 'no-repeat',
-  '@media (max-width: 600px)': {
-    top: '-15%',
-  },
 }));
 
 const CrownImage = styled.img({

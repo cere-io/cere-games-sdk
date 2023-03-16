@@ -47,9 +47,9 @@ const Content = styled.div<FullscreenModalProps>(({ theme }) => ({
   margin: theme.spacing(4),
   width: 600,
 
-  '@media (max-width: 600px), (max-height: 440px)': {
+  '@media (max-width: 600px)': {
     width: 'auto',
-    height: '100vh',
+    height: '100%',
     padding: theme.spacing(3),
     margin: 0,
     borderRadius: 0,
@@ -65,7 +65,9 @@ export const FullscreenModal = ({
   return (
     <FullScreenBackDrop>
       {loading ? (
-        <Spinner size={40} />
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 'inherit' }}>
+          <Spinner size={40} />
+        </div>
       ) : (
         <Content>
           {hasClose && (
