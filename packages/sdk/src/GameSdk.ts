@@ -72,6 +72,13 @@ export class GamesSDK {
   private async initWallet() {
     await this.wallet.init({
       env: this.options.env || 'prod',
+      context: {
+        app: {
+          url: window.location.origin,
+          appId: this.options.gameId,
+        },
+      },
+
       connectOptions: {
         mode: 'modal',
       },
