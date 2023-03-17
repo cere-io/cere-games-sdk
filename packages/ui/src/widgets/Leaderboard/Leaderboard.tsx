@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { Alert, Address, Button, Stack, Table, TableProps, Typography } from '../../components';
 import { RepeatIcon, InsertLinkIcon, TwitterIcon } from '../../icons';
@@ -109,10 +109,12 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
     setBusy(false);
   }, [onPlayAgain]);
 
+  const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
+
   const handleShareClick = useCallback(() => {
-    const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score? Play it straight from your browser here: ${window.location.href}&hashtags=metaversadash,web3,gamer`;
+    const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score? My score: ${playerData?.score} Play it straight from your browser here: ${window.location.href}&hashtags=metaversadash,web3,gamer`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
-  }, []);
+  }, [playerData?.score]);
   return (
     <Widget>
       <Stack spacing={3}>
