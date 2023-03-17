@@ -62,11 +62,11 @@ export const Table = ({ data, activeAddress }: TableProps) => {
       <TableHeader columns={['Rank', 'Player', 'Prize', 'Score']} />
       {activeRow && (
         <div ref={firsElRef} style={{ scrollMarginTop: '600px' }}>
-          <TableDataRow active data={activeRow} />
+          <TableDataRow hasReward={true} active data={activeRow} />
         </div>
       )}
-      {rows.map((row) => (
-        <TableDataRow key={row.address} data={row} />
+      {rows.map((row, idx) => (
+        <TableDataRow key={row.address} data={row} hasReward={idx <= 19} />
       ))}
       {!showMoreInViewport && (
         <ScrollToTop icon={<ArrowTopIcon />} onClick={handleClick}>

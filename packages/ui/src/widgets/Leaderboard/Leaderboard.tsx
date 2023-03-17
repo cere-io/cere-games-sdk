@@ -48,9 +48,10 @@ const TimeLeftText = styled(Typography)({
 const MysteryBlock = styled.div({
   height: 148,
   width: '100%',
-  background: 'url(https://assets.cms.freeport.dev.cere.network/Frame_48096833_2aa4e9a793.png) no-repeat',
-  backgroundSize: 'cover',
+  background: 'url(https://assets.cms.freeport.dev.cere.network/Mystery_Box_min_f9e28497d2.png) no-repeat',
+  backgroundSize: '90%',
   backgroundPositionY: 'center',
+  marginBottom: 25,
 });
 
 const Container = styled(Stack)({
@@ -137,7 +138,7 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
                 </div>
                 <MysteryBlock />
               </Row>
-              <Row columns={isMobile ? 'auto 128px' : 'auto 200px'}>
+              <Row columns={isMobile ? 'auto 128px' : 'auto 145px'}>
                 <GamePortalButton icon={<InsertLinkIcon />}>Cere game portal</GamePortalButton>
                 <TweetButton icon={<TwitterIcon />} variant="outlined" onClick={handleShareClick}>
                   Tweet

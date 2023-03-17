@@ -47,7 +47,7 @@ const Content = styled.div<FullscreenModalProps>(({ theme, isLeaderBoard }) => (
   borderRadius: theme.borderRadius(4),
   padding: theme.spacing(4),
   margin: theme.spacing(4),
-  width: 600,
+  width: isLeaderBoard ? 459 : 600,
 
   '@media (max-width: 600px)': {
     width: 'auto',
@@ -71,8 +71,6 @@ export const FullscreenModal = ({
     'https://assets.cms.freeport.dev.cere.network/gaming_flag_2_e9e8b7d37c.png',
     'https://assets.cms.freeport.dev.cere.network/star_trophy_3_f18a9faca7.png',
   ]);
-
-  console.log('leaderBoard', isLeaderBoard);
 
   return (
     <FullScreenBackDrop>
