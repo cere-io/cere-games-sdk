@@ -48,7 +48,7 @@ const TimeLeftText = styled(Typography)({
 const MysteryBlock = styled.div({
   height: 148,
   width: '100%',
-  background: 'url(https://assets.cms.freeport.dev.cere.network/Mystery_Box_min_f9e28497d2.png) no-repeat',
+  background: 'url(https://assets.cms.freeport.dev.cere.network/Mystery_Box_1_b57b8c650d.png) no-repeat',
   backgroundSize: '90%',
   backgroundPositionY: 'center',
   marginBottom: 25,
@@ -63,7 +63,9 @@ const GamePortalButton = styled(Button)({
   padding: '15px 13px',
   justifyContent: 'flex-start',
   whiteSpace: 'nowrap',
+  gridColumnGap: 4,
   '& > div': {
+    padding: 0,
     fontSize: 14,
     lineHeight: '18px',
   },
@@ -159,14 +161,20 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
               onClick={handlePlayAgain}
               style={{ width: 243 }}
             >
-              <Typography variant="inherit" noWrap>
+              <Typography
+                style={{ fontSize: 16, lineHeight: '22px', textTransform: 'uppercase' }}
+                variant="inherit"
+                noWrap
+              >
                 Play again
               </Typography>
             </Button>
           </Container>
         </StyledStack>
         <StyledStack direction="row" spacing="space-between">
-          <Typography variant="h1">Leaderboard</Typography>
+          <Typography style={{ fontFamily: 'Bebas Neue', fontSize: 36 }} variant="h1">
+            Leaderboard
+          </Typography>
           {address && <Address address={address} />}
         </StyledStack>
       </Stack>
