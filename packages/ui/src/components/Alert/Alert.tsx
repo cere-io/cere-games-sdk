@@ -4,6 +4,7 @@ import { keyframes } from '@emotion/react';
 
 import { Typography } from '../Typography';
 import { CloseIcon } from '../../icons';
+import { useConfigContext, useWalletContext } from '../../hooks';
 
 const Container = styled.div({
   zIndex: 100,
@@ -87,9 +88,11 @@ const ProgressBar = styled.div(() => ({
 }));
 
 export const Alert = () => {
+  const { newWalletReward } = useConfigContext();
+  const { balance, isNewUser } = useWalletContext();
   const [visible, setVisibility] = useState(true);
 
-  if (!visible) {
+  if (!visible || !balance || !isNewUser) {
     return null;
   }
 
@@ -97,7 +100,7 @@ export const Alert = () => {
     <Container>
       <span>🎉</span>
       <StyledTypography variant="body2" color="text-primary">
-        You received <b>20 $CERE</b> tokens for setting up your wallet!
+        You received <b>{newWalletReward} $CERE</b> tokens for setting up your wallet!
       </StyledTypography>
       <CloseAlert onClick={() => setVisibility(false)} />
       <ProgressContainer>

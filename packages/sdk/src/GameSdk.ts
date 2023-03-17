@@ -7,6 +7,7 @@ import {
   GAME_SESSION_DEPOSIT_ADDRESS,
   GAME_SESSION_PRICE,
   GMT_ID,
+  NEW_WALLET_REWARD,
 } from './constants';
 import { GamesApi } from './api';
 import { Analytics } from './Analytics';
@@ -38,7 +39,13 @@ export type InitParams = {};
 export class GamesSDK {
   readonly wallet = new EmbedWallet();
 
-  private readonly ui = UI.createContext();
+  private readonly ui = UI.createContext({
+    config: {
+      newWalletReward: NEW_WALLET_REWARD,
+      sessionPrice: GAME_SESSION_PRICE,
+    },
+  });
+
   private readonly analytics = new Analytics();
   private readonly api = new GamesApi({
     gameId: this.options.gameId,
@@ -71,13 +78,8 @@ export class GamesSDK {
 
   private async initWallet() {
     await this.wallet.init({
+      appId: this.options.gameId,
       env: this.options.env || 'prod',
-      context: {
-        app: {
-          url: window.location.origin,
-          appId: this.options.gameId,
-        },
-      },
 
       connectOptions: {
         mode: 'modal',
@@ -126,7 +128,6 @@ export class GamesSDK {
 
       leaderboard.update({
         data,
-        sessionPrice: GAME_SESSION_PRICE,
         onPlayAgain: async () => {
           await this.payForSession();
           await onPlayAgain?.();
@@ -157,8 +158,9 @@ export class GamesSDK {
            *
            * TODO: Send only for new wallets
            */
-          const { email } = await this.wallet.getUserInfo();
+          const { email, isNewUser } = await this.wallet.getUserInfo();
           this.analytics.trackEvent(ANALYTICS_EVENTS.walletCompleted, { userEmail: email });
+          this.ui.wallet.isNewUser = isNewUser;
 
           modal.close();
         } catch {}

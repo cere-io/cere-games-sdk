@@ -3,10 +3,9 @@ import { useCallback, useState } from 'react';
 
 import { Alert, Address, Button, Stack, Table, TableProps, Typography } from '../../components';
 import { RepeatIcon, InsertLinkIcon, TwitterIcon } from '../../icons';
-import { useMediaQuery, useWalletContext } from '../../hooks';
+import { useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
 
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
-  sessionPrice?: number;
   onPlayAgain?: () => Promise<void> | void;
 };
 
@@ -95,8 +94,9 @@ const StyledTypography = styled(Typography)({
   letterSpacing: '0.01em',
 });
 
-export const Leaderboard = ({ data, sessionPrice = 0, onPlayAgain }: LeaderboardProps) => {
+export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
   const [busy, setBusy] = useState(false);
+  const { sessionPrice } = useConfigContext();
   const { address, balance = 0 } = useWalletContext();
 
   const isMobile = useMediaQuery('(max-width: 600px)');
@@ -145,7 +145,9 @@ export const Leaderboard = ({ data, sessionPrice = 0, onPlayAgain }: Leaderboard
             </Tournament>
           </Container>
           <Container direction="column" spacing={3}>
-            <BalanceText>2 tokens to PLAY (tokens balance: {balance})</BalanceText>
+            <BalanceText>
+              {sessionPrice} tokens to PLAY (tokens balance: {balance})
+            </BalanceText>
             <Button
               disabled={balance < sessionPrice}
               loading={busy}
