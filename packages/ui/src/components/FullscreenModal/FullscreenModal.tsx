@@ -8,6 +8,7 @@ import { useImagePreloader } from '../../hooks';
 
 export type FullscreenModalProps = PropsWithChildren<{
   hasClose?: boolean;
+  isLeaderBoard?: boolean;
   loading?: boolean;
   onRequestClose?: () => void;
 }>;
@@ -36,8 +37,10 @@ const Close = styled(CloseIcon)(({ theme }) => ({
   position: 'absolute',
 }));
 
-const Content = styled.div<FullscreenModalProps>(({ theme }) => ({
-  background: 'linear-gradient(180deg, #5E009F 0%, #111523 100%);',
+const Content = styled.div<FullscreenModalProps>(({ theme, isLeaderBoard }) => ({
+  background: isLeaderBoard
+    ? 'linear-gradient(180deg, #3F006B 0%, #111523 100%)'
+    : 'linear-gradient(180deg, #5E009F 0%, #111523 100%)',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   boxShadow: '0px 5px 40px rgba(0, 0, 0, 0.4)',
@@ -59,6 +62,7 @@ export const FullscreenModal = ({
   onRequestClose,
   hasClose = false,
   loading = false,
+  isLeaderBoard,
 }: FullscreenModalProps) => {
   const { imagesPreloaded } = useImagePreloader([
     'https://assets.cms.freeport.dev.cere.network/animation_640_lf88b7kr_aa5d097cd4.gif',
@@ -68,6 +72,8 @@ export const FullscreenModal = ({
     'https://assets.cms.freeport.dev.cere.network/star_trophy_3_f18a9faca7.png',
   ]);
 
+  console.log('leaderBoard', isLeaderBoard);
+
   return (
     <FullScreenBackDrop>
       {loading || !imagesPreloaded ? (
@@ -75,7 +81,7 @@ export const FullscreenModal = ({
           <Spinner size={40} />
         </div>
       ) : (
-        <Content>
+        <Content isLeaderBoard={isLeaderBoard}>
           {hasClose && (
             <Header direction="row" spacing={2}>
               <Close onClick={onRequestClose} />

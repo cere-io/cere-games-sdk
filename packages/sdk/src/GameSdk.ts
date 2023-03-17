@@ -118,23 +118,26 @@ export class GamesSDK {
   }
 
   showLeaderboard({ onPlayAgain, onBeforeLoad }: ShowLeaderboardOptions = {}) {
-    const { open, ...modal } = UI.createFullscreenModal(async () => {
-      const leaderboard = document.createElement('cere-leaderboard');
+    const { open, ...modal } = UI.createFullscreenModal(
+      async () => {
+        const leaderboard = document.createElement('cere-leaderboard');
 
-      await onBeforeLoad?.();
-      const data = await this.api.getLeaderboard();
+        await onBeforeLoad?.();
+        const data = await this.api.getLeaderboard();
 
-      leaderboard.update({
-        data,
-        sessionPrice: GAME_SESSION_PRICE,
-        onPlayAgain: async () => {
-          await this.payForSession();
-          await onPlayAgain?.();
-        },
-      });
+        leaderboard.update({
+          data,
+          sessionPrice: GAME_SESSION_PRICE,
+          onPlayAgain: async () => {
+            await this.payForSession();
+            await onPlayAgain?.();
+          },
+        });
 
-      return leaderboard;
-    });
+        return leaderboard;
+      },
+      { isLeaderBoard: true },
+    );
 
     open();
 

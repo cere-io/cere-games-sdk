@@ -10,6 +10,7 @@ export type ModalOptions = {
 
 export type FullScreenModalOptions = {
   hasClose?: boolean;
+  isLeaderBoard?: boolean;
 };
 
 function appendToBody(element: HTMLElement) {
@@ -64,6 +65,12 @@ export const createFullscreenModal = (
     modal.update({
       hasClose: true,
       onRequestClose: () => modal.remove(),
+    });
+  }
+
+  if (options.isLeaderBoard) {
+    modal.update({
+      isLeaderBoard: true,
     });
   }
 

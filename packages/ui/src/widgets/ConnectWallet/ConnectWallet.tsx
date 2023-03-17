@@ -9,7 +9,8 @@ export type ConnectWalletProps = {
   score?: number;
 };
 
-const Connect = styled(Button)(() => ({
+const Connect = styled(Button)(({ loading }) => ({
+  textTransform: !loading ? 'uppercase' : undefined,
   marginBottom: '20px!important',
 }));
 
