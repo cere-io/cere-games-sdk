@@ -43,15 +43,15 @@ const StyledImage = styled.img({
 const benefits: { title: string; url: string }[] = [
   {
     title: 'Save your score',
-    url: 'https://assets.cms.freeport.dev.cere.network/stars_66a5bd656a.png',
+    url: 'https://assets.cms.freeport.dev.cere.network/gaming_flag_1_c4694198b3.png',
   },
   {
     title: 'See how you stack up against others',
-    url: 'https://assets.cms.freeport.dev.cere.network/medal_634300bf84.png',
+    url: 'https://assets.cms.freeport.dev.cere.network/gaming_flag_2_e9e8b7d37c.png',
   },
   {
     title: 'Win cool prizes',
-    url: 'https://assets.cms.freeport.dev.cere.network/prize_8e66a0bd01.png',
+    url: 'https://assets.cms.freeport.dev.cere.network/star_trophy_3_f18a9faca7.png',
   },
 ];
 

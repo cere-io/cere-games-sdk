@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useMemo } from 'react';
 
 import { Truncate } from '../Truncate';
 import { Typography } from '../Typography';
@@ -15,6 +16,7 @@ type Data = {
 export type TableDataRowProps = {
   active?: boolean;
   data: Data;
+  hasReward?: boolean;
 };
 
 const Wrapper = styled.div<Pick<TableDataRowProps, 'active'>>(({ theme, active = false }) => ({
@@ -43,22 +45,30 @@ const Prize = styled.img({
 
 const rankColors: RankProps['rankColor'][] = ['gold', 'silver', 'bronze'];
 
-export const TableDataRow = ({ data, active }: TableDataRowProps) => (
-  <Wrapper active={active}>
-    <TableRow
-      columns={[
-        <Rank rankColor={rankColors[data.rank - 1]}>{data.rank}</Rank>,
-        <Typography variant="body2">
-          <CurrentPlayer>
-            <Truncate variant="hex" maxLength={10} text={data.address} />
-            {active && <CurrentPlayerIcon />}
-          </CurrentPlayer>
-        </Typography>,
-        <Prize src="https://assets.cms.freeport.dev.cere.network/mystery_box_21d18c2011.png" />,
-        <Typography variant="body2" fontWight="bold">
-          {data.score}
-        </Typography>,
-      ]}
-    />
-  </Wrapper>
-);
+export const TableDataRow = ({ data, active, hasReward }: TableDataRowProps) => {
+  const rewardTsx = useMemo(() => {
+    if (!hasReward) {
+      return null;
+    }
+    return <Prize src="https://assets.cms.freeport.dev.cere.network/mystery_box_21d18c2011.png" />;
+  }, [hasReward]);
+  return (
+    <Wrapper active={active}>
+      <TableRow
+        columns={[
+          <Rank rankColor={rankColors[data.rank - 1]}>{data.rank}</Rank>,
+          <Typography variant="body2">
+            <CurrentPlayer>
+              <Truncate variant="hex" maxLength={10} text={data.address} />
+              {active && <CurrentPlayerIcon />}
+            </CurrentPlayer>
+          </Typography>,
+          rewardTsx,
+          <Typography variant="body2" fontWight="bold">
+            {data.score}
+          </Typography>,
+        ]}
+      />
+    </Wrapper>
+  );
+};

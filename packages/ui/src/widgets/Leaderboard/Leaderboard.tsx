@@ -48,8 +48,10 @@ const TimeLeftText = styled(Typography)({
 const MysteryBlock = styled.div({
   height: 148,
   width: '100%',
-  background: 'url(https://assets.cms.freeport.dev.cere.network/box_2eb322256d.png) no-repeat',
-  backgroundSize: 'contain',
+  background: 'url(https://assets.cms.freeport.dev.cere.network/Mystery_Box_min_f9e28497d2.png) no-repeat',
+  backgroundSize: '90%',
+  backgroundPositionY: 'center',
+  marginBottom: 25,
 });
 
 const Container = styled(Stack)({
@@ -58,7 +60,7 @@ const Container = styled(Stack)({
 
 const GamePortalButton = styled(Button)({
   background: 'linear-gradient(90deg, rgba(245, 187, 255, 0.3) 0%, rgba(245, 187, 255, 0) 93.55%)',
-  padding: '15px 19px',
+  padding: '15px 13px',
   justifyContent: 'flex-start',
   whiteSpace: 'nowrap',
   '& > div': {
@@ -113,7 +115,7 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
   }, []);
   return (
     <Widget>
-      <Stack spacing={4}>
+      <Stack spacing={3}>
         <StyledStack spacing={3}>
           <Container spacing={2}>
             <Alert />
@@ -136,7 +138,7 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
                 </div>
                 <MysteryBlock />
               </Row>
-              <Row columns={isMobile ? 'auto 128px' : 'auto 200px'}>
+              <Row columns={isMobile ? 'auto 128px' : 'auto 145px'}>
                 <GamePortalButton icon={<InsertLinkIcon />}>Cere game portal</GamePortalButton>
                 <TweetButton icon={<TwitterIcon />} variant="outlined" onClick={handleShareClick}>
                   Tweet
@@ -144,7 +146,7 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
               </Row>
             </Tournament>
           </Container>
-          <Container direction="column" spacing={3}>
+          <Container direction="column" spacing={1.8}>
             <BalanceText>
               {sessionPrice} tokens to PLAY (tokens balance: {balance})
             </BalanceText>

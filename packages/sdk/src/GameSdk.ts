@@ -135,7 +135,7 @@ export class GamesSDK {
       });
 
       return leaderboard;
-    });
+    }, { isLeaderBoard: true});
 
     open();
 
