@@ -12,6 +12,9 @@ export type ConnectWalletProps = {
 const Connect = styled(Button)(({ loading }) => ({
   textTransform: !loading ? 'uppercase' : undefined,
   marginBottom: '20px!important',
+  maxWidth: 311,
+  fontSize: 16,
+  fontWeight: '24px',
 }));
 
 const Widget = styled(Stack)({
