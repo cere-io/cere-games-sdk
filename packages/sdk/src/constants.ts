@@ -12,6 +12,7 @@ export const GAME_SESSION_DEPOSIT_ADDRESS = '5GXnxWDnXdoH7iW6hGsq5vCvDFsDk2f3uXf
  * Game session price in $CERE tokens
  */
 export const GAME_SESSION_PRICE = 2;
+export const NEW_WALLET_REWARD = 20;
 
 export const GMT_ID = 'GTM-MSJX7Q6';
 export const ANALYTICS_EVENTS = {
