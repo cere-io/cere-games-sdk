@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { Spinner, Stack } from '../index';
 import { CloseIcon } from '../../icons';
 import { FullScreenBackDrop } from '../FullScreenBackDrop';
+import { useImagePreloader } from '../../hooks';
 
 export type FullscreenModalProps = PropsWithChildren<{
   hasClose?: boolean;
@@ -59,9 +60,17 @@ export const FullscreenModal = ({
   hasClose = false,
   loading = false,
 }: FullscreenModalProps) => {
+  const { imagesPreloaded } = useImagePreloader([
+    'https://assets.cms.freeport.dev.cere.network/animation_640_lf88b7kr_aa5d097cd4.gif',
+    'https://assets.cms.freeport.dev.cere.network/crown_image_ceeef25fb4.png',
+    'https://assets.cms.freeport.dev.cere.network/gaming_flag_1_c4694198b3.png',
+    'https://assets.cms.freeport.dev.cere.network/gaming_flag_2_e9e8b7d37c.png',
+    'https://assets.cms.freeport.dev.cere.network/star_trophy_3_f18a9faca7.png',
+  ]);
+
   return (
     <FullScreenBackDrop>
-      {loading ? (
+      {loading || !imagesPreloaded ? (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 'inherit' }}>
           <Spinner size={40} />
         </div>

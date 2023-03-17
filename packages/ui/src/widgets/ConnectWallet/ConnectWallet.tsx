@@ -88,16 +88,8 @@ const ByCereText = styled.span({
 export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [busy, setBusy] = useState(false);
-  const [showConfetti, setShow] = useState(false);
+  const [showConfetti, setShow] = useState(true);
   const { isReady, connecting } = useWalletContext();
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => setShow(true), 1000);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, []);
 
   useEffect(() => {
     let timeoutId: string | number | NodeJS.Timeout | undefined;
