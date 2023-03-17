@@ -14,12 +14,10 @@ export type FullscreenModalProps = PropsWithChildren<{
 const Header = styled(Stack)(({ theme }) => ({
   height: 24,
   position: 'relative',
-  marginBottom: theme.spacing(2),
   marginTop: theme.spacing(-1),
 
   '@media (max-width: 600px), (max-height: 440px)': {
     marginRight: theme.spacing(1),
-    marginTop: theme.spacing(0),
   },
 }));
 

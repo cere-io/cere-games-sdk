@@ -34,6 +34,9 @@ const AnimationBlock = styled.div(({ showConfetti }: { showConfetti: boolean }) 
     : '',
   backgroundSize: 'contain',
   backgroundRepeat: 'no-repeat',
+  '@media (max-width: 600px)': {
+    top: '-10%',
+  },
 }));
 
 const CrownImage = styled.img({
@@ -85,16 +88,27 @@ const ByCereText = styled.span({
 export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [busy, setBusy] = useState(false);
-  const [showConfetti, setShow] = useState(true);
+  const [showConfetti, setShow] = useState(false);
   const { isReady, connecting } = useWalletContext();
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => setShow(false), 1500);
+    const timeoutId = setTimeout(() => setShow(true), 1000);
 
     return () => {
       clearTimeout(timeoutId);
     };
-  });
+  }, []);
+
+  useEffect(() => {
+    let timeoutId: string | number | NodeJS.Timeout | undefined;
+    if (showConfetti) {
+      timeoutId = setTimeout(() => setShow(false), 1500);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [showConfetti]);
 
   const handleConnect = useCallback(async () => {
     setBusy(true);
@@ -106,7 +120,7 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
     <Widget spacing={isLandscape ? 2 : 4} align="stretch">
       <AnimationBlock showConfetti={showConfetti} />
       <Stack spacing={4}>
-        <Stack style={{ position: 'relative' }}>
+        <Stack style={{ position: 'relative', marginBottom: 28 }}>
           <CrownImage src="https://assets.cms.freeport.dev.cere.network/crown_image_ceeef25fb4.png" />
           <Stack style={{ zIndex: 2 }}>
             <HeaderTitle>Congratulations!</HeaderTitle>

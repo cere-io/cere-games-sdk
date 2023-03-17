@@ -49,8 +49,9 @@ const TimeLeftText = styled(Typography)({
 const MysteryBlock = styled.div({
   height: 148,
   width: '100%',
-  background: 'url(https://assets.cms.freeport.dev.cere.network/box_2eb322256d.png) no-repeat',
-  backgroundSize: 'contain',
+  background: 'url(https://assets.cms.freeport.dev.cere.network/Frame_48096833_2aa4e9a793.png) no-repeat',
+  backgroundSize: 'cover',
+  backgroundPositionY: 'center',
 });
 
 const Container = styled(Stack)({
@@ -59,7 +60,7 @@ const Container = styled(Stack)({
 
 const GamePortalButton = styled(Button)({
   background: 'linear-gradient(90deg, rgba(245, 187, 255, 0.3) 0%, rgba(245, 187, 255, 0) 93.55%)',
-  padding: '15px 19px',
+  padding: '15px 13px',
   justifyContent: 'flex-start',
   whiteSpace: 'nowrap',
   '& > div': {
@@ -113,7 +114,7 @@ export const Leaderboard = ({ data, sessionPrice = 0, onPlayAgain }: Leaderboard
   }, []);
   return (
     <Widget>
-      <Stack spacing={4}>
+      <Stack spacing={3}>
         <StyledStack spacing={3}>
           <Container spacing={2}>
             <Alert />
@@ -144,7 +145,7 @@ export const Leaderboard = ({ data, sessionPrice = 0, onPlayAgain }: Leaderboard
               </Row>
             </Tournament>
           </Container>
-          <Container direction="column" spacing={3}>
+          <Container direction="column" spacing={1.8}>
             <BalanceText>2 tokens to PLAY (tokens balance: {balance})</BalanceText>
             <Button
               disabled={balance < sessionPrice}

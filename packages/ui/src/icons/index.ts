@@ -7,3 +7,4 @@ export * from './CereGamingIcon';
 export * from './CurrentPlayerIcon';
 export * from './InsertLinkIcon';
 export * from './TwitterIcon';
+export * from './ArrowTopIcon';
