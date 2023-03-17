@@ -3,9 +3,16 @@ export type WalletContext = {
   connecting: boolean;
   address?: string;
   balance?: number;
+  isNewUser?: boolean;
+};
+
+export type ConfigContext = {
+  sessionPrice: number;
+  newWalletReward: number;
 };
 
 export type ContextState = {
+  config: ConfigContext;
   wallet: WalletContext;
 };
 
@@ -14,6 +21,11 @@ export type Context = ContextState & {
 };
 
 const defaultState: ContextState = {
+  config: {
+    sessionPrice: 0,
+    newWalletReward: 0,
+  },
+
   wallet: {
     connecting: false,
     isReady: false,
@@ -42,7 +54,7 @@ export const createProxy = (context: Context, onChange: () => void) => {
   return new Proxy(context, handler);
 };
 
-export const createContext = (initState = defaultState): Context => {
+export const createContext = (initState: Partial<ContextState> = {}): Context => {
   const events = new EventTarget();
   const context: Context = {
     subscribe: (handler) => {
@@ -51,6 +63,7 @@ export const createContext = (initState = defaultState): Context => {
       return () => events.removeEventListener('change', handler);
     },
 
+    ...defaultState,
     ...initState,
   };
 
