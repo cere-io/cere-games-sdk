@@ -25,6 +25,7 @@ const Widget = styled(Stack)({
 });
 
 const AnimationBlock = styled.div(({ showConfetti }: { showConfetti: boolean }) => ({
+  display: showConfetti ? 'initial' : 'none',
   zIndex: 2,
   position: 'absolute',
   top: '-30%',
