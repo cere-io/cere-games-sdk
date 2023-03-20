@@ -158,7 +158,7 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
           </Container>
           <Container direction="column" spacing={1.8}>
             <BalanceText>
-              {sessionPrice} tokens to PLAY (tokens balance: {balance})
+              {sessionPrice} tokens to PLAY (tokens balance: {balance.toFixed(2)})
             </BalanceText>
             <Button
               disabled={balance < sessionPrice}
