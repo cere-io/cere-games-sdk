@@ -3,6 +3,7 @@ import * as UI from '@cere/games-sdk-ui';
 
 import {
   ANALYTICS_EVENTS,
+  GAME_PORTAL_URL,
   GAME_SERVICE_URL,
   GAME_SESSION_DEPOSIT_ADDRESS,
   GAME_SESSION_PRICE,
@@ -48,19 +49,20 @@ export class GamesSDK {
     config: {
       newWalletReward: NEW_WALLET_REWARD,
       sessionPrice: GAME_SESSION_PRICE,
+      gamePortalUrl: GAME_PORTAL_URL[this.env],
     },
   });
 
   private readonly analytics = new Analytics();
 
   readonly wallet = new EmbedWallet({
-    env: this.options.env,
+    env: this.env,
     appId: this.options.gameId,
   });
 
   private readonly api = new GamesApi({
     gameId: this.options.gameId,
-    baseUrl: GAME_SERVICE_URL,
+    baseUrl: GAME_SERVICE_URL[this.env],
   });
 
   constructor(private options: SdkOptions) {
@@ -76,6 +78,10 @@ export class GamesSDK {
       this.ui.wallet.isReady = this.wallet.status !== 'not-ready';
       this.ui.wallet.connecting = this.wallet.status === 'connecting';
     });
+  }
+
+  private get env() {
+    return this.options.env || 'prod';
   }
 
   /**
@@ -118,7 +124,7 @@ export class GamesSDK {
 
     const txHash = await this.wallet.transfer({
       token: 'CERE',
-      to: GAME_SESSION_DEPOSIT_ADDRESS,
+      to: GAME_SESSION_DEPOSIT_ADDRESS[this.env],
       amount: GAME_SESSION_PRICE,
     });
 

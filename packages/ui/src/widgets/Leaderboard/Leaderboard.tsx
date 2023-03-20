@@ -100,8 +100,9 @@ const StyledTypography = styled(Typography)({
 
 export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
   const [busy, setBusy] = useState(false);
-  const { sessionPrice } = useConfigContext();
+  const { sessionPrice, gamePortalUrl } = useConfigContext();
   const { address, balance = 0 } = useWalletContext();
+  const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
 
   const isMobile = useMediaQuery('(max-width: 600px)');
 
@@ -111,12 +112,15 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
     setBusy(false);
   }, [onPlayAgain]);
 
-  const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
+  const handleOpenGamePortal = useCallback(() => {
+    window.location.href = gamePortalUrl;
+  }, [gamePortalUrl]);
 
   const handleShareClick = useCallback(() => {
     const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score? My score: ${playerData?.score} Play it straight from your browser here: ${window.location.href}&hashtags=metaversadash,web3,gamer`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
   }, [playerData?.score]);
+
   return (
     <Widget>
       <Stack spacing={3}>
@@ -143,7 +147,9 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
                 <MysteryBlock />
               </Row>
               <Row columns={isMobile ? 'auto 128px' : 'auto 145px'}>
-                <GamePortalButton icon={<InsertLinkIcon />}>Cere game portal</GamePortalButton>
+                <GamePortalButton icon={<InsertLinkIcon />} onClick={handleOpenGamePortal}>
+                  Cere game portal
+                </GamePortalButton>
                 <TweetButton icon={<TwitterIcon />} variant="outlined" onClick={handleShareClick}>
                   Tweet
                 </TweetButton>
