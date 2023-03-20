@@ -1,4 +1,4 @@
-import { EmbedWallet, WalletAccount, WalletBalance } from '@cere/embed-wallet';
+import { BN, EmbedWallet, WalletAccount, WalletBalance } from '@cere/embed-wallet';
 import * as UI from '@cere/games-sdk-ui';
 
 import {
@@ -44,6 +44,13 @@ export type SdkOptions = {
 
 export type InitParams = Pick<SdkOptions, 'gameInfo'>;
 
+const balanceToFloat = (balance: BN, decimals: BN, precision: number) => {
+  const bnPrecision = new BN(precision);
+  const amount = balance.div(new BN(10).pow(decimals.sub(bnPrecision)));
+
+  return amount.toNumber() / 10 ** bnPrecision.toNumber();
+};
+
 export class GamesSDK {
   private readonly ui = UI.createContext({
     config: {
@@ -70,8 +77,8 @@ export class GamesSDK {
       this.ui.wallet.address = ethAccount?.address;
     });
 
-    this.wallet.subscribe('balance-update', ({ amount }: WalletBalance) => {
-      this.ui.wallet.balance = amount.toNumber();
+    this.wallet.subscribe('balance-update', ({ balance, decimals }: WalletBalance) => {
+      this.ui.wallet.balance = balanceToFloat(balance, decimals, 2);
     });
 
     this.wallet.subscribe('status-update', () => {
