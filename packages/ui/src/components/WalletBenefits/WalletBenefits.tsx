@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { Stack } from '../Stack';
 
 const Item = styled.div({
-  width: 450,
+  width: 311,
   display: 'flex',
   alignItems: 'center',
   columnGap: '29px',
@@ -23,17 +23,11 @@ const Item = styled.div({
     letterSpacing: '0.01em',
     textTransform: 'uppercase',
   },
-
-  '@media (max-width: 600px)': {
-    width: '100%',
-  },
 });
 
 const IconBlock = styled.div({
   width: 64,
   height: 64,
-  background: 'url(https://assets.cms.freeport.dev.cere.network/back_light_1c2a02de4b.png)',
-  backgroundSize: '100% 135%',
 });
 
 const StyledImage = styled.img({
@@ -43,15 +37,15 @@ const StyledImage = styled.img({
 const benefits: { title: string; url: string }[] = [
   {
     title: 'Save your score',
-    url: 'https://assets.cms.freeport.dev.cere.network/gaming_flag_1_c4694198b3.png',
+    url: 'https://assets.cms.freeport.dev.cere.network/star_cdb3ce1c3c.png',
   },
   {
     title: 'See how you stack up against others',
-    url: 'https://assets.cms.freeport.dev.cere.network/gaming_flag_2_e9e8b7d37c.png',
+    url: 'https://assets.cms.freeport.dev.cere.network/place_a538d5c597.png',
   },
   {
     title: 'Win cool prizes',
-    url: 'https://assets.cms.freeport.dev.cere.network/star_trophy_3_f18a9faca7.png',
+    url: 'https://assets.cms.freeport.dev.cere.network/chest_860d09ca5a.png',
   },
 ];
 
