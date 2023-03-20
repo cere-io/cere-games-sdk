@@ -28,13 +28,20 @@ type ShowConnectWalletOptions = {
   score?: number;
 };
 
+export type GameInfo = {
+  name?: string;
+  url?: string;
+  logoUrl?: string;
+};
+
 export type SdkOptions = {
   gameId: string;
   env?: 'dev' | 'stage' | 'prod';
+  gameInfo?: GameInfo;
   onReady?: (sdk: GamesSDK) => void;
 };
 
-export type InitParams = {};
+export type InitParams = Pick<SdkOptions, 'gameInfo'>;
 
 export class GamesSDK {
   private readonly ui = UI.createContext({
@@ -71,17 +78,35 @@ export class GamesSDK {
     });
   }
 
-  async init(params: InitParams = {}) {
+  /**
+   * TODO: Fetch game info from the Game Portal API
+   */
+  private async getGameInfo(info: GameInfo = {}) {
+    return {
+      name: document.title,
+      url: window.location.href,
+
+      ...this.options.gameInfo,
+      ...info,
+    };
+  }
+
+  async init(options: InitParams = {}) {
+    const gameInfo = await this.getGameInfo(options.gameInfo);
+
     await UI.register(this.ui);
 
-    this.initWallet();
+    this.initWallet(gameInfo);
     this.analytics.init({ gtmId: GMT_ID });
 
     this.options.onReady?.(this);
   }
 
-  private async initWallet() {
+  private async initWallet(gameInfo: GameInfo) {
     await this.wallet.init({
+      context: {
+        app: gameInfo,
+      },
       connectOptions: {
         mode: 'modal',
       },
