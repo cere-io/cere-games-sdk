@@ -37,8 +37,6 @@ export type SdkOptions = {
 export type InitParams = {};
 
 export class GamesSDK {
-  readonly wallet = new EmbedWallet();
-
   private readonly ui = UI.createContext({
     config: {
       newWalletReward: NEW_WALLET_REWARD,
@@ -47,6 +45,12 @@ export class GamesSDK {
   });
 
   private readonly analytics = new Analytics();
+
+  readonly wallet = new EmbedWallet({
+    env: this.options.env,
+    appId: this.options.gameId,
+  });
+
   private readonly api = new GamesApi({
     gameId: this.options.gameId,
     baseUrl: GAME_SERVICE_URL,
@@ -78,9 +82,6 @@ export class GamesSDK {
 
   private async initWallet() {
     await this.wallet.init({
-      appId: this.options.gameId,
-      env: this.options.env || 'prod',
-
       connectOptions: {
         mode: 'modal',
       },
@@ -120,22 +121,25 @@ export class GamesSDK {
   }
 
   showLeaderboard({ onPlayAgain, onBeforeLoad }: ShowLeaderboardOptions = {}) {
-    const { open, ...modal } = UI.createFullscreenModal(async () => {
-      const leaderboard = document.createElement('cere-leaderboard');
+    const { open, ...modal } = UI.createFullscreenModal(
+      async () => {
+        const leaderboard = document.createElement('cere-leaderboard');
 
-      await onBeforeLoad?.();
-      const data = await this.api.getLeaderboard();
+        await onBeforeLoad?.();
+        const data = await this.api.getLeaderboard();
 
-      leaderboard.update({
-        data,
-        onPlayAgain: async () => {
-          await this.payForSession();
-          await onPlayAgain?.();
-        },
-      });
+        leaderboard.update({
+          data,
+          onPlayAgain: async () => {
+            await this.payForSession();
+            await onPlayAgain?.();
+          },
+        });
 
-      return leaderboard;
-    }, { isLeaderBoard: true});
+        return leaderboard;
+      },
+      { isLeaderBoard: true },
+    );
 
     open();
 
