@@ -7,6 +7,9 @@ export const NEW_WALLET_REWARD = 5;
 export const GMT_ID = 'GTM-MSJX7Q6';
 export const ANALYTICS_EVENTS = {
   walletCompleted: 'TORUS_WALLET_COMPLETED',
+  highScoreTweet: 'HIGHSCORE_TWEET',
+  clickPlayAgain: 'CLICK_PLAY_AGAIN_GAME',
+  accountCreated: 'ACCOUNT_CREATED',
 };
 
 /**

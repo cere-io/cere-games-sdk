@@ -18,6 +18,7 @@ type AsyncCallback = () => Promise<void> | void;
 type ShowLeaderboardOptions = {
   onPlayAgain?: AsyncCallback;
   onBeforeLoad?: AsyncCallback;
+  onTweet?: AsyncCallback;
 };
 
 type ShowPreloaderOptions = {
@@ -165,12 +166,17 @@ export class GamesSDK {
 
         await onBeforeLoad?.();
         const data = await this.api.getLeaderboard();
+        const { email } = await this.wallet.getUserInfo();
 
         leaderboard.update({
           data,
           onPlayAgain: async () => {
+            this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });
             await this.payForSession();
             await onPlayAgain?.();
+          },
+          onTweet: () => {
+            this.onTweet();
           },
         });
 
@@ -203,7 +209,9 @@ export class GamesSDK {
           const { email, isNewUser } = await this.wallet.getUserInfo();
           this.analytics.trackEvent(ANALYTICS_EVENTS.walletCompleted, { userEmail: email });
           this.ui.wallet.isNewUser = isNewUser;
-
+          if (isNewUser) {
+            this.analytics.trackEvent(ANALYTICS_EVENTS.accountCreated, { userEmail: email });
+          }
           modal.close();
         } catch {}
       },
@@ -230,5 +238,11 @@ export class GamesSDK {
         onConnect: () => save().then(resolve),
       }),
     );
+  }
+
+  async onTweet() {
+    const { email } = await this.wallet.getUserInfo();
+
+    this.analytics.trackEvent(ANALYTICS_EVENTS.highScoreTweet, { userEmail: email });
   }
 }
