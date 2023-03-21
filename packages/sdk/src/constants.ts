@@ -10,10 +10,7 @@ export const ANALYTICS_EVENTS = {
 };
 
 /**
- * The addres where $CERE tokens are sent before playing a game again
- *
- * Current addresses are a fake and can be accessed using Cere Wallet by this email: game-session-bank@cere.io
- * TODO: Use real addresses
+ * The address where $CERE tokens are sent before playing a game again
  */
 export const GAME_SESSION_DEPOSIT_ADDRESS = {
   dev: '5Fk5XD3mJRTGhNPEbBhtEGkK4v2r9uWV81KastzXfbuvrknF',
