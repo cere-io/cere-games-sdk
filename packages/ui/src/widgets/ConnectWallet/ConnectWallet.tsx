@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useCallback, useEffect, useState } from 'react';
 
 import { Button, Stack, Typography, WalletBenefits } from '../../components';
-import { useMediaQuery, useWalletContext } from '../../hooks';
+import { useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
 
 export type ConnectWalletProps = {
   onConnect?: () => Promise<void> | void;
@@ -95,6 +95,7 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
   const [busy, setBusy] = useState(false);
   const [showConfetti, setShow] = useState(true);
   const { isReady, connecting } = useWalletContext();
+  const { newWalletReward } = useConfigContext();
 
   useEffect(() => {
     let timeoutId: string | number | NodeJS.Timeout | undefined;
@@ -138,7 +139,7 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
       </Stack>
       <Stack spacing={2}>
         <Connect loading={!isReady || connecting || busy} onClick={handleConnect}>
-          {!isReady ? 'Preparing... Please wait' : 'Claim 20 free tokens'}
+          {!isReady ? 'Preparing... Please wait' : `Claim ${newWalletReward} free tokens`}
         </Connect>
         <ByCereText>Powered by Cere Gaming Cloud</ByCereText>
       </Stack>

@@ -13,15 +13,12 @@ export const ANALYTICS_EVENTS = {
 };
 
 /**
- * The addres where $CERE tokens are sent before playing a game again
- *
- * Current addresses are a fake and can be accessed using Cere Wallet by this email: game-session-bank@cere.io
- * TODO: Use real addresses
+ * The address where $CERE tokens are sent before playing a game again
  */
 export const GAME_SESSION_DEPOSIT_ADDRESS = {
-  dev: '5GXnxWDnXdoH7iW6hGsq5vCvDFsDk2f3uXfQHxZwmnYikjLK',
-  stage: '5GXnxWDnXdoH7iW6hGsq5vCvDFsDk2f3uXfQHxZwmnYikjLK',
-  prod: '5GXnxWDnXdoH7iW6hGsq5vCvDFsDk2f3uXfQHxZwmnYikjLK',
+  dev: '5Fk5XD3mJRTGhNPEbBhtEGkK4v2r9uWV81KastzXfbuvrknF',
+  stage: '5Fk5XD3mJRTGhNPEbBhtEGkK4v2r9uWV81KastzXfbuvrknF',
+  prod: '5HEiqUDMDguZV1KwLzh3zhoogLY9wC15PyEeQbzCCG1y8RvY',
 };
 
 export const GAME_PORTAL_URL = {
