@@ -16,9 +16,9 @@ export const ANALYTICS_EVENTS = {
  * TODO: Use real addresses
  */
 export const GAME_SESSION_DEPOSIT_ADDRESS = {
-  dev: '5GXnxWDnXdoH7iW6hGsq5vCvDFsDk2f3uXfQHxZwmnYikjLK',
-  stage: '5GXnxWDnXdoH7iW6hGsq5vCvDFsDk2f3uXfQHxZwmnYikjLK',
-  prod: '5GXnxWDnXdoH7iW6hGsq5vCvDFsDk2f3uXfQHxZwmnYikjLK',
+  dev: '5Fk5XD3mJRTGhNPEbBhtEGkK4v2r9uWV81KastzXfbuvrknF',
+  stage: '5Fk5XD3mJRTGhNPEbBhtEGkK4v2r9uWV81KastzXfbuvrknF',
+  prod: '5HEiqUDMDguZV1KwLzh3zhoogLY9wC15PyEeQbzCCG1y8RvY',
 };
 
 export const GAME_PORTAL_URL = {
