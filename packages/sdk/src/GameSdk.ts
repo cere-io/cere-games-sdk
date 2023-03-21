@@ -166,17 +166,18 @@ export class GamesSDK {
 
         await onBeforeLoad?.();
         const data = await this.api.getLeaderboard();
-        const { email } = await this.wallet.getUserInfo();
 
         leaderboard.update({
           data,
           onPlayAgain: async () => {
+            const { email } = await this.wallet.getUserInfo();
             this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });
             await this.payForSession();
             await onPlayAgain?.();
           },
-          onTweet: () => {
-            this.onTweet();
+          onTweet: async () => {
+            const { email } = await this.wallet.getUserInfo();
+            this.analytics.trackEvent(ANALYTICS_EVENTS.highScoreTweet, { userEmail: email });
           },
         });
 
@@ -238,11 +239,5 @@ export class GamesSDK {
         onConnect: () => save().then(resolve),
       }),
     );
-  }
-
-  async onTweet() {
-    const { email } = await this.wallet.getUserInfo();
-
-    this.analytics.trackEvent(ANALYTICS_EVENTS.highScoreTweet, { userEmail: email });
   }
 }
