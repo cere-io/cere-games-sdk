@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
-import { useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { TableDataRow, TableDataRowProps } from './TableDataRow';
 import { TableHeader } from './TableHeader';
 import { Button } from '../Button';
 import { ArrowTopIcon } from '../../icons';
-import { useIsInViewport } from '../../hooks';
 
 export type TableProps = {
   activeAddress?: string;
@@ -41,12 +40,31 @@ const ScrollToTop = styled(Button)({
 });
 
 export const Table = ({ data, activeAddress }: TableProps) => {
+  const [showScrollToTop, setShow] = useState(false);
   const activeRow = useMemo(() => data.find((row) => row.address === activeAddress), [data, activeAddress]);
   const rows = useMemo(() => data.filter((row) => row !== activeRow), [activeRow, data]);
 
   const firsElRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const showMoreInViewport = useIsInViewport(firsElRef);
+  const toggleVisible = useCallback(() => {
+    if (!containerRef.current) {
+      return;
+    }
+    if (containerRef.current.scrollTop > 250) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const ref = containerRef.current;
+    ref?.addEventListener('scroll', toggleVisible, false);
+    return () => {
+      ref?.removeEventListener('scroll', toggleVisible, false);
+    };
+  }, [toggleVisible]);
 
   const handleClick = () => {
     if (!firsElRef.current) {
@@ -58,17 +76,17 @@ export const Table = ({ data, activeAddress }: TableProps) => {
     });
   };
   return (
-    <Container>
+    <Container ref={containerRef}>
       <TableHeader columns={['Rank', 'Player', 'Prize', 'Score']} />
       {activeRow && (
-        <div ref={firsElRef} style={{ scrollMarginTop: '600px' }}>
+        <div ref={firsElRef}>
           <TableDataRow hasReward={true} active data={activeRow} />
         </div>
       )}
       {rows.map((row, idx) => (
         <TableDataRow key={row.address} data={row} hasReward={idx <= 19} />
       ))}
-      {!showMoreInViewport && (
+      {showScrollToTop && (
         <ScrollToTop icon={<ArrowTopIcon />} onClick={handleClick}>
           Top
         </ScrollToTop>
