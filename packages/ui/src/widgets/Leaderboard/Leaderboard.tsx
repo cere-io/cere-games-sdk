@@ -107,8 +107,13 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
   const isMobile = useMediaQuery('(max-width: 600px)');
 
   const handlePlayAgain = useCallback(async () => {
-    setBusy(true);
-    await onPlayAgain?.();
+    try {
+      setBusy(true);
+      await onPlayAgain?.();
+    } catch (error) {
+      console.error(error);
+    }
+
     setBusy(false);
   }, [onPlayAgain]);
 
