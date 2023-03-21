@@ -108,8 +108,13 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
   }, [showConfetti]);
 
   const handleConnect = useCallback(async () => {
-    setBusy(true);
-    await Promise.resolve(onConnect?.());
+    try {
+      setBusy(true);
+      await onConnect?.();
+    } catch (error) {
+      console.error(error);
+    }
+
     setBusy(false);
   }, [onConnect]);
 
