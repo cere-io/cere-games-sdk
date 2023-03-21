@@ -7,6 +7,7 @@ import { useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
 
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
   onPlayAgain?: () => Promise<void> | void;
+  onTweet?: () => Promise<void> | void;
 };
 
 const Widget = styled.div({
@@ -98,7 +99,7 @@ const StyledTypography = styled(Typography)({
   letterSpacing: '0.01em',
 });
 
-export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
+export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) => {
   const [busy, setBusy] = useState(false);
   const { sessionPrice, gamePortalUrl } = useConfigContext();
   const { address, balance = 0 } = useWalletContext();
@@ -122,9 +123,10 @@ export const Leaderboard = ({ data, onPlayAgain }: LeaderboardProps) => {
   }, [gamePortalUrl]);
 
   const handleShareClick = useCallback(() => {
-    const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score? My score: ${playerData?.score} Play it straight from your browser here: ${window.location.href}&hashtags=metaversadash,web3,gamer`;
+    onTweet?.();
+    const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score?%0a%0aMy score: ${playerData?.score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
-  }, [playerData?.score]);
+  }, [onTweet, playerData?.score]);
 
   return (
     <Widget>
