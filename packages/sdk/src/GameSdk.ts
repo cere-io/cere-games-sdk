@@ -202,11 +202,6 @@ export class GamesSDK {
           await this.wallet.connect();
           await onConnect?.();
 
-          /**
-           * Send wallet connected events to analytics
-           *
-           * TODO: Send only for new wallets
-           */
           const { email, isNewUser } = await this.wallet.getUserInfo();
           this.analytics.trackEvent(ANALYTICS_EVENTS.walletCompleted, { userEmail: email });
           this.ui.wallet.isNewUser = isNewUser;
@@ -214,7 +209,9 @@ export class GamesSDK {
             this.analytics.trackEvent(ANALYTICS_EVENTS.accountCreated, { userEmail: email });
           }
           modal.close();
-        } catch {}
+        } catch (error) {
+          console.error(error);
+        }
       },
     });
 
