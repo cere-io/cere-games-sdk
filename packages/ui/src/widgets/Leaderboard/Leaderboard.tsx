@@ -122,8 +122,8 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) =>
     window.location.href = gamePortalUrl;
   }, [gamePortalUrl]);
 
-  const handleShareClick = useCallback(() => {
-    onTweet?.();
+  const handleShareClick = useCallback(async () => {
+    await onTweet?.();
     const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score?%0a%0aMy score: ${playerData?.score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
   }, [onTweet, playerData?.score]);

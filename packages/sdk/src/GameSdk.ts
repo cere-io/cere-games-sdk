@@ -146,6 +146,8 @@ export class GamesSDK {
     preloader.update({
       ready: false,
       onStartClick: async () => {
+        const { email } = await this.wallet.getUserInfo();
+        this.analytics.trackEvent(ANALYTICS_EVENTS.startGame, { userEmail: email });
         await onStart?.();
         modal.close();
       },

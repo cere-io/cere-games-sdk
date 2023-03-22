@@ -1,3 +1,4 @@
 export const ANALYTICS = {
-  playBtnClass: 'play-btn',
+  playBtnClass: 'CLICK_START_GAME',
+  claimTokensBtnClass: 'CLAIM_TOKENS_BTN',
 };

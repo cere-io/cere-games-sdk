@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { Button, Stack, Typography, WalletBenefits } from '../../components';
 import { useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
+import { ANALYTICS } from '../../constants';
 
 export type ConnectWalletProps = {
   onConnect?: () => Promise<void> | void;
@@ -138,7 +139,11 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
         </Stack>
       </Stack>
       <Stack spacing={2}>
-        <Connect loading={!isReady || connecting || busy} onClick={handleConnect}>
+        <Connect
+          className={ANALYTICS.claimTokensBtnClass}
+          loading={!isReady || connecting || busy}
+          onClick={handleConnect}
+        >
           {!isReady ? 'Preparing... Please wait' : `Claim ${newWalletReward} free tokens`}
         </Connect>
         <ByCereText>Powered by Cere Gaming Cloud</ByCereText>
