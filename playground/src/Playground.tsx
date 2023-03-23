@@ -15,6 +15,9 @@ export const Playground = () => {
         onWalletDisconnect: () => {
           window.location.reload();
         },
+        reporting: {
+          sentryPublicKey: '39761830833c4c90a67a6336ac897582',
+        },
       }),
     [],
   );

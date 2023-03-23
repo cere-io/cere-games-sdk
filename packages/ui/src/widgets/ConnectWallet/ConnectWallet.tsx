@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useCallback, useEffect, useState } from 'react';
 
 import { Button, Stack, Typography, WalletBenefits } from '../../components';
-import { useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
+import { useConfigContext, useMediaQuery, useReporting, useWalletContext } from '../../hooks';
 
 export type ConnectWalletProps = {
   onConnect?: () => Promise<void> | void;
@@ -91,6 +91,7 @@ const ByCereText = styled.span({
 });
 
 export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
+  const reporting = useReporting();
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [busy, setBusy] = useState(false);
   const [showConfetti, setShow] = useState(true);
@@ -113,11 +114,11 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
       setBusy(true);
       await onConnect?.();
     } catch (error) {
-      console.error(error);
+      reporting.error(error);
     }
 
     setBusy(false);
-  }, [onConnect]);
+  }, [onConnect, reporting]);
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="stretch">
