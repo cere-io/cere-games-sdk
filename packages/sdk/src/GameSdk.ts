@@ -136,6 +136,10 @@ export class GamesSDK {
       amount: GAME_SESSION_PRICE,
     });
 
+    if (txHash) {
+      this.analytics.trackEvent(ANALYTICS_EVENTS.confirmTransaction, { userEmail: ethAccount.name });
+    }
+
     await this.api.saveSessionTX(txHash, [ethAccount.address, cereAccount.address]);
   }
 
@@ -146,8 +150,7 @@ export class GamesSDK {
     preloader.update({
       ready: false,
       onStartClick: async () => {
-        const { email } = await this.wallet.getUserInfo();
-        this.analytics.trackEvent(ANALYTICS_EVENTS.startGame, { userEmail: email });
+        this.analytics.trackEvent(ANALYTICS_EVENTS.startGame);
         await onStart?.();
         modal.close();
       },
@@ -205,6 +208,7 @@ export class GamesSDK {
           await onConnect?.();
 
           const { email, isNewUser } = await this.wallet.getUserInfo();
+          this.analytics.trackEvent(ANALYTICS_EVENTS.claimTokens, { userEmail: email });
           this.analytics.trackEvent(ANALYTICS_EVENTS.walletCompleted, { userEmail: email });
           this.ui.wallet.isNewUser = isNewUser;
           if (isNewUser) {
