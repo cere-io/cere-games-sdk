@@ -1,4 +1,4 @@
-import { BN, EmbedWallet, WalletAccount, WalletBalance } from '@cere/embed-wallet';
+import { BN, EmbedWallet, WalletAccount, WalletBalance, WalletStatus } from '@cere/embed-wallet';
 import * as UI from '@cere/games-sdk-ui';
 
 import {
@@ -41,6 +41,7 @@ export type SdkOptions = {
   env?: 'dev' | 'stage' | 'prod';
   gameInfo?: GameInfo;
   onReady?: (sdk: GamesSDK) => void;
+  onWalletDisconnect?: () => void;
 };
 
 export type InitParams = Pick<SdkOptions, 'gameInfo'>;
@@ -82,9 +83,16 @@ export class GamesSDK {
       this.ui.wallet.balance = balanceToFloat(balance, decimals, 2);
     });
 
-    this.wallet.subscribe('status-update', () => {
-      this.ui.wallet.isReady = this.wallet.status !== 'not-ready';
-      this.ui.wallet.connecting = this.wallet.status === 'connecting';
+    this.wallet.subscribe('status-update', (status: WalletStatus, prevStatus: WalletStatus) => {
+      this.ui.wallet.isReady = status !== 'not-ready';
+      this.ui.wallet.connecting = status === 'connecting';
+
+      /**
+       * Handle wallet disconnect
+       */
+      if (prevStatus === 'connected' && status === 'ready') {
+        this.options.onWalletDisconnect?.();
+      }
     });
   }
 
