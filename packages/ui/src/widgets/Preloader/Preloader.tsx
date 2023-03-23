@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 import defaultPreloaderImage from '../../assets/preloaderImage.png';
 import { Button, Stack, Typography } from '../../components';
-import { ANALYTICS } from '../../constants';
 import { useMediaQuery } from '../../hooks';
 
 const Image = styled.div({
@@ -42,7 +41,7 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
         </Typography>
       </Stack>
 
-      <Button className={ANALYTICS.playBtnClass} loading={!ready} onClick={onStartClick}>
+      <Button loading={!ready} onClick={onStartClick}>
         {ready ? 'Start' : 'Game loading...'}
       </Button>
     </Widget>

@@ -10,6 +10,9 @@ export const ANALYTICS_EVENTS = {
   highScoreTweet: 'HIGHSCORE_TWEET',
   clickPlayAgain: 'CLICK_PLAY_AGAIN_GAME',
   accountCreated: 'ACCOUNT_CREATED',
+  startGame: 'CLICK_START_GAME',
+  claimTokens: 'CLAIM_TOKENS_BTN',
+  confirmTransaction: 'CONFIRM_TRANSACTION_BTN',
 };
 
 /**
