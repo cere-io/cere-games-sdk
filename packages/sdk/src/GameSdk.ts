@@ -12,6 +12,7 @@ import {
 } from './constants';
 import { GamesApi } from './api';
 import { Analytics } from './Analytics';
+import { Reporting, ReportingOptions } from './Reporting';
 
 type AsyncCallback = () => Promise<void> | void;
 
@@ -40,6 +41,7 @@ export type SdkOptions = {
   gameId: string;
   env?: 'dev' | 'stage' | 'prod';
   gameInfo?: GameInfo;
+  reporting?: ReportingOptions;
   onReady?: (sdk: GamesSDK) => void;
   onWalletDisconnect?: () => void;
 };
@@ -54,15 +56,18 @@ const balanceToFloat = (balance: BN, decimals: BN, precision: number) => {
 };
 
 export class GamesSDK {
+  private readonly reporting = new Reporting(this.options.reporting);
+  private readonly analytics = new Analytics();
+
   private readonly ui = UI.createContext({
+    reporting: this.reporting,
+
     config: {
       newWalletReward: NEW_WALLET_REWARD,
       sessionPrice: GAME_SESSION_PRICE,
       gamePortalUrl: GAME_PORTAL_URL[this.env],
     },
   });
-
-  private readonly analytics = new Analytics();
 
   readonly wallet = new EmbedWallet({
     env: this.env,
@@ -114,9 +119,10 @@ export class GamesSDK {
   }
 
   async init(options: InitParams = {}) {
-    const gameInfo = await this.getGameInfo(options.gameInfo);
-
+    await this.reporting.init();
     await UI.register(this.ui);
+
+    const gameInfo = await this.getGameInfo(options.gameInfo);
 
     this.initWallet(gameInfo);
     this.analytics.init({ gtmId: GMT_ID });
@@ -216,15 +222,18 @@ export class GamesSDK {
           await onConnect?.();
 
           const { email, isNewUser } = await this.wallet.getUserInfo();
+          this.ui.wallet.isNewUser = isNewUser;
+
           this.analytics.trackEvent(ANALYTICS_EVENTS.claimTokens, { userEmail: email });
           this.analytics.trackEvent(ANALYTICS_EVENTS.walletCompleted, { userEmail: email });
-          this.ui.wallet.isNewUser = isNewUser;
+
           if (isNewUser) {
             this.analytics.trackEvent(ANALYTICS_EVENTS.accountCreated, { userEmail: email });
           }
+
           modal.close();
         } catch (error) {
-          console.error(error);
+          this.reporting.error(error);
         }
       },
     });

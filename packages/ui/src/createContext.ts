@@ -12,7 +12,13 @@ export type ConfigContext = {
   gamePortalUrl: string;
 };
 
+export type ReportingContext = {
+  error: (error: any) => void;
+  message: (message: string) => void;
+};
+
 export type ContextState = {
+  reporting: ReportingContext;
   config: ConfigContext;
   wallet: WalletContext;
 };
@@ -22,6 +28,11 @@ export type Context = ContextState & {
 };
 
 const defaultState: ContextState = {
+  reporting: {
+    error: console.error,
+    message: console.log,
+  },
+
   config: {
     sessionPrice: 0,
     newWalletReward: 0,
