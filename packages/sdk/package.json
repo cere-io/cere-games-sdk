@@ -1,14 +1,14 @@
 {
   "name": "@cere/games-sdk",
-  "version": "0.0.1-rc.39",
+  "version": "0.0.1-rc.40",
   "main": "./dist/bundle.umd.js",
   "types": "./dist/types",
   "scripts": {
     "build": "webpack"
   },
   "dependencies": {
-    "@cere/embed-wallet": "0.2.1",
-    "@cere/games-sdk-ui": "0.0.1-rc.38",
+    "@cere/embed-wallet": "0.2.4",
+    "@cere/games-sdk-ui": "0.0.1-rc.40",
     "react-gtm-module": "^2.0.11"
   },
   "devDependencies": {

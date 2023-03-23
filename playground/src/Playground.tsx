@@ -12,6 +12,9 @@ export const Playground = () => {
         env: 'dev',
         gameId: 'metaverse-dash-run',
         onReady: () => setReady(true),
+        onWalletDisconnect: () => {
+          window.location.reload();
+        },
       }),
     [],
   );
