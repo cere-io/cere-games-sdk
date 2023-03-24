@@ -177,7 +177,7 @@ export class GamesSDK {
     preloader.update({
       ready: false,
       onStartClick: async () => {
-        this.startSession(); // Create and record game session in background
+        this.startSession(); // Create and store game session in background
 
         this.analytics.trackEvent(ANALYTICS_EVENTS.startGame);
         await onStart?.();
