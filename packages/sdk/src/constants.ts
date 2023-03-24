@@ -1,3 +1,7 @@
+import pkg from '../package.json';
+
+export const SDK_VERSION = pkg.version;
+
 /**
  * Game session price in $CERE tokens
  */

@@ -1,3 +1,5 @@
+import { SDK_VERSION } from './constants';
+
 declare global {
   interface Window {
     Sentry: any;
@@ -5,6 +7,7 @@ declare global {
 }
 
 export type ReportingOptions = {
+  env: string;
   sentryPublicKey?: string;
 };
 
@@ -22,8 +25,12 @@ const loadSentry = (publicKey: string) => {
 
 export class Reporting {
   private sentry?: any;
+  private setReady = () => {};
+  private isReady = new Promise<void>((resolve) => {
+    this.setReady = resolve;
+  });
 
-  constructor(private options: ReportingOptions = {}) {}
+  constructor(private options: ReportingOptions) {}
 
   async init() {
     if (!this.options.sentryPublicKey) {
@@ -32,20 +39,29 @@ export class Reporting {
 
     try {
       this.sentry = await loadSentry(this.options.sentryPublicKey);
+
+      this.sentry.init({
+        release: `cere-games-sdk@${SDK_VERSION}`,
+        environment: this.options.env,
+      });
+
+      this.setReady();
     } catch (error) {
       console.error('Problem in ErrorReporting initialization', error);
     }
   }
 
-  error = (error: any) => {
+  error = async (error: any) => {
     console.error(error);
 
+    await this.isReady;
     this.sentry?.captureException(error);
   };
 
-  message = (message: string) => {
+  message = async (message: string) => {
     console.log(message);
 
+    await this.isReady;
     this.sentry?.captureMessage(message);
   };
 }
