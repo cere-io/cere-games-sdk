@@ -18,7 +18,7 @@ yarn add @cere/games-sdk
 
 # API
 
-- [GamesSDK](#embedwallet)
+- [GamesSDK](#gamessdk)
   - [wallet](#wallet)
   - [init()](#init)
   - [showPreloader()](#showpreloader)

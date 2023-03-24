@@ -1,19 +1,32 @@
 {
   "name": "@cere/games-sdk",
-  "version": "0.0.1-rc.42",
-  "main": "./dist/bundle.umd.js",
-  "types": "./dist/types",
+  "version": "0.1.0",
+  "description": "Cere Games SDK to integrate games with CERE infrastructure",
+  "sideEffects": false,
+  "main": "dist/bundle.umd.js",
+  "unpkg": "dist/bundle.umd.js",
+  "types": "dist/types",
+  "source": "src/index.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "author": "Cere Network <contact@cere.io (https://www.cere.io/)",
+  "bugs": {
+    "url": "https://github.com/cere-io/cere-games-sdk/issues"
+  },
+  "homepage": "https://github.com/cere-io/cere-games-sdk/tree/master/packages/sdk",
+  "license": "ISC",
   "scripts": {
     "build": "webpack"
   },
   "dependencies": {
-    "@cere/embed-wallet": "0.2.4",
-    "@cere/games-sdk-ui": "0.0.1-rc.42",
+    "@cere/embed-wallet": "0.2.6",
+    "@cere/games-sdk-ui": "0.1.0",
     "react-gtm-module": "^2.0.11"
   },
   "devDependencies": {
     "@types/react-gtm-module": "^2.0.1",
-    "node-polyfill-webpack-plugin": "^2.0.1",
     "ts-loader": "^9.4.2",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1"

@@ -1,6 +1,6 @@
 {
   "name": "cere-games-sdk",
-  "version": "0.0.1-rc.42",
+  "version": "0.1.0",
   "private": true,
   "devDependencies": {
     "eslint": "^8.34.0",
@@ -11,7 +11,7 @@
     "start": "npm start --workspace=@cere-games-sdk/playground",
     "build": "npm run build --workspace=@cere/games-sdk-ui --workspace=@cere/games-sdk",
     "lint": "eslint --quiet '**/*.{ts,tsx,js,jsx}'",
-    "sdk:publish": "npm publish --workspace=@cere/games-sdk-ui --workspace=@cere/games-sdk"
+    "sdk:publish": "npm publish --workspace=@cere/games-sdk-ui --workspace=@cere/games-sdk --access public"
   },
   "workspaces": [
     "playground",
