@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { Alert, Address, Button, Stack, Table, TableProps, Typography } from '../../components';
 import { RepeatIcon, InsertLinkIcon, TwitterIcon } from '../../icons';
-import { useConfigContext, useMediaQuery, useReporting, useWalletContext } from '../../hooks';
+import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
 
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
   onPlayAgain?: () => Promise<void> | void;
@@ -100,25 +100,12 @@ const StyledTypography = styled(Typography)({
 });
 
 export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) => {
-  const reporting = useReporting();
-  const [busy, setBusy] = useState(false);
   const { sessionPrice, gamePortalUrl } = useConfigContext();
   const { address, balance = 0 } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
-
   const isMobile = useMediaQuery('(max-width: 600px)');
 
-  const handlePlayAgain = useCallback(async () => {
-    try {
-      setBusy(true);
-      await onPlayAgain?.();
-    } catch (error) {
-      reporting.error(error);
-    }
-
-    setBusy(false);
-  }, [onPlayAgain, reporting]);
-
+  const [handlePlayAgain, isBusy] = useAsyncCallback(onPlayAgain);
   const handleOpenGamePortal = useCallback(() => {
     window.location.href = gamePortalUrl;
   }, [gamePortalUrl]);
@@ -170,7 +157,7 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) =>
             </BalanceText>
             <Button
               disabled={balance < sessionPrice}
-              loading={busy}
+              loading={isBusy}
               icon={<RepeatIcon />}
               onClick={handlePlayAgain}
               style={{ width: 243 }}

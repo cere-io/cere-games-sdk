@@ -11,7 +11,7 @@ import {
   NEW_WALLET_REWARD,
   SDK_VERSION,
 } from './constants';
-import { GamesApi } from './api';
+import { GamesApi, Session } from './api';
 import { Analytics } from './Analytics';
 import { Reporting, ReportingOptions } from './Reporting';
 
@@ -57,6 +57,8 @@ const balanceToFloat = (balance: BN, decimals: BN, precision: number) => {
 };
 
 export class GamesSDK {
+  private session?: Session;
+
   private readonly reporting = new Reporting({ env: this.env, ...this.options.reporting });
   private readonly analytics = new Analytics();
 
@@ -162,6 +164,12 @@ export class GamesSDK {
     await this.api.saveSessionTX(txHash, [ethAccount.address, cereAccount.address]);
   }
 
+  async startSession() {
+    this.session = await this.api.startSession();
+
+    return this.session;
+  }
+
   showPreloader({ onStart }: ShowPreloaderOptions = {}) {
     const preloader = document.createElement('cere-preloader');
     const { open, ...modal } = UI.createModal(preloader);
@@ -169,6 +177,8 @@ export class GamesSDK {
     preloader.update({
       ready: false,
       onStartClick: async () => {
+        this.startSession(); // Create and store game session in background
+
         this.analytics.trackEvent(ANALYTICS_EVENTS.startGame);
         await onStart?.();
         modal.close();
@@ -250,8 +260,14 @@ export class GamesSDK {
 
   async saveScore(score: number) {
     const save = async () => {
+      if (!this.session) {
+        this.reporting.message(`Attempt to save score without sessionId`);
+
+        return;
+      }
+
       const [ethAddress] = await this.wallet.getAccounts();
-      await this.api.saveScore(ethAddress.address, score);
+      await this.api.saveScore(ethAddress.address, score, this.session);
     };
 
     if (this.wallet.status === 'connected') {

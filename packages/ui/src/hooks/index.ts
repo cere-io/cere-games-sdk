@@ -4,3 +4,4 @@ export * from './useIsInViewport';
 export * from './useImagePreloader';
 export * from './useConfigContext';
 export * from './useReporting';
+export * from './useAsyncCallback';

@@ -1,5 +1,5 @@
 ## Release Notes:
 
-### vNext
+### v0.1.1
 
--
+- Record games sessions

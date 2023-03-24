@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Button, Stack, Typography, WalletBenefits } from '../../components';
-import { useConfigContext, useMediaQuery, useReporting, useWalletContext } from '../../hooks';
+import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
 
 export type ConnectWalletProps = {
   onConnect?: () => Promise<void> | void;
@@ -91,12 +91,11 @@ const ByCereText = styled.span({
 });
 
 export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
-  const reporting = useReporting();
   const isLandscape = useMediaQuery('(max-height: 440px)');
-  const [busy, setBusy] = useState(false);
   const [showConfetti, setShow] = useState(true);
   const { isReady, connecting } = useWalletContext();
   const { newWalletReward } = useConfigContext();
+  const [handleConnect, busy] = useAsyncCallback(onConnect);
 
   useEffect(() => {
     let timeoutId: string | number | NodeJS.Timeout | undefined;
@@ -108,17 +107,6 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
       clearTimeout(timeoutId);
     };
   }, [showConfetti]);
-
-  const handleConnect = useCallback(async () => {
-    try {
-      setBusy(true);
-      await onConnect?.();
-    } catch (error) {
-      reporting.error(error);
-    }
-
-    setBusy(false);
-  }, [onConnect, reporting]);
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="stretch">
