@@ -21,7 +21,7 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@cere/embed-wallet": "0.2.5-rc.2",
+    "@cere/embed-wallet": "0.2.6",
     "@cere/games-sdk-ui": "0.1.0",
     "react-gtm-module": "^2.0.11"
   },
