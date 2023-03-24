@@ -9,6 +9,7 @@ import {
   GAME_SESSION_PRICE,
   GMT_ID,
   NEW_WALLET_REWARD,
+  SDK_VERSION,
 } from './constants';
 import { GamesApi } from './api';
 import { Analytics } from './Analytics';
@@ -41,7 +42,7 @@ export type SdkOptions = {
   gameId: string;
   env?: 'dev' | 'stage' | 'prod';
   gameInfo?: GameInfo;
-  reporting?: ReportingOptions;
+  reporting?: Omit<ReportingOptions, 'env'>;
   onReady?: (sdk: GamesSDK) => void;
   onWalletDisconnect?: () => void;
 };
@@ -56,7 +57,7 @@ const balanceToFloat = (balance: BN, decimals: BN, precision: number) => {
 };
 
 export class GamesSDK {
-  private readonly reporting = new Reporting(this.options.reporting);
+  private readonly reporting = new Reporting({ env: this.env, ...this.options.reporting });
   private readonly analytics = new Analytics();
 
   private readonly ui = UI.createContext({
@@ -80,6 +81,10 @@ export class GamesSDK {
   });
 
   constructor(private options: SdkOptions) {
+    console.log(`CERE Games SDK: version ${SDK_VERSION}`);
+
+    this.reporting.message('Test async message');
+
     this.wallet.subscribe('accounts-update', ([ethAccount]: WalletAccount[]) => {
       this.ui.wallet.address = ethAccount?.address;
     });
@@ -119,9 +124,9 @@ export class GamesSDK {
   }
 
   async init(options: InitParams = {}) {
-    await this.reporting.init();
-    await UI.register(this.ui);
+    this.reporting.init();
 
+    await UI.register(this.ui);
     const gameInfo = await this.getGameInfo(options.gameInfo);
 
     this.initWallet(gameInfo);
