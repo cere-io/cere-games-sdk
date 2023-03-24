@@ -1,5 +1,4 @@
 const path = require('path');
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -11,8 +10,6 @@ module.exports = {
     filename: 'bundle.umd.js',
     library: { name: 'CereGamesSDK', type: 'umd' },
   },
-
-  plugins: [new NodePolyfillPlugin()],
 
   module: {
     rules: [
