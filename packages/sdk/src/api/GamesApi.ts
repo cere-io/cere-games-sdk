@@ -4,8 +4,11 @@ type LeaderBoardRecord = {
   gameId: string;
 };
 
-type LeaderBoard = LeaderBoardRecord[];
-type Rank = number;
+export type LeaderBoard = LeaderBoardRecord[];
+export type Rank = number;
+export type Session = {
+  sessionId: string;
+};
 
 export type GamesApiOptions = {
   baseUrl: string;
@@ -29,6 +32,14 @@ export class GamesApi {
     });
   }
 
+  async startSession() {
+    const endpoint = this.createEndpoint('/leader-board/start-session');
+    const response = await this.post(endpoint, { gameId: this.options.gameId });
+    const session: Session = await response.json();
+
+    return session;
+  }
+
   async getLeaderboard() {
     const endpoint = this.createEndpoint(`/leader-board/game-id/${this.options.gameId}`);
     const response = await fetch(endpoint);
@@ -41,12 +52,13 @@ export class GamesApi {
     }));
   }
 
-  async saveScore(walletAddress: string, score: number) {
+  async saveScore(walletId: string, score: number, { sessionId }: Session) {
     const endpoint = this.createEndpoint('/leader-board');
 
-    await this.post<LeaderBoardRecord>(endpoint, {
+    await this.post(endpoint, {
       score,
-      walletId: walletAddress,
+      sessionId,
+      walletId,
       gameId: this.options.gameId,
     });
   }

@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import defaultPreloaderImage from '../../assets/preloaderImage.png';
 import { Button, Stack, Typography } from '../../components';
-import { useMediaQuery } from '../../hooks';
+import { useAsyncCallback, useMediaQuery } from '../../hooks';
 
 const Image = styled.div({
   height: 200,
@@ -23,11 +23,12 @@ const Widget = styled(Stack)({
 
 export type PreloaderProps = {
   ready?: boolean;
-  onStartClick?: () => void;
+  onStartClick?: () => Promise<void> | void;
 };
 
 export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
+  const [handleStartClick, isBusy] = useAsyncCallback(onStartClick);
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="center">
@@ -41,7 +42,7 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
         </Typography>
       </Stack>
 
-      <Button loading={!ready} onClick={onStartClick}>
+      <Button loading={!ready || isBusy} onClick={handleStartClick}>
         {ready ? 'Start' : 'Game loading...'}
       </Button>
     </Widget>
