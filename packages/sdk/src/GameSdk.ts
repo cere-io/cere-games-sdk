@@ -85,8 +85,6 @@ export class GamesSDK {
   constructor(private options: SdkOptions) {
     console.log(`CERE Games SDK: version ${SDK_VERSION}`);
 
-    this.reporting.message('Test async message');
-
     this.wallet.subscribe('accounts-update', ([ethAccount]: WalletAccount[]) => {
       this.ui.wallet.address = ethAccount?.address;
     });
@@ -213,6 +211,7 @@ export class GamesSDK {
             const { email } = await this.wallet.getUserInfo();
             this.analytics.trackEvent(ANALYTICS_EVENTS.highScoreTweet, { userEmail: email });
           },
+          serviceUrl: GAME_SERVICE_URL[this.env],
         });
 
         return leaderboard;

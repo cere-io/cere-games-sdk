@@ -8,6 +8,7 @@ import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } f
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
   onPlayAgain?: () => Promise<void> | void;
   onTweet?: () => Promise<void> | void;
+  serviceUrl: string;
 };
 
 const Widget = styled.div({
@@ -99,9 +100,9 @@ const StyledTypography = styled(Typography)({
   letterSpacing: '0.01em',
 });
 
-export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) => {
+export const Leaderboard = ({ data, onPlayAgain, onTweet, serviceUrl }: LeaderboardProps) => {
   const { sessionPrice, gamePortalUrl } = useConfigContext();
-  const { address, balance = 0 } = useWalletContext();
+  const { address, balance = 0, isReady } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
   const isMobile = useMediaQuery('(max-width: 600px)');
 
@@ -112,9 +113,14 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) =>
 
   const handleShareClick = useCallback(async () => {
     await onTweet?.();
-    const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score?%0a%0aMy score: ${playerData?.score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer`;
+    const score = data.find((row) => row.address === address)!.score;
+    const title = 'Your score';
+    const subTitle = 'Congratulations!';
+    const bgUrl = 'https://assets.cms.freeport.dev.cere.network/Share_twitter_6_bg_6f4253090d.png';
+    const staticPageUrl = `${serviceUrl}/twitter-static?serviceUrl=${serviceUrl}&title=${title}&subTitle=${subTitle}&score=${score}&bgUrl=${bgUrl}`;
+    const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score?%0a%0aMy score: ${playerData?.score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer%0a%0a&url=${staticPageUrl}`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
-  }, [onTweet, playerData?.score]);
+  }, [address, data, onTweet, playerData?.score, serviceUrl]);
 
   return (
     <Widget>
@@ -145,7 +151,7 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) =>
                 <GamePortalButton icon={<InsertLinkIcon />} onClick={handleOpenGamePortal}>
                   Cere game portal
                 </GamePortalButton>
-                <TweetButton icon={<TwitterIcon />} variant="outlined" onClick={handleShareClick}>
+                <TweetButton disabled={!isReady} icon={<TwitterIcon />} variant="outlined" onClick={handleShareClick}>
                   Tweet
                 </TweetButton>
               </Row>
