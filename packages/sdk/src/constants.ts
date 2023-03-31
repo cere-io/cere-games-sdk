@@ -39,3 +39,9 @@ export const GAME_SERVICE_URL = {
   stage: 'https://stage-freeport-gaming.network-stage.aws.cere.io',
   prod: 'https://prod-freeport-gaming.network.aws.cere.io',
 };
+
+export const ENV_CONFIGS = {
+  dev: 'https://assets.cms.freeport.dev.cere.network',
+  stage: 'https://assets.cms.freeport.stg.cere.network',
+  prod: 'https://assets.cms.freeport.cere.network',
+};

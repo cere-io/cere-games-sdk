@@ -27,22 +27,22 @@ const Widget = styled(Stack)({
   },
 });
 
-const AnimationBlock = styled.div(({ showConfetti }: { showConfetti: boolean }) => ({
-  display: showConfetti ? 'initial' : 'none',
-  zIndex: 2,
-  position: 'absolute',
-  top: '-30%',
-  width: '100%',
-  height: '100%',
-  background: showConfetti
-    ? 'url(https://assets.cms.freeport.dev.cere.network/animation_640_lf88b7kr_aa5d097cd4.gif)'
-    : '',
-  backgroundSize: 'contain',
-  backgroundRepeat: 'no-repeat',
-  '@media (max-width: 600px)': {
-    top: '-10%',
-  },
-}));
+const AnimationBlock = styled.div(
+  ({ showConfetti, staticBaseUrl }: { showConfetti: boolean; staticBaseUrl: string }) => ({
+    display: showConfetti ? 'initial' : 'none',
+    zIndex: 2,
+    position: 'absolute',
+    top: '-30%',
+    width: '100%',
+    height: '100%',
+    background: showConfetti ? `url(${staticBaseUrl}/animation_640_lf88b7kr_aa5d097cd4.gif)` : '',
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    '@media (max-width: 600px)': {
+      top: '-10%',
+    },
+  }),
+);
 
 const CrownImage = styled.img({
   position: 'absolute',
@@ -94,7 +94,7 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [showConfetti, setShow] = useState(true);
   const { isReady, connecting } = useWalletContext();
-  const { newWalletReward } = useConfigContext();
+  const { newWalletReward, staticBaseUrl } = useConfigContext();
   const [handleConnect, busy] = useAsyncCallback(onConnect);
 
   useEffect(() => {
@@ -110,10 +110,10 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="stretch">
-      <AnimationBlock showConfetti={showConfetti} />
+      <AnimationBlock staticBaseUrl={staticBaseUrl} showConfetti={showConfetti} />
       <Stack spacing={4}>
         <Stack style={{ position: 'relative', marginBottom: 28 }}>
-          <CrownImage src="https://assets.cms.freeport.dev.cere.network/crown_image_ceeef25fb4.png" />
+          <CrownImage src={`${staticBaseUrl}/crown_image_ceeef25fb4.png`} />
           <Stack style={{ zIndex: 2 }}>
             <HeaderTitle>Congratulations!</HeaderTitle>
             <HeaderSubTitle>

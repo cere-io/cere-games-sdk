@@ -6,6 +6,7 @@ import { Typography } from '../Typography';
 import { Rank, RankProps } from './Rank';
 import { TableRow } from './TableRow';
 import { CurrentPlayerIcon } from '../../icons';
+import { useConfigContext } from '../../hooks';
 
 type Data = {
   rank: number;
@@ -46,12 +47,14 @@ const Prize = styled.img({
 const rankColors: RankProps['rankColor'][] = ['gold', 'silver', 'bronze'];
 
 export const TableDataRow = ({ data, active, hasReward }: TableDataRowProps) => {
+  const { staticBaseUrl } = useConfigContext();
+
   const rewardTsx = useMemo(() => {
     if (!hasReward) {
       return null;
     }
-    return <Prize src="https://assets.cms.freeport.dev.cere.network/mystery_box_21d18c2011.png" />;
-  }, [hasReward]);
+    return <Prize src={`${staticBaseUrl}/mystery_box_21d18c2011.png`} />;
+  }, [hasReward, staticBaseUrl]);
   return (
     <Wrapper active={active}>
       <TableRow

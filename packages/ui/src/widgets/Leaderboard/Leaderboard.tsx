@@ -47,14 +47,14 @@ const TimeLeftText = styled(Typography)({
   },
 });
 
-const MysteryBlock = styled.div({
+const MysteryBlock = styled.div(({ staticBaseUrl }: { staticBaseUrl: string }) => ({
   height: 148,
   width: '100%',
-  background: 'url(https://assets.cms.freeport.dev.cere.network/Mystery_Box_1_b57b8c650d.png) no-repeat',
+  background: `url(${staticBaseUrl}/Mystery_Box_1_b57b8c650d.png) no-repeat`,
   backgroundSize: '90%',
   backgroundPositionY: 'center',
   marginBottom: 25,
-});
+}));
 
 const Container = styled(Stack)({
   width: '100%',
@@ -101,7 +101,7 @@ const StyledTypography = styled(Typography)({
 });
 
 export const Leaderboard = ({ data, onPlayAgain, onTweet, serviceUrl }: LeaderboardProps) => {
-  const { sessionPrice, gamePortalUrl } = useConfigContext();
+  const { sessionPrice, gamePortalUrl, staticBaseUrl } = useConfigContext();
   const { address, balance = 0, isReady } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
   const isMobile = useMediaQuery('(max-width: 600px)');
@@ -116,11 +116,11 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet, serviceUrl }: Leaderbo
     const score = data.find((row) => row.address === address)!.score;
     const title = 'Your score';
     const subTitle = 'Congratulations!';
-    const bgUrl = 'https://assets.cms.freeport.dev.cere.network/Share_twitter_6_bg_6f4253090d.png';
+    const bgUrl = `${staticBaseUrl}/Share_twitter_6_bg_6f4253090d.png`;
     const staticPageUrl = `${serviceUrl}/twitter-static?serviceUrl=${serviceUrl}&title=${title}&subTitle=${subTitle}&score=${score}&bgUrl=${bgUrl}`;
     const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score?%0a%0aMy score: ${playerData?.score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer%0a%0a&url=${staticPageUrl}`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
-  }, [address, data, onTweet, playerData?.score, serviceUrl]);
+  }, [address, data, onTweet, playerData?.score, serviceUrl, staticBaseUrl]);
 
   return (
     <Widget>
@@ -145,7 +145,7 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet, serviceUrl }: Leaderbo
                     </StyledTypography>
                   </Stack>
                 </div>
-                <MysteryBlock />
+                <MysteryBlock staticBaseUrl={staticBaseUrl} />
               </Row>
               <Row columns={isMobile ? 'auto 128px' : 'auto 145px'}>
                 <GamePortalButton icon={<InsertLinkIcon />} onClick={handleOpenGamePortal}>
