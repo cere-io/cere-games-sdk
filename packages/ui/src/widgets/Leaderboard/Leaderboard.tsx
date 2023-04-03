@@ -47,14 +47,14 @@ const TimeLeftText = styled(Typography)({
   },
 });
 
-const MysteryBlock = styled.div({
+const MysteryBlock = styled.div(({ url }: { url: string }) => ({
   height: 148,
   width: '100%',
-  background: 'url(https://assets.cms.freeport.dev.cere.network/Mystery_Box_1_b57b8c650d.png) no-repeat',
+  background: `url(${url}) no-repeat`,
   backgroundSize: '90%',
   backgroundPositionY: 'center',
   marginBottom: 25,
-});
+}));
 
 const Container = styled(Stack)({
   width: '100%',
@@ -100,8 +100,8 @@ const StyledTypography = styled(Typography)({
   letterSpacing: '0.01em',
 });
 
-export const Leaderboard = ({ data, onPlayAgain, onTweet, serviceUrl }: LeaderboardProps) => {
-  const { sessionPrice, gamePortalUrl } = useConfigContext();
+export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) => {
+  const { sessionPrice, gamePortalUrl, staticBaseUrl } = useConfigContext();
   const { address, balance = 0, isReady } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
   const isMobile = useMediaQuery('(max-width: 600px)');
@@ -113,14 +113,9 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet, serviceUrl }: Leaderbo
 
   const handleShareClick = useCallback(async () => {
     await onTweet?.();
-    const score = data.find((row) => row.address === address)!.score;
-    const title = 'Your score';
-    const subTitle = 'Congratulations!';
-    const bgUrl = 'https://assets.cms.freeport.dev.cere.network/Share_twitter_6_bg_6f4253090d.png';
-    const staticPageUrl = `${serviceUrl}/twitter-static?serviceUrl=${serviceUrl}&title=${title}&subTitle=${subTitle}&score=${score}&bgUrl=${bgUrl}`;
-    const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score?%0a%0aMy score: ${playerData?.score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer%0a%0a&url=${staticPageUrl}`;
+    const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score?%0a%0aMy score: ${playerData?.score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
-  }, [address, data, onTweet, playerData?.score, serviceUrl]);
+  }, [onTweet, playerData?.score]);
 
   return (
     <Widget>
@@ -145,7 +140,7 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet, serviceUrl }: Leaderbo
                     </StyledTypography>
                   </Stack>
                 </div>
-                <MysteryBlock />
+                <MysteryBlock url={staticBaseUrl.mysteryBox} />
               </Row>
               <Row columns={isMobile ? 'auto 128px' : 'auto 145px'}>
                 <GamePortalButton icon={<InsertLinkIcon />} onClick={handleOpenGamePortal}>

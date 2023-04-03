@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { Stack } from '../Stack';
+import { useConfigContext } from '../../hooks';
 
 const Item = styled.div({
   width: 311,
@@ -34,32 +35,34 @@ const StyledImage = styled.img({
   maxHeight: 64,
 });
 
-const benefits: { title: string; url: string }[] = [
-  {
-    title: 'Save your score',
-    url: 'https://assets.cms.freeport.dev.cere.network/star_cdb3ce1c3c.png',
-  },
-  {
-    title: 'See how you stack up against others',
-    url: 'https://assets.cms.freeport.dev.cere.network/place_a538d5c597.png',
-  },
-  {
-    title: 'Win cool prizes',
-    url: 'https://assets.cms.freeport.dev.cere.network/chest_860d09ca5a.png',
-  },
-];
-
-export const WalletBenefits = () => (
-  <Stack spacing={1}>
-    {benefits.map(({ title, url }) => {
-      return (
-        <Item key={title}>
-          <IconBlock>
-            <StyledImage src={url} alt={title} />
-          </IconBlock>
-          <span>{title}</span>
-        </Item>
-      );
-    })}
-  </Stack>
-);
+export const WalletBenefits = () => {
+  const { staticBaseUrl } = useConfigContext();
+  const benefits: { title: string; url: string }[] = [
+    {
+      title: 'Save your score',
+      url: staticBaseUrl.star,
+    },
+    {
+      title: 'See how you stack up against others',
+      url: staticBaseUrl.place,
+    },
+    {
+      title: 'Win cool prizes',
+      url: staticBaseUrl.chest,
+    },
+  ];
+  return (
+    <Stack spacing={1}>
+      {benefits.map(({ title, url }) => {
+        return (
+          <Item key={title}>
+            <IconBlock>
+              <StyledImage src={url} alt={title} />
+            </IconBlock>
+            <span>{title}</span>
+          </Item>
+        );
+      })}
+    </Stack>
+  );
+};

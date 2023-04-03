@@ -27,16 +27,14 @@ const Widget = styled(Stack)({
   },
 });
 
-const AnimationBlock = styled.div(({ showConfetti }: { showConfetti: boolean }) => ({
+const AnimationBlock = styled.div(({ showConfetti, url }: { showConfetti: boolean; url: string }) => ({
   display: showConfetti ? 'initial' : 'none',
   zIndex: 2,
   position: 'absolute',
   top: '-30%',
   width: '100%',
   height: '100%',
-  background: showConfetti
-    ? 'url(https://assets.cms.freeport.dev.cere.network/animation_640_lf88b7kr_aa5d097cd4.gif)'
-    : '',
+  background: showConfetti ? `url(${url})` : '',
   backgroundSize: 'contain',
   backgroundRepeat: 'no-repeat',
   '@media (max-width: 600px)': {
@@ -94,7 +92,7 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [showConfetti, setShow] = useState(true);
   const { isReady, connecting } = useWalletContext();
-  const { newWalletReward } = useConfigContext();
+  const { newWalletReward, staticBaseUrl } = useConfigContext();
   const [handleConnect, busy] = useAsyncCallback(onConnect);
 
   useEffect(() => {
@@ -110,10 +108,10 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="stretch">
-      <AnimationBlock showConfetti={showConfetti} />
+      <AnimationBlock url={staticBaseUrl.animation} showConfetti={showConfetti} />
       <Stack spacing={4}>
         <Stack style={{ position: 'relative', marginBottom: 28 }}>
-          <CrownImage src="https://assets.cms.freeport.dev.cere.network/crown_image_ceeef25fb4.png" />
+          <CrownImage src={staticBaseUrl.crown} />
           <Stack style={{ zIndex: 2 }}>
             <HeaderTitle>Congratulations!</HeaderTitle>
             <HeaderSubTitle>
