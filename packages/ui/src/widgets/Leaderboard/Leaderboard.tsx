@@ -8,6 +8,7 @@ import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } f
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
   onPlayAgain?: () => Promise<void> | void;
   onTweet?: () => Promise<void> | void;
+  serviceUrl: string;
 };
 
 const Widget = styled.div({
