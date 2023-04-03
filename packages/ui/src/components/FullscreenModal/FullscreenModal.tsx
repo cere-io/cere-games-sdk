@@ -67,12 +67,13 @@ export const FullscreenModal = ({
   const { staticBaseUrl } = useConfigContext();
 
   const { imagesPreloaded } = useImagePreloader([
-    `${staticBaseUrl}/animation_640_lf88b7kr_aa5d097cd4.gif`,
-    `${staticBaseUrl}/crown_image_ceeef25fb4.png`,
-    `${staticBaseUrl}/star_cdb3ce1c3c.png`,
-    `${staticBaseUrl}/place_a538d5c597.png`,
-    `${staticBaseUrl}/chest_860d09ca5a.png`,
-    `${staticBaseUrl}/Mystery_Box_1_b57b8c650d.png`,
+    staticBaseUrl.animation,
+    staticBaseUrl.crown,
+    staticBaseUrl.star,
+    staticBaseUrl.place,
+    staticBaseUrl.chest,
+    staticBaseUrl.mysteryBox,
+    staticBaseUrl.twitterBgUrl,
   ]);
 
   return (

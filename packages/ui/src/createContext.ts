@@ -10,7 +10,15 @@ export type ConfigContext = {
   sessionPrice: number;
   newWalletReward: number;
   gamePortalUrl: string;
-  staticBaseUrl: string;
+  staticBaseUrl: {
+    crown: string;
+    animation: string;
+    star: string;
+    place: string;
+    chest: string;
+    mysteryBox: string;
+    twitterBgUrl: string;
+  };
 };
 
 export type ReportingContext = {
@@ -38,7 +46,15 @@ const defaultState: ContextState = {
     sessionPrice: 0,
     newWalletReward: 0,
     gamePortalUrl: '',
-    staticBaseUrl: '',
+    staticBaseUrl: {
+      crown: '',
+      animation: '',
+      star: '',
+      place: '',
+      chest: '',
+      mysteryBox: '',
+      twitterBgUrl: '',
+    },
   },
 
   wallet: {

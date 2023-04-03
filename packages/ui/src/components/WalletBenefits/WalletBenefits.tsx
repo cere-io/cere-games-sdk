@@ -40,15 +40,15 @@ export const WalletBenefits = () => {
   const benefits: { title: string; url: string }[] = [
     {
       title: 'Save your score',
-      url: `${staticBaseUrl}/star_cdb3ce1c3c.png`,
+      url: staticBaseUrl.star,
     },
     {
       title: 'See how you stack up against others',
-      url: `${staticBaseUrl}/place_a538d5c597.png`,
+      url: staticBaseUrl.place,
     },
     {
       title: 'Win cool prizes',
-      url: `${staticBaseUrl}/chest_860d09ca5a.png`,
+      url: staticBaseUrl.chest,
     },
   ];
   return (

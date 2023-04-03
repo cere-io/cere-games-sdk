@@ -3,7 +3,7 @@ import * as UI from '@cere/games-sdk-ui';
 
 import {
   ANALYTICS_EVENTS,
-  ENV_CONFIGS,
+  STATIC_BASE_URL,
   GAME_PORTAL_URL,
   GAME_SERVICE_URL,
   GAME_SESSION_DEPOSIT_ADDRESS,
@@ -70,7 +70,7 @@ export class GamesSDK {
       newWalletReward: NEW_WALLET_REWARD,
       sessionPrice: GAME_SESSION_PRICE,
       gamePortalUrl: GAME_PORTAL_URL[this.env],
-      staticBaseUrl: ENV_CONFIGS[this.env],
+      staticBaseUrl: STATIC_BASE_URL[this.env],
     },
   });
 

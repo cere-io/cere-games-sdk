@@ -53,7 +53,7 @@ export const TableDataRow = ({ data, active, hasReward }: TableDataRowProps) => 
     if (!hasReward) {
       return null;
     }
-    return <Prize src={`${staticBaseUrl}/mystery_box_21d18c2011.png`} />;
+    return <Prize src={staticBaseUrl.mysteryBox} />;
   }, [hasReward, staticBaseUrl]);
   return (
     <Wrapper active={active}>

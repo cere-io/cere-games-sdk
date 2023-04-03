@@ -27,22 +27,20 @@ const Widget = styled(Stack)({
   },
 });
 
-const AnimationBlock = styled.div(
-  ({ showConfetti, staticBaseUrl }: { showConfetti: boolean; staticBaseUrl: string }) => ({
-    display: showConfetti ? 'initial' : 'none',
-    zIndex: 2,
-    position: 'absolute',
-    top: '-30%',
-    width: '100%',
-    height: '100%',
-    background: showConfetti ? `url(${staticBaseUrl}/animation_640_lf88b7kr_aa5d097cd4.gif)` : '',
-    backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat',
-    '@media (max-width: 600px)': {
-      top: '-10%',
-    },
-  }),
-);
+const AnimationBlock = styled.div(({ showConfetti, url }: { showConfetti: boolean; url: string }) => ({
+  display: showConfetti ? 'initial' : 'none',
+  zIndex: 2,
+  position: 'absolute',
+  top: '-30%',
+  width: '100%',
+  height: '100%',
+  background: showConfetti ? `url(${url})` : '',
+  backgroundSize: 'contain',
+  backgroundRepeat: 'no-repeat',
+  '@media (max-width: 600px)': {
+    top: '-10%',
+  },
+}));
 
 const CrownImage = styled.img({
   position: 'absolute',
@@ -110,10 +108,10 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="stretch">
-      <AnimationBlock staticBaseUrl={staticBaseUrl} showConfetti={showConfetti} />
+      <AnimationBlock url={staticBaseUrl.animation} showConfetti={showConfetti} />
       <Stack spacing={4}>
         <Stack style={{ position: 'relative', marginBottom: 28 }}>
-          <CrownImage src={`${staticBaseUrl}/crown_image_ceeef25fb4.png`} />
+          <CrownImage src={staticBaseUrl.crown} />
           <Stack style={{ zIndex: 2 }}>
             <HeaderTitle>Congratulations!</HeaderTitle>
             <HeaderSubTitle>

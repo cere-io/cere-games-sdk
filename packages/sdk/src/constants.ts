@@ -40,8 +40,32 @@ export const GAME_SERVICE_URL = {
   prod: 'https://prod-freeport-gaming.network.aws.cere.io',
 };
 
-export const ENV_CONFIGS = {
-  dev: 'https://assets.cms.freeport.dev.cere.network',
-  stage: 'https://assets.cms.freeport.stg.cere.network',
-  prod: 'https://assets.cms.freeport.cere.network',
+export const STATIC_BASE_URL = {
+  dev: {
+    crown: 'https://assets.cms.freeport.dev.cere.network/crown_image_ceeef25fb4.png',
+    animation: 'https://assets.cms.freeport.dev.cere.network/animation_640_lf88b7kr_aa5d097cd4.gif',
+    star: 'https://assets.cms.freeport.dev.cere.network/star_cdb3ce1c3c.png',
+    place: 'https://assets.cms.freeport.dev.cere.network/place_a538d5c597.png',
+    chest: 'https://assets.cms.freeport.dev.cere.network/chest_860d09ca5a.png',
+    mysteryBox: 'https://assets.cms.freeport.dev.cere.network/Mystery_Box_1_b57b8c650d.png',
+    twitterBgUrl: 'https://assets.cms.freeport.dev.cere.network/Share_twitter_6_bg_6f4253090d.png',
+  },
+  stage: {
+    crown: 'https://assets.cms.freeport.stg.cere.network/crown_image_7732ef35a7.png',
+    animation: 'https://assets.cms.freeport.stg.cere.network/animation_640_lf88b7kr_bcdbdea5eb.gif',
+    star: 'https://assets.cms.freeport.stg.cere.network/star_f5e42058e7.png',
+    place: 'https://assets.cms.freeport.stg.cere.network/place_113b2a4bc2.png',
+    chest: 'https://assets.cms.freeport.stg.cere.network/chest_55bda02818.png',
+    mysteryBox: 'https://assets.cms.freeport.stg.cere.network/Mystery_Box_1_219b034096.png',
+    twitterBgUrl: 'https://assets.cms.freeport.stg.cere.network/Share_twitter_6_bg_64f3f8d358.png',
+  },
+  prod: {
+    crown: 'https://assets.cms.freeport.cere.network/crown_image_da8ff13498.png',
+    animation: 'https://assets.cms.freeport.cere.network/animation_640_lf88b7kr_17efc8d01b.gif',
+    star: 'https://assets.cms.freeport.cere.network/star_1465e776c3.png',
+    place: 'https://assets.cms.freeport.cere.network/place_4df64adbdb.png',
+    chest: 'https://assets.cms.freeport.cere.network/chest_187ff5db3c.png',
+    mysteryBox: 'https://assets.cms.freeport.cere.network/Mystery_Box_1_8e30ff12f8.png',
+    twitterBgUrl: 'https://assets.cms.freeport.cere.network/Share_twitter_6_bg_21223da12d.png',
+  },
 };
