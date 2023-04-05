@@ -23,9 +23,9 @@ export const ANALYTICS_EVENTS = {
  * The address where $CERE tokens are sent before playing a game again
  */
 export const GAME_SESSION_DEPOSIT_ADDRESS = {
-  dev: '5Fk5XD3mJRTGhNPEbBhtEGkK4v2r9uWV81KastzXfbuvrknF',
-  stage: '5Fk5XD3mJRTGhNPEbBhtEGkK4v2r9uWV81KastzXfbuvrknF',
-  prod: '5HEiqUDMDguZV1KwLzh3zhoogLY9wC15PyEeQbzCCG1y8RvY',
+  dev: '0xeaAb99Bcf7d75Ba328ED5C2c96E4cAd3612b5656',
+  stage: '0xeaAb99Bcf7d75Ba328ED5C2c96E4cAd3612b5656',
+  prod: '0xd827efAcbf3dc6385a416F00A1c5797119471EEa',
 };
 
 export const GAME_PORTAL_URL = {
