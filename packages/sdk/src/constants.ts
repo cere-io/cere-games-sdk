@@ -1,12 +1,26 @@
 import pkg from '../package.json';
 
+type EnvType = 'dev' | 'stage' | 'prod';
+
+type StaticBaseUrlType = {
+  [key in EnvType]: {
+    crown: string;
+    animation: string;
+    star: string;
+    place: string;
+    chest: string;
+    mysteryBox: string;
+    twitterBgUrl: string;
+  };
+};
+
 export const SDK_VERSION = pkg.version;
 
 /**
  * Game session price in $CERE tokens
  */
 export const GAME_SESSION_PRICE = 2;
-export const NEW_WALLET_REWARD = 5;
+export const NEW_WALLET_REWARD = 6;
 
 export const GMT_ID = 'GTM-MSJX7Q6';
 export const ANALYTICS_EVENTS = {
@@ -40,7 +54,7 @@ export const GAME_SERVICE_URL = {
   prod: 'https://prod-freeport-gaming.network.aws.cere.io',
 };
 
-export const STATIC_BASE_URL = {
+export const STATIC_BASE_URL: StaticBaseUrlType = {
   dev: {
     crown: 'https://assets.cms.freeport.dev.cere.network/crown_image_ceeef25fb4.png',
     animation: 'https://assets.cms.freeport.dev.cere.network/animation_640_lf88b7kr_aa5d097cd4.gif',
