@@ -76,7 +76,7 @@ export class GamesApi {
 
     await this.post(endpoint, {
       txHash,
-      cereWalletId: cereAddress,
+      cereWalletId: ethAddress,
     });
   }
 }
