@@ -1,3 +1,9 @@
+export type SessionEvent<T = unknown> = {
+  eventType: 'SCORE_EARNED';
+  timestamp?: number;
+  payload: T;
+};
+
 type LeaderBoardRecord = {
   walletId: string;
   score: number;
@@ -77,6 +83,16 @@ export class GamesApi {
     await this.post(endpoint, {
       txHash,
       cereWalletId: ethAddress,
+    });
+  }
+
+  async saveSessionEvents(walletId: string, events: Required<SessionEvent>[]) {
+    const endpoint = this.createEndpoint('/session-store/save');
+
+    await this.post(endpoint, {
+      walletId,
+      events,
+      gameGuid: this.options.gameId,
     });
   }
 }
