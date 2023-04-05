@@ -12,7 +12,7 @@ import {
   NEW_WALLET_REWARD,
   SDK_VERSION,
 } from './constants';
-import { GamesApi, Session } from './api';
+import { GamesApi, Session, SessionEvent } from './api';
 import { Analytics } from './Analytics';
 import { Reporting, ReportingOptions } from './Reporting';
 
@@ -59,6 +59,7 @@ const balanceToFloat = (balance: BN, decimals: BN, precision: number) => {
 
 export class GamesSDK {
   private session?: Session;
+  private sessionEvents: Required<SessionEvent>[] = [];
 
   private readonly reporting = new Reporting({ env: this.env, ...this.options.reporting });
   private readonly analytics = new Analytics();
@@ -167,10 +168,25 @@ export class GamesSDK {
     await this.api.saveSessionTX(txHash, [ethAccount.address, cereAccount.address]);
   }
 
-  async startSession() {
+  private async startSession() {
     this.session = await this.api.startSession();
+    this.sessionEvents = [];
 
     return this.session;
+  }
+
+  private async saveSession() {
+    const [ethAccount] = await this.wallet.getAccounts();
+
+    try {
+      await this.api.saveSessionEvents(ethAccount.address, this.sessionEvents);
+    } catch (error) {
+      this.reporting.error(error);
+    }
+  }
+
+  private addSessionEvent(event: SessionEvent) {
+    this.sessionEvents.push({ timestamp: Date.now(), ...event });
   }
 
   showPreloader({ onStart }: ShowPreloaderOptions = {}) {
@@ -263,6 +279,13 @@ export class GamesSDK {
   }
 
   async saveScore(score: number) {
+    this.addSessionEvent({
+      eventType: 'SCORE_EARNED',
+      payload: {
+        value: score,
+      },
+    });
+
     const save = async () => {
       if (!this.session) {
         this.reporting.message(`Attempt to save score without sessionId`);
@@ -271,6 +294,8 @@ export class GamesSDK {
       }
 
       const [ethAddress] = await this.wallet.getAccounts();
+
+      await this.saveSession();
       await this.api.saveScore(ethAddress.address, score, this.session);
     };
 
