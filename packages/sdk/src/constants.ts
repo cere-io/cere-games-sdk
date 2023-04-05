@@ -36,10 +36,16 @@ export const ANALYTICS_EVENTS = {
 /**
  * The address where $CERE tokens are sent before playing a game again
  */
+// export const GAME_SESSION_DEPOSIT_ADDRESS = {
+//   dev: '0x7034f8346685a31C43508580cfa4A5e0a61bA7D9',
+//   stage: '0x7034f8346685a31C43508580cfa4A5e0a61bA7D9',
+//   prod: '0x64cA6DA624E56afA3C1Fa432371eCD9FCf4a83eb',
+// };
+
 export const GAME_SESSION_DEPOSIT_ADDRESS = {
-  dev: '0x7034f8346685a31C43508580cfa4A5e0a61bA7D9',
-  stage: '0x7034f8346685a31C43508580cfa4A5e0a61bA7D9',
-  prod: '0x64cA6DA624E56afA3C1Fa432371eCD9FCf4a83eb',
+  dev: '5Fk5XD3mJRTGhNPEbBhtEGkK4v2r9uWV81KastzXfbuvrknF',
+  stage: '5Fk5XD3mJRTGhNPEbBhtEGkK4v2r9uWV81KastzXfbuvrknF',
+  prod: '5HEiqUDMDguZV1KwLzh3zhoogLY9wC15PyEeQbzCCG1y8RvY',
 };
 
 export const GAME_PORTAL_URL = {
