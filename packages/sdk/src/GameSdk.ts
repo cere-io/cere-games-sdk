@@ -93,7 +93,7 @@ export class GamesSDK {
     });
 
     this.wallet.subscribe('balance-update', ({ balance, decimals, type, token }: WalletBalance) => {
-      if (type === 'native') {
+      if (type === 'erc20' && token === 'CERE') {
         this.ui.wallet.balance = balanceToFloat(balance, decimals, 2);
       }
     });
@@ -156,7 +156,7 @@ export class GamesSDK {
 
     const txHash = await this.wallet.transfer({
       token: 'CERE',
-      type: 'native',
+      type: 'erc20',
       to: GAME_SESSION_DEPOSIT_ADDRESS[this.env],
       amount: GAME_SESSION_PRICE,
     });
