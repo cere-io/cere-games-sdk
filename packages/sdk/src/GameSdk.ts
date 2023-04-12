@@ -30,6 +30,7 @@ type ShowPreloaderOptions = {
 
 type ShowConnectWalletOptions = {
   onConnect?: AsyncCallback;
+  onComplete?: AsyncCallback;
   score?: number;
 };
 
@@ -245,7 +246,7 @@ export class GamesSDK {
     return modal;
   }
 
-  async showConnectWallet({ onConnect, score }: ShowConnectWalletOptions = {}) {
+  async showConnectWallet({ onConnect, onComplete, score }: ShowConnectWalletOptions = {}) {
     const connectWallet = document.createElement('cere-connect-wallet');
     const { open, ...modal } = UI.createFullscreenModal(connectWallet, { hasClose: true });
 
@@ -267,6 +268,8 @@ export class GamesSDK {
           }
 
           modal.close();
+
+          await onComplete?.();
         } catch (error) {
           this.reporting.error(error);
         }
@@ -306,7 +309,8 @@ export class GamesSDK {
     await new Promise<void>((resolve) =>
       this.showConnectWallet({
         score,
-        onConnect: () => save().then(resolve),
+        onConnect: save,
+        onComplete: resolve,
       }),
     );
   }
