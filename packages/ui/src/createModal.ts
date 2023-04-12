@@ -1,6 +1,3 @@
-import { WidgetType } from './types';
-import { FullscreenModalProps } from './widgets';
-
 export type Modal = {
   readonly isOpen: boolean;
   open: () => void;
