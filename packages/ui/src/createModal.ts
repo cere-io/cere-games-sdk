@@ -63,13 +63,7 @@ export const createFullscreenModal = (
   options: FullScreenModalOptions = {},
 ): Modal => {
   const elementName = 'cere-fullscreen-modal';
-  const modalInstance = document.querySelector(elementName);
-  let modal: WidgetType<FullscreenModalProps>;
-  if (!!modalInstance) {
-    modal = modalInstance;
-  } else {
-    modal = document.createElement(elementName);
-  }
+  const modal = document.querySelector(elementName) || document.createElement(elementName);
 
   if (options.hasClose) {
     modal.update({
@@ -88,10 +82,12 @@ export const createFullscreenModal = (
     modal.update({ loading: true });
 
     Promise.resolve(contentElement()).then((element) => {
-      modal.replaceChildren(element);
+      modal.replaceChildren();
+      modal.appendChild(element);
       modal.update({ loading: false });
     });
   } else {
+    modal.replaceChildren();
     modal.appendChild(contentElement);
   }
 
@@ -100,7 +96,12 @@ export const createFullscreenModal = (
       return modal.isConnected;
     },
 
-    open: () => appendToBody(modal),
+    open: () => {
+      if (!modal.isConnected) {
+        appendToBody(modal);
+      }
+    },
+
     close: () => modal.remove(),
   };
 };
