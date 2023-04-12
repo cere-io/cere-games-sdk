@@ -88,8 +88,7 @@ export const createFullscreenModal = (
     modal.update({ loading: true });
 
     Promise.resolve(contentElement()).then((element) => {
-      modal.replaceChildren();
-      modal.appendChild(element);
+      modal.replaceChildren(element);
       modal.update({ loading: false });
     });
   } else {
