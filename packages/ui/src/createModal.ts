@@ -1,3 +1,6 @@
+import { WidgetType } from './types';
+import { FullscreenModalProps } from './widgets';
+
 export type Modal = {
   readonly isOpen: boolean;
   open: () => void;
@@ -59,7 +62,14 @@ export const createFullscreenModal = (
   contentElement: HTMLElement | (() => Promise<HTMLElement>),
   options: FullScreenModalOptions = {},
 ): Modal => {
-  const modal = document.createElement('cere-fullscreen-modal');
+  const elementName = 'cere-fullscreen-modal';
+  const modalInstance = document.querySelector(elementName);
+  let modal: WidgetType<FullscreenModalProps>;
+  if (!!modalInstance) {
+    modal = modalInstance;
+  } else {
+    modal = document.createElement(elementName);
+  }
 
   if (options.hasClose) {
     modal.update({
@@ -78,7 +88,7 @@ export const createFullscreenModal = (
     modal.update({ loading: true });
 
     Promise.resolve(contentElement()).then((element) => {
-      modal.appendChild(element);
+      modal.replaceChildren(element);
       modal.update({ loading: false });
     });
   } else {
