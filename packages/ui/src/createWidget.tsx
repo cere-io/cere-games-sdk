@@ -23,6 +23,11 @@ export const createWidget = <P extends {} = {}>(
     private root = createRoot(this.mountPoint);
     private stylesCache = createCache({ key: Component.name.toLowerCase(), container: this.mountPoint });
 
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' }).appendChild(this.mountPoint);
+    }
+
     get props() {
       return this.componentProps;
     }
@@ -34,8 +39,6 @@ export const createWidget = <P extends {} = {}>(
     }
 
     connectedCallback() {
-      this.attachShadow({ mode: 'open' }).appendChild(this.mountPoint);
-
       this.render();
     }
 
