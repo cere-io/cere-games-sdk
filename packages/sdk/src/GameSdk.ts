@@ -16,21 +16,21 @@ import { GamesApi, Session, SessionEvent } from './api';
 import { Analytics } from './Analytics';
 import { Reporting, ReportingOptions } from './Reporting';
 
-type AsyncCallback = () => Promise<void> | void;
+type AsyncResult<T = void> = Promise<T> | T;
 
 type ShowLeaderboardOptions = {
-  onPlayAgain?: AsyncCallback;
-  onBeforeLoad?: AsyncCallback;
-  onTweet?: AsyncCallback;
+  onPlayAgain?: () => AsyncResult;
+  onBeforeLoad?: () => AsyncResult;
+  onTweet?: () => AsyncResult;
 };
 
 type ShowPreloaderOptions = {
-  onStart?: AsyncCallback;
+  onStart?: () => AsyncResult;
 };
 
 type ShowConnectWalletOptions = {
-  onConnect?: AsyncCallback;
-  onComplete?: AsyncCallback;
+  onConnect?: (accounts: WalletAccount[], isNew: boolean) => AsyncResult;
+  onComplete?: () => AsyncResult;
   score?: number;
 };
 
@@ -255,10 +255,16 @@ export class GamesSDK {
       onConnect: async () => {
         try {
           await this.wallet.connect();
-          await onConnect?.();
 
-          const { email, isNewUser } = await this.wallet.getUserInfo();
+          const [{ email, isNewUser }, accounts] = await Promise.all([
+            this.wallet.getUserInfo(),
+            this.wallet.getAccounts(),
+          ]);
+
           this.ui.wallet.isNewUser = isNewUser;
+          this.ui.wallet.address = accounts[0].address; // Save eth account address to UI context
+
+          await onConnect?.(accounts, isNewUser);
 
           this.analytics.trackEvent(ANALYTICS_EVENTS.claimTokens, { userEmail: email });
           this.analytics.trackEvent(ANALYTICS_EVENTS.walletCompleted, { userEmail: email });
