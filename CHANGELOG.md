@@ -2,6 +2,7 @@
 
 ### vNext
 
+- Add publicKey in tweet
 - Moved static base URL in the ENV config
 - Update Cere Wallet SDK to add CERE ERC20 tokens support
 - Log and store session events
