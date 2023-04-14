@@ -76,6 +76,7 @@ export class GamesSDK {
     },
   });
 
+  private walletPromise?: Promise<EmbedWallet>; // TODO: Move `isReady` promise to the wallet itself
   readonly wallet = new EmbedWallet({
     env: this.env,
     appId: this.options.gameId,
@@ -135,8 +136,8 @@ export class GamesSDK {
     await UI.register(this.ui);
     const gameInfo = await this.getGameInfo(options.gameInfo);
 
-    this.initWallet(gameInfo);
     this.analytics.init({ gtmId: GMT_ID });
+    this.walletPromise = this.initWallet(gameInfo);
 
     this.options.onReady?.(this);
   }
@@ -150,6 +151,21 @@ export class GamesSDK {
         mode: 'modal',
       },
     });
+
+    if (this.wallet.status !== 'connected') {
+      return this.wallet;
+    }
+
+    const [ethAccount] = await this.wallet.getAccounts();
+
+    /**
+     * Save eth account address to UI context
+     *
+     * TODO: Fix `accounts-update` event speed on the Wallet side so we don't have to manually set addres here
+     */
+    this.ui.wallet.address = ethAccount?.address;
+
+    return this.wallet;
   }
 
   private async payForSession() {
@@ -262,7 +278,13 @@ export class GamesSDK {
           ]);
 
           this.ui.wallet.isNewUser = isNewUser;
-          this.ui.wallet.address = accounts[0].address; // Save eth account address to UI context
+
+          /**
+           * Save eth account address to UI context
+           *
+           * TODO: Fix `accounts-update` event speed on the Wallet side so we don't have to manually set addres here
+           */
+          this.ui.wallet.address = accounts[0].address;
 
           await onConnect?.(accounts, isNewUser);
 
@@ -307,6 +329,11 @@ export class GamesSDK {
       await this.saveSession();
       await this.api.saveScore(ethAddress.address, score, this.session);
     };
+
+    /**
+     * Wait for wallet to be fully intialized
+     */
+    await this.walletPromise;
 
     if (this.wallet.status === 'connected') {
       return save();
