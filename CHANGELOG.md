@@ -8,6 +8,7 @@
 - Log and store session events
 - Fix wallet token reward amount
 - Fix bug with two leaderboards
+- Fix an issue when Connect Wallet popup is shown instead of Leaderboard
 
 ### v0.1.2
 
