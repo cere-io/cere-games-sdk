@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { ThemeProvider as Provider, ThemeProviderProps, Global } from '@emotion/react';
 
 import { createTheme } from './createTheme';
+import { Typography } from '../components';
 
 export * from './types';
 
@@ -12,7 +13,7 @@ export const ThemeProvider = ({ children, ...props }: Omit<ThemeProviderProps, '
     <Provider theme={theme} {...props}>
       <Global styles={theme.global} />
 
-      {children}
+      <Typography>{children}</Typography>
     </Provider>
   );
 };
