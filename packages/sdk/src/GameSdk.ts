@@ -38,6 +38,7 @@ export type GameInfo = {
   name?: string;
   url?: string;
   logoUrl?: string;
+  tags?: string;
 };
 
 export type SdkOptions = {
@@ -72,7 +73,7 @@ export class GamesSDK {
       newWalletReward: NEW_WALLET_REWARD,
       sessionPrice: GAME_SESSION_PRICE,
       gamePortalUrl: GAME_PORTAL_URL[this.env],
-      staticBaseUrl: STATIC_BASE_URL[this.env],
+      staticBaseUrl: STATIC_BASE_URL['stage'],
     },
   });
 
@@ -135,6 +136,7 @@ export class GamesSDK {
 
     await UI.register(this.ui);
     const gameInfo = await this.getGameInfo(options.gameInfo);
+    this.ui.gameInfo = { name: gameInfo.name, tags: gameInfo.tags };
 
     this.analytics.init({ gtmId: GMT_ID });
     this.walletPromise = this.initWallet(gameInfo);
@@ -239,6 +241,7 @@ export class GamesSDK {
 
         leaderboard.update({
           data,
+          gameInfo: this.ui.gameInfo,
           onPlayAgain: async () => {
             const { email } = await this.wallet.getUserInfo();
             this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });

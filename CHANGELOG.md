@@ -9,6 +9,7 @@
 - Fix wallet token reward amount
 - Fix bug with two leaderboards
 - Fix an issue when Connect Wallet popup is shown instead of Leaderboard
+- Add tags for tweet to game configuration
 
 ### v0.1.2
 

@@ -30,6 +30,7 @@ export type ContextState = {
   reporting: ReportingContext;
   config: ConfigContext;
   wallet: WalletContext;
+  gameInfo: { name?: string; tags?: string };
 };
 
 export type Context = ContextState & {
@@ -60,6 +61,10 @@ const defaultState: ContextState = {
   wallet: {
     connecting: false,
     isReady: false,
+  },
+  gameInfo: {
+    name: '',
+    tags: '',
   },
 };
 
