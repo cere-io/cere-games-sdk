@@ -3,7 +3,7 @@ import { useCallback, useMemo } from 'react';
 
 import { Alert, Address, Button, Stack, Table, TableProps, Typography } from '../../components';
 import { RepeatIcon, InsertLinkIcon, TwitterIcon } from '../../icons';
-import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
+import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery, useWalletContext } from '../../hooks';
 
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
   onPlayAgain?: () => Promise<void> | void;
@@ -102,9 +102,11 @@ const StyledTypography = styled(Typography)({
 
 export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) => {
   const { sessionPrice, gamePortalUrl, staticBaseUrl } = useConfigContext();
+  const gameInfo = useGameInfo();
   const { address, balance = 0, isReady } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
   const isMobile = useMediaQuery('(max-width: 600px)');
+  const twitterTags = gameInfo?.tags && gameInfo?.tags.length > 0 ? gameInfo.tags.join(',') : '';
 
   const [handlePlayAgain, isBusy] = useAsyncCallback(onPlayAgain);
   const handleOpenGamePortal = useCallback(() => {
@@ -113,9 +115,9 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) =>
 
   const handleShareClick = useCallback(async () => {
     await onTweet?.();
-    const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score?%0a%0a${address}%0a%0aMy score: ${playerData?.score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer`;
+    const tweetBody = `text=Do you think you can beat my ${gameInfo.name} high-score?%0a%0a${address}%0a%0aMy score: ${playerData?.score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=${twitterTags}`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
-  }, [address, onTweet, playerData?.score]);
+  }, [address, gameInfo.name, onTweet, playerData?.score, twitterTags]);
 
   return (
     <Widget>

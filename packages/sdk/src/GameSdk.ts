@@ -38,6 +38,7 @@ export type GameInfo = {
   name?: string;
   url?: string;
   logoUrl?: string;
+  tags?: string[];
 };
 
 export type SdkOptions = {
@@ -135,6 +136,7 @@ export class GamesSDK {
 
     await UI.register(this.ui);
     const gameInfo = await this.getGameInfo(options.gameInfo);
+    this.ui.gameInfo = gameInfo;
 
     this.analytics.init({ gtmId: GMT_ID });
     this.walletPromise = this.initWallet(gameInfo);

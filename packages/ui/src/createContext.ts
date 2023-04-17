@@ -26,10 +26,18 @@ export type ReportingContext = {
   message: (message: string) => void;
 };
 
+export type GameInfoContext = {
+  name?: string;
+  url?: string;
+  logoUrl?: string;
+  tags?: string[];
+};
+
 export type ContextState = {
   reporting: ReportingContext;
   config: ConfigContext;
   wallet: WalletContext;
+  gameInfo: GameInfoContext;
 };
 
 export type Context = ContextState & {
@@ -60,6 +68,10 @@ const defaultState: ContextState = {
   wallet: {
     connecting: false,
     isReady: false,
+  },
+  gameInfo: {
+    name: '',
+    tags: [''],
   },
 };
 
