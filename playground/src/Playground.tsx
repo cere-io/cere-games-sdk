@@ -11,6 +11,10 @@ export const Playground = () => {
       new GamesSDK({
         env: 'dev',
         gameId: 'metaverse-dash-run',
+        gameInfo: {
+          name: 'Metaverse Dash Run',
+          tags: ['metaversadash', 'web3', 'gamer'],
+        },
         onReady: () => setReady(true),
         onWalletDisconnect: () => {
           window.location.reload();

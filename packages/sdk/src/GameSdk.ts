@@ -38,7 +38,7 @@ export type GameInfo = {
   name?: string;
   url?: string;
   logoUrl?: string;
-  tags?: string;
+  tags?: string[];
 };
 
 export type SdkOptions = {
@@ -136,7 +136,7 @@ export class GamesSDK {
 
     await UI.register(this.ui);
     const gameInfo = await this.getGameInfo(options.gameInfo);
-    this.ui.gameInfo = { name: gameInfo.name, tags: gameInfo.tags };
+    this.ui.gameInfo = gameInfo;
 
     this.analytics.init({ gtmId: GMT_ID });
     this.walletPromise = this.initWallet(gameInfo);
@@ -241,7 +241,6 @@ export class GamesSDK {
 
         leaderboard.update({
           data,
-          gameInfo: this.ui.gameInfo,
           onPlayAgain: async () => {
             const { email } = await this.wallet.getUserInfo();
             this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });

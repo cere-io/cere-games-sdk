@@ -3,16 +3,12 @@ import { useCallback, useMemo } from 'react';
 
 import { Alert, Address, Button, Stack, Table, TableProps, Typography } from '../../components';
 import { RepeatIcon, InsertLinkIcon, TwitterIcon } from '../../icons';
-import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
+import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery, useWalletContext } from '../../hooks';
 
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
   onPlayAgain?: () => Promise<void> | void;
   onTweet?: () => Promise<void> | void;
   serviceUrl: string;
-  gameInfo: {
-    name?: string;
-    tags?: string;
-  };
 };
 
 const Widget = styled.div({
@@ -104,11 +100,13 @@ const StyledTypography = styled(Typography)({
   letterSpacing: '0.01em',
 });
 
-export const Leaderboard = ({ data, onPlayAgain, onTweet, gameInfo }: LeaderboardProps) => {
+export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) => {
   const { sessionPrice, gamePortalUrl, staticBaseUrl } = useConfigContext();
+  const gameInfo = useGameInfo();
   const { address, balance = 0, isReady } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
   const isMobile = useMediaQuery('(max-width: 600px)');
+  const twitterTags = gameInfo?.tags && gameInfo?.tags.length > 0 ? gameInfo.tags.join(',') : '';
 
   const [handlePlayAgain, isBusy] = useAsyncCallback(onPlayAgain);
   const handleOpenGamePortal = useCallback(() => {
@@ -117,9 +115,9 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet, gameInfo }: Leaderboar
 
   const handleShareClick = useCallback(async () => {
     await onTweet?.();
-    const tweetBody = `text=Do you think you can beat my ${gameInfo.name} high-score?%0a%0a${address}%0a%0aMy score: ${playerData?.score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=${gameInfo.tags}`;
+    const tweetBody = `text=Do you think you can beat my ${gameInfo.name} high-score?%0a%0a${address}%0a%0aMy score: ${playerData?.score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=${twitterTags}`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
-  }, [address, gameInfo.name, gameInfo.tags, onTweet, playerData?.score]);
+  }, [address, gameInfo.name, onTweet, playerData?.score, twitterTags]);
 
   return (
     <Widget>
