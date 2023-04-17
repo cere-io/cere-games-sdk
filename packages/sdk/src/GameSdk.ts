@@ -73,7 +73,7 @@ export class GamesSDK {
       newWalletReward: NEW_WALLET_REWARD,
       sessionPrice: GAME_SESSION_PRICE,
       gamePortalUrl: GAME_PORTAL_URL[this.env],
-      staticBaseUrl: STATIC_BASE_URL['stage'],
+      staticBaseUrl: STATIC_BASE_URL[this.env],
     },
   });
 
