@@ -92,7 +92,7 @@ export class GamesApi {
     await this.post(endpoint, {
       walletId,
       events,
-      gameGuid: this.options.gameId,
+      gameCode: this.options.gameId,
     });
   }
 }
