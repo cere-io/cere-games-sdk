@@ -12,12 +12,12 @@ export type TableProps = {
 };
 
 const Container = styled.div({
-  maxHeight: '600px',
+  maxHeight: '412px',
   overflowY: 'auto',
 });
 
 const ScrollToTop = styled(Button)({
-  position: 'fixed',
+  position: 'sticky',
   display: 'grid',
   gridTemplateColumns: '16px auto',
   gridColumnGap: '5px',
@@ -44,14 +44,13 @@ export const Table = ({ data, activeAddress }: TableProps) => {
   const activeRow = useMemo(() => data.find((row) => row.address === activeAddress), [data, activeAddress]);
   const rows = useMemo(() => data.filter((row) => row !== activeRow), [activeRow, data]);
 
-  const firsElRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const toggleVisible = useCallback(() => {
     if (!containerRef.current) {
       return;
     }
-    if (containerRef.current.scrollTop > 250) {
+    if (containerRef.current.scrollTop > 150) {
       setShow(true);
     } else {
       setShow(false);
@@ -67,22 +66,15 @@ export const Table = ({ data, activeAddress }: TableProps) => {
   }, [toggleVisible]);
 
   const handleClick = () => {
-    if (!firsElRef.current) {
+    if (!containerRef.current) {
       return;
     }
-    firsElRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
+    containerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
   };
   return (
     <Container ref={containerRef}>
       <TableHeader columns={['Rank', 'Player', 'Prize', 'Score']} />
-      {activeRow && (
-        <div ref={firsElRef}>
-          <TableDataRow hasReward={true} active data={activeRow} />
-        </div>
-      )}
+      {activeRow && <TableDataRow hasReward={true} active data={activeRow} />}
       {rows.map((row, idx) => (
         <TableDataRow key={row.address} data={row} hasReward={idx <= 19} />
       ))}
