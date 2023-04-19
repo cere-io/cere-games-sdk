@@ -77,7 +77,6 @@ export class GamesSDK {
     },
   });
 
-  private walletPromise?: Promise<EmbedWallet>; // TODO: Move `isReady` promise to the wallet itself
   readonly wallet = new EmbedWallet({
     env: this.env,
     appId: this.options.gameId,
@@ -139,7 +138,7 @@ export class GamesSDK {
     this.ui.gameInfo = gameInfo;
 
     this.analytics.init({ gtmId: GMT_ID });
-    this.walletPromise = this.initWallet(gameInfo);
+    this.initWallet(gameInfo);
 
     this.options.onReady?.(this);
   }
@@ -153,19 +152,6 @@ export class GamesSDK {
         mode: 'modal',
       },
     });
-
-    if (this.wallet.status !== 'connected') {
-      return this.wallet;
-    }
-
-    const [ethAccount] = await this.wallet.getAccounts();
-
-    /**
-     * Save eth account address to UI context
-     *
-     * TODO: Fix `accounts-update` event speed on the Wallet side so we don't have to manually set addres here
-     */
-    this.ui.wallet.address = ethAccount?.address;
 
     return this.wallet;
   }
@@ -281,13 +267,6 @@ export class GamesSDK {
 
           this.ui.wallet.isNewUser = isNewUser;
 
-          /**
-           * Save eth account address to UI context
-           *
-           * TODO: Fix `accounts-update` event speed on the Wallet side so we don't have to manually set addres here
-           */
-          this.ui.wallet.address = accounts[0].address;
-
           await onConnect?.(accounts, isNewUser);
 
           this.analytics.trackEvent(ANALYTICS_EVENTS.claimTokens, { userEmail: email });
@@ -320,13 +299,13 @@ export class GamesSDK {
     });
 
     const save = async () => {
+      const [ethAddress] = await this.wallet.getAccounts();
+
       if (!this.session) {
         this.reporting.message(`Attempt to save score without sessionId`);
 
         return;
       }
-
-      const [ethAddress] = await this.wallet.getAccounts();
 
       await this.saveSession();
       await this.api.saveScore(ethAddress.address, score, this.session);
@@ -335,7 +314,7 @@ export class GamesSDK {
     /**
      * Wait for wallet to be fully intialized
      */
-    await this.walletPromise;
+    await this.wallet.isReady;
 
     if (this.wallet.status === 'connected') {
       return save();
