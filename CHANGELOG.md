@@ -1,6 +1,6 @@
 ## Release Notes:
 
-### vNext
+### v0.2.0
 
 - Add publicKey in tweet
 - Moved static base URL in the ENV config
