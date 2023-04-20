@@ -36,8 +36,18 @@ import { GamesSdk } from '@cere/games-sdk';
 const gamesSdk = new GamesSdk({
   env: 'dev',
   gameId: 'tower-game',
+  gameInfo: {
+    name: 'Tower Game',
+    tags: ['towergame', 'web3', 'gamer'],
+    url: window.location.href,
+    logoUrl: 'http://...',
+  },
   onReady: () => {
     console.log('The SDK is ready!');
+  },
+
+  onWalletDisconnect: () => {
+    console.log('The Wallet has been disconnected');
   },
 });
 ```
@@ -50,7 +60,13 @@ const gamesSdk = new GamesSdk({
   - `stage` - loads all its dependencies from the stage environment
   - `prod` - loads all its dependencies from the production environment
 - `gameId` - unique game identifier
+- `gameInfo` - additional information about the game
+  - `name` - name of the game
+  - `tags` - list of tags
+  - `url` - public game URL
+  - `logoUrl` - URL to the game's logo image
 - `onReady` - a callback called when the `SDK` is initialized and ready for interactions
+- `onWalletDisconnect` - a callback called when the Wallet is disconnected by player
 
 ### wallet
 
@@ -156,6 +172,7 @@ This method shows `Connect Wallet` modal which covers entire screen. The modal a
 
 ```ts
 const modal = gamesSdk.showConnectWallet({
+  score: 20,
   onConnect: () => {
     // The wallet is connected
   },
@@ -164,7 +181,9 @@ const modal = gamesSdk.showConnectWallet({
 
 #### Parameters
 
+- `score` - current player score to be shown on Wallet Connect UI
 - `onConnect` - a callback which is called when player connects their wallet
+- `onComplete` - a callback which is called wallet connect is completed and the modal is closed
 
 The method returns a modal instance with the following type:
 
