@@ -74,7 +74,7 @@ export const Table = ({ data, activeAddress }: TableProps) => {
   return (
     <Container ref={containerRef}>
       <TableHeader columns={['Rank', 'Player', 'Prize', 'Score']} />
-      {activeRow && <TableDataRow hasReward={true} active data={activeRow} />}
+      {activeRow && <TableDataRow hasReward={activeRow.rank <= 19} active data={activeRow} />}
       {rows.map((row, idx) => (
         <TableDataRow key={row.address} data={row} hasReward={idx <= 19} />
       ))}
