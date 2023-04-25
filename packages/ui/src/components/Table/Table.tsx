@@ -6,6 +6,8 @@ import { TableHeader } from './TableHeader';
 import { Button } from '../Button';
 import { ArrowTopIcon } from '../../icons';
 
+const MAX_RANK_WITH_GIFT = 20;
+
 export type TableProps = {
   activeAddress?: string;
   data: TableDataRowProps['data'][];
@@ -74,9 +76,9 @@ export const Table = ({ data, activeAddress }: TableProps) => {
   return (
     <Container ref={containerRef}>
       <TableHeader columns={['Rank', 'Player', 'Prize', 'Score']} />
-      {activeRow && <TableDataRow hasReward={activeRow.rank <= 19} active data={activeRow} />}
-      {rows.map((row, idx) => (
-        <TableDataRow key={row.address} data={row} hasReward={idx <= 19} />
+      {activeRow && <TableDataRow hasReward={activeRow.rank <= MAX_RANK_WITH_GIFT} active data={activeRow} />}
+      {rows.map((row) => (
+        <TableDataRow key={row.address} data={row} hasReward={row.rank <= MAX_RANK_WITH_GIFT} />
       ))}
       {showScrollToTop && (
         <ScrollToTop icon={<ArrowTopIcon />} onClick={handleClick}>

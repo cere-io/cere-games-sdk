@@ -1,5 +1,8 @@
 ## Release Notes:
 
+### vNext
+- Fix bug with rank
+
 ### v0.2.0
 
 - Add publicKey in tweet
