@@ -1,7 +1,7 @@
 ## Release Notes:
 
 ### vNext
-- Fix bug with rank
+- [[Bug]](https://www.notion.so/cere/If-a-player-took-20th-place-or-higher-then-21st-place-has-a-gift-icon-5bb7e12a9e4544a29f21bc607b3df324?pvs=4) Fix bug with rank
 
 ### v0.2.0
 
