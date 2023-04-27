@@ -5,3 +5,4 @@ export * from './useConfigContext';
 export * from './useReporting';
 export * from './useAsyncCallback';
 export * from './useGameInfo';
+export * from './useDomEvents';

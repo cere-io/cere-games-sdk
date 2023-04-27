@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { GamesSDK } from '@cere/games-sdk';
 
 import { Layout, AsyncButton } from './components';
@@ -22,6 +22,17 @@ export const Playground = () => {
       }),
     [],
   );
+
+  useEffect(() => {
+    const logEvent = (event: Event) => console.log('Host window event: ', event.type, event);
+
+    window.addEventListener('focus', logEvent);
+    window.addEventListener('blur', logEvent);
+    window.addEventListener('focusout', logEvent);
+    window.addEventListener('pageHide', logEvent);
+    window.addEventListener('pause', logEvent);
+    window.addEventListener('focusin', logEvent);
+  }, []);
 
   const handleShowPreloader = useCallback(async () => {
     const preloader = sdk.showPreloader({
