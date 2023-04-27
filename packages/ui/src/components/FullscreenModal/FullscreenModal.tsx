@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import { Spinner, Stack } from '../index';
 import { CloseIcon } from '../../icons';
 import { FullScreenBackDrop } from '../FullScreenBackDrop';
-import { useConfigContext, useImagePreloader } from '../../hooks';
 
 export type FullscreenModalProps = PropsWithChildren<{
   hasClose?: boolean;
@@ -64,21 +63,9 @@ export const FullscreenModal = ({
   loading = false,
   isLeaderBoard,
 }: FullscreenModalProps) => {
-  const { staticBaseUrl } = useConfigContext();
-
-  const { imagesPreloaded } = useImagePreloader([
-    staticBaseUrl.animation,
-    staticBaseUrl.crown,
-    staticBaseUrl.star,
-    staticBaseUrl.place,
-    staticBaseUrl.chest,
-    staticBaseUrl.mysteryBox,
-    staticBaseUrl.twitterBgUrl,
-  ]);
-
   return (
     <FullScreenBackDrop>
-      {loading || !imagesPreloaded ? (
+      {loading ? (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 'inherit' }}>
           <Spinner size={40} />
         </div>

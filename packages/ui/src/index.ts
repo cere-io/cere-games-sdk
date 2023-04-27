@@ -3,9 +3,11 @@ import { createWidget } from './createWidget';
 import { registerWidget } from './registerWidget';
 import { injectFonts } from './injectFonts';
 import { Leaderboard, Preloader, Modal, ConnectWallet, FullscreenModal } from './widgets';
+import { preloadAssets } from './preloadAssets';
 
 export const register = async (context: Context) => {
   injectFonts();
+  preloadAssets(context);
 
   registerWidget('cere-preloader', createWidget(Preloader, context));
   registerWidget('cere-leaderboard', createWidget(Leaderboard, context));

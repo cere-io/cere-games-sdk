@@ -1,7 +1,9 @@
 ## Release Notes:
 
 ### vNext
+
 - [[Bug]](https://www.notion.so/cere/If-a-player-took-20th-place-or-higher-then-21st-place-has-a-gift-icon-5bb7e12a9e4544a29f21bc607b3df324?pvs=4) Fix bug with rank
+- [[Bug]](https://www.notion.so/cere/Confetti-animation-on-Congratulations-screen-does-not-always-work-the-first-time-f88c1b30b9074077b70bd400f6e46a96?pvs=4) Preload static assets in advance to fix missing confetti animation
 
 ### v0.2.0
 
