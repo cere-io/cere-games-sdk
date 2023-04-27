@@ -1,3 +1,5 @@
+import { DomEventsProxy, createDomEventsProxy } from './createDomEventsProxy';
+
 export type WalletContext = {
   isReady: boolean;
   connecting: boolean;
@@ -35,6 +37,7 @@ export type GameInfoContext = {
 };
 
 export type ContextState = {
+  domEvents: DomEventsProxy;
   reporting: ReportingContext;
   config: ConfigContext;
   wallet: WalletContext;
@@ -46,6 +49,7 @@ export type Context = ContextState & {
 };
 
 const defaultState: ContextState = {
+  domEvents: createDomEventsProxy(),
   reporting: {
     error: console.error,
     message: console.log,

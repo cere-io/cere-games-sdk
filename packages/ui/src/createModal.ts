@@ -96,6 +96,8 @@ export const createFullscreenModal = (
     open: () => {
       if (!modal.isConnected) {
         appendToBody(modal);
+
+        modal.focus();
       }
     },
 

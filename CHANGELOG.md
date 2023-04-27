@@ -6,6 +6,7 @@
 - [[Bug]](https://www.notion.so/cere/A-rewarding-pop-up-appears-on-the-top-and-moves-the-layout-11a377734b264549aa70b75bab664333?pvs=4) Fix reward notification position on mobile
 - [[Bug]](https://www.notion.so/cere/Confetti-animation-on-Congratulations-screen-does-not-always-work-the-first-time-f88c1b30b9074077b70bd400f6e46a96?pvs=4) Preload static assets in advance to fix missing confetti animation
 - [[Bug]](https://www.notion.so/cere/After-interacting-with-Wallet-button-the-control-arrows-become-inactive-b4f58387f306481ead213af8cc7af364?pvs=4) Restore focus on game window after closing the wallet widget to fix keyboard interaction issue
+- [[Bug]](https://www.notion.so/cere/By-clicking-on-Top-button-on-Leaderboard-user-can-paused-and-resumed-the-game-6c11c983f6bd47d98b7c8d476df26167?pvs=4) Suspend all window events when Games SDK modal is visible
 
 ### v0.2.0
 
