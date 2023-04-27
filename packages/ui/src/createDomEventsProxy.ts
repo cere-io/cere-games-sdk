@@ -17,7 +17,7 @@ export const createDomEventsProxy = (): DomEventsProxy => {
       return;
     }
 
-    console.log('Stop host event:', event.type, event);
+    console.info('Cere Games SDK: Stop host event:', event.type, event);
 
     event.stopImmediatePropagation();
   };
@@ -27,10 +27,14 @@ export const createDomEventsProxy = (): DomEventsProxy => {
 
   return {
     suspend: () => {
+      console.info('Cere Games SDK: Suspend host events');
+
       shouldStopEvents = true;
     },
 
     resume: () => {
+      console.info('Cere Games SDK: Resume host events');
+
       shouldStopEvents = false;
     },
   };

@@ -42,6 +42,10 @@ export const createWidget = <P extends {} = {}>(
       this.render();
     }
 
+    disconnectedCallback() {
+      this.root.unmount();
+    }
+
     private render() {
       if (!this.isConnected) {
         return this;
