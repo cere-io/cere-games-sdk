@@ -60,32 +60,40 @@ export const GAME_SERVICE_URL = {
   prod: 'https://prod-freeport-gaming.network.aws.cere.io',
 };
 
-export const STATIC_BASE_URL: StaticBaseUrlType = {
+export const STATIC_BASE_URL = {
+  dev: 'https://assets.cms.freeport.dev.cere.network',
+  stage: 'https://assets.cms.freeport.stg.cere.network',
+  prod: 'https://assets.cms.freeport.cere.network',
+};
+
+export const STATIC_ASSETS: StaticBaseUrlType = {
   dev: {
-    crown: 'https://assets.cms.freeport.dev.cere.network/crown_image_ceeef25fb4.png',
-    animation: 'https://assets.cms.freeport.dev.cere.network/animation_640_lf88b7kr_aa5d097cd4.gif',
-    star: 'https://assets.cms.freeport.dev.cere.network/star_cdb3ce1c3c.png',
-    place: 'https://assets.cms.freeport.dev.cere.network/place_a538d5c597.png',
-    chest: 'https://assets.cms.freeport.dev.cere.network/chest_860d09ca5a.png',
-    mysteryBox: 'https://assets.cms.freeport.dev.cere.network/Mystery_Box_1_b57b8c650d.png',
-    twitterBgUrl: 'https://assets.cms.freeport.dev.cere.network/Share_twitter_6_bg_6f4253090d.png',
+    crown: `${STATIC_BASE_URL.dev}/crown_image_ceeef25fb4.png`,
+    animation: `${STATIC_BASE_URL.dev}/animation_640_lf88b7kr_aa5d097cd4.gif`,
+    star: `${STATIC_BASE_URL.dev}/star_cdb3ce1c3c.png`,
+    place: `${STATIC_BASE_URL.dev}/place_a538d5c597.png`,
+    chest: `${STATIC_BASE_URL.dev}/chest_860d09ca5a.png`,
+    mysteryBox: `${STATIC_BASE_URL.dev}/Mystery_Box_1_b57b8c650d.png`,
+    twitterBgUrl: `${STATIC_BASE_URL.dev}/Share_twitter_6_bg_6f4253090d.png`,
   },
+
   stage: {
-    crown: 'https://assets.cms.freeport.stg.cere.network/crown_image_7732ef35a7.png',
-    animation: 'https://assets.cms.freeport.stg.cere.network/animation_640_lf88b7kr_bcdbdea5eb.gif',
-    star: 'https://assets.cms.freeport.stg.cere.network/star_f5e42058e7.png',
-    place: 'https://assets.cms.freeport.stg.cere.network/place_113b2a4bc2.png',
-    chest: 'https://assets.cms.freeport.stg.cere.network/chest_55bda02818.png',
-    mysteryBox: 'https://assets.cms.freeport.stg.cere.network/Mystery_Box_1_219b034096.png',
-    twitterBgUrl: 'https://assets.cms.freeport.stg.cere.network/Share_twitter_6_bg_64f3f8d358.png',
+    crown: `${STATIC_BASE_URL.stage}/crown_image_7732ef35a7.png`,
+    animation: `${STATIC_BASE_URL.stage}/animation_640_lf88b7kr_bcdbdea5eb.gif`,
+    star: `${STATIC_BASE_URL.stage}/star_f5e42058e7.png`,
+    place: `${STATIC_BASE_URL.stage}/place_113b2a4bc2.png`,
+    chest: `${STATIC_BASE_URL.stage}/chest_55bda02818.png`,
+    mysteryBox: `${STATIC_BASE_URL.stage}/Mystery_Box_1_219b034096.png`,
+    twitterBgUrl: `${STATIC_BASE_URL.stage}/Share_twitter_6_bg_64f3f8d358.png`,
   },
+
   prod: {
-    crown: 'https://assets.cms.freeport.cere.network/crown_image_da8ff13498.png',
-    animation: 'https://assets.cms.freeport.cere.network/animation_640_lf88b7kr_17efc8d01b.gif',
-    star: 'https://assets.cms.freeport.cere.network/star_1465e776c3.png',
-    place: 'https://assets.cms.freeport.cere.network/place_4df64adbdb.png',
-    chest: 'https://assets.cms.freeport.cere.network/chest_187ff5db3c.png',
-    mysteryBox: 'https://assets.cms.freeport.cere.network/Mystery_Box_1_8e30ff12f8.png',
-    twitterBgUrl: 'https://assets.cms.freeport.cere.network/Share_twitter_6_bg_21223da12d.png',
+    crown: `${STATIC_BASE_URL.prod}/crown_image_da8ff13498.png`,
+    animation: `${STATIC_BASE_URL.prod}/animation_640_lf88b7kr_17efc8d01b.gif`,
+    star: `${STATIC_BASE_URL.prod}/star_1465e776c3.png`,
+    place: `${STATIC_BASE_URL.prod}/place_4df64adbdb.png`,
+    chest: `${STATIC_BASE_URL.prod}/chest_187ff5db3c.png`,
+    mysteryBox: `${STATIC_BASE_URL.prod}/Mystery_Box_1_8e30ff12f8.png`,
+    twitterBgUrl: `${STATIC_BASE_URL.prod}/Share_twitter_6_bg_21223da12d.png`,
   },
 };
