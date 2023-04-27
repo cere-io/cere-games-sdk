@@ -22,8 +22,8 @@ const Container = styled.div({
   '& > span': {
     fontSize: 32,
   },
+
   '@media (max-width: 600px)': {
-    position: 'relative',
     top: 0,
     right: 0,
     width: '100%',
