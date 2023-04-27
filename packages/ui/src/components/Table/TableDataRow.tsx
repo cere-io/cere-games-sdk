@@ -47,14 +47,15 @@ const Prize = styled.img({
 const rankColors: RankProps['rankColor'][] = ['gold', 'silver', 'bronze'];
 
 export const TableDataRow = ({ data, active, hasReward }: TableDataRowProps) => {
-  const { staticBaseUrl } = useConfigContext();
+  const { staticAssets } = useConfigContext();
 
   const rewardTsx = useMemo(() => {
     if (!hasReward) {
       return null;
     }
-    return <Prize src={staticBaseUrl.mysteryBox} />;
-  }, [hasReward, staticBaseUrl]);
+    return <Prize src={staticAssets.mysteryBox} />;
+  }, [hasReward, staticAssets]);
+
   return (
     <Wrapper active={active}>
       <TableRow

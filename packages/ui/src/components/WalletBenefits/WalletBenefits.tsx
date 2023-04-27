@@ -36,19 +36,19 @@ const StyledImage = styled.img({
 });
 
 export const WalletBenefits = () => {
-  const { staticBaseUrl } = useConfigContext();
+  const { staticAssets } = useConfigContext();
   const benefits: { title: string; url: string }[] = [
     {
       title: 'Save your score',
-      url: staticBaseUrl.star,
+      url: staticAssets.star,
     },
     {
       title: 'See how you stack up against others',
-      url: staticBaseUrl.place,
+      url: staticAssets.place,
     },
     {
       title: 'Win cool prizes',
-      url: staticBaseUrl.chest,
+      url: staticAssets.chest,
     },
   ];
   return (

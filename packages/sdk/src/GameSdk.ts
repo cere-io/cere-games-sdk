@@ -11,6 +11,7 @@ import {
   GMT_ID,
   NEW_WALLET_REWARD,
   SDK_VERSION,
+  STATIC_ASSETS,
 } from './constants';
 import { GamesApi, Session, SessionEvent } from './api';
 import { Analytics } from './Analytics';
@@ -74,6 +75,7 @@ export class GamesSDK {
       sessionPrice: GAME_SESSION_PRICE,
       gamePortalUrl: GAME_PORTAL_URL[this.env],
       staticBaseUrl: STATIC_BASE_URL[this.env],
+      staticAssets: STATIC_ASSETS[this.env],
     },
   });
 

@@ -92,7 +92,7 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [showConfetti, setShow] = useState(true);
   const { isReady, connecting } = useWalletContext();
-  const { newWalletReward, staticBaseUrl } = useConfigContext();
+  const { newWalletReward, staticAssets } = useConfigContext();
   const [handleConnect, busy] = useAsyncCallback(onConnect);
 
   useEffect(() => {
@@ -108,10 +108,10 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="stretch">
-      <AnimationBlock url={staticBaseUrl.animation} showConfetti={showConfetti} />
+      <AnimationBlock url={staticAssets.animation} showConfetti={showConfetti} />
       <Stack spacing={4}>
         <Stack style={{ position: 'relative', marginBottom: 28 }}>
-          <CrownImage src={staticBaseUrl.crown} />
+          <CrownImage src={staticAssets.crown} />
           <Stack style={{ zIndex: 2 }}>
             <HeaderTitle>Congratulations!</HeaderTitle>
             <HeaderSubTitle>

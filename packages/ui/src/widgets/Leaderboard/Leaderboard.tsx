@@ -101,7 +101,7 @@ const StyledTypography = styled(Typography)({
 });
 
 export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) => {
-  const { sessionPrice, gamePortalUrl, staticBaseUrl } = useConfigContext();
+  const { sessionPrice, gamePortalUrl, staticAssets } = useConfigContext();
   const gameInfo = useGameInfo();
   const { address, balance = 0, isReady } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
@@ -142,7 +142,7 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) =>
                     </StyledTypography>
                   </Stack>
                 </div>
-                <MysteryBlock url={staticBaseUrl.mysteryBox} />
+                <MysteryBlock url={staticAssets.mysteryBox} />
               </Row>
               <Row columns={isMobile ? 'auto 128px' : 'auto 145px'}>
                 <GamePortalButton icon={<InsertLinkIcon />} onClick={handleOpenGamePortal}>
