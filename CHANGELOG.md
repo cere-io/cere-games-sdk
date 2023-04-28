@@ -1,5 +1,9 @@
 ## Release Notes:
 
+### vNext
+
+- Add the SDK integration run-able examples (`/examples`)
+
 ### v0.3.0
 
 - [[Bug]](https://www.notion.so/cere/If-a-player-took-20th-place-or-higher-then-21st-place-has-a-gift-icon-5bb7e12a9e4544a29f21bc607b3df324?pvs=4) Fix bug with rank
