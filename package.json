@@ -3,12 +3,17 @@
   "version": "0.3.0",
   "private": true,
   "devDependencies": {
+    "concurrently": "^8.0.1",
     "eslint": "^8.34.0",
     "prettier": "^2.8.4",
+    "serve": "^14.2.0",
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "start": "npm start --workspace=@cere-games-sdk/playground",
+    "start": "concurrently npm:serve:games npm:serve:sdk",
+    "playground": "npm start --workspace=@cere-games-sdk/playground",
+    "serve:games": "serve ./games -p 8888",
+    "serve:sdk": "npm run serve -w @cere/games-sdk -- --port 8889",
     "build": "npm run build --workspace=@cere/games-sdk-ui --workspace=@cere/games-sdk",
     "lint": "eslint --quiet '**/*.{ts,tsx,js,jsx}'",
     "sdk:publish": "npm publish --workspace=@cere/games-sdk-ui --workspace=@cere/games-sdk --access public"
