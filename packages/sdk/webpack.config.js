@@ -29,4 +29,12 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
+
+  devServer: {
+    hot: false,
+    liveReload: false,
+    static: false,
+    client: false,
+    watchFiles: ['src/**/*'],
+  },
 };
