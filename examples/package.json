@@ -1,0 +1,14 @@
+{
+  "name": "@cere-games-sdk/examples",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "concurrently 'npm:serve:sdk' 'npm:serve:examples -- -o'",
+    "serve": "concurrently 'npm:serve:sdk' 'npm:serve:examples'",
+    "serve:examples": "http-server ./public -p 8888",
+    "serve:sdk": "npm run serve -w @cere/games-sdk -- --port 8889"
+  },
+  "dependencies": {
+    "concurrently": "^8.0.1",
+    "http-server": "^14.1.1"
+  }
+}
