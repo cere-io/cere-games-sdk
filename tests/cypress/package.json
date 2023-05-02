@@ -1,0 +1,11 @@
+{
+  "name": "@cere-games-sdk/cypress",
+  "version": "0.0.0",
+  "scripts": {
+    "open": "cypress open",
+    "test": "cypress run --browser chrome"
+  },
+  "dependencies": {
+    "cypress": "^12.11.0"
+  }
+}

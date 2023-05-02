@@ -2,13 +2,14 @@
   "name": "@cere-games-sdk/examples",
   "version": "0.0.0",
   "scripts": {
-    "start": "concurrently 'npm:serve:sdk' 'npm:serve:games -- -o'",
-    "serve": "concurrently 'npm:serve:sdk' 'npm:serve:games'",
-    "serve:games": "http-server ./games -p 8888",
-    "serve:sdk": "npm run serve -w @cere/games-sdk -- --port 8889"
+    "start": "npm run serve:sdk & npm run serve:games -- -o",
+    "serve": "npm run serve:sdk & npm run serve:games -- --silent -p 8888",
+    "serve:games": "npm run wait:sdk && http-server ./games",
+    "serve:sdk": "npm run serve -w @cere/games-sdk -- --port 8889",
+    "wait:sdk": "wait-on http-get://localhost:8889/bundle.umd.js"
   },
   "dependencies": {
-    "concurrently": "^8.0.1",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "wait-on": "^7.0.1"
   }
 }

@@ -35,6 +35,7 @@ module.exports = {
     liveReload: false,
     static: false,
     client: false,
+
     watchFiles: ['src/**/*'],
   },
 };
