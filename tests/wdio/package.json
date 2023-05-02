@@ -1,6 +1,14 @@
 {
   "name": "@cere-games-sdk/wdio",
   "version": "0.0.0",
-  "scripts": {},
-  "dependencies": {}
+  "scripts": {
+    "test": "wait-on http://localhost:8888 -t 3000 && wdio run ./wdio.conf.ts --watch"
+  },
+  "dependencies": {
+    "@wdio/devtools-service": "^8.9.0",
+    "@wdio/cli": "^8.9.0",
+    "@wdio/local-runner": "^8.9.0",
+    "@wdio/mocha-framework": "^8.8.7",
+    "@wdio/spec-reporter": "^8.8.7"
+  }
 }

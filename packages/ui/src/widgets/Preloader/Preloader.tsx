@@ -42,7 +42,7 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
         </Typography>
       </Stack>
 
-      <Button loading={!ready || isBusy} onClick={handleStartClick}>
+      <Button data-testid="preloaderStart" loading={!ready || isBusy} onClick={handleStartClick}>
         {ready ? 'Start' : 'Game loading...'}
       </Button>
     </Widget>

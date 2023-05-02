@@ -2,8 +2,8 @@
   "name": "@cere-games-sdk/cypress",
   "version": "0.0.0",
   "scripts": {
-    "open": "cypress open",
-    "test": "cypress run --browser chrome"
+    "start": "cypress open",
+    "test": "wait-on http://localhost:8888 -t 3000 && cypress run --browser chrome"
   },
   "dependencies": {
     "cypress": "^12.11.0"
