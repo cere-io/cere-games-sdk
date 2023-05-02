@@ -14,7 +14,7 @@ describe('Game', () => {
       await expect(preloader).toBeExisting();
     });
 
-    it.only('should be closed after clicking start button', async () => {
+    it('should be closed after clicking start button', async () => {
       await preloader.shadow$('[data-testid="preloaderStart"]').click();
 
       await expect(preloader).not.toBeExisting();

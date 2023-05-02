@@ -2,7 +2,7 @@
   "name": "@cere-games-sdk/wdio",
   "version": "0.0.0",
   "scripts": {
-    "test": "wait-on http://localhost:8888 -t 3000 && wdio run ./wdio.conf.ts --watch"
+    "test": "wait-on http://localhost:8888 -t 3000 && wdio run ./wdio.conf.ts"
   },
   "dependencies": {
     "@wdio/devtools-service": "^8.9.0",
