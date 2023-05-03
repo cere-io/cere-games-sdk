@@ -18,13 +18,16 @@ export const createWidget = <P extends {} = {}>(
   context: Context | null = null,
 ): WidgetConstructor<P> => {
   class CustomElement extends HTMLElement implements WidgetType<P> {
+    readonly name = Component.name.toLowerCase();
     private componentProps: any = {};
     private mountPoint = document.createElement('div');
     private root = createRoot(this.mountPoint);
-    private stylesCache = createCache({ key: Component.name.toLowerCase(), container: this.mountPoint });
+    private stylesCache = createCache({ key: this.name, container: this.mountPoint });
 
     constructor() {
       super();
+
+      this.mountPoint.setAttribute('data-widget-root', this.name);
       this.attachShadow({ mode: 'open' }).appendChild(this.mountPoint);
     }
 

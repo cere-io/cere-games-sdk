@@ -198,8 +198,9 @@ export const config: Options.Testrunner = {
    * @param {Array.<String>} specs        List of spec file paths that are to be run
    * @param {object}         browser      instance of created browser/device session
    */
-  // before: function (capabilities, specs) {
-  // },
+  before: function (capabilities, specs) {
+    require('./commands');
+  },
   /**
    * Runs before a WebdriverIO command gets executed.
    * @param {string} commandName hook command name

@@ -15,7 +15,14 @@ describe('Game', () => {
     });
 
     it('should be closed after clicking start button', async () => {
-      await preloader.shadow$('[data-testid="preloaderStart"]').click();
+      await preloader.widget$('button=Start').click();
+
+      await expect(preloader).not.toBeExisting();
+    });
+
+    it('should be closed after clicking start button (Testing Library)', async () => {
+      // await preloader.widget$().findByTestId$('preloaderStart').click(); // By test Id
+      await preloader.widget$().findByRole$('button', { name: 'Start' }).click(); // By aria role
 
       await expect(preloader).not.toBeExisting();
     });
