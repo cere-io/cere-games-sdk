@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "start": "npm run serve:sdk & npm run serve:games -- -o",
-    "serve": "npm run serve:sdk & npm run serve:games -- --silent -p 8888",
-    "serve:games": "npm run wait:sdk && http-server ./games",
+    "serve": "npm run serve:sdk & npm run serve:games -- --silent",
+    "serve:games": "npm run wait:sdk && http-server ./games -p 8888",
     "serve:sdk": "npm run serve -w @cere/games-sdk -- --port 8889",
     "wait:sdk": "wait-on http-get://localhost:8889/bundle.umd.js"
   },

@@ -14,8 +14,7 @@
     "playground": "npm start --workspace=@cere-games-sdk/playground",
     "build": "npm run build --workspace=@cere/games-sdk-ui --workspace=@cere/games-sdk",
     "lint": "eslint --quiet '**/*.{ts,tsx,js,jsx}'",
-    "test:cypress": "npm run test --workspace @cere-games-sdk/cypress",
-    "test:wdio": "npm run test --workspace @cere-games-sdk/wdio",
+    "test": "npm run test --workspaces --if-present",
     "sdk:publish": "npm publish --workspace=@cere/games-sdk-ui --workspace=@cere/games-sdk --access public"
   },
   "workspaces": [

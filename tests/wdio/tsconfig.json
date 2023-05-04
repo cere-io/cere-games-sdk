@@ -1,5 +1,5 @@
 {
-  "include": ["./test", "./commands", "./wdio.conf.ts"],
+  "include": ["config", "specs", "objects"],
   "compilerOptions": {
     "moduleResolution": "node",
     "module": "commonjs",

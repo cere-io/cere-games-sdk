@@ -1,6 +1,10 @@
 import { setupBrowser, WebdriverIOQueriesChainable, WebdriverIOQueries } from '@testing-library/webdriverio';
+import { step as stepFunction, xstep as xstepFunction } from 'mocha-steps';
 
 declare global {
+  const step: typeof stepFunction;
+  const xstep: typeof xstepFunction;
+
   namespace WebdriverIO {
     interface Browser extends WebdriverIOQueries, WebdriverIOQueriesChainable<Browser> {}
     interface Element extends WebdriverIOQueries, WebdriverIOQueriesChainable<Element> {
@@ -15,14 +19,6 @@ declare global {
 setupBrowser(browser);
 
 /**
- * Custom command to access widgets shadow elements
+ * Setup custom commands
  */
-browser.addCommand(
-  'widget$',
-  async function (this: WebdriverIO.Element, selector?: string) {
-    const widgetRoot = this.shadow$('[data-widget-root]');
-
-    return selector ? widgetRoot.$(selector) : widgetRoot;
-  },
-  true,
-);
+require('./commands');
