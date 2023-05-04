@@ -7,24 +7,44 @@ describe('Game', () => {
     let preloader: ChainablePromiseElement;
 
     beforeEach(async () => {
-      preloader = $('cere-modal cere-preloader');
+      preloader = $('cere-preloader');
     });
 
     it('should be shown', async () => {
-      await expect(preloader).toBeExisting();
+      await expect(preloader).toBeDisplayed();
     });
 
     it('should be closed after clicking start button', async () => {
-      await preloader.widget$('button=Start').click();
+      const startButton = await preloader.widget$().findByRole('button', {
+        name: 'Start',
+      });
 
-      await expect(preloader).not.toBeExisting();
+      startButton.click();
+
+      await expect(preloader).not.toBeDisplayed();
+    });
+  });
+
+  describe('Connect Wallet', () => {
+    let connectWallet: ChainablePromiseElement;
+
+    beforeEach(async () => {
+      await $('cere-preloader').widget$('button=Start').click();
+      await $('cere-connect-wallet').waitForDisplayed({ timeout: 10000 });
+
+      connectWallet = $('cere-connect-wallet');
     });
 
-    it('should be closed after clicking start button (Testing Library)', async () => {
-      // await preloader.widget$().findByTestId$('preloaderStart').click(); // By test Id
-      await preloader.widget$().findByRole$('button', { name: 'Start' }).click(); // By aria role
+    it('should eventually appear', async () => {
+      await expect(connectWallet).toBeDisplayed();
+    });
 
-      await expect(preloader).not.toBeExisting();
+    it('should have claim tokens button', async () => {
+      const connectButton = connectWallet.widget$().findByRole('button', {
+        name: 'Claim 5 free tokens',
+      });
+
+      await expect(connectButton).toBeDisplayed();
     });
   });
 });

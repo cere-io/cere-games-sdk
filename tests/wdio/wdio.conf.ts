@@ -64,7 +64,7 @@ export const config: Options.Testrunner = {
       browserName: 'chrome', // or "firefox", "microsoftedge", "safari"
 
       'wdio:devtoolsOptions': {
-        headless: true,
+        headless: false,
       },
     },
   ],
