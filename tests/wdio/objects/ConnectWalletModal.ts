@@ -6,6 +6,6 @@ export class ConnectWalletModal extends Widget {
   }
 
   get connectButton() {
-    return this.shadowRoot.findByRole$('button', { name: 'Claim 5 free tokens' });
+    return this.shadowRoot.findByTestId$('connectWallet');
   }
 }

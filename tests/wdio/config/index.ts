@@ -1,4 +1,5 @@
 import type { Options } from '@wdio/types';
+import { configure } from '@testing-library/webdriverio';
 
 const headless = process.env.HEADLESS === 'true';
 
@@ -10,7 +11,9 @@ export const config: Options.Testrunner = {
   capabilities: [
     {
       browserName: 'chrome',
-      'wdio:devtoolsOptions': { headless },
+      'goog:chromeOptions': {
+        args: headless ? ['--headless', '--disable-gpu'] : [],
+      },
     },
   ],
 
@@ -20,7 +23,7 @@ export const config: Options.Testrunner = {
   waitforTimeout: 5000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,
-  services: ['devtools'],
+  services: ['chromedriver'],
   reporters: ['spec'],
 
   autoCompileOpts: {
@@ -34,6 +37,7 @@ export const config: Options.Testrunner = {
   framework: 'mocha',
   mochaOpts: {
     ui: 'bdd',
+    timeout: 60000,
     require: [require.resolve('mocha-steps')],
   },
 
@@ -41,3 +45,7 @@ export const config: Options.Testrunner = {
     require('./setup');
   },
 };
+
+configure({
+  asyncUtilTimeout: config.waitforTimeout,
+});

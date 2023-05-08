@@ -57,7 +57,7 @@ export const TableDataRow = ({ data, active, hasReward }: TableDataRowProps) => 
   }, [hasReward, staticAssets]);
 
   return (
-    <Wrapper active={active}>
+    <Wrapper active={active} role="row" aria-selected={active}>
       <TableRow
         columns={[
           <Rank rankColor={rankColors[data.rank - 1]}>{data.rank}</Rank>,

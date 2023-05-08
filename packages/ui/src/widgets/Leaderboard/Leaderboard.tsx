@@ -179,7 +179,7 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) =>
           <Typography style={{ fontFamily: 'Bebas Neue', fontSize: 36 }} variant="h1">
             Leaderboard
           </Typography>
-          {address && <Address address={address} />}
+          {address && <Address aria-label="Wallet address" address={address} />}
         </StyledStack>
       </Stack>
 
