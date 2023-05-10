@@ -1,5 +1,3 @@
-// import { step } from 'mocha-steps';
-
 import { PreloaderModal, ConnectWalletModal, CereWalletAuth, LeaderboardModal, CereWalletApprove } from '../objects';
 
 describe('Game', () => {
