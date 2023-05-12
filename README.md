@@ -17,17 +17,38 @@ nvm exec npm i
 2. Run the playground application:
 
 ```bash
+nvm exec npm run playground
+```
+
+3. Run the examples:
+
+```bash
 nvm exec npm start
 ```
 
-3. Build the libraries in production mode:
+4. Build the libraries in production mode:
 
 ```bash
 nvm exec npm run build
 ```
 
-3. Publish the packages to NPM:
+5. Publish the packages to NPM:
 
 ```bash
 nvm exec npm run sdk:publish
+```
+
+## Auto tests
+
+1. Run examples application
+
+```bash
+nvm exec npm run serve
+```
+
+2. Run tests
+
+```bash
+nvm exec npm test # headless
+nvm exec npm start --workspace @cere-games-sdk/wdio # in browser
 ```
