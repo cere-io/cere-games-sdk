@@ -25,7 +25,7 @@ describe('Game', () => {
 
   describe('Connect Wallet Modal', () => {
     before(async () => {
-      await connectWallet.element.waitForDisplayed({ timeout: 10000 });
+      await connectWallet.element.waitForDisplayed();
     });
 
     step('click claim tokens button', async () => {
@@ -100,7 +100,7 @@ describe('Game', () => {
     });
 
     it('should reload the page and show Preloader', async () => {
-      await preloader.element.waitForDisplayed({ timeout: 10000 });
+      await preloader.element.waitForDisplayed();
     });
   });
 });

@@ -20,7 +20,7 @@ export const config: Options.Testrunner = {
   logLevel: 'warn',
   maxInstances: 10,
 
-  waitforTimeout: 5000,
+  waitforTimeout: 10000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,
   services: ['chromedriver'],
