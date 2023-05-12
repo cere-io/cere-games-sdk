@@ -58,7 +58,7 @@ export const Button = ({
   children,
   ...props
 }: ComponentProps<typeof ButtonBase>) => (
-  <ButtonBase {...props} disabled={disabled || readOnly} readOnly={readOnly}>
+  <ButtonBase {...props} disabled={disabled || readOnly} readOnly={readOnly} aria-busy={loading}>
     {loading ? <Spinner size={25} /> : icon}
     <Content>{children}</Content>
   </ButtonBase>

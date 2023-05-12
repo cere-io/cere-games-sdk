@@ -21,15 +21,11 @@
                 logoUrl: logoUrl.toString()
             },
 
-            reporting: {
-                sentryPublicKey: '39761830833c4c90a67a6336ac897582',
-            },
-
             onWalletDisconnect: () => window.location.reload(),
             onReady: (sdk) => {
                 gamesSdkPreloader = sdk.showPreloader({
                     onStart() {
-                        // TODO: Autostart the game
+                        ig.game.loadLevel(LevelGame);
                     },
                 });
             },

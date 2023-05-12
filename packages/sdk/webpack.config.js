@@ -1,40 +1,55 @@
 const path = require('path');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-module.exports = {
-  mode: 'production',
-  entry: './src/index.ts',
+module.exports = ({ WEBPACK_BUILD: isBuild }) => {
+  const tsConfigFile = isBuild ? 'tsconfig.build.json' : 'tsconfig.json';
 
-  output: {
-    clean: true,
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.umd.js',
-    library: { name: 'CereGamesSDK', type: 'umd' },
-  },
+  return {
+    mode: 'production',
+    entry: './src/index.ts',
 
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'ts-loader',
-            options: { configFile: 'tsconfig.build.json' },
-          },
-        ],
-      },
-    ],
-  },
+    output: {
+      clean: true,
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'bundle.umd.js',
+      library: { name: 'CereGamesSDK', type: 'umd' },
+    },
 
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-  },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'ts-loader',
+              options: {
+                configFile: tsConfigFile,
+              },
+            },
+          ],
+        },
+        {
+          test: /\.png/,
+          type: 'asset/inline',
+        },
+      ],
+    },
 
-  devServer: {
-    hot: false,
-    liveReload: false,
-    static: false,
-    client: false,
-    watchFiles: ['src/**/*'],
-  },
+    resolve: {
+      extensions: ['.tsx', '.ts', '.js'],
+      plugins: [
+        new TsconfigPathsPlugin({
+          configFile: tsConfigFile,
+        }),
+      ],
+    },
+
+    devServer: {
+      hot: false,
+      liveReload: false,
+      static: false,
+      client: false,
+    },
+  };
 };

@@ -106,6 +106,8 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
     };
   }, [showConfetti]);
 
+  const isBusy = !isReady || connecting || busy;
+
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="stretch">
       <AnimationBlock url={staticAssets.animation} showConfetti={showConfetti} />
@@ -125,7 +127,7 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
         </Stack>
       </Stack>
       <Stack spacing={2}>
-        <Connect loading={!isReady || connecting || busy} onClick={handleConnect}>
+        <Connect data-testid="connectWallet" loading={isBusy} onClick={handleConnect}>
           {!isReady ? 'Preparing... Please wait' : `Claim ${newWalletReward} free tokens`}
         </Connect>
         <ByCereText>Powered by Cere Gaming Cloud</ByCereText>

@@ -74,7 +74,7 @@ export const Table = ({ data, activeAddress }: TableProps) => {
     containerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
   };
   return (
-    <Container ref={containerRef}>
+    <Container ref={containerRef} role="table">
       <TableHeader columns={['Rank', 'Player', 'Prize', 'Score']} />
       {activeRow && <TableDataRow hasReward={activeRow.rank <= MAX_RANK_WITH_GIFT} active data={activeRow} />}
       {rows.map((row) => (
