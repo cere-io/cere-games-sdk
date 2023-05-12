@@ -2,6 +2,7 @@
 
 ### vNext
 
+- Add WebDriverIO auto test
 - Add the SDK integration run-able examples (`/examples`)
 
 ### v0.3.0
