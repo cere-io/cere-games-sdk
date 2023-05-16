@@ -19,8 +19,7 @@
   "homepage": "https://github.com/cere-io/cere-games-sdk/tree/master/packages/sdk",
   "license": "ISC",
   "scripts": {
-    "build": "webpack",
-    "serve": "webpack serve --no-performance-hints"
+    "build": "webpack"
   },
   "dependencies": {
     "@cere/embed-wallet": "0.9.0",

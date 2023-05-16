@@ -8,7 +8,7 @@ describe('Game', () => {
   const leaderboardModal = new LeaderboardModal();
 
   before(async () => {
-    await browser.url('/metaverse-dash-run/');
+    await browser.url('metaverse-dash-run');
   });
 
   describe('Preloader modal', () => {

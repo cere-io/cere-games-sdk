@@ -2,13 +2,15 @@
   "name": "@cere-games-sdk/examples",
   "version": "0.0.0",
   "scripts": {
-    "start": "npm run serve:sdk & npm run serve:games -- -o",
-    "serve": "npm run serve:sdk & npm run serve:games -- --silent",
-    "serve:games": "npm run wait:sdk && http-server ./games -p 8888",
-    "serve:sdk": "npm run serve -w @cere/games-sdk -- --port 8889",
-    "wait:sdk": "wait-on http-get://localhost:8889/bundle.umd.js"
+    "start": "webpack serve --open",
+    "build": "webpack"
   },
   "dependencies": {
-    "http-server": "^14.1.1"
+    "@cere/games-sdk": "*"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }

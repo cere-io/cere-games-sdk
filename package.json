@@ -9,18 +9,17 @@
     "wait-on": "^7.0.1"
   },
   "scripts": {
-    "start": "npm run start --workspace=@cere-games-sdk/examples",
-    "serve": "npm run serve --workspace=@cere-games-sdk/examples",
+    "start": "npm start --workspace=@cere-games-sdk/examples",
     "playground": "npm start --workspace=@cere-games-sdk/playground",
-    "build": "npm run build --workspace=@cere/games-sdk-ui --workspace=@cere/games-sdk",
+    "build": "npm run build --workspaces --if-present",
     "lint": "eslint --quiet '**/*.{ts,tsx,js,jsx}'",
     "test": "npm run test --workspaces --if-present",
     "sdk:publish": "npm publish --workspace=@cere/games-sdk-ui --workspace=@cere/games-sdk --access public"
   },
   "workspaces": [
-    "examples",
-    "playground",
     "packages/*",
-    "tests/*"
+    "tests/*",
+    "examples",
+    "playground"
   ]
 }
