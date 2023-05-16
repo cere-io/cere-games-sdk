@@ -40,8 +40,8 @@ module.exports = {
   ],
 
   devServer: {
-    client: {
-      overlay: false,
-    },
+    client: false,
+    hot: false,
+    liveReload: false,
   },
 };

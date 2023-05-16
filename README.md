@@ -14,19 +14,19 @@ The repository includes several packages related to `Cere Games SDK`:
 nvm exec npm i
 ```
 
-2. Run the playground application:
+2. Run playground application:
 
 ```bash
 nvm exec npm run playground
 ```
 
-3. Run the examples:
+3. Run examples:
 
 ```bash
 nvm exec npm start
 ```
 
-4. Build the libraries in production mode:
+4. Build libraries in production mode:
 
 ```bash
 nvm exec npm run build
@@ -40,7 +40,7 @@ nvm exec npm run sdk:publish
 
 ## Auto tests
 
-1. Run examples application
+1. Build libraries and examples
 
 ```bash
 nvm exec npm run build
