@@ -2,7 +2,7 @@
   "name": "@cere-games-sdk/examples",
   "version": "0.0.0",
   "scripts": {
-    "start": "npm run serve -- --open",
+    "start": "webpack serve --open",
     "build": "webpack"
   },
   "dependencies": {
