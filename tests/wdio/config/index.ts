@@ -7,7 +7,7 @@ const headless = process.env.HEADLESS === 'true';
 
 export const config: Options.Testrunner = {
   runner: 'local',
-  baseUrl: 'http://localhost:4567/examples',
+  baseUrl: 'http://localhost:4567/examples/',
   specs: ['./specs/**/*.ts'],
 
   capabilities: [
