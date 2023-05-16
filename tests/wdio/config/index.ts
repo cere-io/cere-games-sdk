@@ -1,11 +1,13 @@
+import * as path from 'path';
 import type { Options } from '@wdio/types';
 import { configure } from '@testing-library/webdriverio';
 
+const rootDir = path.resolve(__dirname, '../../..');
 const headless = process.env.HEADLESS === 'true';
 
 export const config: Options.Testrunner = {
   runner: 'local',
-  baseUrl: 'http://localhost:8888',
+  baseUrl: 'http://localhost:4567/examples/',
   specs: ['./specs/**/*.ts'],
 
   capabilities: [
@@ -23,7 +25,21 @@ export const config: Options.Testrunner = {
   waitforTimeout: 10000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,
-  services: ['chromedriver'],
+  services: [
+    'chromedriver',
+    [
+      'static-server',
+      {
+        folders: [
+          {
+            mount: '/',
+            path: path.resolve(rootDir, 'build'),
+          },
+        ],
+      },
+    ],
+  ],
+
   reporters: ['spec'],
 
   autoCompileOpts: {
