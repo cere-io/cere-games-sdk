@@ -30,11 +30,4 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
     plugins: [new TsconfigPathsPlugin()],
   },
-
-  devServer: {
-    hot: false,
-    liveReload: false,
-    static: false,
-    client: false,
-  },
 };

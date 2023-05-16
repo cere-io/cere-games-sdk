@@ -43,7 +43,7 @@ nvm exec npm run sdk:publish
 1. Run examples application
 
 ```bash
-nvm exec npm run serve
+nvm exec npm run build
 ```
 
 2. Run tests
