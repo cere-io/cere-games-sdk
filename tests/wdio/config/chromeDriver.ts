@@ -7,19 +7,19 @@ if (options.headless) {
   chromeArgs.push('--headless', '--disable-gpu');
 }
 
+export const chromeCapability = {
+  browserName: 'chrome',
+  acceptInsecureCerts: true,
+
+  'goog:chromeOptions': {
+    args: chromeArgs,
+  },
+};
+
 export const config: WebdriverIO.Config = {
   ...baseConfig,
 
   services: ['chromedriver', ...baseConfig.services],
 
-  capabilities: [
-    {
-      browserName: 'chrome',
-      acceptInsecureCerts: true,
-
-      'goog:chromeOptions': {
-        args: chromeArgs,
-      },
-    },
-  ],
+  capabilities: [chromeCapability],
 };
