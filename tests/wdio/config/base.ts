@@ -1,8 +1,11 @@
+import * as path from 'path';
 import { configure } from '@testing-library/webdriverio';
+
+const rootDir = path.resolve(__dirname, '../../..');
 
 export const config: WebdriverIO.Config = {
   runner: 'local',
-  baseUrl: 'http://localhost:8888',
+  baseUrl: 'http://localhost:4567/examples/',
   specs: ['./specs/**/*.ts'],
   capabilities: [],
 
@@ -12,6 +15,21 @@ export const config: WebdriverIO.Config = {
   waitforTimeout: 10000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,
+
+  services: [
+    [
+      'static-server',
+      {
+        folders: [
+          {
+            mount: '/',
+            path: path.resolve(rootDir, 'build'),
+          },
+        ],
+      },
+    ],
+  ],
+
   reporters: ['spec'],
 
   autoCompileOpts: {

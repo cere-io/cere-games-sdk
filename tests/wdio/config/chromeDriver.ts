@@ -10,11 +10,13 @@ if (options.headless) {
 export const config: WebdriverIO.Config = {
   ...baseConfig,
 
-  services: ['chromedriver'],
+  services: ['chromedriver', ...baseConfig.services],
+
   capabilities: [
     {
       browserName: 'chrome',
       acceptInsecureCerts: true,
+
       'goog:chromeOptions': {
         args: chromeArgs,
       },
