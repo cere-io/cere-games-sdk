@@ -9,7 +9,7 @@ export const config: WebdriverIO.Config = {
   specs: ['./specs/**/*.ts'],
   capabilities: [],
 
-  logLevel: 'warn',
+  logLevel: 'debug',
   maxInstances: 10,
 
   waitforTimeout: 10000,
