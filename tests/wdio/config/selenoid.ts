@@ -18,6 +18,7 @@ if (options.startSelenoid) {
 export const config: WebdriverIO.Config = {
   ...baseConfig,
 
+  baseUrl: 'http://host.docker.internal:4567/examples/',
   hostname: 'localhost',
   port: 4444,
   path: '/wd/hub/',
