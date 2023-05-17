@@ -1,15 +1,32 @@
 import * as path from 'path';
 import { configure } from '@testing-library/webdriverio';
 
+import { options } from './options';
+
 const rootDir = path.resolve(__dirname, '../../..');
+
+const chromeArgs = ['--window-size=1920,1080', '--disable-dev-shm-usage', '--no-sandbox', '--mute-audio'];
+
+if (options.headless) {
+  chromeArgs.push('--headless', '--disable-gpu');
+}
+
+export const chromeCapability = {
+  browserName: 'chrome',
+  acceptInsecureCerts: true,
+
+  'goog:chromeOptions': {
+    args: chromeArgs,
+  },
+};
 
 export const config: WebdriverIO.Config = {
   runner: 'local',
   baseUrl: 'http://localhost:4567/examples/',
   specs: ['./specs/**/*.ts'],
-  capabilities: [],
+  capabilities: [chromeCapability],
 
-  logLevel: 'debug',
+  logLevel: 'warn',
   maxInstances: 10,
 
   waitforTimeout: 10000,

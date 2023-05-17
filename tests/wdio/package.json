@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "start": "wdio run ./wdio.conf.ts",
-    "test": "npm start -- --headless",
-    "test:ci": "npm start -- --headless --variant=selenoid"
+    "test": "wdio run ./wdio.conf.ts --headless",
+    "test:ci": "npm test -- --ci"
   },
   "dependencies": {
     "@testing-library/webdriverio": "^3.2.1",
