@@ -10,7 +10,7 @@ export const Playground = () => {
     () =>
       new GamesSDK({
         env: 'dev',
-        gameId: 'metaverse-dash-run',
+        gameId: 'metaverse-dash-run-2',
         gameInfo: {
           name: 'Metaverse Dash Run',
           tags: ['metaversadash', 'web3', 'gamer'],
