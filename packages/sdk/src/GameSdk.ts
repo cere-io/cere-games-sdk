@@ -226,8 +226,10 @@ export class GamesSDK {
 
         await onBeforeLoad?.();
         const data = await this.api.getLeaderboard();
+        const activeTournament = await this.api.getActiveTournamentData();
 
         leaderboard.update({
+          activeTournament,
           data,
           onPlayAgain: async () => {
             const { email } = await this.wallet.getUserInfo();

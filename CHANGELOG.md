@@ -4,6 +4,7 @@
 
 - Add WebDriverIO auto test
 - Add the SDK integration run-able examples (`/examples`)
+- [[Feature]](https://www.notion.so/cere/Update-Leaderboard-modal-to-show-tournaments-65b3a7f4d8d848a384d36618e01b338c?pvs=4) Update Leaderboard modal to show tournaments
 
 ### v0.3.0
 
