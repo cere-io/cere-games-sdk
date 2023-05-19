@@ -107,8 +107,8 @@ export class GamesApi {
   async getActiveTournamentData() {
     const endpoint = this.createEndpoint(`tournament/active/${this.options.gameId}`);
     const response = await fetch(endpoint);
-    const data: Tournament[] = await response.json();
+    const [tournament]: Tournament[] = await response.json();
 
-    return data.length > 0 ? data[0] : undefined;
+    return tournament;
   }
 }
