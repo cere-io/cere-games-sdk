@@ -86,7 +86,7 @@ export class GamesSDK {
 
   private readonly api = new GamesApi({
     gameId: this.options.gameId,
-    baseUrl: GAME_SERVICE_URL[this.env],
+    baseUrl: 'http://localhost:3001',
   });
 
   constructor(private options: SdkOptions) {
@@ -313,6 +313,7 @@ export class GamesSDK {
 
       await this.saveSession();
       await this.api.saveScore(ethAddress.address, score, this.session);
+      await this.api.getLeaderboard();
     };
 
     /**
