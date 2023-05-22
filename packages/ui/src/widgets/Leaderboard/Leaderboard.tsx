@@ -151,15 +151,21 @@ export const Leaderboard = ({ data, activeTournament, onPlayAgain, onTweet }: Le
                   <Stack spacing={2} align="start">
                     <Stack spacing={1} align="start">
                       <Typography variant="caption" uppercase fontWight="semi-bold">
-                        {`${activeTournament ? activeTournament.title : 'Weekly'} tournament`}
+                        {`${activeTournament ? activeTournament.title : 'Weekly tournament'}`}
                       </Typography>
                       <TimeLeftText fontWight="bold">
                         Time left: <span>{dayDifference ? dayDifference : 1} day</span>
                       </TimeLeftText>
                     </Stack>
-                    <StyledTypography variant="h1" uppercase>
-                      TOP 20 players wins <br /> UNIQUE NFT
-                    </StyledTypography>
+                    {!activeTournament ? (
+                      <StyledTypography variant="h1" uppercase>
+                        TOP 20 players wins <br /> UNIQUE NFT
+                      </StyledTypography>
+                    ) : (
+                      <StyledTypography variant="h1" uppercase>
+                        {activeTournament?.subtitle}
+                      </StyledTypography>
+                    )}
                   </Stack>
                 </div>
                 <MysteryBlock url={staticAssets.mysteryBox} />
