@@ -86,7 +86,7 @@ export class GamesSDK {
 
   private readonly api = new GamesApi({
     gameId: this.options.gameId,
-    baseUrl: 'http://localhost:3001',
+    baseUrl: GAME_SERVICE_URL[this.env],
   });
 
   constructor(private options: SdkOptions) {
