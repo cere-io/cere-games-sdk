@@ -313,7 +313,6 @@ export class GamesSDK {
 
       await this.saveSession();
       await this.api.saveScore(ethAddress.address, score, this.session);
-      await this.api.getLeaderboard();
     };
 
     /**
