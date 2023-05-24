@@ -76,6 +76,9 @@ export class GamesSDK {
       gamePortalUrl: GAME_PORTAL_URL[this.env],
       staticBaseUrl: STATIC_BASE_URL[this.env],
       staticAssets: STATIC_ASSETS[this.env],
+      dynamicAssets: {
+        preloader: '',
+      },
     },
   });
 
@@ -113,6 +116,11 @@ export class GamesSDK {
         this.options.onWalletDisconnect?.();
       }
     });
+    (async () => {
+      const { preloaderPath } = await this.api.getGameInfoData();
+
+      this.ui.config.dynamicAssets.preloader = preloaderPath;
+    })();
   }
 
   private get env() {
@@ -196,9 +204,11 @@ export class GamesSDK {
     this.sessionEvents.push({ timestamp: Date.now(), ...event });
   }
 
-  showPreloader({ onStart }: ShowPreloaderOptions = {}) {
+  async showPreloader({ onStart }: ShowPreloaderOptions = {}) {
     const preloader = document.createElement('cere-preloader');
     const { open, ...modal } = UI.createModal(preloader);
+
+    const { preloaderPath, preloaderTitle, preloaderDescription } = await this.api.getGameInfoData();
 
     preloader.update({
       ready: false,
@@ -209,6 +219,9 @@ export class GamesSDK {
         await onStart?.();
         modal.close();
       },
+      preloaderPath,
+      preloaderTitle,
+      preloaderDescription,
     });
 
     open();

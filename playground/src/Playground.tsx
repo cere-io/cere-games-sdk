@@ -35,7 +35,7 @@ export const Playground = () => {
   }, []);
 
   const handleShowPreloader = useCallback(async () => {
-    const preloader = sdk.showPreloader({
+    const preloader = await sdk.showPreloader({
       onStart() {
         console.log('Preloader: onStart');
       },

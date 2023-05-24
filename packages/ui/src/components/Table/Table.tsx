@@ -7,10 +7,12 @@ import { Button } from '../Button';
 import { ArrowTopIcon } from '../../icons';
 
 const MAX_RANK_WITH_GIFT = 20;
+const MAX_RANK_WITH_GIFT_WITH_TOURNAMENT = 3;
 
 export type TableProps = {
   activeAddress?: string;
   data: TableDataRowProps['data'][];
+  hasTournament: boolean;
 };
 
 const Container = styled.div({
@@ -41,7 +43,7 @@ const ScrollToTop = styled(Button)({
   },
 });
 
-export const Table = ({ data, activeAddress }: TableProps) => {
+export const Table = ({ data, activeAddress, hasTournament }: TableProps) => {
   const [showScrollToTop, setShow] = useState(false);
   const activeRow = useMemo(() => data.find((row) => row.address === activeAddress), [data, activeAddress]);
   const rows = useMemo(() => data.filter((row) => row !== activeRow), [activeRow, data]);
@@ -76,9 +78,19 @@ export const Table = ({ data, activeAddress }: TableProps) => {
   return (
     <Container ref={containerRef} role="table">
       <TableHeader columns={['Rank', 'Player', 'Prize', 'Score']} />
-      {activeRow && <TableDataRow hasReward={activeRow.rank <= MAX_RANK_WITH_GIFT} active data={activeRow} />}
+      {activeRow && (
+        <TableDataRow
+          hasReward={activeRow.rank <= (hasTournament ? MAX_RANK_WITH_GIFT_WITH_TOURNAMENT : MAX_RANK_WITH_GIFT)}
+          active
+          data={activeRow}
+        />
+      )}
       {rows.map((row) => (
-        <TableDataRow key={row.address} data={row} hasReward={row.rank <= MAX_RANK_WITH_GIFT} />
+        <TableDataRow
+          key={row.address}
+          data={row}
+          hasReward={row.rank <= (hasTournament ? MAX_RANK_WITH_GIFT_WITH_TOURNAMENT : MAX_RANK_WITH_GIFT)}
+        />
       ))}
       {showScrollToTop && (
         <ScrollToTop icon={<ArrowTopIcon />} onClick={handleClick}>

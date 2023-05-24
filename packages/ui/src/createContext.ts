@@ -22,6 +22,9 @@ export type ConfigContext = {
     mysteryBox: string;
     twitterBgUrl: string;
   };
+  dynamicAssets: {
+    preloader: string;
+  };
 };
 
 export type ReportingContext = {
@@ -68,6 +71,9 @@ const defaultState: ContextState = {
       chest: '',
       mysteryBox: '',
       twitterBgUrl: '',
+    },
+    dynamicAssets: {
+      preloader: '',
     },
   },
 
