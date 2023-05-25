@@ -1,51 +1,86 @@
 import * as path from 'path';
+import historyApiMiddleware from 'express-history-api-fallback';
 import { configure } from '@testing-library/webdriverio';
 
-import { options } from './options';
+import { options, rootDir } from './options';
+import { setup } from './setup';
 
-const rootDir = path.resolve(__dirname, '../../..');
+const bundleRoot = path.resolve(rootDir, 'build');
 
-const chromeArgs = ['--window-size=1920,1080', '--disable-dev-shm-usage', '--no-sandbox', '--mute-audio'];
-
-if (options.headless) {
-  chromeArgs.push('--headless', '--disable-gpu');
-}
-
-export const chromeCapability = {
+export const chromeCapability: WebDriver.DesiredCapabilities = {
   browserName: 'chrome',
   acceptInsecureCerts: true,
 
   'goog:chromeOptions': {
-    args: chromeArgs,
+    args: [
+      '--window-size=1920,1080',
+      '--disable-dev-shm-usage',
+      '--no-sandbox',
+      '--mute-audio',
+      '--disable-notifications',
+
+      ...(options.openDevTools ? ['--auto-open-devtools-for-tabs'] : []),
+      ...(options.headless ? ['--headless', '--disable-gpu'] : []),
+    ],
+  },
+
+  // @ts-ignore
+  'goog:loggingPrefs': { browser: 'ALL' },
+
+  'selenoid:options': {
+    /**
+     * The hardcoded IP address is the address of GitHub actions host
+     *
+     * TODO: Figure out a better way to dected CI host IP, insted of hardcoding this one
+     */
+    hostsEntries: ['host.docker.internal:172.17.0.1'],
   },
 };
 
+let baseUrl = options.targetUrl;
+const services: WebdriverIO.Config['services'] = ['intercept'];
+
+if (!baseUrl) {
+  baseUrl = 'http://localhost:4567/examples/';
+
+  services.push([
+    'static-server',
+    {
+      folders: [
+        {
+          mount: '/',
+          path: bundleRoot,
+        },
+      ],
+      middleware: [
+        {
+          mount: '/',
+          middleware: historyApiMiddleware('index.html', { root: bundleRoot }),
+        },
+      ],
+    },
+  ]);
+}
+
 export const config: WebdriverIO.Config = {
+  baseUrl,
+  services,
+
   runner: 'local',
-  baseUrl: 'http://localhost:4567/examples/',
+
   specs: ['./specs/**/*.ts'],
+  suites: {
+    simulation: ['./specs/Game.e2e.ts'],
+  },
+
   capabilities: [chromeCapability],
 
   logLevel: 'warn',
-  maxInstances: 10,
+  maxInstances: options.maxInstances,
 
-  waitforTimeout: 10000,
-  connectionRetryTimeout: 120000,
+  waitforTimeout: 10 * 1000, // 10 secs
+  connectionRetryTimeout: 2 * 60 * 1000, // 2 mins
   connectionRetryCount: 3,
-
-  services: [
-    [
-      'static-server',
-      {
-        folders: [
-          {
-            mount: '/',
-            path: path.resolve(rootDir, 'build'),
-          },
-        ],
-      },
-    ],
-  ],
 
   reporters: ['spec'],
 
@@ -60,12 +95,12 @@ export const config: WebdriverIO.Config = {
   framework: 'mocha',
   mochaOpts: {
     ui: 'bdd',
-    timeout: 60000,
+    timeout: 3 * 60 * 1000, // 3 mins
     require: [require.resolve('mocha-steps')],
   },
 
-  before: (capabilities, specs) => {
-    require('./setup');
+  async before() {
+    await setup();
   },
 };
 

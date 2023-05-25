@@ -1,3 +1,9 @@
-import { options, ci, local } from './config';
+import path from 'path';
+import dotenv from 'dotenv';
+import { rootDir } from './config';
 
-export const config = options.ci ? ci : local;
+dotenv.config({
+  path: path.resolve(rootDir, '.env'),
+});
+
+export * from './config';

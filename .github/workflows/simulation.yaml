@@ -1,0 +1,34 @@
+name: Run simulation
+
+on:
+  workflow_dispatch:
+    inputs:
+      iterations:
+        description: 'Number of iterations'
+        required: true
+        type: number
+        default: 10
+
+      instances:
+        description: 'Number of browser instances'
+        required: true
+        type: number
+        default: 1
+
+jobs:
+  tests:
+    name: Simulation
+    uses: ./.github/workflows/wdio-tests.yaml
+    with:
+      max-instances: ${{ inputs.instances }}
+      keep-report-history: 20
+      report-dir: simulations
+      install_packages_command: cp .env.simulation .env; npm ci
+      build_command: npm run build
+      test_command: |
+        npm run test:ci -- \
+          --suite=simulation \
+          --maxInstances=${{ inputs.instances }} \
+          --multi-run=${{ inputs.iterations }}
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN_READ }}
