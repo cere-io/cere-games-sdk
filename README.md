@@ -52,3 +52,30 @@ nvm exec npm run build
 nvm exec npm test # headless
 nvm exec npm start --workspace @cere-games-sdk/wdio # in browser
 ```
+
+3. Generate and open report
+
+```bash
+npm run test:report
+```
+
+## Simulation
+
+1. Build the application bundle
+
+```bash
+nvm exec npm run build
+```
+
+2. Run simulation
+
+```bash
+nvm exec npm test -- --suite=simulation --maxInstances=5 --multi-run=10 # headless
+nvm exec npm start --workspace @cere-games-sdk/wdio -- --suite=simulation --maxInstances=5 --multi-run=10 # in browser
+```
+
+3. Generate and open report
+
+```bash
+npm run test:report
+```

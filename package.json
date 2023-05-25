@@ -15,6 +15,7 @@
     "lint": "eslint --quiet '**/*.{ts,tsx,js,jsx}'",
     "test": "npm test --workspaces --if-present -- $*",
     "test:ci": "npm run test:ci --workspaces --if-present -- $*",
+    "test:report": "npm run test:report --workspaces --if-present -- $*",
     "sdk:publish": "npm publish --workspace=@cere/games-sdk-ui --workspace=@cere/games-sdk --access public"
   },
   "workspaces": [

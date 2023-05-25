@@ -1,0 +1,64 @@
+import path from 'path';
+import fs from 'fs';
+import * as allure from '@wdio/allure-reporter';
+
+import { rootDir } from './options';
+
+const outputDir = path.resolve(rootDir, './report/allure-results');
+
+/**
+ * Write Allure environment file directelly due to a bug in `allure.addEnvironment` which allows only one variable to be added
+ *
+ * https://github.com/webdriverio/webdriverio/issues/10321
+ */
+const writeEnvironmentVars = (vars: Record<string, string>) => {
+  const file = path.resolve(outputDir, 'environment.properties');
+  const content = Object.entries(vars)
+    .map(([name, value]) => `${name}=${value}`)
+    .join('\n');
+
+  fs.writeFileSync(file, content + '\n');
+};
+
+export const withAllure = (baseConfig: WebdriverIO.Config): WebdriverIO.Config => ({
+  ...baseConfig,
+
+  reporters: [
+    ...baseConfig.reporters,
+    [
+      'allure',
+      {
+        outputDir,
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
+      },
+    ],
+  ],
+
+  async beforeTest() {
+    browser.setupInterceptor();
+  },
+
+  async afterTest(test, context, result) {
+    const logs = await browser.getLogs('browser');
+    const networkLog = await browser.getRequests({
+      orderBy: 'START',
+    });
+
+    allure.addAttachment('Browser log', JSON.stringify(logs, null, 2), 'application/json');
+    allure.addAttachment('Network log', JSON.stringify(networkLog, null, 2), 'application/json');
+
+    if (result.error) {
+      await browser.takeScreenshot();
+    }
+
+    browser.disableInterceptor();
+  },
+
+  onComplete() {
+    /**
+     * TODO: Add env variables later
+     */
+    // writeEnvironmentVars({});
+  },
+});
