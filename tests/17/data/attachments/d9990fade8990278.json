@@ -1,0 +1,14 @@
+[
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685011524922 0:491674 \"Cere Games SDK: Resume host events\"",
+    "source": "console-api",
+    "timestamp": 1685011600326
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685011524922 0:491604 \"Cere Games SDK: Suspend host events\"",
+    "source": "console-api",
+    "timestamp": 1685011600327
+  }
+]
