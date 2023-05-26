@@ -17,9 +17,7 @@ const preloadImage = (src: string) => {
 };
 
 export const preloadAssets = async ({ config }: Context) => {
-  const { staticAssets, dynamicAssets } = config;
+  const { staticAssets } = config;
 
-  for (const asset of [staticAssets, dynamicAssets]) {
-    await Promise.allSettled(Object.values(asset).map(preloadImage));
-  }
+  await Promise.allSettled(Object.values(staticAssets).map(preloadImage));
 };

@@ -2,13 +2,13 @@ import styled from '@emotion/styled';
 import { useMemo } from 'react';
 
 import defaultPreloaderImage from '../../assets/preloaderImage.png';
-import { Button, Stack, Typography } from '../../components';
-import { useAsyncCallback, useMediaQuery } from '../../hooks';
+import { Button, ProgressiveImg, Stack, Typography } from '../../components';
+import { useAsyncCallback, useGameInfo, useMediaQuery } from '../../hooks';
 
 const ImageBlock = styled.div(({ hasPrelaoder }: { hasPrelaoder: boolean }) => ({
   height: 200,
   alignSelf: 'stretch',
-  backgroundImage: !hasPrelaoder ? `url(${defaultPreloaderImage})` : 'none',
+  background: hasPrelaoder ? 'rgba(255, 255, 255, 0.1)' : `url(${defaultPreloaderImage})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   borderRadius: 12,
@@ -17,16 +17,6 @@ const ImageBlock = styled.div(({ hasPrelaoder }: { hasPrelaoder: boolean }) => (
     height: 130,
   },
 }));
-
-const Image = styled.img({
-  height: 200,
-  width: '100%',
-  objectFit: 'fill',
-  borderRadius: 12,
-  '@media (max-height: 440px)': {
-    height: 130,
-  },
-});
 
 const Widget = styled(Stack)({
   maxWidth: 400,
@@ -39,39 +29,28 @@ const Widget = styled(Stack)({
 export type PreloaderProps = {
   ready?: boolean;
   onStartClick?: () => Promise<void> | void;
-  preloaderPath?: string;
-  preloaderTitle?: string;
-  preloaderDescription?: string;
 };
 
-export const Preloader = ({
-  ready = false,
-  onStartClick,
-  preloaderPath,
-  preloaderTitle,
-  preloaderDescription,
-}: PreloaderProps) => {
+export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [handleStartClick, isBusy] = useAsyncCallback(onStartClick);
+  const { preloaderPath, preloaderTitle, preloaderDescription } = useGameInfo();
 
+  console.log('preloaderPath', preloaderPath);
   const preloaderImage = useMemo(
     () => (
       <ImageBlock hasPrelaoder={Boolean(preloaderPath)}>
-        {Boolean(preloaderPath) && <Image src={preloaderPath} alt="" loading="lazy" />}
+        {Boolean(preloaderPath) ? <ProgressiveImg src={preloaderPath} alt="preloaderImage" /> : null}
       </ImageBlock>
     ),
     [preloaderPath],
   );
 
-  const title = useMemo(() => (Boolean(preloaderTitle) ? preloaderTitle : 'Play now & win'), [preloaderTitle]);
+  const title = Boolean(preloaderTitle) ? preloaderTitle : 'Play now & win';
 
-  const description = useMemo(
-    () =>
-      Boolean(preloaderDescription)
-        ? preloaderDescription
-        : 'Unlock NFT and token rewards, work your way to the top of the leaderboard and claim a bonus prize!',
-    [preloaderDescription],
-  );
+  const description = Boolean(preloaderDescription)
+    ? preloaderDescription
+    : 'Unlock NFT and token rewards, work your way to the top of the leaderboard and claim a bonus prize!';
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="center">

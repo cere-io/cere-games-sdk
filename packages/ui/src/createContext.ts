@@ -22,9 +22,6 @@ export type ConfigContext = {
     mysteryBox: string;
     twitterBgUrl: string;
   };
-  dynamicAssets: {
-    preloader: string;
-  };
 };
 
 export type ReportingContext = {
@@ -37,6 +34,9 @@ export type GameInfoContext = {
   url?: string;
   logoUrl?: string;
   tags?: string[];
+  preloaderPath?: string;
+  preloaderTitle: string;
+  preloaderDescription: string;
 };
 
 export type ContextState = {
@@ -72,9 +72,6 @@ const defaultState: ContextState = {
       mysteryBox: '',
       twitterBgUrl: '',
     },
-    dynamicAssets: {
-      preloader: '',
-    },
   },
 
   wallet: {
@@ -84,6 +81,9 @@ const defaultState: ContextState = {
   gameInfo: {
     name: '',
     tags: [''],
+    preloaderPath: undefined,
+    preloaderTitle: '',
+    preloaderDescription: '',
   },
 };
 
