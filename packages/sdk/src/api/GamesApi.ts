@@ -20,6 +20,17 @@ export type Tournament = {
   endDate: Date;
   status: 'DISABLED' | 'ENABLED';
 };
+export type Game = {
+  id: number;
+  guid: string;
+  code: string;
+  title: string;
+  path: string;
+  nftId: string;
+  preloaderTitle: string;
+  preloaderDescription: string;
+  preloaderPath: string;
+};
 export type Session = {
   sessionId: string;
 };
@@ -110,5 +121,12 @@ export class GamesApi {
     const [tournament]: Tournament[] = await response.json();
 
     return tournament;
+  }
+
+  async getGameInfoData() {
+    const endpoint = this.createEndpoint(`/games/by-code/${this.options.gameId}`);
+    const response = await fetch(endpoint);
+    const data: Game = await response.json();
+    return data;
   }
 }
