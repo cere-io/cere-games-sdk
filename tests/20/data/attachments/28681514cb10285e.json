@@ -1,0 +1,23 @@
+[
+  {
+    "url": "https://dev-freeport-gaming.network-dev.aws.cere.io/leader-board/start-session",
+    "method": "POST",
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "gameId": "metaverse-dash-run"
+    },
+    "pending": false,
+    "response": {
+      "headers": {
+        "content-length": "52",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "body": {
+        "sessionId": "d33b7948-f85c-42da-b0ca-7fe4c2b6d19c"
+      },
+      "statusCode": 200
+    }
+  }
+]

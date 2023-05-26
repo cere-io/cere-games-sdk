@@ -1,0 +1,20 @@
+[
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.3bc97979.chunk.js 0:1993 \"Wallet (Outgoing)\" Object",
+    "source": "console-api",
+    "timestamp": 1685091884964
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685091848190 0:491468 \"Cere Games SDK: Stop host event:\" \"blur\" Event",
+    "source": "console-api",
+    "timestamp": 1685091884978
+  },
+  {
+    "level": "INFO",
+    "message": "https://wallet.dev.cere.io/static/js/main.198ffbf9.js 1:39562 \"Opening URL in the frame popup\" \"https://wallet.dev.cere.io/authorize?sessionNamespace=host.docker.internal&callbackUrl=%2Fauthorize%2Fclose%3FsessionNamespace%3Dhost.docker.internal&preopenInstanceId=5c1hi0w40a9&preopenInstanceId=5c1hi0w40a9\"",
+    "source": "console-api",
+    "timestamp": 1685091885116
+  }
+]
