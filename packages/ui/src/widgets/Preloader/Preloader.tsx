@@ -36,7 +36,6 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
   const [handleStartClick, isBusy] = useAsyncCallback(onStartClick);
   const { preloaderPath, preloaderTitle, preloaderDescription } = useGameInfo();
 
-  console.log('preloaderPath', preloaderPath);
   const preloaderImage = useMemo(
     () => (
       <ImageBlock hasPrelaoder={Boolean(preloaderPath)}>
