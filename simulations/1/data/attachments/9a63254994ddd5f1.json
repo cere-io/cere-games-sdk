@@ -1,0 +1,50 @@
+[
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.3bc97979.chunk.js 0:1993 \"Wallet (Outgoing)\" Object",
+    "source": "console-api",
+    "timestamp": 1685108178958
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685108135726 0:491468 \"Cere Games SDK: Stop host event:\" \"blur\" Event",
+    "source": "console-api",
+    "timestamp": 1685108178958
+  },
+  {
+    "level": "INFO",
+    "message": "https://wallet.dev.cere.io/static/js/main.198ffbf9.js 1:39562 \"Opening URL in the frame popup\" \"https://wallet.dev.cere.io/authorize?sessionNamespace=host.docker.internal&callbackUrl=%2Fauthorize%2Fclose%3FsessionNamespace%3Dhost.docker.internal&preopenInstanceId=23vs1cz5mctj&preopenInstanceId=23vs1cz5mctj\"",
+    "source": "console-api",
+    "timestamp": 1685108179074
+  },
+  {
+    "level": "WARNING",
+    "message": "https://static.hotjar.com/c/hotjar-2133914.js?sv=7 2:6557 \"Hotjar not launching due to suspicious userAgent:\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/113.0.5672.126 Safari/537.36\"",
+    "source": "console-api",
+    "timestamp": 1685108180022
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.198ffbf9.js 1:55573 \"Popup (Outgoing)\" \"popup.23vs1cz5mctj\" Object",
+    "source": "console-api",
+    "timestamp": 1685108180309
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.198ffbf9.js 1:55693 \"Popup (Incoming)\" \"popup.23vs1cz5mctj\" Object",
+    "source": "console-api",
+    "timestamp": 1685108180414
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.198ffbf9.js 1:55573 \"Popup (Outgoing)\" \"popup.23vs1cz5mctj\" Object",
+    "source": "console-api",
+    "timestamp": 1685108180415
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.198ffbf9.js 1:55693 \"Popup (Incoming)\" \"popup.23vs1cz5mctj\" Object",
+    "source": "console-api",
+    "timestamp": 1685108180484
+  }
+]
