@@ -199,7 +199,7 @@ export class GamesSDK {
     this.sessionEvents.push({ timestamp: Date.now(), ...event });
   }
 
-  async showPreloader({ onStart }: ShowPreloaderOptions = {}) {
+  showPreloader({ onStart }: ShowPreloaderOptions = {}) {
     const preloader = document.createElement('cere-preloader');
     const { open, ...modal } = UI.createModal(preloader);
 
