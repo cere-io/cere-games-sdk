@@ -49,7 +49,7 @@ const CrownImage = styled.img({
   left: -65,
 });
 
-const StyledNumber = styled.span({
+const Score = styled.span({
   background: 'linear-gradient(79.06deg, #75ACFF 0%, #27E3C1 100%)',
   backgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
@@ -115,9 +115,11 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
         <Stack style={{ position: 'relative', marginBottom: 28 }}>
           <CrownImage src={staticAssets.crown} />
           <Stack style={{ zIndex: 2 }}>
-            <HeaderTitle>Congratulations!</HeaderTitle>
-            <HeaderSubTitle>
-              Your score: <StyledNumber>{score}</StyledNumber>
+            <HeaderTitle role="heading" aria-level={1}>
+              Congratulations!
+            </HeaderTitle>
+            <HeaderSubTitle role="heading" aria-level={2}>
+              Your score: <Score>{score}</Score>
             </HeaderSubTitle>
           </Stack>
         </Stack>
@@ -127,7 +129,7 @@ export const ConnectWallet = ({ onConnect, score }: ConnectWalletProps) => {
         </Stack>
       </Stack>
       <Stack spacing={2}>
-        <Connect data-testid="connectWallet" loading={isBusy} onClick={handleConnect}>
+        <Connect loading={isBusy} onClick={handleConnect}>
           {!isReady ? 'Preparing... Please wait' : `Claim ${newWalletReward} free tokens`}
         </Connect>
         <ByCereText>Powered by Cere Gaming Cloud</ByCereText>

@@ -4,6 +4,7 @@ import { configure } from '@testing-library/webdriverio';
 
 import { options, rootDir } from './options';
 import { setup } from './setup';
+import { specs, suites } from '../specs';
 
 const bundleRoot = path.resolve(rootDir, 'build');
 
@@ -65,14 +66,10 @@ if (!baseUrl) {
 export const config: WebdriverIO.Config = {
   baseUrl,
   services,
-
+  specs,
+  suites,
   runner: 'local',
-
-  specs: ['./specs/**/*.ts'],
-  suites: {
-    simulation: ['./specs/Game.e2e.ts'],
-  },
-
+  rootDir: path.resolve(__dirname, '../specs'),
   capabilities: [chromeCapability],
 
   logLevel: 'warn',

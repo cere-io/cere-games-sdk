@@ -63,7 +63,7 @@ export const TableDataRow = ({ data, active, hasReward }: TableDataRowProps) => 
           <Rank rankColor={rankColors[data.rank - 1]}>{data.rank}</Rank>,
           <Typography variant="body2">
             <CurrentPlayer>
-              <Truncate variant="hex" maxLength={10} text={data.address} />
+              <Truncate aria-label="Address" variant="hex" maxLength={10} text={data.address} />
               {active && <CurrentPlayerIcon />}
             </CurrentPlayer>
           </Typography>,
