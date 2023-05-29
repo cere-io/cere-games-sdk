@@ -2,7 +2,7 @@
 
 ### vNext
 
-- Add WebDriverIO auto test
+- [[Feature]](https://www.notion.so/cere/UI-tests-for-Wallet-Client-and-Games-49a07b7b50114f49bd4c012c6e6220f5?pvs=4) Add WebDriverIO auto test
 - Add the SDK integration run-able examples (`/examples`)
 - [[Feature]](https://www.notion.so/cere/Update-Leaderboard-modal-to-show-tournaments-65b3a7f4d8d848a384d36618e01b338c?pvs=4) Update Leaderboard modal to show tournaments
 
