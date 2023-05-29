@@ -1,0 +1,435 @@
+[
+  {
+    "url": "https://dev-freeport-gaming.network-dev.aws.cere.io/session-store/save",
+    "method": "POST",
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "walletId": "0xb1bcf8b02bce37224c5654435efba333f8dd002d",
+      "events": [
+        {
+          "timestamp": 1685342975264,
+          "eventType": "SCORE_EARNED",
+          "payload": {
+            "value": 18
+          }
+        }
+      ],
+      "gameCode": "metaverse-dash-run"
+    },
+    "pending": false,
+    "response": {
+      "headers": {
+        "content-length": "672",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "body": {
+        "code": 500,
+        "message": "bad response (status=403, headers={\"date\":\"Mon, 29 May 2023 06:49:50 GMT\",\"content-type\":\"text/plain; charset=utf-8\",\"content-length\":\"90\",\"connection\":\"close\",\"vary\":\"Origin, Accept-Encoding\",\"x-content-type-options\":\"nosniff\"}, body=\"{\\\"jsonrpc\\\":\\\"2.0\\\",\\\"error\\\":{\\\"code\\\":-32002,\\\"message\\\":\\\"rejected due to project ID settings\\\"}}\\n\", requestBody=\"{\\\"method\\\":\\\"eth_accounts\\\",\\\"params\\\":[],\\\"id\\\":50,\\\"jsonrpc\\\":\\\"2.0\\\"}\", requestMethod=\"POST\", url=\"https://polygon-mumbai.infura.io/v3/248b37a1123943a9b5c975eb2c93a2ab\", code=SERVER_ERROR, version=web/5.7.1)"
+      },
+      "statusCode": 500
+    }
+  },
+  {
+    "url": "https://dev-freeport-gaming.network-dev.aws.cere.io/leader-board",
+    "method": "POST",
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "score": 18,
+      "sessionId": "d10b9534-c064-4794-9034-2953add2ac29",
+      "walletId": "0xb1bcf8b02bce37224c5654435efba333f8dd002d",
+      "gameId": "metaverse-dash-run"
+    },
+    "pending": false,
+    "response": {
+      "headers": {
+        "content-length": "236",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "body": {
+        "id": 383,
+        "gameId": "metaverse-dash-run",
+        "walletId": "0xb1bcf8b02bce37224c5654435efba333f8dd002d",
+        "score": 18,
+        "createdAt": "2023-05-29T06:49:50.933Z",
+        "updatedAt": "2023-05-29T06:49:50.933Z",
+        "sessionId": "d10b9534-c064-4794-9034-2953add2ac29"
+      },
+      "statusCode": 201
+    }
+  },
+  {
+    "url": "https://dev-freeport-gaming.network-dev.aws.cere.io/leader-board",
+    "method": "POST",
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "score": 18,
+      "sessionId": "d10b9534-c064-4794-9034-2953add2ac29",
+      "walletId": "0xb1bcf8b02bce37224c5654435efba333f8dd002d",
+      "gameId": "metaverse-dash-run"
+    },
+    "pending": false,
+    "response": {
+      "headers": {
+        "content-length": "236",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "body": {
+        "id": 383,
+        "gameId": "metaverse-dash-run",
+        "walletId": "0xb1bcf8b02bce37224c5654435efba333f8dd002d",
+        "score": 18,
+        "createdAt": "2023-05-29T06:49:50.933Z",
+        "updatedAt": "2023-05-29T06:49:50.933Z",
+        "sessionId": "d10b9534-c064-4794-9034-2953add2ac29"
+      },
+      "statusCode": 201
+    }
+  },
+  {
+    "url": "https://dev-freeport-gaming.network-dev.aws.cere.io/leader-board/tournament/game-id/metaverse-dash-run",
+    "method": "GET",
+    "headers": {},
+    "pending": false,
+    "response": {
+      "headers": {
+        "content-length": "2486",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "body": [
+        {
+          "walletId": "0x5ccdc10e21be237a7a116dbd2821c34c1062f9cb",
+          "score": 164
+        },
+        {
+          "walletId": "0x5b7741b9652d6d6df153dfbb0fff1e9cd8b2a641",
+          "score": 22
+        },
+        {
+          "walletId": "0x4423098e0b46898d7eeae8906b87beacfce17fbd",
+          "score": 22
+        },
+        {
+          "walletId": "0x3b660ffb64bb143b93350621cc3ba0c906cfdb79",
+          "score": 22
+        },
+        {
+          "walletId": "0xfd12e64f373ca04bd29231584794abbf1f255cf8",
+          "score": 22
+        },
+        {
+          "walletId": "0xaa60c25a62ca295434b612cf901e078fae9d1ee4",
+          "score": 22
+        },
+        {
+          "walletId": "0x2350d687a8bf2e2be0ef5a28940b05107d79211d",
+          "score": 21
+        },
+        {
+          "walletId": "0xda530f84d260d461473bc0f12248b8549ed749a5",
+          "score": 21
+        },
+        {
+          "walletId": "0xf6c35b7bc68a1a9d062d3075f8ad686c1ff41376",
+          "score": 19
+        },
+        {
+          "walletId": "0x7cf26aea0c559313ec9d81553977f99f25ef0690",
+          "score": 19
+        },
+        {
+          "walletId": "0x2738b5ebad0740f0c9c9289f5cd39a16b0aa10a6",
+          "score": 19
+        },
+        {
+          "walletId": "0xb1bcf8b02bce37224c5654435efba333f8dd002d",
+          "score": 18
+        },
+        {
+          "walletId": "0xc687acf54a9da566d488b57d8131e0043e5fc406",
+          "score": 17
+        },
+        {
+          "walletId": "0xd87479c8bab09c0e95c171b86147e0f919a1e98f",
+          "score": 17
+        },
+        {
+          "walletId": "0x5aca1d048205e9754576d456686721d4f8d470ae",
+          "score": 17
+        },
+        {
+          "walletId": "0xc83731496bcdc0ed7361872087750b02c4dfa1db",
+          "score": 17
+        },
+        {
+          "walletId": "0x52dfe2f802d99d26dbef8af54d0cc2b8439840c7",
+          "score": 17
+        },
+        {
+          "walletId": "0xfb4e1c5e622e830b5666a94f98ba13c941cea879",
+          "score": 17
+        },
+        {
+          "walletId": "0x7ae1fa7a0ca437a4dda2531eaadbb096eb09df4e",
+          "score": 17
+        },
+        {
+          "walletId": "0x7981b6359e44c58c71bc16cf915a637653e2e2fd",
+          "score": 17
+        },
+        {
+          "walletId": "0x428b6e7ca3f1dcd5f9d4f1e550d5f0808174ffd4",
+          "score": 17
+        },
+        {
+          "walletId": "0xb7df81ab2ca1ae05ff577aa64d636d4c8b79c1b6",
+          "score": 17
+        },
+        {
+          "walletId": "0x9fb3dba09f19925261c121397dd2e7112d11d87c",
+          "score": 17
+        },
+        {
+          "walletId": "0x7df8b17c6f5eab0b952e4909dd5b011846730524",
+          "score": 17
+        },
+        {
+          "walletId": "0xf4803c51e36214a710104d2cbe009159add271d9",
+          "score": 17
+        },
+        {
+          "walletId": "0x24518c1a1443c807da01766af77382b0e63141d5",
+          "score": 17
+        },
+        {
+          "walletId": "0x96de3076803cb0b3821ff38c6c0f72e0bf57d8fc",
+          "score": 17
+        },
+        {
+          "walletId": "0x1a6d20fe28cc8f49b24edbfa5ea814f5d87d1989",
+          "score": 17
+        },
+        {
+          "walletId": "0x83734ece527ecf17f06d563dae186e48e3e3571d",
+          "score": 17
+        },
+        {
+          "walletId": "0x99fb638168b452d56f2378fcf66c6f58a30d22b2",
+          "score": 17
+        },
+        {
+          "walletId": "0x2c92f242294c8f0598af6cbe7571af1343dec3e2",
+          "score": 17
+        },
+        {
+          "walletId": "0x470344e7902b5ff02ba33bd51ef158ab3f314c77",
+          "score": 17
+        },
+        {
+          "walletId": "0x76ec3033887210fbd6d9f392a9f41b1b36bc5aef",
+          "score": 17
+        },
+        {
+          "walletId": "0x8a56074dffdb4aae2e8b65f35d431770ac7b695a",
+          "score": 16
+        },
+        {
+          "walletId": "0xb47df9894e6773305e0c5aa8d20ee437c89fbb70",
+          "score": 16
+        },
+        {
+          "walletId": "0x0d2d99cc63adc2515bc4d5f243aa7a681f88fff7",
+          "score": 15
+        }
+      ],
+      "statusCode": 200
+    }
+  },
+  {
+    "url": "https://dev-freeport-gaming.network-dev.aws.cere.io/leader-board/tournament/game-id/metaverse-dash-run",
+    "method": "GET",
+    "headers": {},
+    "pending": false,
+    "response": {
+      "headers": {
+        "content-length": "2486",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "body": [
+        {
+          "walletId": "0x5ccdc10e21be237a7a116dbd2821c34c1062f9cb",
+          "score": 164
+        },
+        {
+          "walletId": "0x5b7741b9652d6d6df153dfbb0fff1e9cd8b2a641",
+          "score": 22
+        },
+        {
+          "walletId": "0x4423098e0b46898d7eeae8906b87beacfce17fbd",
+          "score": 22
+        },
+        {
+          "walletId": "0x3b660ffb64bb143b93350621cc3ba0c906cfdb79",
+          "score": 22
+        },
+        {
+          "walletId": "0xfd12e64f373ca04bd29231584794abbf1f255cf8",
+          "score": 22
+        },
+        {
+          "walletId": "0xaa60c25a62ca295434b612cf901e078fae9d1ee4",
+          "score": 22
+        },
+        {
+          "walletId": "0x2350d687a8bf2e2be0ef5a28940b05107d79211d",
+          "score": 21
+        },
+        {
+          "walletId": "0xda530f84d260d461473bc0f12248b8549ed749a5",
+          "score": 21
+        },
+        {
+          "walletId": "0xf6c35b7bc68a1a9d062d3075f8ad686c1ff41376",
+          "score": 19
+        },
+        {
+          "walletId": "0x7cf26aea0c559313ec9d81553977f99f25ef0690",
+          "score": 19
+        },
+        {
+          "walletId": "0x2738b5ebad0740f0c9c9289f5cd39a16b0aa10a6",
+          "score": 19
+        },
+        {
+          "walletId": "0xb1bcf8b02bce37224c5654435efba333f8dd002d",
+          "score": 18
+        },
+        {
+          "walletId": "0xc687acf54a9da566d488b57d8131e0043e5fc406",
+          "score": 17
+        },
+        {
+          "walletId": "0xd87479c8bab09c0e95c171b86147e0f919a1e98f",
+          "score": 17
+        },
+        {
+          "walletId": "0x5aca1d048205e9754576d456686721d4f8d470ae",
+          "score": 17
+        },
+        {
+          "walletId": "0xc83731496bcdc0ed7361872087750b02c4dfa1db",
+          "score": 17
+        },
+        {
+          "walletId": "0x52dfe2f802d99d26dbef8af54d0cc2b8439840c7",
+          "score": 17
+        },
+        {
+          "walletId": "0xfb4e1c5e622e830b5666a94f98ba13c941cea879",
+          "score": 17
+        },
+        {
+          "walletId": "0x7ae1fa7a0ca437a4dda2531eaadbb096eb09df4e",
+          "score": 17
+        },
+        {
+          "walletId": "0x7981b6359e44c58c71bc16cf915a637653e2e2fd",
+          "score": 17
+        },
+        {
+          "walletId": "0x428b6e7ca3f1dcd5f9d4f1e550d5f0808174ffd4",
+          "score": 17
+        },
+        {
+          "walletId": "0xb7df81ab2ca1ae05ff577aa64d636d4c8b79c1b6",
+          "score": 17
+        },
+        {
+          "walletId": "0x9fb3dba09f19925261c121397dd2e7112d11d87c",
+          "score": 17
+        },
+        {
+          "walletId": "0x7df8b17c6f5eab0b952e4909dd5b011846730524",
+          "score": 17
+        },
+        {
+          "walletId": "0xf4803c51e36214a710104d2cbe009159add271d9",
+          "score": 17
+        },
+        {
+          "walletId": "0x24518c1a1443c807da01766af77382b0e63141d5",
+          "score": 17
+        },
+        {
+          "walletId": "0x96de3076803cb0b3821ff38c6c0f72e0bf57d8fc",
+          "score": 17
+        },
+        {
+          "walletId": "0x1a6d20fe28cc8f49b24edbfa5ea814f5d87d1989",
+          "score": 17
+        },
+        {
+          "walletId": "0x83734ece527ecf17f06d563dae186e48e3e3571d",
+          "score": 17
+        },
+        {
+          "walletId": "0x99fb638168b452d56f2378fcf66c6f58a30d22b2",
+          "score": 17
+        },
+        {
+          "walletId": "0x2c92f242294c8f0598af6cbe7571af1343dec3e2",
+          "score": 17
+        },
+        {
+          "walletId": "0x470344e7902b5ff02ba33bd51ef158ab3f314c77",
+          "score": 17
+        },
+        {
+          "walletId": "0x76ec3033887210fbd6d9f392a9f41b1b36bc5aef",
+          "score": 17
+        },
+        {
+          "walletId": "0x8a56074dffdb4aae2e8b65f35d431770ac7b695a",
+          "score": 16
+        },
+        {
+          "walletId": "0xb47df9894e6773305e0c5aa8d20ee437c89fbb70",
+          "score": 16
+        },
+        {
+          "walletId": "0x0d2d99cc63adc2515bc4d5f243aa7a681f88fff7",
+          "score": 15
+        }
+      ],
+      "statusCode": 200
+    }
+  },
+  {
+    "url": "https://dev-freeport-gaming.network-dev.aws.cere.io/tournament/active/metaverse-dash-run",
+    "method": "GET",
+    "headers": {},
+    "pending": false,
+    "response": {
+      "headers": {
+        "content-length": "169",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "body": [
+        {
+          "id": 16,
+          "title": "test test tes title",
+          "subtitle": "Subtitle test test ",
+          "startDate": "2023-05-25T21:00:00.000Z",
+          "endDate": "2023-05-30T21:00:00.000Z",
+          "status": "ENABLED"
+        }
+      ],
+      "statusCode": 200
+    }
+  }
+]
