@@ -209,7 +209,7 @@ export const Leaderboard = ({ data, activeTournament, onPlayAgain, onTweet }: Le
         </StyledStack>
       </Stack>
 
-      <Table data={data} activeAddress={address} />
+      <Table data={data} activeAddress={address} hasTournament={Boolean(activeTournament)} />
     </Widget>
   );
 };
