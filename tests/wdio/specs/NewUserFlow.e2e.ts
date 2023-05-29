@@ -58,7 +58,7 @@ describe('New user flow', () => {
     walletAddress = await leaderboardModal.getWalletAddress();
   });
 
-  it('Current user ballanse should be 0', async () => {
+  it('Current user ballanсe should be 0', async () => {
     const balance = await leaderboardModal.getBalance();
 
     expect(balance).toEqual(0);
@@ -97,7 +97,7 @@ describe('New user flow', () => {
     await walletApprove.waitUntilClosed();
   });
 
-  it('should reload the page and show Preloader', async () => {
+  it('The page should reload and preloader appear', async () => {
     await preloader.element.waitForDisplayed();
   });
 });
