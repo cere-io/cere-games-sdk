@@ -1,5 +1,10 @@
 ## Release Notes:
 
+### v0.4.0
+
+- Update Cere Wallet SDK
+- Update Leaderboard modal to show tournaments
+
 ### v0.3.0
 
 - Fix ran icon issue on Leaderboard
