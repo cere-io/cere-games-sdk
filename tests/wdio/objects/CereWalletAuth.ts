@@ -17,6 +17,15 @@ export class CereWalletAuth extends CereWallet {
     return browser.findByRole$('button', { name: 'Verify' });
   }
 
+  async enterRandomEmail() {
+    const emailSuffix = Math.random().toString(32).slice(2);
+    const email = `auto+${emailSuffix}@test.io`;
+
+    await this.emailInput.setValue(email);
+
+    return email;
+  }
+
   async enterOTP(otp: string) {
     await $('.react-code-input').waitForDisplayed();
 

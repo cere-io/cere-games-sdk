@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { keyframes } from '@emotion/react';
 
 import { Typography } from '../Typography';
@@ -88,6 +88,7 @@ const ProgressBar = styled.div(() => ({
 }));
 
 export const Alert = () => {
+  const descriptionId = useId();
   const { newWalletReward } = useConfigContext();
   const { balance, isNewUser } = useWalletContext();
   const [visible, setVisibility] = useState(true);
@@ -97,12 +98,12 @@ export const Alert = () => {
   }
 
   return (
-    <Container>
+    <Container role="alert" aria-describedby={descriptionId}>
       <span>🎉</span>
-      <StyledTypography variant="body2" color="text-primary">
+      <StyledTypography id={descriptionId} variant="body2" color="text-primary">
         You received <b>{newWalletReward} $CERE</b> tokens for setting up your wallet!
       </StyledTypography>
-      <CloseAlert onClick={() => setVisibility(false)} />
+      <CloseAlert aria-label="Close" onClick={() => setVisibility(false)} />
       <ProgressContainer>
         <ProgressBar onAnimationEnd={() => setVisibility(false)} />
       </ProgressContainer>
