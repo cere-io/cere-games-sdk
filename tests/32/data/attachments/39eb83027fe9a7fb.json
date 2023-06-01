@@ -1,0 +1,86 @@
+[
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685612504243 0:491455 \"Cere Games SDK: Stop host event:\" \"focus\" FocusEvent",
+    "source": "console-api",
+    "timestamp": 1685612548957
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685612504243 0:491455 \"Cere Games SDK: Stop host event:\" \"focusin\" FocusEvent",
+    "source": "console-api",
+    "timestamp": 1685612548957
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685612504243 0:491455 \"Cere Games SDK: Stop host event:\" \"blur\" FocusEvent",
+    "source": "console-api",
+    "timestamp": 1685612548962
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685612504243 0:491455 \"Cere Games SDK: Stop host event:\" \"focusout\" FocusEvent",
+    "source": "console-api",
+    "timestamp": 1685612548963
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685612504243 0:491661 \"Cere Games SDK: Resume host events\"",
+    "source": "console-api",
+    "timestamp": 1685612548966
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685612504243 0:491591 \"Cere Games SDK: Suspend host events\"",
+    "source": "console-api",
+    "timestamp": 1685612548967
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:4588 \"RPC (Request)\" Object",
+    "source": "console-api",
+    "timestamp": 1685612549012
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:4625 \"RPC (Response)\" Object",
+    "source": "console-api",
+    "timestamp": 1685612549013
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:1879 \"Wallet (Incoming)\" Object",
+    "source": "console-api",
+    "timestamp": 1685612549017
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:1879 \"Wallet (Incoming)\" Object",
+    "source": "console-api",
+    "timestamp": 1685612549017
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.bdd3eace.js 1:59209 \"Popup (Outgoing)\" \"popup.6qbm34jbfs4\" Object",
+    "source": "console-api",
+    "timestamp": 1685612549017
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:1993 \"Wallet (Outgoing)\" Object",
+    "source": "console-api",
+    "timestamp": 1685612549025
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685612504243 0:491455 \"Cere Games SDK: Stop host event:\" \"blur\" Event",
+    "source": "console-api",
+    "timestamp": 1685612549032
+  },
+  {
+    "level": "INFO",
+    "message": "https://wallet.dev.cere.io/static/js/main.bdd3eace.js 1:43198 \"Opening URL in the frame popup\" \"https://wallet.dev.cere.io/authorize?sessionNamespace=host.docker.internal&callbackUrl=%2Fauthorize%2Fclose%3FsessionNamespace%3Dhost.docker.internal&preopenInstanceId=6qbm34jbfs4&preopenInstanceId=6qbm34jbfs4\"",
+    "source": "console-api",
+    "timestamp": 1685612549119
+  }
+]
