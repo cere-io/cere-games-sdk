@@ -26,7 +26,10 @@ export class LeaderboardModal extends Widget {
   }
 
   async getRewardNotificationAmount() {
-    const notification = await browser.waitUntil(() => this.shadowRoot.getByRole('alert'), { timeout: 30000 });
+    const notification = await browser.waitUntil(() => this.shadowRoot.queryByRole('alert'), {
+      timeout: 30000,
+      timeoutMsg: 'The reward notification did not appear in time',
+    });
 
     const text = await notification.getText();
     const [match, amount] = text.match(/(\d+) \$CERE tokens/i) || [];

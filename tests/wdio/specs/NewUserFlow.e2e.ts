@@ -86,6 +86,8 @@ describe('New user flow', () => {
   });
 
   step('Press `Play again` button', async () => {
+    await expect(leaderboardModal.playAgainButton).toBeClickable();
+
     await leaderboardModal.playAgainButton.click();
   });
 
