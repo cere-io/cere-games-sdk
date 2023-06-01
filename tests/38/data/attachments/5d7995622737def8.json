@@ -1,0 +1,230 @@
+[
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685621561727 0:709565 \"CERE Games SDK: version 0.4.0\"",
+    "source": "console-api",
+    "timestamp": 1685621594471
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1685621561727 0:1956 \"Release: v1.0.0+build.141\"",
+    "source": "console-api",
+    "timestamp": 1685621594496
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1685621561727 0:304546 \"Chat bubble plugins.\\nDeveloped by: Duc Le - https://www.linkedin.com/in/ducle95\"",
+    "source": "console-api",
+    "timestamp": 1685621594527
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1685621561727 0:206743 \"serving universal version ...\"",
+    "source": "console-api",
+    "timestamp": 1685621594536
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1685621561727 0:235746 \"Initiating sound handler\"",
+    "source": "console-api",
+    "timestamp": 1685621594539
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1685621561727 0 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu",
+    "source": "other",
+    "timestamp": 1685621594594
+  },
+  {
+    "level": "SEVERE",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/media/audio/land.ogg - Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "source": "network",
+    "timestamp": 1685621594658
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - Failed to decode downloaded font: http://host.docker.internal:4567/examples/metaverse-dash-run/media/fonts/arcadeclassic.woff2",
+    "source": "other",
+    "timestamp": 1685621594725
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - OTS parsing error: invalid sfntVersion: -2147367933",
+    "source": "other",
+    "timestamp": 1685621594725
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - Failed to decode downloaded font: http://host.docker.internal:4567/examples/metaverse-dash-run/media/fonts/arcadeclassic.woff2",
+    "source": "other",
+    "timestamp": 1685621594725
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - OTS parsing error: invalid sfntVersion: -2147367933",
+    "source": "other",
+    "timestamp": 1685621594727
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - Failed to decode downloaded font: http://host.docker.internal:4567/examples/metaverse-dash-run/media/fonts/arcadeclassic.woff2",
+    "source": "other",
+    "timestamp": 1685621594727
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - OTS parsing error: invalid sfntVersion: -2147367933",
+    "source": "other",
+    "timestamp": 1685621594727
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - Failed to decode downloaded font: http://host.docker.internal:4567/examples/metaverse-dash-run/media/fonts/arcadeclassic.woff2",
+    "source": "other",
+    "timestamp": 1685621594727
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - OTS parsing error: invalid sfntVersion: -2147367933",
+    "source": "other",
+    "timestamp": 1685621594727
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685621561727 0:491591 \"Cere Games SDK: Suspend host events\"",
+    "source": "console-api",
+    "timestamp": 1685621594753
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.bdd3eace.js 1:59209 \"Popup (Outgoing)\" \"network.5a04faaca92b034ac48feca96d8d8e91\" Object",
+    "source": "console-api",
+    "timestamp": 1685621596079
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.bdd3eace.js 1:59209 \"Popup (Outgoing)\" \"activity.5a04faaca92b034ac48feca96d8d8e91\" Object",
+    "source": "console-api",
+    "timestamp": 1685621596083
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.bdd3eace.js 1:59209 \"Popup (Outgoing)\" \"context.5a04faaca92b034ac48feca96d8d8e91\" Object",
+    "source": "console-api",
+    "timestamp": 1685621596084
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.bdd3eace.js 1:59209 \"Popup (Outgoing)\" \"account.5a04faaca92b034ac48feca96d8d8e91\" Object",
+    "source": "console-api",
+    "timestamp": 1685621596089
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:1993 \"Wallet (Outgoing)\" Object",
+    "source": "console-api",
+    "timestamp": 1685621596101
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ 43:20 \" *** Game Loaded ***\"",
+    "source": "console-api",
+    "timestamp": 1685621596196
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1685621561727 0:443506 \"MarketJSGameCenter settings not defined in game settings\"",
+    "source": "console-api",
+    "timestamp": 1685621596200
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1685621561727 0:258672 \"Plug in Storage Manager\"",
+    "source": "console-api",
+    "timestamp": 1685621596202
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1685621561727 0 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu",
+    "source": "other",
+    "timestamp": 1685621596207
+  },
+  {
+    "level": "WARNING",
+    "message": "https://web-sdk.smartlook.com/es6/init.ff22ec37977e84c7477a.js 1:2138 \"[🎥 Smartlook] Smartlook is stopped. Automation framework is detected.\"",
+    "source": "console-api",
+    "timestamp": 1685621596420
+  },
+  {
+    "level": "WARNING",
+    "message": "https://static.hotjar.com/c/hotjar-2133914.js?sv=7 2:6557 \"Hotjar not launching due to suspicious userAgent:\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/113.0.5672.126 Safari/537.36\"",
+    "source": "console-api",
+    "timestamp": 1685621596450
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685621561727 0:334109 \"setupWeb3 running\"",
+    "source": "console-api",
+    "timestamp": 1685621597132
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685621561727 0:336656 \"Torus - injected provider\"",
+    "source": "console-api",
+    "timestamp": 1685621597139
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:1879 \"Wallet (Incoming)\" Object",
+    "source": "console-api",
+    "timestamp": 1685621597145
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:1993 \"Wallet (Outgoing)\" Object",
+    "source": "console-api",
+    "timestamp": 1685621597150
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685621561727 0:491661 \"Cere Games SDK: Resume host events\"",
+    "source": "console-api",
+    "timestamp": 1685621597163
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685621561727 0:491591 \"Cere Games SDK: Suspend host events\"",
+    "source": "console-api",
+    "timestamp": 1685621597163
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:4588 \"RPC (Request)\" Object",
+    "source": "console-api",
+    "timestamp": 1685621597205
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:4625 \"RPC (Response)\" Object",
+    "source": "console-api",
+    "timestamp": 1685621597205
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:4588 \"RPC (Request)\" Object",
+    "source": "console-api",
+    "timestamp": 1685621597206
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:4625 \"RPC (Response)\" Object",
+    "source": "console-api",
+    "timestamp": 1685621597206
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685621561727 0:313723 \"initialized state\"",
+    "source": "console-api",
+    "timestamp": 1685621597209
+  }
+]
