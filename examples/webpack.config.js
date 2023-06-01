@@ -43,5 +43,9 @@ module.exports = {
     client: false,
     hot: false,
     liveReload: false,
+    devMiddleware: {
+      index: false,
+      writeToDisk: true,
+    },
   },
 };

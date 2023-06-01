@@ -34,6 +34,9 @@ export type GameInfoContext = {
   url?: string;
   logoUrl?: string;
   tags?: string[];
+  preloaderPath?: string;
+  preloaderTitle: string;
+  preloaderDescription: string;
 };
 
 export type ContextState = {
@@ -78,6 +81,9 @@ const defaultState: ContextState = {
   gameInfo: {
     name: '',
     tags: [''],
+    preloaderPath: undefined,
+    preloaderTitle: '',
+    preloaderDescription: '',
   },
 };
 

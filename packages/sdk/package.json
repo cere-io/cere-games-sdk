@@ -1,6 +1,6 @@
 {
   "name": "@cere/games-sdk",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Cere Games SDK to integrate games with CERE infrastructure",
   "sideEffects": false,
   "main": "dist/bundle.umd.js",
@@ -22,8 +22,8 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@cere/embed-wallet": "0.9.0",
-    "@cere/games-sdk-ui": "0.3.0",
+    "@cere/embed-wallet": "0.11.0",
+    "@cere/games-sdk-ui": "0.4.0",
     "react-gtm-module": "^2.0.11"
   },
   "devDependencies": {

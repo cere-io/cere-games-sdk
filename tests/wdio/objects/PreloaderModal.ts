@@ -6,6 +6,6 @@ export class PreloaderModal extends Widget {
   }
 
   get startButton() {
-    return this.shadowRoot.findByTestId$('preloaderStart');
+    return this.shadowRoot.findByRole$('button', { name: /start/i });
   }
 }

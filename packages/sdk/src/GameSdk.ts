@@ -123,10 +123,13 @@ export class GamesSDK {
    * TODO: Fetch game info from the Game Portal API
    */
   private async getGameInfo(info: GameInfo = {}) {
+    const { preloaderPath, preloaderTitle, preloaderDescription } = await this.api.getGameInfoData();
     return {
       name: document.title,
       url: window.location.href,
-
+      preloaderPath,
+      preloaderTitle,
+      preloaderDescription,
       ...this.options.gameInfo,
       ...info,
     };
@@ -226,8 +229,10 @@ export class GamesSDK {
 
         await onBeforeLoad?.();
         const data = await this.api.getLeaderboard();
+        const activeTournament = await this.api.getActiveTournamentData();
 
         leaderboard.update({
+          activeTournament,
           data,
           onPlayAgain: async () => {
             const { email } = await this.wallet.getUserInfo();
