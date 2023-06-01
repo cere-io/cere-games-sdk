@@ -1,0 +1,195 @@
+[
+  {
+    "url": "https://client-api.auryc.com/siteconfig?lib=web",
+    "method": "GET",
+    "headers": {
+      "content-type": "application/json",
+      "x-authorized-identity": "6594-Main-prod-heap",
+      "x-authorized-token": "5215a28c097e46366274dd946c30a08f"
+    },
+    "pending": false,
+    "response": {
+      "headers": {
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "content-encoding": "gzip",
+        "content-length": "992",
+        "content-type": "application/json",
+        "date": "Thu, 01 Jun 2023 10:26:45 GMT",
+        "expires": "0",
+        "pragma": "no-cache",
+        "server": "istio-envoy",
+        "vary": "accept-encoding,origin,access-control-request-headers,access-control-request-method,accept-encoding",
+        "x-content-type-options": "nosniff",
+        "x-envoy-upstream-service-time": "2",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "1; mode=block"
+      },
+      "body": {
+        "totalSession": 0,
+        "countingPeriod": null,
+        "countingSession": 0,
+        "sessionThreshold": -1,
+        "isrInput": 0,
+        "isrProcessed": 0,
+        "baseConfig": {
+          "enabled": true,
+          "siteid": "6594-Main-prod-heap",
+          "siteToken": "5215a28c097e46366274dd946c30a08f",
+          "browser_cutoff": {
+            "IE": 11,
+            "Internet Explorer": 11,
+            "Safari": 5.1,
+            "Firefox": 31,
+            "Chrome": 36,
+            "Chrome Mobile": 46,
+            "Opera": 25
+          },
+          "platform_cutoff": {
+            "Android": 4.1,
+            "Winphone": 8,
+            "iPod": 7,
+            "iPhone": 7,
+            "iPad": 7
+          }
+        },
+        "recordConfig": {
+          "enabled": true,
+          "keepInputs": false,
+          "serializeCss": true,
+          "keepInputsWhiteList": ""
+        },
+        "behaviorConfig": {
+          "enabled": true,
+          "feedbackEnabled": false,
+          "siteid": "6594-Main-prod-heap",
+          "autotracking": true,
+          "disableWinName": true,
+          "sessionDuration": 1800,
+          "trackingMode": "new",
+          "doNotTrack": {
+            "blocked": {
+              ".*": ""
+            }
+          },
+          "trackConsole": false,
+          "frustrationTrack": {
+            "deadUrl": [
+              ".*404\\.htm.*"
+            ],
+            "enabled": true
+          },
+          "userProperties": [
+            {
+              "properties": [
+                {
+                  "name": "js_error",
+                  "dataType": "customEvent",
+                  "attribute": [
+                    {
+                      "name": "relative_error_loc",
+                      "value": "fileRelativeLocation"
+                    },
+                    {
+                      "name": "error_message",
+                      "value": "message"
+                    },
+                    {
+                      "name": "error_lineNo",
+                      "value": "lineNo"
+                    },
+                    {
+                      "name": "error_columnNo",
+                      "value": "columnNo"
+                    }
+                  ],
+                  "handler": "aurycJSErrorHanlder"
+                }
+              ],
+              "triggers": [
+                {
+                  "event": "error",
+                  "object": "window"
+                }
+              ]
+            },
+            {
+              "context": {
+                "cssSelector": "[class*='error'],[id*='error']"
+              },
+              "dynamic": true,
+              "properties": [
+                {
+                  "name": "SiteError",
+                  "dataType": "customEvent",
+                  "attribute": [
+                    {
+                      "name": "error_message",
+                      "value": {
+                        "cssSelector": "[class*='error'],[id*='error']",
+                        "attribute": "innerText"
+                      },
+                      "required": "true"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "sampling": 100,
+          "urlFilterControl": {
+            "enabled": false
+          },
+          "excluded": {
+            "ua": []
+          },
+          "samesite": false,
+          "ignoreHeapTextCapture": false
+        },
+        "ruleengineConfig": {
+          "siteid": "6594-Main-prod-heap",
+          "creatives": [
+            {
+              "id": 1,
+              "template": "signup",
+              "display": {
+                "color": "#ffffff"
+              },
+              "content": {
+                "img": "https://s3.amazonaws.com/public-assets.auryc.com/creatives/test/teec.png"
+              },
+              "triggers": {
+                "serialized": "f.pv > 2 and f.pageload"
+              },
+              "goal": {
+                "event": "click",
+                "target": "#goal1"
+              }
+            },
+            {
+              "id": 2,
+              "template": "fblike",
+              "display": {
+                "color": "#ffffff"
+              },
+              "content": {
+                "img": "https://s3.amazonaws.com/public-assets.auryc.com/creatives/test/fblike_teec.jpg"
+              },
+              "triggers": {
+                "serialized": "f.pv > 2 and f.halfwaydown and f.url = 'teammember' "
+              },
+              "goal": {
+                "event": "click",
+                "target": "#goal1"
+              }
+            }
+          ]
+        },
+        "feedbackConfig": {
+          "siteid": "6594-Main-prod-heap",
+          "instances": []
+        }
+      },
+      "statusCode": 200
+    }
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1685615171275 0 Failed to decode downloaded font: http://host.docker.internal:4567/examples/metaverse-dash-run/media/fonts/arcadeclassic.woff2",
+    "source": "other",
+    "timestamp": 1685615205706
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1685615171275 0 OTS parsing error: invalid sfntVersion: -2147367933",
+    "source": "other",
+    "timestamp": 1685615205707
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1685615171275 0 Failed to decode downloaded font: http://host.docker.internal:4567/examples/metaverse-dash-run/media/fonts/arcadeclassic.woff2",
+    "source": "other",
+    "timestamp": 1685615205707
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1685615171275 0 OTS parsing error: invalid sfntVersion: -2147367933",
+    "source": "other",
+    "timestamp": 1685615205707
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685615171275 0:491455 \"Cere Games SDK: Stop host event:\" \"focus\" FocusEvent",
+    "source": "console-api",
+    "timestamp": 1685615207138
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685615171275 0:491455 \"Cere Games SDK: Stop host event:\" \"focusin\" FocusEvent",
+    "source": "console-api",
+    "timestamp": 1685615207138
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ 49:20 \" *** Game Started ***\"",
+    "source": "console-api",
+    "timestamp": 1685615207174
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685615171275 0:491455 \"Cere Games SDK: Stop host event:\" \"blur\" FocusEvent",
+    "source": "console-api",
+    "timestamp": 1685615207176
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685615171275 0:491455 \"Cere Games SDK: Stop host event:\" \"focusout\" FocusEvent",
+    "source": "console-api",
+    "timestamp": 1685615207177
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/sdk/bundle.js?v=1685615171275 0:491661 \"Cere Games SDK: Resume host events\"",
+    "source": "console-api",
+    "timestamp": 1685615207179
+  }
+]

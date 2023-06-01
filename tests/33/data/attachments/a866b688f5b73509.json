@@ -1,0 +1,30 @@
+[
+  {
+    "url": "https://dev-freeport-gaming.network-dev.aws.cere.io/leader-board/start-session",
+    "method": "POST",
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "gameId": "metaverse-dash-run"
+    },
+    "pending": false,
+    "response": {
+      "headers": {
+        "access-control-allow-origin": "*",
+        "content-length": "52",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 01 Jun 2023 10:26:47 GMT",
+        "etag": "W/\"34-N2k9dQnkJd/yZRvSKrm35YbN6II\"",
+        "x-powered-by": "Express",
+        "x-ratelimit-limit": "20",
+        "x-ratelimit-remaining": "19",
+        "x-ratelimit-reset": "0"
+      },
+      "body": {
+        "sessionId": "5e8dbde7-3637-4010-ad08-245157839051"
+      },
+      "statusCode": 200
+    }
+  }
+]
