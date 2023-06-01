@@ -1,0 +1,62 @@
+[
+  {
+    "level": "WARNING",
+    "message": "https://static.hotjar.com/c/hotjar-2133914.js?sv=7 2:6557 \"Hotjar not launching due to suspicious userAgent:\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/113.0.5672.126 Safari/537.36\"",
+    "source": "console-api",
+    "timestamp": 1685605580686
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.bdd3eace.js 1:59209 \"Popup (Outgoing)\" \"popup.qs2e2v0h23q\" Object",
+    "source": "console-api",
+    "timestamp": 1685605581051
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.bdd3eace.js 1:59329 \"Popup (Incoming)\" \"popup.qs2e2v0h23q\" Object",
+    "source": "console-api",
+    "timestamp": 1685605581182
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.bdd3eace.js 1:59209 \"Popup (Outgoing)\" \"popup.qs2e2v0h23q\" Object",
+    "source": "console-api",
+    "timestamp": 1685605581182
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.bdd3eace.js 1:59329 \"Popup (Incoming)\" \"popup.qs2e2v0h23q\" Object",
+    "source": "console-api",
+    "timestamp": 1685605581249
+  },
+  {
+    "level": "INFO",
+    "message": "https://wallet.dev.cere.io/static/js/AuthorizationRouter.641c6aa3.chunk.js 0:1244 \"Local storage availbalility:\" \"writable\"",
+    "source": "console-api",
+    "timestamp": 1685605583460
+  },
+  {
+    "level": "SEVERE",
+    "message": "https://wallet.dev.cere.io/authorize/signup?sessionNamespace=host.docker.internal&callbackUrl=%2Fauthorize%2Fclose%3FsessionNamespace%3Dhost.docker.internal&preopenInstanceId=qs2e2v0h23q&preopenInstanceId=qs2e2v0h23q - Access to XMLHttpRequest at 'https://dev-cere-wallet-api.core-dev.aws.cere.io/auth/otp/send' from origin 'https://wallet.dev.cere.io' has been blocked by CORS policy: The request client is not a secure context and the resource is in more-private address space `private`.",
+    "source": "javascript",
+    "timestamp": 1685605585230
+  },
+  {
+    "level": "SEVERE",
+    "message": "https://wallet.dev.cere.io/static/js/main.bdd3eace.js 1:21551 C",
+    "source": "console-api",
+    "timestamp": 1685605585233
+  },
+  {
+    "level": "SEVERE",
+    "message": "https://wallet.dev.cere.io/static/js/AuthorizationRouter.641c6aa3.chunk.js 0:69578 \"OtpPage sending error\"",
+    "source": "console-api",
+    "timestamp": 1685605585234
+  },
+  {
+    "level": "SEVERE",
+    "message": "https://dev-cere-wallet-api.core-dev.aws.cere.io/auth/otp/send - Failed to load resource: net::ERR_FAILED",
+    "source": "network",
+    "timestamp": 1685605585234
+  }
+]
