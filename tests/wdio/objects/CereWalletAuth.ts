@@ -27,9 +27,7 @@ export class CereWalletAuth extends CereWallet {
   }
 
   async enterOTP(otp: string) {
-    await $('.react-code-input').waitForDisplayed({
-      timeout: 30000,
-    });
+    await $('.react-code-input').waitForDisplayed();
 
     const inputs = await browser.$$('.react-code-input input');
 
