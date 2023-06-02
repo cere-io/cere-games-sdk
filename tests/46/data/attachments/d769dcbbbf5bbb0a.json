@@ -1,0 +1,8 @@
+[
+  {
+    "level": "SEVERE",
+    "message": "https://polygon-mumbai.infura.io/v3/248b37a1123943a9b5c975eb2c93a2ab - Failed to load resource: the server responded with a status of 403 ()",
+    "source": "network",
+    "timestamp": 1685711269828
+  }
+]
