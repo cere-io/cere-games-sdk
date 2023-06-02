@@ -10,6 +10,7 @@ const ImageBlock = styled.div(
     height: 200,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 12,
 
     '@media (max-height: 440px)': {
@@ -22,16 +23,15 @@ const ImageBlock = styled.div(
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'rgba(255, 255, 255, 0.1)',
         }
       : {
-          background: hasPreloader ? 'rgba(255, 255, 255, 0.1)' : `url(${preloaderImage})`,
+          backgroundImage: hasPreloader ? undefined : `url(${preloaderImage})`,
         },
 );
 
 const Widget = styled(Stack)({
   maxWidth: 400,
-  minHeight: 390,
+  minHeight: 415,
 
   '@media (min-width: 600px)': {
     minWidth: 400,
@@ -55,7 +55,11 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="center">
       <ImageBlock hasPreloader={!!preloader.url} loading={loading}>
-        {preloader.url ? <ProgressiveImg src={preloader.url} alt="Preloader image" /> : <Spinner size="25" />}
+        {loading ? (
+          <Spinner size="25" />
+        ) : (
+          preloader.url && <ProgressiveImg src={preloader.url} alt="Preloader image" />
+        )}
       </ImageBlock>
 
       {!loading && (
