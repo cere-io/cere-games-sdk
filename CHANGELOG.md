@@ -2,6 +2,11 @@
 
 ### vNext
 
+-
+
+### v0.4.1
+
+- Fix preloader data loading state
 - Configure auto-tests to work in VPN protected environment
 
 ### v0.4.0
