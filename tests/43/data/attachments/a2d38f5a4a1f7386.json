@@ -1,0 +1,58 @@
+[
+  {
+    "url": "https://dev-freeport-gaming.network-dev.aws.cere.io/leader-board/start-session",
+    "method": "POST",
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "gameId": "metaverse-dash-run"
+    },
+    "pending": false,
+    "response": {
+      "headers": {
+        "access-control-allow-origin": "*",
+        "content-length": "52",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Fri, 02 Jun 2023 07:59:48 GMT",
+        "etag": "W/\"34-/2BScbBbFo1fFaiylokukmET+4E\"",
+        "x-powered-by": "Express",
+        "x-ratelimit-limit": "20",
+        "x-ratelimit-remaining": "19",
+        "x-ratelimit-reset": "0"
+      },
+      "body": {
+        "sessionId": "a06aebd7-0391-4de2-b12a-34abee43bbd6"
+      },
+      "statusCode": 200
+    }
+  },
+  {
+    "url": "https://dev-freeport-gaming.network-dev.aws.cere.io/leader-board/start-session",
+    "method": "POST",
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "gameId": "metaverse-dash-run"
+    },
+    "pending": false,
+    "response": {
+      "headers": {
+        "access-control-allow-origin": "*",
+        "content-length": "52",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Fri, 02 Jun 2023 07:59:48 GMT",
+        "etag": "W/\"34-/2BScbBbFo1fFaiylokukmET+4E\"",
+        "x-powered-by": "Express",
+        "x-ratelimit-limit": "20",
+        "x-ratelimit-remaining": "19",
+        "x-ratelimit-reset": "0"
+      },
+      "body": {
+        "sessionId": "a06aebd7-0391-4de2-b12a-34abee43bbd6"
+      },
+      "statusCode": 200
+    }
+  }
+]
