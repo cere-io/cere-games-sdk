@@ -119,19 +119,17 @@ export class GamesSDK {
     return this.options.env || 'prod';
   }
 
-  /**
-   * TODO: Fetch game info from the Game Portal API
-   */
-  private async getGameInfo(info: GameInfo = {}) {
+  private async getGameInfo() {
     const { preloaderPath, preloaderTitle, preloaderDescription } = await this.api.getGameInfoData();
+
     return {
       name: document.title,
       url: window.location.href,
       preloaderPath,
       preloaderTitle,
       preloaderDescription,
+
       ...this.options.gameInfo,
-      ...info,
     };
   }
 
@@ -139,11 +137,14 @@ export class GamesSDK {
     this.reporting.init();
 
     await UI.register(this.ui);
-    const gameInfo = await this.getGameInfo(options.gameInfo);
-    this.ui.gameInfo = gameInfo;
 
     this.analytics.init({ gtmId: GMT_ID });
-    this.initWallet(gameInfo);
+
+    this.getGameInfo().then((gameInfo) => {
+      this.ui.gameInfo = gameInfo;
+
+      this.initWallet(gameInfo);
+    });
 
     this.options.onReady?.(this);
   }

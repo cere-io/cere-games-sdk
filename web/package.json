@@ -1,14 +1,16 @@
 {
-  "name": "@cere-games-sdk/examples",
+  "name": "@cere-games-sdk/web",
   "version": "0.0.0",
   "scripts": {
-    "start": "webpack serve --open",
-    "build": "webpack"
+    "start": "webpack serve --open /examples",
+    "bundle": "webpack"
   },
   "dependencies": {
     "@cere/games-sdk": "*"
   },
   "devDependencies": {
+    "ts-loader": "^9.4.2",
+    "tsconfig-paths-webpack-plugin": "^4.0.1",
     "copy-webpack-plugin": "^11.0.0",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1"

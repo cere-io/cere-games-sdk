@@ -12,6 +12,7 @@
     "start": "npm start --workspace=@cere-games-sdk/examples",
     "playground": "npm start --workspace=@cere-games-sdk/playground",
     "build": "npm run build --workspaces --if-present",
+    "bundle": "npm run bundle --workspaces --if-present",
     "lint": "eslint --quiet '**/*.{ts,tsx,js,jsx}'",
     "test": "npm test --workspaces --if-present -- $*",
     "test:ci": "npm run test:ci --workspaces --if-present -- $*",
@@ -22,6 +23,7 @@
     "packages/*",
     "tests/*",
     "examples",
+    "web",
     "playground"
   ]
 }

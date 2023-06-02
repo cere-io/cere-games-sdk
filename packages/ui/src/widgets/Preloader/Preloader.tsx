@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 import { useMemo } from 'react';
 
-import defaultPreloaderImage from '../../assets/preloaderImage.png';
+import { preloaderImage } from '../../assets';
 import { Button, ProgressiveImg, Stack, Typography } from '../../components';
 import { useAsyncCallback, useGameInfo, useMediaQuery } from '../../hooks';
 
 const ImageBlock = styled.div(({ hasPrelaoder }: { hasPrelaoder: boolean }) => ({
   height: 200,
   alignSelf: 'stretch',
-  background: hasPrelaoder ? 'rgba(255, 255, 255, 0.1)' : `url(${defaultPreloaderImage})`,
+  background: hasPrelaoder ? 'rgba(255, 255, 255, 0.1)' : `url(${preloaderImage})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   borderRadius: 12,
