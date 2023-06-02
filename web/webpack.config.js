@@ -1,6 +1,7 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const SymlinkWebpackPlugin = require('symlink-webpack-plugin');
 const { version: sdkVersion } = require('@cere/games-sdk/package.json');
 
 const buildDir = path.resolve(__dirname, '../build');
@@ -12,72 +13,100 @@ const injectVars = (vars) => (content) =>
     return content.replaceAll(`%${name}%`, value);
   }, content.toString());
 
-module.exports = {
-  mode: 'production',
-  entry: {
-    sdk: {
-      import: path.resolve(__dirname, 'sdk/index.ts'),
-      filename: `sdk/${sdkVersion}/bundle.umd.js`,
-      library: { name: 'CereGamesSDK', type: 'umd' },
+const createSdkEntry = (version) => ({
+  import: path.resolve(__dirname, 'sdk/index.ts'),
+  filename: `sdk/${version}/bundle.umd.js`,
+  library: { name: 'CereGamesSDK', type: 'umd' },
+});
+
+module.exports = ({ WEBPACK_BUILD }) => {
+  return {
+    mode: 'production',
+    entry: {
+      sdk: createSdkEntry(sdkVersion),
     },
-  },
 
-  output: {
-    clean: true,
-    path: buildDir,
-  },
+    output: {
+      clean: true,
+      path: buildDir,
+    },
 
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: [{ loader: 'ts-loader' }],
-      },
-      {
-        test: /\.png/,
-        type: 'asset/inline',
-      },
-    ],
-  },
-
-  plugins: [
-    new CopyPlugin({
-      patterns: [
+    module: {
+      rules: [
         {
-          context: examplesSourceDir,
-          from: '**/*',
-          to: examplesDistDir,
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: [{ loader: 'ts-loader' }],
         },
         {
-          context: examplesSourceDir,
-          from: '**/*.html',
-          to: examplesDistDir,
-          transform: injectVars({
-            BUILD_TIME: new Date().getTime(),
-          }),
+          test: /\.png/,
+          type: 'asset/inline',
         },
       ],
-    }),
-  ],
-
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-    plugins: [new TsconfigPathsPlugin()],
-  },
-
-  devServer: {
-    client: false,
-    hot: false,
-    liveReload: false,
-    devMiddleware: {
-      index: false,
-      writeToDisk: true,
     },
 
-    static: {
-      directory: examplesDistDir,
-      publicPath: '/examples',
+    plugins: [
+      new CopyPlugin({
+        patterns: [
+          {
+            context: examplesSourceDir,
+            from: '**/*',
+            to: examplesDistDir,
+          },
+          {
+            context: examplesSourceDir,
+            from: '**/*.html',
+            to: examplesDistDir,
+            transform: injectVars({
+              BUILD_TIME: new Date().getTime(),
+            }),
+          },
+        ],
+      }),
+
+      /**
+       * Create `latest` SDK version symlink in `build` directory
+       */
+
+      new SymlinkWebpackPlugin({
+        origin: `sdk/${sdkVersion}`,
+        symlink: 'sdk/latest',
+        force: true,
+      }),
+    ],
+
+    resolve: {
+      extensions: ['.tsx', '.ts', '.js'],
+      plugins: [new TsconfigPathsPlugin()],
     },
-  },
+
+    devServer: {
+      port: 3000,
+      client: false,
+      hot: false,
+      liveReload: false,
+
+      /**
+       * Configure `latest` SDK version for dev server
+       */
+      proxy: {
+        '/sdk/latest': {
+          target: 'http://localhost:3000/',
+          pathRewrite: {
+            '/sdk/latest': `/sdk/${sdkVersion}`,
+          },
+        },
+      },
+
+      devMiddleware: {
+        index: false,
+        writeToDisk: true,
+      },
+
+      static: {
+        directory: examplesDistDir,
+        publicPath: '/examples',
+      },
+    },
+  };
 };
