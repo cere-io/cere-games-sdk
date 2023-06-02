@@ -30,13 +30,17 @@ export type ReportingContext = {
 };
 
 export type GameInfoContext = {
+  loading: boolean;
   name?: string;
   url?: string;
   logoUrl?: string;
   tags?: string[];
-  preloaderPath?: string;
-  preloaderTitle: string;
-  preloaderDescription: string;
+
+  preloader: {
+    url?: string;
+    title?: string;
+    description?: string;
+  };
 };
 
 export type ContextState = {
@@ -79,11 +83,10 @@ const defaultState: ContextState = {
     isReady: false,
   },
   gameInfo: {
+    loading: false,
     name: '',
     tags: [''],
-    preloaderPath: undefined,
-    preloaderTitle: '',
-    preloaderDescription: '',
+    preloader: {},
   },
 };
 

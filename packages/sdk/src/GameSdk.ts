@@ -119,18 +119,32 @@ export class GamesSDK {
     return this.options.env || 'prod';
   }
 
-  private async getGameInfo() {
-    const { preloaderPath, preloaderTitle, preloaderDescription } = await this.api.getGameInfoData();
-
-    return {
+  private async initGameInfo({ gameInfo }: InitParams = {}) {
+    const baseInfo: GameInfo = {
       name: document.title,
       url: window.location.href,
-      preloaderPath,
-      preloaderTitle,
-      preloaderDescription,
 
       ...this.options.gameInfo,
+      ...gameInfo,
     };
+
+    Object.assign(this.ui.gameInfo, {
+      loading: true,
+      ...baseInfo,
+    });
+
+    this.api.getGameInfoData().then((data) =>
+      Object.assign(this.ui.gameInfo, baseInfo, {
+        loading: false,
+        preloader: {
+          title: data.preloaderTitle,
+          url: data.preloaderPath,
+          description: data.preloaderDescription,
+        },
+      }),
+    );
+
+    return baseInfo;
   }
 
   async init(options: InitParams = {}) {
@@ -140,9 +154,7 @@ export class GamesSDK {
 
     this.analytics.init({ gtmId: GMT_ID });
 
-    this.getGameInfo().then((gameInfo) => {
-      this.ui.gameInfo = gameInfo;
-
+    this.initGameInfo(options).then((gameInfo) => {
       this.initWallet(gameInfo);
     });
 
