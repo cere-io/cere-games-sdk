@@ -22,7 +22,6 @@
   "workspaces": [
     "packages/*",
     "tests/*",
-    "examples",
     "web",
     "playground"
   ]
