@@ -9,7 +9,7 @@
     "wait-on": "^7.0.1"
   },
   "scripts": {
-    "start": "npm start --workspace=@cere-games-sdk/examples",
+    "start": "npm start --workspace=@cere-games-sdk/web",
     "playground": "npm start --workspace=@cere-games-sdk/playground",
     "build": "npm run build --workspaces --if-present",
     "bundle": "npm run bundle --workspaces --if-present",
