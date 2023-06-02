@@ -1,0 +1,64 @@
+[
+  {
+    "url": "http://hn.inspectlet.com/ginit/304706502",
+    "method": "POST",
+    "headers": {
+      "accept": "application/json, text/javascript, */*; q=0.01",
+      "content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+    },
+    "body": "w=304706502&uid=-1&sid=-1&pad=-1&nv=true&u=http%3A%2F%2Fhost.docker.internal%3A4567%2Fexamples%2Fmetaverse-dash-run%2F&or=http%3A%2F%2Fhost.docker.internal%3A4567&ref=&title=Metaverse+Dash+Run&pw=1920&ph=1080&ism=false&cloc=string&sd=1080&st=1080&dbgk=&jv=4&identity=&targcv%5Blochref%5D=http%3A%2F%2Fhost.docker.internal%3A4567%2Fexamples%2Fmetaverse-dash-run%2F&targcv%5Bdoctitle%5D=Metaverse+Dash+Run&targcv%5Blptitle%5D=Metaverse+Dash+Run&targcv%5Blpurl%5D=http%3A%2F%2Fhost.docker.internal%3A4567%2Fexamples%2Fmetaverse-dash-run%2F&targcv%5B%24browser%5D%5Bchrome%5D=true&targcv%5B%24browser%5D%5Bversion%5D=113.0.5672.126&targcv%5B%24browser%5D%5Bwebkit%5D=true&targcv%5BuserAgent%5D=Mozilla%2F5.0+(X11%3B+Linux+x86_64)+AppleWebKit%2F537.36+(KHTML%2C+like+Gecko)+HeadlessChrome%2F113.0.5672.126+Safari%2F537.36&targcv%5Bmobchua%5D=Mozilla%2F5.0+(X11%3B+Linux+x86_64)+AppleWebKit%2F537.36+(KHTML%2C+like+Gecko)+HeadlessChrome%2F113.0.5672.126+Safari%2F537.36&targcv%5Bref%5D=&targcv%5Bnv%5D=true&isvp=false",
+    "pending": false,
+    "response": {
+      "headers": {
+        "access-control-allow-credentials": "true",
+        "access-control-allow-headers": "X-Requested-With, Content-Type",
+        "access-control-allow-methods": "GET, POST",
+        "access-control-allow-origin": "http://host.docker.internal:4567",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "no-cache",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "7d0f721cabc62811-SEA",
+        "connection": "keep-alive",
+        "content-length": "27",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Fri, 02 Jun 2023 11:44:40 GMT",
+        "etag": "W/\"1b-X2PnPCi/V0SzAP9mhJ6AHw\"",
+        "server": "cloudflare",
+        "via": "1.1 vegur",
+        "x-powered-by": "Express"
+      },
+      "body": {
+        "noinspectlet": "crawlbot"
+      },
+      "statusCode": 200
+    }
+  },
+  {
+    "url": "https://dev-freeport-gaming.network-dev.aws.cere.io/leader-board/start-session",
+    "method": "POST",
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "gameId": "metaverse-dash-run"
+    },
+    "pending": false,
+    "response": {
+      "headers": {
+        "access-control-allow-origin": "*",
+        "content-length": "52",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Fri, 02 Jun 2023 11:44:40 GMT",
+        "etag": "W/\"34-clasefqqxI7JwfDQ9VDOQ7hN+8o\"",
+        "x-powered-by": "Express",
+        "x-ratelimit-limit": "20",
+        "x-ratelimit-remaining": "19",
+        "x-ratelimit-reset": "0"
+      },
+      "body": {
+        "sessionId": "147422dd-b7a4-489d-aeda-1ae12247f9b8"
+      },
+      "statusCode": 200
+    }
+  }
+]
