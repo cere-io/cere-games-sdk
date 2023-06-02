@@ -2,6 +2,7 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const SymlinkWebpackPlugin = require('symlink-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const { version: sdkVersion } = require('@cere/games-sdk/package.json');
 
 const buildDir = path.resolve(__dirname, '../build');
@@ -46,6 +47,10 @@ module.exports = ({ WEBPACK_BUILD }) => {
     },
 
     plugins: [
+      new Dotenv({
+        path: path.resolve(__dirname, '../.env'),
+      }),
+
       new CopyPlugin({
         patterns: [
           {
