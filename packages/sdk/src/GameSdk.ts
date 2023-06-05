@@ -253,9 +253,18 @@ export class GamesSDK {
             await this.payForSession();
             await onPlayAgain?.();
           },
-          onTweet: async () => {
+          onTweet: async (score) => {
+            const response = await this.api.getTweet({
+              serviceUrl: GAME_SERVICE_URL[this.env],
+              score: score,
+              gameName: this.ui.gameInfo.name as string,
+              address: this.ui.wallet.address as string,
+              gameUrl: window.location.href,
+              twitterTags: this.ui.gameInfo.tags?.join(',') || '',
+            });
             const { email } = await this.wallet.getUserInfo();
             this.analytics.trackEvent(ANALYTICS_EVENTS.highScoreTweet, { userEmail: email });
+            return response;
           },
           serviceUrl: GAME_SERVICE_URL[this.env],
         });
