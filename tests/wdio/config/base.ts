@@ -11,6 +11,7 @@ const bundleRoot = path.resolve(rootDir, 'build');
 export const chromeCapability: WebDriver.DesiredCapabilities = {
   browserName: 'chrome',
   acceptInsecureCerts: true,
+  pageLoadStrategy: 'eager',
 
   'goog:chromeOptions': {
     args: [
@@ -19,6 +20,7 @@ export const chromeCapability: WebDriver.DesiredCapabilities = {
       '--no-sandbox',
       '--mute-audio',
       '--disable-notifications',
+      '--disable-features=PrivateNetworkAccessSendPreflights',
 
       ...(options.openDevTools ? ['--auto-open-devtools-for-tabs'] : []),
       ...(options.headless ? ['--headless', '--disable-gpu'] : []),
