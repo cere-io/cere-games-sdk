@@ -1,5 +1,9 @@
 ## Release Notes:
 
+### v0.4.1
+
+- Fix preloader data loading state
+
 ### v0.4.0
 
 - Update Cere Wallet SDK
