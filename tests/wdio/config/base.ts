@@ -20,7 +20,6 @@ export const chromeCapability: WebDriver.DesiredCapabilities = {
       '--no-sandbox',
       '--mute-audio',
       '--disable-notifications',
-      '--disable-features=PrivateNetworkAccessSendPreflights',
 
       ...(options.openDevTools ? ['--auto-open-devtools-for-tabs'] : []),
       ...(options.headless ? ['--headless', '--disable-gpu'] : []),
