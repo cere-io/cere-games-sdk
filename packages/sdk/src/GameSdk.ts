@@ -257,8 +257,8 @@ export class GamesSDK {
             const response = await this.api.getTweet({
               serviceUrl: GAME_SERVICE_URL[this.env],
               score: score,
-              gameName: this.ui.gameInfo.name as string,
-              address: this.ui.wallet.address as string,
+              gameName: this.ui.gameInfo.name || '',
+              address: this.ui.wallet.address || '',
               gameUrl: window.location.href,
               twitterTags: this.ui.gameInfo.tags?.join(',') || '',
             });
