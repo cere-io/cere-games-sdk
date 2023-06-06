@@ -3,6 +3,7 @@
 ### vNext
 
 - [[Feature]](https://www.notion.so/cere/Gaming-API-Implement-link-shortener-for-Twitter-message-3dd6bfdd26004bac8e18e4d25c64fc1d?pvs=4)Implementation auto generated picture in tweet
+- [[Bug]](https://www.notion.so/cere/No-formatting-for-preloader-for-description-field-40f7606a24db4290ace7ba78d859f140?pvs=4) No formatting for preloader for description field
 
 ### v0.4.1
 
