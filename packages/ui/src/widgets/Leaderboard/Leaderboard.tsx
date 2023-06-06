@@ -3,7 +3,7 @@ import { useCallback, useMemo } from 'react';
 
 import { Alert, Address, Button, Stack, Table, TableProps, Typography } from '../../components';
 import { RepeatIcon, InsertLinkIcon, TwitterIcon } from '../../icons';
-import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery, useWalletContext } from '../../hooks';
+import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
 
 type TournamentType = {
   id: number;
@@ -17,7 +17,7 @@ type TournamentType = {
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
   activeTournament: TournamentType | undefined;
   onPlayAgain?: () => Promise<void> | void;
-  onTweet?: () => Promise<void> | void;
+  onTweet?: (score: number) => Promise<{ tweetBody: string }>;
   serviceUrl: string;
 };
 
@@ -112,11 +112,9 @@ const StyledTypography = styled(Typography)({
 
 export const Leaderboard = ({ data, activeTournament, onPlayAgain, onTweet }: LeaderboardProps) => {
   const { sessionPrice, gamePortalUrl, staticAssets } = useConfigContext();
-  const gameInfo = useGameInfo();
   const { address, balance = 0, isReady } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
   const isMobile = useMediaQuery('(max-width: 600px)');
-  const twitterTags = gameInfo?.tags && gameInfo?.tags.length > 0 ? gameInfo.tags.join(',') : '';
 
   const [handlePlayAgain, isBusy] = useAsyncCallback(onPlayAgain);
   const handleOpenGamePortal = useCallback(() => {
@@ -124,10 +122,9 @@ export const Leaderboard = ({ data, activeTournament, onPlayAgain, onTweet }: Le
   }, [gamePortalUrl]);
 
   const handleShareClick = useCallback(async () => {
-    await onTweet?.();
-    const tweetBody = `text=Do you think you can beat my ${gameInfo.name} high-score?%0a%0a${address}%0a%0aMy score: ${playerData?.score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=${twitterTags}`;
-    window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
-  }, [address, gameInfo.name, onTweet, playerData?.score, twitterTags]);
+    const tweet = await onTweet?.(playerData?.score as number);
+    window.open(`https://twitter.com/intent/tweet?${tweet?.tweetBody}`, '_system', 'width=600,height=600');
+  }, [onTweet, playerData?.score]);
 
   const dayDifference = useMemo(() => {
     if (!activeTournament) {

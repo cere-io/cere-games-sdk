@@ -38,6 +38,10 @@ const Widget = styled(Stack)({
   },
 });
 
+const StyledTypography = styled(Typography)({
+  whiteSpace: 'pre-line',
+});
+
 const StartButton = styled(Button)({
   marginTop: 'auto',
 });
@@ -68,10 +72,10 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
             {preloader.title || 'Play now & win'}
           </Typography>
 
-          <Typography align="center">
+          <StyledTypography align="center">
             {preloader.description ||
               'Unlock NFT and token rewards, work your way to the top of the leaderboard and claim a bonus prize!'}
-          </Typography>
+          </StyledTypography>
         </Stack>
       )}
 

@@ -129,4 +129,18 @@ export class GamesApi {
     const data: Game = await response.json();
     return data;
   }
+
+  async getTweet(data: {
+    serviceUrl: string;
+    score: number;
+    gameName: string;
+    address: string;
+    gameUrl: string;
+    twitterTags: string;
+  }): Promise<{ tweetBody: string }> {
+    const endpoint = this.createEndpoint('/tweet/generate');
+    const response = await this.post(endpoint, data);
+    const tweetData: { tweetBody: string } = await response.json();
+    return tweetData;
+  }
 }
