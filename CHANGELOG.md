@@ -2,7 +2,7 @@
 
 ### vNext
 
--
+- [[Feature]](https://www.notion.so/cere/Gaming-API-Implement-link-shortener-for-Twitter-message-3dd6bfdd26004bac8e18e4d25c64fc1d?pvs=4)Implementation auto generated picture in tweet
 
 ### v0.4.1
 
