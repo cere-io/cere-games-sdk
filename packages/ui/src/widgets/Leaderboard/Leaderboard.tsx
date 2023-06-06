@@ -5,7 +5,17 @@ import { Alert, Address, Button, Stack, Table, TableProps, Typography } from '..
 import { RepeatIcon, InsertLinkIcon, TwitterIcon } from '../../icons';
 import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery, useWalletContext } from '../../hooks';
 
+type TournamentType = {
+  id: number;
+  title: string;
+  subtitle: string;
+  startDate: Date;
+  endDate: Date;
+  status: 'DISABLED' | 'ENABLED';
+};
+
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
+  activeTournament: TournamentType | undefined;
   onPlayAgain?: () => Promise<void> | void;
   onTweet?: () => Promise<void> | void;
   serviceUrl: string;
@@ -100,7 +110,7 @@ const StyledTypography = styled(Typography)({
   letterSpacing: '0.01em',
 });
 
-export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) => {
+export const Leaderboard = ({ data, activeTournament, onPlayAgain, onTweet }: LeaderboardProps) => {
   const { sessionPrice, gamePortalUrl, staticAssets } = useConfigContext();
   const gameInfo = useGameInfo();
   const { address, balance = 0, isReady } = useWalletContext();
@@ -119,6 +129,16 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) =>
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
   }, [address, gameInfo.name, onTweet, playerData?.score, twitterTags]);
 
+  const dayDifference = useMemo(() => {
+    if (!activeTournament) {
+      return undefined;
+    }
+    const tournamentEndDate = new Date(activeTournament.endDate);
+    const dateNow = new Date();
+    const diffInTime = tournamentEndDate.getTime() - dateNow.getTime();
+    return Math.ceil(Math.abs(diffInTime / (1000 * 3600 * 24)));
+  }, [activeTournament]);
+
   return (
     <Widget>
       <Stack spacing={3}>
@@ -131,15 +151,21 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) =>
                   <Stack spacing={2} align="start">
                     <Stack spacing={1} align="start">
                       <Typography variant="caption" uppercase fontWight="semi-bold">
-                        Weekly tournament
+                        {`${activeTournament ? activeTournament.title : 'Weekly tournament'}`}
                       </Typography>
                       <TimeLeftText fontWight="bold">
-                        Time left: <span>1 day</span>
+                        Time left: <span>{dayDifference ? dayDifference : 1} day</span>
                       </TimeLeftText>
                     </Stack>
-                    <StyledTypography variant="h1" uppercase>
-                      TOP 20 players wins <br /> UNIQUE NFT
-                    </StyledTypography>
+                    {!activeTournament ? (
+                      <StyledTypography variant="h1" uppercase>
+                        TOP 20 players wins <br /> UNIQUE NFT
+                      </StyledTypography>
+                    ) : (
+                      <StyledTypography variant="h1" uppercase>
+                        {activeTournament?.subtitle}
+                      </StyledTypography>
+                    )}
                   </Stack>
                 </div>
                 <MysteryBlock url={staticAssets.mysteryBox} />
@@ -183,7 +209,7 @@ export const Leaderboard = ({ data, onPlayAgain, onTweet }: LeaderboardProps) =>
         </StyledStack>
       </Stack>
 
-      <Table data={data} activeAddress={address} />
+      <Table data={data} activeAddress={address} hasTournament={Boolean(activeTournament)} />
     </Widget>
   );
 };

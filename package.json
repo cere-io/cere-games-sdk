@@ -1,6 +1,6 @@
 {
   "name": "cere-games-sdk",
-  "version": "0.3.0",
+  "version": "0.4.1",
   "private": true,
   "devDependencies": {
     "eslint": "^8.34.0",
@@ -9,17 +9,20 @@
     "wait-on": "^7.0.1"
   },
   "scripts": {
-    "start": "npm start --workspace=@cere-games-sdk/examples",
+    "start": "npm start --workspace=@cere-games-sdk/web",
     "playground": "npm start --workspace=@cere-games-sdk/playground",
     "build": "npm run build --workspaces --if-present",
+    "bundle": "npm run bundle --workspaces --if-present",
     "lint": "eslint --quiet '**/*.{ts,tsx,js,jsx}'",
-    "test": "npm run test --workspaces --if-present",
+    "test": "npm test --workspaces --if-present -- $*",
+    "test:ci": "npm run test:ci --workspaces --if-present -- $*",
+    "test:report": "npm run test:report --workspaces --if-present -- $*",
     "sdk:publish": "npm publish --workspace=@cere/games-sdk-ui --workspace=@cere/games-sdk --access public"
   },
   "workspaces": [
     "packages/*",
     "tests/*",
-    "examples",
+    "web",
     "playground"
   ]
 }

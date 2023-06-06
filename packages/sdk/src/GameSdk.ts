@@ -119,28 +119,44 @@ export class GamesSDK {
     return this.options.env || 'prod';
   }
 
-  /**
-   * TODO: Fetch game info from the Game Portal API
-   */
-  private async getGameInfo(info: GameInfo = {}) {
-    return {
+  private async initGameInfo({ gameInfo }: InitParams = {}) {
+    const baseInfo: GameInfo = {
       name: document.title,
       url: window.location.href,
 
       ...this.options.gameInfo,
-      ...info,
+      ...gameInfo,
     };
+
+    Object.assign(this.ui.gameInfo, {
+      loading: true,
+      ...baseInfo,
+    });
+
+    this.api.getGameInfoData().then((data) =>
+      Object.assign(this.ui.gameInfo, baseInfo, {
+        loading: false,
+        preloader: {
+          title: data.preloaderTitle,
+          url: data.preloaderPath,
+          description: data.preloaderDescription,
+        },
+      }),
+    );
+
+    return baseInfo;
   }
 
   async init(options: InitParams = {}) {
     this.reporting.init();
 
     await UI.register(this.ui);
-    const gameInfo = await this.getGameInfo(options.gameInfo);
-    this.ui.gameInfo = gameInfo;
 
     this.analytics.init({ gtmId: GMT_ID });
-    this.initWallet(gameInfo);
+
+    this.initGameInfo(options).then((gameInfo) => {
+      this.initWallet(gameInfo);
+    });
 
     this.options.onReady?.(this);
   }
@@ -226,8 +242,10 @@ export class GamesSDK {
 
         await onBeforeLoad?.();
         const data = await this.api.getLeaderboard();
+        const activeTournament = await this.api.getActiveTournamentData();
 
         leaderboard.update({
+          activeTournament,
           data,
           onPlayAgain: async () => {
             const { email } = await this.wallet.getUserInfo();

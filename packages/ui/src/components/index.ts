@@ -9,3 +9,4 @@ export * from './Address';
 export * from './FullscreenModal';
 export * from './Alert';
 export * from './WalletBenefits';
+export * from './ProgressiveImg';
