@@ -2,7 +2,7 @@
 
 ### vNext
 
--
+- [[Bug]](https://www.notion.so/cere/No-formatting-for-preloader-for-description-field-40f7606a24db4290ace7ba78d859f140?pvs=4) No formatting for preloader for description field
 
 ### v0.4.1
 
