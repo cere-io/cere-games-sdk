@@ -61,7 +61,7 @@ jobs:
           last-versions: 1
 
           # TODO: Fix Private Network Access and bump the browser version to near latest
-          browsers: chrome:<90.0
+          browsers: chrome:90.0
 
       - name: Checkout code
         uses: actions/checkout@v3
