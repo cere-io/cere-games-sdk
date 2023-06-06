@@ -1,5 +1,10 @@
 ## Release Notes:
 
+### v0.5.0
+
+- Auto generate picture in tweet
+- Fix no formatting for preloader description field
+
 ### v0.4.1
 
 - Fix preloader data loading state
