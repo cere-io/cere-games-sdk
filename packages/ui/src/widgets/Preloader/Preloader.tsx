@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useMemo } from 'react';
 
 import { preloaderImage } from '../../assets';
 import { Button, ProgressiveImg, Spinner, Stack, Typography } from '../../components';
@@ -52,6 +53,11 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
   const [handleStartClick, isBusy] = useAsyncCallback(onStartClick);
   const { loading, preloader } = useGameInfo();
 
+  const preloaderDescription = useMemo(
+    () => preloader.description?.split('\r\n').map((item) => <div>{item}</div>),
+    [preloader.description],
+  );
+
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="center">
       <ImageBlock hasPreloader={!!preloader.url} loading={loading}>
@@ -69,7 +75,7 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
           </Typography>
 
           <Typography align="center">
-            {preloader.description ||
+            {preloaderDescription ||
               'Unlock NFT and token rewards, work your way to the top of the leaderboard and claim a bonus prize!'}
           </Typography>
         </Stack>
