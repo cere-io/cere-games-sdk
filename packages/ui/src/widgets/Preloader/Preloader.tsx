@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { useMemo } from 'react';
 
 import { preloaderImage } from '../../assets';
 import { Button, ProgressiveImg, Spinner, Stack, Typography } from '../../components';
@@ -39,6 +38,10 @@ const Widget = styled(Stack)({
   },
 });
 
+const StyledTypography = styled(Typography)({
+  whiteSpace: 'pre-line',
+});
+
 const StartButton = styled(Button)({
   marginTop: 'auto',
 });
@@ -52,11 +55,6 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [handleStartClick, isBusy] = useAsyncCallback(onStartClick);
   const { loading, preloader } = useGameInfo();
-
-  const preloaderDescription = useMemo(
-    () => preloader.description?.split('\r\n').map((item) => <div>{item}</div>),
-    [preloader.description],
-  );
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="center">
@@ -74,10 +72,10 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
             {preloader.title || 'Play now & win'}
           </Typography>
 
-          <Typography align="center">
-            {preloaderDescription ||
+          <StyledTypography align="center">
+            {preloader.description ||
               'Unlock NFT and token rewards, work your way to the top of the leaderboard and claim a bonus prize!'}
-          </Typography>
+          </StyledTypography>
         </Stack>
       )}
 
