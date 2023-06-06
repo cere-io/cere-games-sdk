@@ -1,0 +1,38 @@
+[
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1686049769615 1:491424 \"Cere Games SDK: Stop host event:\" \"focus\" FocusEvent",
+    "source": "console-api",
+    "timestamp": 1686049810181
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1686049769615 1:491424 \"Cere Games SDK: Stop host event:\" \"focusin\" FocusEvent",
+    "source": "console-api",
+    "timestamp": 1686049810182
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ 48:20 \" *** Game Started ***\"",
+    "source": "console-api",
+    "timestamp": 1686049810224
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1686049769615 1:491424 \"Cere Games SDK: Stop host event:\" \"blur\" FocusEvent",
+    "source": "console-api",
+    "timestamp": 1686049810228
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1686049769615 1:491424 \"Cere Games SDK: Stop host event:\" \"focusout\" FocusEvent",
+    "source": "console-api",
+    "timestamp": 1686049810229
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1686049769615 1:491630 \"Cere Games SDK: Resume host events\"",
+    "source": "console-api",
+    "timestamp": 1686049810234
+  }
+]

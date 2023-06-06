@@ -1,0 +1,26 @@
+[
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ 52:20 \" *** Game Ended ***\"",
+    "source": "console-api",
+    "timestamp": 1686049817130
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ 53:20 \" *** Score: 17 ***\"",
+    "source": "console-api",
+    "timestamp": 1686049817130
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ 54:20 \" *** Coins Collected: 5 ***\"",
+    "source": "console-api",
+    "timestamp": 1686049817130
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1686049769615 1:491560 \"Cere Games SDK: Suspend host events\"",
+    "source": "console-api",
+    "timestamp": 1686049817163
+  }
+]
