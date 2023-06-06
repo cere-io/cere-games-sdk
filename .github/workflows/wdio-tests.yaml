@@ -58,8 +58,10 @@ jobs:
         with:
           version: 1.10.1
           args: -limit ${{ inputs.max-instances }}
-          browsers: chrome
           last-versions: 1
+
+          # TODO: Fix Private Network Access and bump the browser version to near latest
+          browsers: chrome:<90.0
 
       - name: Checkout code
         uses: actions/checkout@v3
