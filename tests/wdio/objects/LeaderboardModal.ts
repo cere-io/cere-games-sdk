@@ -21,6 +21,10 @@ export class LeaderboardModal extends Widget {
     return this.shadowRoot.findByText$(/tokens balance: (\d+\.\d{2})/i);
   }
 
+  get tokensToPlay() {
+    return this.shadowRoot.findByText$(/(\d+) tokens to play/i);
+  }
+
   get playAgainButton() {
     return this.shadowRoot.findByRole$('button', { name: /play again/i });
   }
@@ -45,7 +49,14 @@ export class LeaderboardModal extends Widget {
 
   async getBalance() {
     const text = await this.tokensBalance.getText();
-    const [match, amount] = text.match(/(\d+\.\d{2})/i) || [];
+    const [match, amount] = text.match(/tokens balance: (\d+\.\d{2})/i) || [];
+
+    return match ? +amount : undefined;
+  }
+
+  async getGamePlayPrice() {
+    const text = await this.tokensToPlay.getText();
+    const [match, amount] = text.match(/(\d+) tokens to play/i) || [];
 
     return match ? +amount : undefined;
   }
