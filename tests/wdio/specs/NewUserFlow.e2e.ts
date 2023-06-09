@@ -1,3 +1,5 @@
+import report from '@wdio/allure-reporter';
+
 import { PreloaderModal, ConnectWalletModal, CereWalletAuth, LeaderboardModal, CereWalletApprove } from '../objects';
 
 describe('New user flow', () => {
@@ -44,13 +46,15 @@ describe('New user flow', () => {
     await walletAuth.switchToFrame();
 
     await walletAuth.newWalletButton.click();
-    await walletAuth.enterRandomEmail();
+    const email = await walletAuth.enterRandomEmail();
     await walletAuth.signUpButton.click();
     await walletAuth.enterOTP('555555');
     await walletAuth.verifyButton.click();
 
     await walletAuth.switchFromFrame();
     await walletAuth.waitUntilClosed();
+
+    report.addArgument('Email', email);
   });
 
   step('Wait for Leaderboard modal to appear', async () => {
@@ -120,8 +124,14 @@ describe('New user flow', () => {
   });
 
   it('The game play price should be deducted from the balance', async () => {
-    const newBalance = await leaderboardModal.getBalance();
+    const newBalance = await browser.waitUntil(
+      () => leaderboardModal.getBalance().then((balance) => balance !== walletBalance && balance),
+      {
+        timeout: 30000,
+        timeoutMsg: 'The balance has not been changed after 30 sec',
+      },
+    );
 
-    expect(newBalance).toEqual(walletBalance - gamePlayPrice);
+    await expect(newBalance).toEqual(walletBalance - gamePlayPrice);
   });
 });
