@@ -1,0 +1,62 @@
+[
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ 52:20 \" *** Game Ended ***\"",
+    "source": "console-api",
+    "timestamp": 1686296816124
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ 53:20 \" *** Score: 17 ***\"",
+    "source": "console-api",
+    "timestamp": 1686296816125
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ 54:20 \" *** Coins Collected: 2 ***\"",
+    "source": "console-api",
+    "timestamp": 1686296816125
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:4588 \"RPC (Request)\" Object",
+    "source": "console-api",
+    "timestamp": 1686296816149
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:4625 \"RPC (Response)\" Object",
+    "source": "console-api",
+    "timestamp": 1686296816162
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:4588 \"RPC (Request)\" Object",
+    "source": "console-api",
+    "timestamp": 1686296816164
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:4625 \"RPC (Response)\" Object",
+    "source": "console-api",
+    "timestamp": 1686296816188
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1686296727633 1:491560 \"Cere Games SDK: Suspend host events\"",
+    "source": "console-api",
+    "timestamp": 1686296817145
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1686296727633 1:491630 \"Cere Games SDK: Resume host events\"",
+    "source": "console-api",
+    "timestamp": 1686296817509
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1686296727633 1:491560 \"Cere Games SDK: Suspend host events\"",
+    "source": "console-api",
+    "timestamp": 1686296817509
+  }
+]
