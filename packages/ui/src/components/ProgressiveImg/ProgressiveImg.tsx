@@ -6,7 +6,7 @@ import { Stack } from '../Stack';
 
 export type ProgressiveImgProps = Partial<ImgHTMLAttributes<HTMLImageElement>> & {
   src?: string;
-  isLoadingProp: boolean;
+  isLoading: boolean;
 };
 
 const StyledImage = styled.img({
@@ -24,10 +24,10 @@ const StyledStack = styled(Stack)({
   height: '100%',
 });
 
-export const ProgressiveImg = ({ src, isLoadingProp, ...props }: ProgressiveImgProps) => {
+export const ProgressiveImg = ({ src, isLoading, ...props }: ProgressiveImgProps) => {
   return (
     <StyledStack align="center">
-      {isLoadingProp ? <Spinner size="25" /> : <StyledImage src={src} alt={props.alt || ''} className="image" />}
+      {isLoading ? <Spinner size="25" /> : <StyledImage src={src} alt={props.alt || ''} className="image" />}
     </StyledStack>
   );
 };
