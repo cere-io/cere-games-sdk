@@ -62,7 +62,7 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
         {loading ? (
           <Spinner size="25" />
         ) : (
-          preloader.url && <ProgressiveImg src={preloader.url} alt="Preloader image" />
+          preloader.url && <ProgressiveImg src={preloader.url} isLoadingProp={loading} alt="Preloader image" />
         )}
       </ImageBlock>
 
