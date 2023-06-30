@@ -1,0 +1,20 @@
+[
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:4625 \"RPC (Response)\" Object",
+    "source": "console-api",
+    "timestamp": 1688133261173
+  },
+  {
+    "level": "SEVERE",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1688133178954 1:311622 \"MetaMask - RPC Error: Internal JSON-RPC error.\" Object",
+    "source": "console-api",
+    "timestamp": 1688133261173
+  },
+  {
+    "level": "SEVERE",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1688133178954 1:708984 Object",
+    "source": "console-api",
+    "timestamp": 1688133261174
+  }
+]
