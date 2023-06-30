@@ -1,0 +1,140 @@
+[
+  {
+    "level": "WARNING",
+    "message": "https://static.hotjar.com/c/hotjar-2133914.js?sv=7 2:6554 \"Hotjar not launching due to suspicious userAgent:\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/114.0.5735.133 Safari/537.36\"",
+    "source": "console-api",
+    "timestamp": 1688125722247
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.d9775329.js 1:59209 \"Popup (Outgoing)\" \"popup.34xq5s316g3\" Object",
+    "source": "console-api",
+    "timestamp": 1688125722637
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.d9775329.js 1:59329 \"Popup (Incoming)\" \"popup.34xq5s316g3\" Object",
+    "source": "console-api",
+    "timestamp": 1688125722762
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.d9775329.js 1:59209 \"Popup (Outgoing)\" \"popup.34xq5s316g3\" Object",
+    "source": "console-api",
+    "timestamp": 1688125722762
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.d9775329.js 1:59329 \"Popup (Incoming)\" \"popup.34xq5s316g3\" Object",
+    "source": "console-api",
+    "timestamp": 1688125722795
+  },
+  {
+    "level": "INFO",
+    "message": "https://wallet.dev.cere.io/static/js/AuthorizationRouter.3e060f37.chunk.js 0:1244 \"Local storage availbalility:\" \"writable\"",
+    "source": "console-api",
+    "timestamp": 1688125725005
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.d9775329.js 1:59209 \"Popup (Outgoing)\" \"popup.34xq5s316g3\" Object",
+    "source": "console-api",
+    "timestamp": 1688125736204
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.d9775329.js 1:59329 \"Popup (Incoming)\" \"popup.34xq5s316g3\" Object",
+    "source": "console-api",
+    "timestamp": 1688125736211
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:1993 \"Wallet (Outgoing)\" Object",
+    "source": "console-api",
+    "timestamp": 1688125736401
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:1993 \"Wallet (Outgoing)\" Object",
+    "source": "console-api",
+    "timestamp": 1688125736505
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1688125669360 1:491630 \"Cere Games SDK: Resume host events\"",
+    "source": "console-api",
+    "timestamp": 1688125736591
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1688125669360 1:491560 \"Cere Games SDK: Suspend host events\"",
+    "source": "console-api",
+    "timestamp": 1688125736591
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1688125669360 1:491424 \"Cere Games SDK: Stop host event:\" \"focus\" Event",
+    "source": "console-api",
+    "timestamp": 1688125736600
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1688125669360 1:491630 \"Cere Games SDK: Resume host events\"",
+    "source": "console-api",
+    "timestamp": 1688125736605
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1688125669360 1:491560 \"Cere Games SDK: Suspend host events\"",
+    "source": "console-api",
+    "timestamp": 1688125736605
+  },
+  {
+    "level": "SEVERE",
+    "message": "https://wallet.dev.cere.io/popup?v1.26.0 - Access to XMLHttpRequest at 'https://api.freeport.dev.cere.network/wallet/0x070eb114a6017658b6629fb65e88c4124b127afc/nfts/owned' from origin 'https://wallet.dev.cere.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "source": "javascript",
+    "timestamp": 1688125736610
+  },
+  {
+    "level": "SEVERE",
+    "message": "https://wallet.dev.cere.io/static/js/main.d9775329.js 1:21551 C",
+    "source": "console-api",
+    "timestamp": 1688125736616
+  },
+  {
+    "level": "SEVERE",
+    "message": "https://api.freeport.dev.cere.network/wallet/0x070eb114a6017658b6629fb65e88c4124b127afc/nfts/owned - Failed to load resource: net::ERR_FAILED",
+    "source": "network",
+    "timestamp": 1688125736617
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:1993 \"Wallet (Outgoing)\" Object",
+    "source": "console-api",
+    "timestamp": 1688125736644
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.d9775329.js 1:59146 \"Popup (Closed)\" \"popup.34xq5s316g3\"",
+    "source": "console-api",
+    "timestamp": 1688125736644
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:1879 \"Wallet (Incoming)\" Object",
+    "source": "console-api",
+    "timestamp": 1688125736684
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:4588 \"RPC (Request)\" Object",
+    "source": "console-api",
+    "timestamp": 1688125736685
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.ecfff8f3.chunk.js 0:4625 \"RPC (Response)\" Object",
+    "source": "console-api",
+    "timestamp": 1688125736700
+  }
+]
