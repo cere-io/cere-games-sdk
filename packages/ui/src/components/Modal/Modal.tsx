@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { PropsWithChildren } from 'react';
 
 import { CloseIcon } from '../../icons';
+import { layer } from '../../assets'
 import { Backdrop } from '../Backdrop';
 import { Spinner } from '../Spinner';
 import { Stack } from '../Stack';
@@ -35,16 +36,30 @@ const Close = styled(CloseIcon)(({ theme }) => ({
 }));
 
 const Content = styled.div<ModalProps>(({ theme }) => ({
-  background: 'linear-gradient(180deg, rgba(138, 143, 255, 0.2) 0%, rgba(17, 21, 35, 0) 100%), #111523',
+  background: `linear-gradient(rgba(1, 1, 7, 1), rgba(44, 50, 91, 1)), linear-gradient(180deg, #010107 23.96%, #2C325B 100%), radial-gradient(99.55% 99.55% at 90.53% 12.99%, rgba(22, 29, 48, 0.00) 0%, #161D30 82.04%)`,
+  backgroundColor: 'rgba(22, 29, 48, 1)',
   boxShadow: '0px 5px 40px rgba(0, 0, 0, 0.4)',
-  borderRadius: theme.borderRadius(5),
-  padding: theme.spacing(4),
+  position: 'relative',
+  zIndex: 2,
+  borderRadius: theme.borderRadius(3),
+  padding: `${theme.spacing(3)} ${theme.spacing(3)} ${theme.spacing(4)} ${theme.spacing(3)}`,
   margin: theme.spacing(4),
-
   '@media (max-width: 600px), (max-height: 440px)': {
     padding: theme.spacing(2),
     margin: theme.spacing(1),
   },
+  '&:before': {
+    content: '""',
+    background: `url(${layer})`,
+    backgroundSize: 'cover',
+    position: 'absolute',
+    zIndex: -1,
+    top: '0px',
+    right: '0px',
+    bottom: '0px',
+    left: '0px',
+    opacity: '0.2'
+  }
 }));
 
 export const Modal = ({ children, onRequestClose, hasClose = false, loading = false }: ModalProps) => (
@@ -58,7 +73,6 @@ export const Modal = ({ children, onRequestClose, hasClose = false, loading = fa
             <Close onClick={onRequestClose} />
           </Header>
         )}
-
         {children}
       </Content>
     )}
