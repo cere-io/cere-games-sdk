@@ -33,6 +33,7 @@ type ShowConnectWalletOptions = {
   onConnect?: (accounts: WalletAccount[], isNew: boolean) => AsyncResult;
   onComplete?: () => AsyncResult;
   score?: number;
+  onShowSignUp?: string
 };
 
 export type GameInfo = {
@@ -281,7 +282,7 @@ export class GamesSDK {
 
   async showConnectWallet({ onConnect, onComplete, score }: ShowConnectWalletOptions = {}) {
     const connectWallet = document.createElement('cere-connect-wallet');
-    const { open, ...modal } = UI.createFullscreenModal(connectWallet, { hasClose: true });
+    const { open, ...modal } = UI.createModal(connectWallet, { hasClose: true });
 
     connectWallet.update({
       score,
@@ -312,6 +313,21 @@ export class GamesSDK {
           this.reporting.error(error);
         }
       },
+      onShowSignUp: async () => {
+        try {
+           const { email } = await this.wallet.getUserInfo();
+           if (email) {
+            this.showLeaderboard()
+           } else {
+             console.log('sdfsdfsdf')
+           }
+        } catch (e) {
+            const signUp = document.createElement('cere-signup');
+            const { open: openSignUp } = UI.createModal(signUp);
+            modal.close()
+            openSignUp()
+        }
+      }
     });
 
     open();

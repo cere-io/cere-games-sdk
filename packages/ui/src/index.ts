@@ -1,12 +1,33 @@
 import { Context } from './createContext';
 import { createWidget } from './createWidget';
 import { registerWidget } from './registerWidget';
-import { injectFonts } from './injectFonts';
-import { Leaderboard, Preloader, Modal, ConnectWallet, FullscreenModal } from './widgets';
+import {injectFonts, injectLocalFonts} from './injectFonts';
+import {
+  Leaderboard,
+  Preloader,
+  Modal,
+  ConnectWallet,
+  FullscreenModal,
+  SignUp
+} from './widgets';
+
 import { preloadAssets } from './preloadAssets';
+import {
+  yapariSemiBoldExtended,
+  yapariSemiBold,
+  yapariSemiBoldExpanded,
+  yapariSemiBoldWide
+} from "./fonts";
 
 export const register = async (context: Context) => {
+
   injectFonts();
+  injectLocalFonts([
+    yapariSemiBoldExpanded,
+    yapariSemiBoldExtended,
+    yapariSemiBoldWide,
+    yapariSemiBold
+  ]);
   preloadAssets(context);
 
   registerWidget('cere-preloader', createWidget(Preloader, context));
@@ -14,6 +35,7 @@ export const register = async (context: Context) => {
   registerWidget('cere-modal', createWidget(Modal, context));
   registerWidget('cere-fullscreen-modal', createWidget(FullscreenModal, context));
   registerWidget('cere-connect-wallet', createWidget(ConnectWallet, context));
+  registerWidget('cere-signup', createWidget(SignUp, context));
 };
 
 export * from './createModal';

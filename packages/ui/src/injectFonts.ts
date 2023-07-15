@@ -11,3 +11,11 @@ export function injectFonts() {
     document.head.appendChild(font);
   });
 }
+
+export function injectLocalFonts(fontsStrings: string[]) {
+  return fontsStrings.map( async (url) => {
+    const font = new FontFace('Yapari',`url(${url})`)
+    await font.load();
+    document.fonts.add(font);
+  })
+}

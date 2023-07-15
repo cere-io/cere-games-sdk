@@ -43,10 +43,10 @@ const Content = styled.div<FullscreenModalProps>(({ theme, isLeaderBoard }) => (
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   boxShadow: '0px 5px 40px rgba(0, 0, 0, 0.4)',
-  borderRadius: theme.borderRadius(4),
-  padding: theme.spacing(4),
+  borderRadius: theme.borderRadius(3),
+  padding: `${theme.spacing(3)} ${theme.spacing(3)} 47px ${theme.spacing(3)}`,
   margin: theme.spacing(4),
-  width: isLeaderBoard ? 459 : 600,
+  width: isLeaderBoard ? 459 : 440,
 
   '@media (max-width: 600px)': {
     width: 'auto',

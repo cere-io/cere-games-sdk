@@ -8,6 +8,7 @@ export interface WidgetType<P = {}> extends HTMLElement {
 export type WidgetMap = {
   'cere-leaderboard': WidgetType<LeaderboardProps>;
   'cere-preloader': WidgetType<PreloaderProps>;
+  'cere-signup': WidgetType<PreloaderProps>;
   'cere-modal': WidgetType<ModalProps>;
   'cere-fullscreen-modal': WidgetType<FullscreenModalProps>;
   'cere-connect-wallet': WidgetType<ConnectWalletProps>;

@@ -20,9 +20,17 @@ module.exports = {
         test: /\.png/,
         type: 'asset/inline',
       },
+      {
+        test: /\.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+        type: 'asset/source',
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.png'],
   },
 };
