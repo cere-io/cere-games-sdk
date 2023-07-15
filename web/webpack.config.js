@@ -40,7 +40,7 @@ module.exports = ({ WEBPACK_BUILD }) => {
           use: [{ loader: 'ts-loader' }],
         },
         {
-          test: /\.png/,
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: 'asset/inline',
         },
       ],
