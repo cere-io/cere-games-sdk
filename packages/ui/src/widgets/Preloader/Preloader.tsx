@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 
 import { preloaderImage } from '../../assets';
-import { Button, ProgressiveImg, Spinner, Stack, Typography } from '../../components';
+import { Button, ProgressiveImg, Stack, Typography, Steps } from '../../components';
 import { useAsyncCallback, useGameInfo, useMediaQuery } from '../../hooks';
 
 const ImageBlock = styled.div(
   {
     alignSelf: 'stretch',
-    height: 200,
+    height: 280,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -34,8 +34,12 @@ const Widget = styled(Stack)({
   minHeight: 415,
 
   '@media (min-width: 600px)': {
-    minWidth: 400,
+    minWidth: 492,
   },
+});
+
+const Title = styled(Typography)({
+  marginBottom: '24px !important',
 });
 
 const StyledTypography = styled(Typography)({
@@ -44,7 +48,12 @@ const StyledTypography = styled(Typography)({
 
 const StartButton = styled(Button)({
   marginTop: 'auto',
-});
+},
+  ({ loading }) => ({
+    background: loading ? '#161D30' : '#F32758', // TODO fix when color theme will be ready
+    borderRadius: loading ? 12 : 4
+  }),
+);
 
 export type PreloaderProps = {
   ready?: boolean;
@@ -59,28 +68,21 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="center">
       <ImageBlock hasPreloader={!!preloader.url} loading={loading}>
-        {loading ? (
-          <Spinner size="25" />
-        ) : (
-          preloader.url && <ProgressiveImg src={preloader.url} alt="Preloader image" />
-        )}
+        {preloader.url && <ProgressiveImg src={preloader.url} alt="Preloader image" />}
       </ImageBlock>
-
       {!loading && (
-        <Stack spacing={1}>
-          <Typography align="center" variant="h2">
-            {preloader.title || 'Play now & win'}
-          </Typography>
-
-          <StyledTypography align="center">
-            {preloader.description ||
-              'Unlock NFT and token rewards, work your way to the top of the leaderboard and claim a bonus prize!'}
-          </StyledTypography>
-        </Stack>
+        <Title align="center" variant="h2">
+          {preloader.title || 'Play & Earn $CERE'}
+        </Title>
       )}
+      {preloader.description ?
+        <StyledTypography align="center">
+          {preloader.description}
+        </StyledTypography>
+        : <Steps />}
 
       <StartButton data-testid="preloaderStart" loading={!ready || isBusy} onClick={handleStartClick}>
-        {ready ? 'Start' : 'Game loading...'}
+        {ready ? 'Play Now' : 'Game loading...'}
       </StartButton>
     </Widget>
   );

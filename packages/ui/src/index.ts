@@ -1,32 +1,31 @@
 import { Context } from './createContext';
 import { createWidget } from './createWidget';
 import { registerWidget } from './registerWidget';
-import {injectFonts, injectLocalFonts} from './injectFonts';
-import {
-  Leaderboard,
-  Preloader,
-  Modal,
-  ConnectWallet,
-  FullscreenModal,
-  SignUp
-} from './widgets';
-
+import { injectFonts, injectLocalFonts } from './injectFonts';
+import { Leaderboard, Preloader, Modal, ConnectWallet, FullscreenModal, SignUp } from './widgets';
 import { preloadAssets } from './preloadAssets';
-import {
-  yapariSemiBoldExtended,
-  yapariSemiBold,
-  yapariSemiBoldExpanded,
-  yapariSemiBoldWide
-} from "./fonts";
+
+import { yapariSemiBold, yapariSemiBoldExpanded, yapariSemiBoldExtended, yapariSemiBoldWide } from './fonts'
 
 export const register = async (context: Context) => {
-
   injectFonts();
   injectLocalFonts([
-    yapariSemiBoldExpanded,
-    yapariSemiBoldExtended,
-    yapariSemiBoldWide,
-    yapariSemiBold
+    {
+      name: 'Yapari-SemiBold',
+      src: yapariSemiBold
+    },
+    {
+      name: 'Yapari-SemiBoldExpanded',
+      src: yapariSemiBoldExpanded
+    },
+    {
+      name: 'Yapari-SemiBoldExtended',
+      src: yapariSemiBoldExtended
+    },
+    {
+      name: 'Yapari-SemiBoldWide',
+      src: yapariSemiBoldWide
+    }
   ]);
   preloadAssets(context);
 

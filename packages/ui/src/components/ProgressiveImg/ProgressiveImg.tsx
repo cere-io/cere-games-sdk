@@ -1,7 +1,6 @@
 import { ImgHTMLAttributes, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 
-import { Spinner } from '../Spinner';
 import { Stack } from '../Stack';
 
 export type ProgressiveImgProps = Partial<ImgHTMLAttributes<HTMLImageElement>> & {
@@ -9,7 +8,7 @@ export type ProgressiveImgProps = Partial<ImgHTMLAttributes<HTMLImageElement>> &
 };
 
 const StyledImage = styled.img({
-  height: 200,
+  height: 280,
   width: '100%',
   objectFit: 'fill',
   borderRadius: 12,
@@ -39,7 +38,7 @@ export const ProgressiveImg = ({ src, ...props }: ProgressiveImgProps) => {
 
   return (
     <StyledStack align="center">
-      {isLoading ? <Spinner size="25" /> : <StyledImage src={src} alt={props.alt || ''} className="image" />}
+      <StyledImage src={src} alt={props.alt || ''} className="image" />
     </StyledStack>
   );
 };
