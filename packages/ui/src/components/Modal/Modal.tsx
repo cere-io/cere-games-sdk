@@ -76,6 +76,11 @@ const RadialGradientBackGround = styled.div(({ theme }) => ({
   },
 }));
 
+const Content = styled.div({
+  position: "relative",
+  zIndex: 3,
+});
+
 export const Modal = ({ children, onRequestClose, hasClose = false, loading = false }: ModalProps) => (
   <Backdrop>
     {loading ? (
@@ -88,9 +93,9 @@ export const Modal = ({ children, onRequestClose, hasClose = false, loading = fa
             <Close onClick={onRequestClose} />
           </Header>
         )}
-      <div style={{ position: 'relative', zIndex: 3 }}>
+      <Content>
         {children}
-      </div>
+      </Content>
       </Wrapper>
     )}
   </Backdrop>

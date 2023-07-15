@@ -43,6 +43,10 @@ module.exports = ({ WEBPACK_BUILD }) => {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: 'asset/inline',
         },
+        {
+          test: /\.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+          type: 'asset/resource',
+        },
       ],
     },
 

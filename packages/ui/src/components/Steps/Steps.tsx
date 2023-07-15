@@ -20,7 +20,7 @@ const NumberWrapper = styled(Stack)({
 });
 
 const Number = styled(Typography)({
-  // fontFamily: Yapari, // TODO fix when add a font
+  fontFamily: 'Yapari-SemiBold',
   fontSize: 48,
   fontStyle: 'normal',
   lineHeight: 'normal',

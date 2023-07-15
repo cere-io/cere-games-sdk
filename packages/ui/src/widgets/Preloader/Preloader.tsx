@@ -75,13 +75,11 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
           {preloader.title || 'Play & Earn $CERE'}
         </Title>
       )}
-      {/*{preloader.description ?*/}
-      {/*  <StyledTypography align="center">*/}
-      {/*    {preloader.description}*/}
-      {/*  </StyledTypography>*/}
-      {/*  : <Steps />}*/}
-
-      <Steps />
+      {preloader.description ?
+        <StyledTypography align="center">
+          {preloader.description}
+        </StyledTypography>
+        : <Steps />}
 
       <StartButton data-testid="preloaderStart" loading={!ready || isBusy} onClick={handleStartClick}>
         {ready ? 'Play Now' : 'Game loading...'}
