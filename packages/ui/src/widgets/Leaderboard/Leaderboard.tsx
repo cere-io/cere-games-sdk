@@ -8,7 +8,8 @@ import {
   TableProps,
   Typography,
   Wrapper,
-  RadialGradientBackGround, Content
+  RadialGradientBackGround,
+  Content
 } from '../../components';
 import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
 import { TopWidget } from "./TopWidget";
@@ -28,6 +29,7 @@ export type LeaderboardProps = Pick<TableProps, 'data'> & {
   onTweet?: (score: number) => Promise<{ tweetBody: string }>;
   serviceUrl: string;
   withTopWidget?: boolean;
+  onShowSignUp?: () => void;
 };
 
 const Widget = styled.div({
@@ -75,7 +77,14 @@ const SignUpButton = styled(Button)({
   margin: '6px auto 16px auto',
 })
 
-export const Leaderboard = ({ data, activeTournament, onPlayAgain, onTweet, withTopWidget }: LeaderboardProps) => {
+export const Leaderboard = ({
+  data,
+  activeTournament,
+  onPlayAgain,
+  onTweet,
+  withTopWidget,
+  onShowSignUp
+}: LeaderboardProps) => {
   const { sessionPrice, gamePortalUrl, staticAssets } = useConfigContext();
   const { address, balance = 0, isReady } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
@@ -114,7 +123,7 @@ export const Leaderboard = ({ data, activeTournament, onPlayAgain, onTweet, with
         <Content>
           <LeaderboardTitle>leaderboard</LeaderboardTitle>
           <Stack align="center">
-            <SignUpButton>
+            <SignUpButton onClick={onShowSignUp}>
               Sign Up to unlock score
             </SignUpButton>
           </Stack>

@@ -1,85 +1,127 @@
+import React, { SVGProps } from "react";
+
 import styled from '@emotion/styled';
+import { Button, Stack, Typography } from '../../components';
+import { useAsyncCallback } from '../../hooks';
+import { BalanceIcon, TrophyRedIcon, GameIcon, LockIcon } from "../../icons";
 
-import { preloaderImage } from '../../assets';
-import { Button, ProgressiveImg, Spinner, Stack, Typography } from '../../components';
-import { useAsyncCallback, useGameInfo, useMediaQuery } from '../../hooks';
-import { PreloaderProps } from "../Preloader";
+export type SignUpProps = {
+  onConnect?: () => void;
+}
 
-const ImageBlock = styled.div(
+type Ads = {
+  icon: (props?: SVGProps<SVGSVGElement>) => JSX.Element |JSX.Element[];
+  text: string;
+};
+
+const mockAds: Ads[] = [
   {
-    alignSelf: 'stretch',
-    height: 200,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 12,
-
-    '@media (max-height: 440px)': {
-      height: 130,
-    },
+    icon: BalanceIcon,
+    text: 'Your Balance'
   },
-  ({ hasPreloader, loading }: { hasPreloader: boolean; loading: boolean }) =>
-    loading
-      ? {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }
-      : {
-        backgroundImage: hasPreloader ? undefined : `url(${preloaderImage})`,
-      },
-);
+  {
+    icon: TrophyRedIcon,
+    text: 'Weekly tournaments'
+  },
+  {
+    icon: GameIcon,
+    text: 'New Games'
+  },
+]
 
 const Widget = styled(Stack)({
   maxWidth: 400,
-  minHeight: 415,
+  minHeight: 340,
 
   '@media (min-width: 600px)': {
-    minWidth: 400,
+    minWidth: 441,
+    maxHeight: 340,
   },
 });
 
-const StyledTypography = styled(Typography)({
-  whiteSpace: 'pre-line',
-});
-
-const StartButton = styled(Button)({
+const SignUpButton = styled(Button)({
   marginTop: 'auto',
+  borderRadius: 4,
+  background: '#F32758',
 });
 
+const Title = styled(Typography)({
+  color: '#FFF',
+  fontFamily: 'Yapari-SemiBold',
+  fontSize: 28,
+  fontStyle: 'normal',
+  fontWeight: 600,
+  lineHeight: 'normal',
+  letterSpacing: '0.28px',
+  width: 393,
+});
 
+const SignUpAds = styled.div({
+  borderRadius: 12,
+  background: 'rgba(233, 204, 255, 0.10)',
+  display: 'flex',
+  width: 393,
+  height: 143,
+  justifyContent: "space-between",
+  padding: '20px 53px 19px 53px',
+  margin: '14px 0 0 0'
+});
 
-export const SignUp = ({ ready = false, onStartClick }: PreloaderProps) => {
-  const isLandscape = useMediaQuery('(max-height: 440px)');
-  const [handleStartClick, isBusy] = useAsyncCallback(onStartClick);
-  const { loading, preloader } = useGameInfo();
+const AdElement = styled(Stack)({
+  display: 'flex',
+  flexDirection: 'column',
+  width: 58,
+  height: 110,
+});
+
+const AdText = styled(Typography)({
+  fontFamily: 'Lexend, sans-serif',
+  fontSize: 14,
+  fontWeight: 600,
+  letterSpacing: '0.01em',
+  marginTop: 6,
+
+});
+
+const AdIcon = styled.div({
+  maxHeight: 42,
+  marginTop: 10,
+});
+
+const ConnectWallet = styled.div({
+  marginTop: 14,
+});
+
+export const SignUp = ({ onConnect }: SignUpProps) => {
+  const [handleStartClick, isBusy] = useAsyncCallback(onConnect);
 
   return (
-    <Widget spacing={isLandscape ? 2 : 4} align="center">
-      <ImageBlock hasPreloader={!!preloader.url} loading={loading}>
-        {loading ? (
-          <Spinner size="25" />
-        ) : (
-          preloader.url && <ProgressiveImg src={preloader.url} alt="Preloader image" />
-        )}
-      </ImageBlock>
-
-      {!loading && (
-        <Stack spacing={1}>
-          <Typography align="center" variant="h2">
-            awerergsdfgsdfgsdfgsdfg
-          </Typography>
-
-          <StyledTypography align="center">
-            {preloader.description ||
-              'Unlock NFT and token rewards, work your way to the top of the leaderboard and claim a bonus prize!'}
-          </StyledTypography>
-        </Stack>
-      )}
-
-      <StartButton data-testid="preloaderStart" loading={!ready || isBusy} onClick={handleStartClick}>
-        {ready ? 'Start' : 'Game loading...'}
-      </StartButton>
+    <Widget align="center">
+      <Title align="center" uppercase>
+        Don’t Lose
+        your progress
+      </Title>
+      <SignUpAds>
+        {mockAds.map(({ icon, text }: Ads, index: number) => {
+          return (
+            <AdElement  direction="column" key={index}>
+            <LockIcon />
+              <AdIcon>
+                {icon()}
+              </AdIcon>
+              <AdText align="center">
+                {text}
+              </AdText>
+            </AdElement>
+          )
+        })}
+      </SignUpAds>
+      <ConnectWallet>
+        Connect your wallet and save your result
+      </ConnectWallet>
+      <SignUpButton onClick={onConnect}>
+        Sign Up
+      </SignUpButton>
     </Widget>
   );
 };

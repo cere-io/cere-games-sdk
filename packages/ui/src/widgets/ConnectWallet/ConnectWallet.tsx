@@ -8,7 +8,8 @@ import { RepeatIcon } from "../../icons";
 export type ConnectWalletProps = {
   onConnect?: () => Promise<void> | void;
   score?: number;
-  onShowLeaderboard?: () => Promise<void> | void
+  onShowLeaderboard?: () => void;
+  onShowSignUp?: () => void;
 };
 
 const Connect = styled(Button)({
@@ -58,7 +59,7 @@ const HeaderSubTitle = styled(HeaderTitle)({
   textTransform: 'uppercase',
 });
 
-export const ConnectWallet = ({ onConnect, score, onShowLeaderboard }: ConnectWalletProps) => {
+export const ConnectWallet = ({ onConnect, score, onShowLeaderboard, onShowSignUp }: ConnectWalletProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [showConfetti, setShow] = useState(true);
   const { isReady, connecting } = useWalletContext();
@@ -89,7 +90,7 @@ export const ConnectWallet = ({ onConnect, score, onShowLeaderboard }: ConnectWa
         </HeaderSubTitle>
       </Stack>
       <Stack spacing={2}>
-        <Connect loading={isBusy} onClick={() => window.location.reload()}>
+        <Connect loading={isBusy} onClick={onShowSignUp}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <RepeatIcon />
             <PlayAgainText uppercase={false}>

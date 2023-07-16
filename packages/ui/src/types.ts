@@ -1,4 +1,11 @@
-import type { PreloaderProps, LeaderboardProps, ModalProps, ConnectWalletProps, FullscreenModalProps } from './widgets';
+import type {
+  PreloaderProps,
+  LeaderboardProps,
+  ModalProps,
+  ConnectWalletProps,
+  FullscreenModalProps,
+  SignUpProps
+} from './widgets';
 
 export interface WidgetType<P = {}> extends HTMLElement {
   readonly props: P;
@@ -8,7 +15,7 @@ export interface WidgetType<P = {}> extends HTMLElement {
 export type WidgetMap = {
   'cere-leaderboard': WidgetType<LeaderboardProps>;
   'cere-preloader': WidgetType<PreloaderProps>;
-  'cere-signup': WidgetType<PreloaderProps>;
+  'cere-signup': WidgetType<SignUpProps>;
   'cere-modal': WidgetType<ModalProps>;
   'cere-fullscreen-modal': WidgetType<FullscreenModalProps>;
   'cere-connect-wallet': WidgetType<ConnectWalletProps>;
