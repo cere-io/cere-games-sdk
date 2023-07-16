@@ -35,7 +35,7 @@ const Close = styled(CloseIcon)(({ theme }) => ({
   position: 'absolute',
 }));
 
-const Wrapper = styled.div<ModalProps>(({ theme }) => ({
+export const Wrapper = styled.div<ModalProps>(({ theme }) => ({
   background: 'linear-gradient(180deg, #010107 23.96%, #2C325B 100%)',
   boxShadow: '0px 5px 40px rgba(0, 0, 0, 0.4)',
   position: 'relative',
@@ -61,7 +61,7 @@ const Wrapper = styled.div<ModalProps>(({ theme }) => ({
   }
 }));
 
-const RadialGradientBackGround = styled.div(({ theme }) => ({
+export const RadialGradientBackGround = styled.div(({ theme }) => ({
   background: 'radial-gradient(99.55% 99.55% at 90.53% 50.99%, rgba(22, 29, 48, 0.00) 0%, #161D30 82.04%)',
   width: '100%',
   height: '100%',
@@ -76,7 +76,7 @@ const RadialGradientBackGround = styled.div(({ theme }) => ({
   },
 }));
 
-const Content = styled.div({
+export const Content = styled.div({
   position: "relative",
   zIndex: 3,
 });

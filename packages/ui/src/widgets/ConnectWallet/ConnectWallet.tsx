@@ -97,7 +97,7 @@ export const ConnectWallet = ({ onConnect, score, onShowLeaderboard }: ConnectWa
             </PlayAgainText>
           </div>
         </Connect>
-        <ViewLeaderBoard className="lato" loading={isBusy} onClick={onShowLeaderboard}>
+        <ViewLeaderBoard loading={isBusy} onClick={onShowLeaderboard}>
           View Leaderboard
         </ViewLeaderBoard>
       </Stack>

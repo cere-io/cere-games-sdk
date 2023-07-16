@@ -10,6 +10,7 @@ export type FullscreenModalProps = PropsWithChildren<{
   isLeaderBoard?: boolean;
   loading?: boolean;
   onRequestClose?: () => void;
+  withTopWidget?: boolean;
 }>;
 
 const Header = styled(Stack)(({ theme }) => ({
@@ -37,16 +38,16 @@ const Close = styled(CloseIcon)(({ theme }) => ({
 }));
 
 const Content = styled.div<FullscreenModalProps>(({ theme, isLeaderBoard }) => ({
-  background: isLeaderBoard
-    ? 'linear-gradient(180deg, #3F006B 0%, #111523 100%)'
-    : 'linear-gradient(180deg, #5E009F 0%, #111523 100%)',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  boxShadow: '0px 5px 40px rgba(0, 0, 0, 0.4)',
+  // background: isLeaderBoard
+  //   ? 'linear-gradient(180deg, #3F006B 0%, #111523 100%)'
+  //   : 'linear-gradient(180deg, #5E009F 0%, #111523 100%)',
+  // backgroundSize: 'cover',
+  // backgroundPosition: 'center',
+  // boxShadow: '0px 5px 40px rgba(0, 0, 0, 0.4)',
   borderRadius: theme.borderRadius(3),
   padding: `${theme.spacing(3)} ${theme.spacing(3)} 47px ${theme.spacing(3)}`,
   margin: theme.spacing(4),
-  width: isLeaderBoard ? 459 : 440,
+  // width: isLeaderBoard ? 443 : 440,
 
   '@media (max-width: 600px)': {
     width: 'auto',
@@ -62,6 +63,7 @@ export const FullscreenModal = ({
   hasClose = false,
   loading = false,
   isLeaderBoard,
+  // withTopWidget
 }: FullscreenModalProps) => {
   return (
     <FullScreenBackDrop>
@@ -70,6 +72,8 @@ export const FullscreenModal = ({
           <Spinner size={40} />
         </div>
       ) : (
+        <>
+          {/*{withTopWidget && <p>ask about it</p>} */}
         <Content isLeaderBoard={isLeaderBoard}>
           {hasClose && (
             <Header direction="row" spacing={2}>
@@ -78,6 +82,7 @@ export const FullscreenModal = ({
           )}
           {children}
         </Content>
+        </>
       )}
     </FullScreenBackDrop>
   );
