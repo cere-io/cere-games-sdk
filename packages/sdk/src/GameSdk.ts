@@ -293,7 +293,7 @@ export class GamesSDK {
         leaderboard.update({
           activeTournament,
           data,
-          withTopWidget,
+          withTopWidget: true,
           onPlayAgain: async () => {
             const { email } = await this.wallet.getUserInfo();
             this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });

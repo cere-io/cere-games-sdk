@@ -5,7 +5,7 @@ import { Truncate } from '../Truncate';
 import { Typography } from '../Typography';
 import { Rank, RankProps } from './Rank';
 import { TableRow } from './TableRow';
-import { CurrentPlayerIcon, TrophyWhiteIcon } from '../../icons';
+import { CurrentPlayerIconWhite, TrophyWhiteIcon } from '../../icons';
 import { useConfigContext } from '../../hooks';
 
 type Data = {
@@ -59,8 +59,8 @@ export const TableDataRow = ({ data, active, hasReward }: TableDataRowProps) => 
           <Rank rankColor={rankColors[data.rank - 1]}>{data.rank}</Rank>,
           <Typography variant="body2">
             <CurrentPlayer>
-              <Truncate aria-label="Address" variant="hex" maxLength={10} text={data.address} />
-              {active && <CurrentPlayerIcon />}
+              <Truncate aria-label="Address" variant="hex" maxLength={8} text={data.address} />
+              {active && <CurrentPlayerIconWhite />}
             </CurrentPlayer>
           </Typography>,
           rewardTsx,

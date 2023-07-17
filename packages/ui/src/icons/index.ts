@@ -14,4 +14,5 @@ export * from './BalanceIcon';
 export * from './TrophyRedIcon';
 export * from './GameIcon';
 export * from './LockIcon';
+export * from './CurrentPlayerIconWhite';
 

@@ -9,7 +9,8 @@ import {
   Typography,
   Wrapper,
   RadialGradientBackGround,
-  Content
+  Content,
+  Truncate
 } from '../../components';
 import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
 import { TopWidget } from "./TopWidget";
@@ -41,17 +42,6 @@ const Widget = styled.div({
   },
 });
 
-const TimeLeftText = styled(Typography)({
-  fontSize: 10,
-  lineHeight: '12.5px',
-  textTransform: 'uppercase',
-  color: 'rgba(255, 255, 255, 0.8)',
-  '& > span': {
-    fontWeight: 900,
-    color: '#ffffff',
-  },
-});
-
 const LeaderboardTitle = styled(Typography)({
   fontFamily: 'Yapari-SemiBold',
   fontSize: 18,
@@ -60,6 +50,15 @@ const LeaderboardTitle = styled(Typography)({
   linHeight: 32,
   textTransform: 'uppercase',
   textAlign: "center",
+});
+
+const Address = styled.div({
+  width: 105,
+  height: 36,
+  padding: '8px 16px',
+  background: 'rgba(233, 204, 255, 0.1)',
+  borderRadius: 4,
+  fontSize: 14,
 });
 
 const SignUpButton = styled(Button)({
@@ -90,7 +89,7 @@ export const Leaderboard = ({
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
   const isMobile = useMediaQuery('(max-width: 600px)');
 
-
+  console.log(data, playerData)
   const [handlePlayAgain, isBusy] = useAsyncCallback(onPlayAgain);
   const handleOpenGamePortal = useCallback(() => {
     window.location.href = gamePortalUrl;
@@ -121,12 +120,20 @@ export const Leaderboard = ({
       <Wrapper>
         <RadialGradientBackGround/>
         <Content>
-          <LeaderboardTitle>leaderboard</LeaderboardTitle>
-          <Stack align="center">
+          {playerData ?
+            <Stack direction="row" spacing="space-between">
+            <LeaderboardTitle>
+              leaderboard
+            </LeaderboardTitle>
+              <Address>
+                <Truncate text={playerData.address} maxLength={8} />
+              </Address>
+          </Stack> : <LeaderboardTitle>leaderboard</LeaderboardTitle>}
+          {!playerData && <Stack align="center">
             <SignUpButton onClick={onShowSignUp}>
               Sign Up to unlock score
             </SignUpButton>
-          </Stack>
+          </Stack>}
           <Table
             data={data}
             activeAddress={address}
