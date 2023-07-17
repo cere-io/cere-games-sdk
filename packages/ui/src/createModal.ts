@@ -6,13 +6,11 @@ export type Modal = {
 
 export type ModalOptions = {
   hasClose?: boolean;
-  withTopWidget?: boolean;
 };
 
 export type FullScreenModalOptions = {
   hasClose?: boolean;
   isLeaderBoard?: boolean;
-  withTopWidget?: boolean;
 };
 
 function appendToBody(element: HTMLElement) {
@@ -74,12 +72,6 @@ export const createFullscreenModal = (
   if (options.isLeaderBoard) {
     modal.update({
       isLeaderBoard: true,
-    });
-  }
-
-  if (options.withTopWidget) {
-    modal.update({
-      withTopWidget: options.withTopWidget,
     });
   }
 
