@@ -23,6 +23,7 @@ type ShowLeaderboardOptions = {
   onPlayAgain?: () => AsyncResult;
   onBeforeLoad?: () => AsyncResult;
   onTweet?: () => AsyncResult;
+  withTopWidget?: boolean;
   onShowSignUp?: () => void;
 };
 
@@ -280,7 +281,7 @@ export class GamesSDK {
     }
   }
 
-  showLeaderboard({ onPlayAgain, onBeforeLoad, onShowSignUp }: ShowLeaderboardOptions = {}) {
+  showLeaderboard({ onPlayAgain, onBeforeLoad, withTopWidget, onShowSignUp }: ShowLeaderboardOptions = {}) {
     const { open, ...modal } = UI.createFullscreenModal(
       async () => {
         const leaderboard = document.createElement('cere-leaderboard');
@@ -292,6 +293,7 @@ export class GamesSDK {
         leaderboard.update({
           activeTournament,
           data,
+          withTopWidget: true,
           onPlayAgain: async () => {
             const { email } = await this.wallet.getUserInfo();
             this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });
@@ -322,7 +324,7 @@ export class GamesSDK {
 
         return leaderboard;
       },
-      { isLeaderBoard: true },
+      { isLeaderBoard: true, withTopWidget },
     );
 
     open();
@@ -364,7 +366,7 @@ export class GamesSDK {
         }
       },
       onShowLeaderboard: () => {
-        this.showLeaderboard()
+        this.showLeaderboard({ withTopWidget: true })
         modal.close()
       },
       onShowSignUp: async () => {

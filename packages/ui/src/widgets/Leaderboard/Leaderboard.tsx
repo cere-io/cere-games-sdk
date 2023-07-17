@@ -29,6 +29,7 @@ export type LeaderboardProps = Pick<TableProps, 'data'> & {
   onPlayAgain?: () => Promise<void> | void;
   onTweet?: (score: number) => Promise<{ tweetBody: string }>;
   serviceUrl: string;
+  withTopWidget?: boolean;
   onShowSignUp?: () => void;
 };
 
@@ -80,6 +81,7 @@ export const Leaderboard = ({
   activeTournament,
   onPlayAgain,
   onTweet,
+  withTopWidget,
   onShowSignUp
 }: LeaderboardProps) => {
   const { sessionPrice, gamePortalUrl, staticAssets } = useConfigContext();
@@ -110,11 +112,11 @@ export const Leaderboard = ({
 
   return (
     <>
-
-      <TopWidget
-        onPlayAgain={handlePlayAgain}
-        disabled={balance < sessionPrice}
-    />
+      {withTopWidget &&
+        <TopWidget
+          onPlayAgain={handlePlayAgain}
+          disabled={balance < sessionPrice}
+      />}
       <Wrapper>
         <RadialGradientBackGround/>
         <Content>

@@ -10,6 +10,7 @@ export type FullscreenModalProps = PropsWithChildren<{
   isLeaderBoard?: boolean;
   loading?: boolean;
   onRequestClose?: () => void;
+  withTopWidget?: boolean;
 }>;
 
 const Header = styled(Stack)(({ theme }) => ({
@@ -62,6 +63,7 @@ export const FullscreenModal = ({
   hasClose = false,
   loading = false,
   isLeaderBoard,
+  // withTopWidget
 }: FullscreenModalProps) => {
   return (
     <FullScreenBackDrop>
@@ -71,6 +73,7 @@ export const FullscreenModal = ({
         </div>
       ) : (
         <>
+          {/*{withTopWidget && <p>ask about it</p>} */}
         <Content isLeaderBoard={isLeaderBoard}>
           {hasClose && (
             <Header direction="row" spacing={2}>
