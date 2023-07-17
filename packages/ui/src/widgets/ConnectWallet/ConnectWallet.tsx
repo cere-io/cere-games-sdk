@@ -86,7 +86,7 @@ export const ConnectWallet = ({ onConnect, score, onShowLeaderboard, onShowSignU
           You’ve earned
         </HeaderTitle>
         <HeaderSubTitle role="heading" aria-level={2}>
-          {score} $Cere
+          5 $Cere
         </HeaderSubTitle>
       </Stack>
       <Stack spacing={2}>

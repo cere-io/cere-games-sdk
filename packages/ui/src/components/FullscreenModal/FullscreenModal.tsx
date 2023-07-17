@@ -38,16 +38,9 @@ const Close = styled(CloseIcon)(({ theme }) => ({
 }));
 
 const Content = styled.div<FullscreenModalProps>(({ theme, isLeaderBoard }) => ({
-  // background: isLeaderBoard
-  //   ? 'linear-gradient(180deg, #3F006B 0%, #111523 100%)'
-  //   : 'linear-gradient(180deg, #5E009F 0%, #111523 100%)',
-  // backgroundSize: 'cover',
-  // backgroundPosition: 'center',
-  // boxShadow: '0px 5px 40px rgba(0, 0, 0, 0.4)',
   borderRadius: theme.borderRadius(3),
   padding: `${theme.spacing(3)} ${theme.spacing(3)} 47px ${theme.spacing(3)}`,
   margin: theme.spacing(4),
-  // width: isLeaderBoard ? 443 : 440,
 
   '@media (max-width: 600px)': {
     width: 'auto',

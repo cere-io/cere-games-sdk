@@ -5,7 +5,7 @@ import { injectFonts, injectLocalFonts } from './injectFonts';
 import { Leaderboard, Preloader, Modal, ConnectWallet, FullscreenModal, SignUp } from './widgets';
 import { preloadAssets } from './preloadAssets';
 
-import { yapariSemiBold, yapariSemiBoldExpanded, yapariSemiBoldExtended, yapariSemiBoldWide } from './fonts'
+import { yapariSemiBold } from './fonts'
 
 export const register = async (context: Context) => {
   injectFonts();
@@ -14,18 +14,6 @@ export const register = async (context: Context) => {
       name: 'Yapari-SemiBold',
       src: yapariSemiBold
     },
-    {
-      name: 'Yapari-SemiBoldExpanded',
-      src: yapariSemiBoldExpanded
-    },
-    {
-      name: 'Yapari-SemiBoldExtended',
-      src: yapariSemiBoldExtended
-    },
-    {
-      name: 'Yapari-SemiBoldWide',
-      src: yapariSemiBoldWide
-    }
   ]);
   preloadAssets(context);
 
