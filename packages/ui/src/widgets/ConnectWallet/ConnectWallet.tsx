@@ -63,7 +63,7 @@ export const ConnectWallet = ({ onConnect, score, onShowLeaderboard, onShowSignU
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [showConfetti, setShow] = useState(true);
   const { isReady, connecting } = useWalletContext();
-  const { newWalletReward, staticAssets } = useConfigContext();
+  const { newWalletReward, sessionPrice, staticAssets } = useConfigContext();
   const [handleConnect, busy] = useAsyncCallback(onConnect);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export const ConnectWallet = ({ onConnect, score, onShowLeaderboard, onShowSignU
           You’ve earned
         </HeaderTitle>
         <HeaderSubTitle role="heading" aria-level={2}>
-          5 $Cere
+          {newWalletReward} $Cere
         </HeaderSubTitle>
       </Stack>
       <Stack spacing={2}>
@@ -94,7 +94,7 @@ export const ConnectWallet = ({ onConnect, score, onShowLeaderboard, onShowSignU
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <RepeatIcon />
             <PlayAgainText uppercase={false}>
-              2 $CERE To Play Again
+              {sessionPrice} $CERE To Play Again
             </PlayAgainText>
           </div>
         </Connect>

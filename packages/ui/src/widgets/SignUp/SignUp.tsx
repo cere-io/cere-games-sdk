@@ -10,7 +10,7 @@ export type SignUpProps = {
 }
 
 type Ads = {
-  icon: (props?: SVGProps<SVGSVGElement>) => JSX.Element |JSX.Element[];
+  icon: (props?: SVGProps<SVGSVGElement>) => JSX.Element;
   text: string;
 };
 
@@ -102,12 +102,12 @@ export const SignUp = ({ onConnect }: SignUpProps) => {
         your progress
       </Title>
       <SignUpAds>
-        {mockAds.map(({ icon, text }: Ads, index: number) => {
+        {mockAds.map(({ icon: Icon, text }: Ads, index: number) => {
           return (
             <AdElement  direction="column" key={index}>
             <LockIcon />
               <AdIcon>
-                {icon()}
+                <Icon />
               </AdIcon>
               <AdText align="center">
                 {text}
@@ -119,7 +119,7 @@ export const SignUp = ({ onConnect }: SignUpProps) => {
       <ConnectWallet>
         Connect your wallet and save your result
       </ConnectWallet>
-      <SignUpButton onClick={onConnect}>
+      <SignUpButton onClick={handleStartClick}>
         Sign Up
       </SignUpButton>
     </Widget>

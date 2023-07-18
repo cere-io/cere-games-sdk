@@ -1,4 +1,3 @@
-
 export const BalanceIcon = () => (
   <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M6 34L6 8L4 8L4 34L6 34Z" fill="#F32758"/>

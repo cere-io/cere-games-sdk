@@ -1,5 +1,3 @@
-import { SVGProps } from 'react';
-
 export const GameIcon = () => (
   <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M0 25L-5.24537e-07 13L4 13L4 25L0 25Z" fill="#F32758"/>

@@ -39,7 +39,7 @@ const Close = styled(CloseIcon)(({ theme }) => ({
 
 const Content = styled.div<FullscreenModalProps>(({ theme, isLeaderBoard }) => ({
   borderRadius: theme.borderRadius(3),
-  padding: `${theme.spacing(3)} ${theme.spacing(3)} 47px ${theme.spacing(3)}`,
+  padding: theme.spacing(3, 3, 6, 3),
   margin: theme.spacing(4),
 
   '@media (max-width: 600px)': {
@@ -56,8 +56,8 @@ export const FullscreenModal = ({
   hasClose = false,
   loading = false,
   isLeaderBoard,
-  // withTopWidget
-}: FullscreenModalProps) => {
+}: // withTopWidget
+FullscreenModalProps) => {
   return (
     <FullScreenBackDrop>
       {loading ? (
@@ -66,15 +66,14 @@ export const FullscreenModal = ({
         </div>
       ) : (
         <>
-          {/*{withTopWidget && <p>ask about it</p>} */}
-        <Content isLeaderBoard={isLeaderBoard}>
-          {hasClose && (
-            <Header direction="row" spacing={2}>
-              <Close onClick={onRequestClose} />
-            </Header>
-          )}
-          {children}
-        </Content>
+          <Content isLeaderBoard={isLeaderBoard}>
+            {hasClose && (
+              <Header direction="row" spacing={2}>
+                <Close onClick={onRequestClose} />
+              </Header>
+            )}
+            {children}
+          </Content>
         </>
       )}
     </FullScreenBackDrop>

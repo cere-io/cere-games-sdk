@@ -1,21 +1,15 @@
 import styled from '@emotion/styled';
-import {
-  Wrapper,
-  RadialGradientBackGround,
-  Content,
-  Typography,
-  Button,
-} from "../../components";
-import { nft } from '../../assets'
-import { RepeatIcon } from "../../icons";
+import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button } from '../../components';
+import { nft } from '../../assets';
+import { RepeatIcon } from '../../icons';
 
 type TopWidgetProps = {
   amountOfDaysLeft?: number;
   onPlayAgain: () => void;
   disabled?: boolean;
-}
+};
 
-const WidgetWrapper = styled(Wrapper)({
+const WidgetWrapper = styled(ModalWrapper)({
   minWidth: 443,
   minHeight: 265,
 });
@@ -28,11 +22,11 @@ const DaysLeft = styled.div({
   fontWeight: 600,
   fontSize: 14,
   textAlign: 'center',
-  position: "absolute",
+  position: 'absolute',
   left: '-40px',
   top: '-80px',
   minWidth: 168,
-  textTransform: 'uppercase'
+  textTransform: 'uppercase',
 });
 
 const Text = styled.div({
@@ -65,44 +59,31 @@ const PlayAgainText = styled(Typography)({
 });
 
 const NFTImage = styled.img({
-  position: "absolute",
+  position: 'absolute',
   width: 180,
   height: 280,
   right: '-60px',
   top: '-110px',
-})
+});
 
-export const TopWidget = ({
-  amountOfDaysLeft = 1,
-  onPlayAgain,
-  disabled
-}: TopWidgetProps): JSX.Element => {
+export const TopWidget = ({ amountOfDaysLeft = 1, onPlayAgain, disabled }: TopWidgetProps): JSX.Element => {
   return (
     <WidgetWrapper>
-      <RadialGradientBackGround/>
+      <RadialGradientBackGround />
       <Content>
-        <DaysLeft>
-          {amountOfDaysLeft} day left
-        </DaysLeft>
-        <NFTImage src={nft}/>
+        <DaysLeft>{amountOfDaysLeft} day left</DaysLeft>
+        <NFTImage src={nft} />
         <Text>
-          <Typography>
-            Weekly tournament
-          </Typography>
-          <UniqueNFT>
-            TOP 20 wins
-            UNIQUE NFT
-          </UniqueNFT>
+          <Typography>Weekly tournament</Typography>
+          <UniqueNFT>TOP 20 wins UNIQUE NFT</UniqueNFT>
         </Text>
         <PlayAgain onClick={disabled ? () => onPlayAgain : () => null}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <RepeatIcon />
-            <PlayAgainText>
-              Play Again
-            </PlayAgainText>
+            <PlayAgainText>Play Again</PlayAgainText>
           </div>
         </PlayAgain>
       </Content>
     </WidgetWrapper>
-  )
-}
+  );
+};

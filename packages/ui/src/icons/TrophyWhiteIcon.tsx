@@ -1,6 +1,4 @@
-import { SVGProps } from 'react';
-
-export const TrophyWhiteIcon = (props: SVGProps<SVGSVGElement>) => (
+export const TrophyWhiteIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_4593_40153)">
       <path d="M5.55554 18.3335H14.4444V19.4446H5.55554V18.3335Z" fill="#F5FAFC"/>

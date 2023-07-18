@@ -7,13 +7,13 @@ import {
   Table,
   TableProps,
   Typography,
-  Wrapper,
+  ModalWrapper,
   RadialGradientBackGround,
   Content,
-  Truncate
+  Truncate,
 } from '../../components';
 import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
-import { TopWidget } from "./TopWidget";
+import { TopWidget } from './TopWidget';
 
 type TournamentType = {
   id: number;
@@ -49,7 +49,7 @@ const LeaderboardTitle = styled(Typography)({
   fontWeight: 600,
   linHeight: 32,
   textTransform: 'uppercase',
-  textAlign: "center",
+  textAlign: 'center',
 });
 
 const Address = styled.div({
@@ -74,7 +74,7 @@ const SignUpButton = styled(Button)({
   fontWeight: 600,
   textTransform: 'capitalize',
   margin: '6px auto 16px auto',
-})
+});
 
 export const Leaderboard = ({
   data,
@@ -82,14 +82,13 @@ export const Leaderboard = ({
   onPlayAgain,
   onTweet,
   withTopWidget,
-  onShowSignUp
+  onShowSignUp,
 }: LeaderboardProps) => {
   const { sessionPrice, gamePortalUrl, staticAssets } = useConfigContext();
   const { address, balance = 0, isReady } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
   const isMobile = useMediaQuery('(max-width: 600px)');
 
-  console.log(data, playerData)
   const [handlePlayAgain, isBusy] = useAsyncCallback(onPlayAgain);
   const handleOpenGamePortal = useCallback(() => {
     window.location.href = gamePortalUrl;
@@ -112,35 +111,28 @@ export const Leaderboard = ({
 
   return (
     <>
-      {withTopWidget &&
-        <TopWidget
-          onPlayAgain={handlePlayAgain}
-          disabled={balance < sessionPrice}
-      />}
-      <Wrapper>
-        <RadialGradientBackGround/>
+      {withTopWidget && <TopWidget onPlayAgain={handlePlayAgain} disabled={balance < sessionPrice} />}
+      <ModalWrapper>
+        <RadialGradientBackGround />
         <Content>
-          {playerData ?
+          {playerData ? (
             <Stack direction="row" spacing="space-between">
-            <LeaderboardTitle>
-              leaderboard
-            </LeaderboardTitle>
+              <LeaderboardTitle>leaderboard</LeaderboardTitle>
               <Address>
                 <Truncate text={playerData.address} maxLength={8} />
               </Address>
-          </Stack> : <LeaderboardTitle>leaderboard</LeaderboardTitle>}
-          {!playerData && <Stack align="center">
-            <SignUpButton onClick={onShowSignUp}>
-              Sign Up to unlock score
-            </SignUpButton>
-          </Stack>}
-          <Table
-            data={data}
-            activeAddress={address}
-            hasTournament={Boolean(activeTournament)}
-          />
+            </Stack>
+          ) : (
+            <LeaderboardTitle>leaderboard</LeaderboardTitle>
+          )}
+          {!playerData && (
+            <Stack align="center">
+              <SignUpButton onClick={onShowSignUp}>Sign Up to unlock score</SignUpButton>
+            </Stack>
+          )}
+          <Table data={data} activeAddress={address} hasTournament={Boolean(activeTournament)} />
         </Content>
-      </Wrapper>
+      </ModalWrapper>
     </>
   );
 };
