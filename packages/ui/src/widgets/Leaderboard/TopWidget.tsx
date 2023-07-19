@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button } from '../../components';
-import { nft } from '../../assets';
+import { useConfigContext } from '../../hooks';
 import { RepeatIcon } from '../../icons';
 
 type TopWidgetProps = {
@@ -10,8 +10,11 @@ type TopWidgetProps = {
 };
 
 const WidgetWrapper = styled(ModalWrapper)({
-  minWidth: 443,
+  width: 490,
   minHeight: 265,
+  '@media (max-width: 600px)': {
+    width: 'auto',
+  },
 });
 
 const DaysLeft = styled.div({
@@ -67,12 +70,14 @@ const NFTImage = styled.img({
 });
 
 export const TopWidget = ({ amountOfDaysLeft = 1, onPlayAgain, disabled }: TopWidgetProps): JSX.Element => {
+  const { sdkUrl: cdnUrl } = useConfigContext();
+
   return (
-    <WidgetWrapper>
+    <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`}>
       <RadialGradientBackGround />
       <Content>
         <DaysLeft>{amountOfDaysLeft} day left</DaysLeft>
-        <NFTImage src={nft} />
+        <NFTImage src={`${cdnUrl}/assets/nft.png`} />
         <Text>
           <Typography>Weekly tournament</Typography>
           <UniqueNFT>TOP 20 wins UNIQUE NFT</UniqueNFT>

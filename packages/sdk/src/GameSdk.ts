@@ -12,6 +12,7 @@ import {
   NEW_WALLET_REWARD,
   SDK_VERSION,
   STATIC_ASSETS,
+  SDK_CDN_URL,
 } from './constants';
 import { GamesApi, Session, SessionEvent } from './api';
 import { Analytics } from './Analytics';
@@ -41,7 +42,7 @@ type ShowConnectWalletOptions = {
 
 type ShowSignUpOptions = {
   onConnect?: (accounts: WalletAccount[], isNew: boolean) => AsyncResult;
-}
+};
 
 export type GameInfo = {
   name?: string;
@@ -75,7 +76,7 @@ export class GamesSDK {
   private readonly reporting = new Reporting({ env: this.env, ...this.options.reporting });
   private readonly analytics = new Analytics();
 
-  private readonly ui = UI.createContext({
+  protected readonly ui = UI.createContext({
     reporting: this.reporting,
 
     config: {
@@ -84,6 +85,7 @@ export class GamesSDK {
       gamePortalUrl: GAME_PORTAL_URL[this.env],
       staticBaseUrl: STATIC_BASE_URL[this.env],
       staticAssets: STATIC_ASSETS[this.env],
+      sdkUrl: SDK_CDN_URL[this.env],
     },
   });
 
@@ -244,7 +246,7 @@ export class GamesSDK {
   }
 
   showSignUp({ onConnect }: ShowSignUpOptions) {
-    const signUp = document.createElement('cere-signup')
+    const signUp = document.createElement('cere-signup');
     const { open, ...modal } = UI.createModal(signUp, { hasClose: false });
 
     signUp.update({
@@ -258,7 +260,6 @@ export class GamesSDK {
             this.wallet.getAccounts(),
           ]);
 
-
           this.ui.wallet.isNewUser = isNewUser;
 
           await onConnect?.(accounts, isNewUser);
@@ -269,16 +270,15 @@ export class GamesSDK {
           if (isNewUser) {
             this.analytics.trackEvent(ANALYTICS_EVENTS.accountCreated, { userEmail: email });
           }
-
         } catch (error) {
           this.reporting.error(error);
         }
-      }
-    })
+      },
+    });
 
     return {
-      open
-    }
+      open,
+    };
   }
 
   showLeaderboard({ onPlayAgain, onBeforeLoad, withTopWidget, onShowSignUp }: ShowLeaderboardOptions = {}) {
@@ -314,10 +314,9 @@ export class GamesSDK {
             return response;
           },
           onShowSignUp: () => {
-            const { open } = this.showSignUp({})
-            open()
-            modal.close()
-
+            const { open } = this.showSignUp({});
+            open();
+            modal.close();
           },
           serviceUrl: GAME_SERVICE_URL[this.env],
         });
@@ -366,16 +365,16 @@ export class GamesSDK {
         }
       },
       onShowLeaderboard: () => {
-        this.showLeaderboard({ withTopWidget: true })
-        modal.close()
+        this.showLeaderboard({ withTopWidget: false });
+        modal.close();
       },
       onShowSignUp: async () => {
         const { open } = this.showSignUp({
-          onConnect
-        })
-        open()
-        modal.close()
-      }
+          onConnect,
+        });
+        open();
+        modal.close();
+      },
     });
 
     open();

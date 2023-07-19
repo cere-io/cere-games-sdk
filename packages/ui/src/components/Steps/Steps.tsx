@@ -1,11 +1,15 @@
 import styled from '@emotion/styled';
 
+import { useMediaQuery } from '../../hooks';
 import { Stack, Typography } from '../../components';
-import { ArrowRightIcon } from "../../icons";
+import { ArrowRightIcon } from '../../icons';
 
 const Container = styled(Stack)({
   width: 460,
   height: 100,
+  '@media (max-width: 600px)': {
+    maxWidth: 312,
+  },
 });
 
 const StepContainer = styled(Stack)({
@@ -17,6 +21,10 @@ const StepContainer = styled(Stack)({
 const NumberWrapper = styled(Stack)({
   width: 134,
   maxHeight: 94,
+  '@media (max-width: 600px)': {
+    width: 104,
+    maxHeight: 79,
+  },
 });
 
 const Number = styled(Typography)({
@@ -24,6 +32,9 @@ const Number = styled(Typography)({
   fontSize: 48,
   fontStyle: 'normal',
   lineHeight: 'normal',
+  '@media (max-width: 600px)': {
+    fontSize: 36,
+  },
 });
 
 interface StepsProps {
@@ -34,19 +45,20 @@ interface StepsProps {
 const mockData: StepsProps[] = [
   {
     number: '01',
-    text: 'Play Metaverse Dash Run'
+    text: 'Play Metaverse Dash Run',
   },
   {
     number: '02',
-    text: 'Create a Cere wallet'
+    text: 'Create a Cere wallet',
   },
   {
     number: '03',
-    text: 'Claim your $CERE tokens'
+    text: 'Claim your $CERE tokens',
   },
-]
+];
 
 export const Steps = (): JSX.Element => {
+  const isMobile = useMediaQuery('(max-width: 600px)');
 
   return (
     <Container direction="row" margin={[0, 0, 4, 0]} align="start">
@@ -55,18 +67,14 @@ export const Steps = (): JSX.Element => {
           <NumberWrapper>
             <Number variant="body1" uppercase align="center" fontWight="semi-bold">
               {number}
-              <Typography
-                align="center"
-                fontWight="regular"
-                style={{ fontSize: '15px' }}
-              >
+              <Typography align="center" fontWight="regular" style={{ fontSize: isMobile ? '11px' : '15px' }}>
                 {text}
               </Typography>
             </Number>
           </NumberWrapper>
-          {index !== mockData.length -1 ? <ArrowRightIcon /> : null}
-        </StepContainer >
+          {!isMobile && index !== mockData.length - 1 ? <ArrowRightIcon /> : null}
+        </StepContainer>
       ))}
     </Container>
-  )
-}
+  );
+};

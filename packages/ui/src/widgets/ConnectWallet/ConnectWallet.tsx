@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 
+import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
 import { Button, Stack, Typography } from '../../components';
-import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from "../../hooks";
-import { RepeatIcon } from "../../icons";
+import { RepeatIcon } from '../../icons';
 
 export type ConnectWalletProps = {
   onConnect?: () => Promise<void> | void;
@@ -34,9 +34,8 @@ const Widget = styled(Stack)({
   maxWidth: 600,
   minWidth: 440,
   '@media (max-width: 600px)': {
-    maxWidth: '100%',
-    width: '100%',
-    height: '100vh',
+    maxWidth: 345,
+    minWidth: 345,
   },
 });
 
@@ -93,9 +92,7 @@ export const ConnectWallet = ({ onConnect, score, onShowLeaderboard, onShowSignU
         <Connect loading={isBusy} onClick={onShowSignUp}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <RepeatIcon />
-            <PlayAgainText uppercase={false}>
-              {sessionPrice} $CERE To Play Again
-            </PlayAgainText>
+            <PlayAgainText uppercase={false}>{sessionPrice} $CERE To Play Again</PlayAgainText>
           </div>
         </Connect>
         <ViewLeaderBoard loading={isBusy} onClick={onShowLeaderboard}>

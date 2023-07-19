@@ -2,15 +2,17 @@ import styled from '@emotion/styled';
 import { PropsWithChildren } from 'react';
 
 import { CloseIcon } from '../../icons';
-import { layerSvg } from '../../assets';
 import { Backdrop } from '../Backdrop';
 import { Spinner } from '../Spinner';
 import { Stack } from '../Stack';
+
+import { useConfigContext } from '../../hooks'
 
 export type ModalProps = PropsWithChildren<{
   hasClose?: boolean;
   loading?: boolean;
   onRequestClose?: () => void;
+  layer?: string;
 }>;
 
 const Header = styled(Stack)(({ theme }) => ({
@@ -35,7 +37,7 @@ const Close = styled(CloseIcon)(({ theme }) => ({
   position: 'absolute',
 }));
 
-export const ModalWrapper = styled.div<ModalProps>(({ theme }) => ({
+export const ModalWrapper = styled.div<ModalProps>(({ theme, layer }) => ({
   background: 'linear-gradient(180deg, #010107 23.96%, #2C325B 100%)',
   boxShadow: '0px 5px 40px rgba(0, 0, 0, 0.4)',
   position: 'relative',
@@ -49,7 +51,7 @@ export const ModalWrapper = styled.div<ModalProps>(({ theme }) => ({
   },
   '&:before': {
     content: '""',
-    background: `url(${layerSvg})`,
+    background: `url(${layer})`,
     backgroundSize: 'cover',
     position: 'absolute',
     zIndex: -1,
@@ -81,20 +83,24 @@ export const Content = styled.div({
   zIndex: 3,
 });
 
-export const Modal = ({ children, onRequestClose, hasClose = false, loading = false }: ModalProps) => (
-  <Backdrop>
-    {loading ? (
-      <Spinner size={40} />
-    ) : (
-      <ModalWrapper>
-        <RadialGradientBackGround />
-        {hasClose && (
-          <Header direction="row" spacing={2}>
-            <Close onClick={onRequestClose} />
-          </Header>
-        )}
-        <Content>{children}</Content>
-      </ModalWrapper>
-    )}
-  </Backdrop>
-);
+export const Modal = ({ children, onRequestClose, hasClose = false, loading = false }: ModalProps) => {
+  const { sdkUrl: cdnUrl } = useConfigContext()
+
+  return (
+    <Backdrop>
+      {loading ? (
+        <Spinner size={40} />
+      ) : (
+        <ModalWrapper layer={`${cdnUrl}/assets/layer.svg`}>
+          <RadialGradientBackGround />
+          {hasClose && (
+            <Header direction="row" spacing={2}>
+              <Close onClick={onRequestClose} />
+            </Header>
+          )}
+          <Content>{children}</Content>
+        </ModalWrapper>
+      )}
+    </Backdrop>
+  );
+}

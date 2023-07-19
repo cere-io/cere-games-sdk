@@ -84,7 +84,7 @@ export const Leaderboard = ({
   withTopWidget,
   onShowSignUp,
 }: LeaderboardProps) => {
-  const { sessionPrice, gamePortalUrl, staticAssets } = useConfigContext();
+  const { sessionPrice, gamePortalUrl, staticAssets, sdkUrl: cdnUrl } = useConfigContext();
   const { address, balance = 0, isReady } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
   const isMobile = useMediaQuery('(max-width: 600px)');
@@ -112,7 +112,7 @@ export const Leaderboard = ({
   return (
     <>
       {withTopWidget && <TopWidget onPlayAgain={handlePlayAgain} disabled={balance < sessionPrice} />}
-      <ModalWrapper>
+      <ModalWrapper layer={`${cdnUrl}/assets/layer.svg`}>
         <RadialGradientBackGround />
         <Content>
           {playerData ? (

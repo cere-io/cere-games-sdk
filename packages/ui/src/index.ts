@@ -5,16 +5,9 @@ import { injectFonts, injectLocalFonts } from './injectFonts';
 import { Leaderboard, Preloader, Modal, ConnectWallet, FullscreenModal, SignUp } from './widgets';
 import { preloadAssets } from './preloadAssets';
 
-import { yapariSemiBold } from './fonts'
-
 export const register = async (context: Context) => {
   injectFonts();
-  injectLocalFonts([
-    {
-      name: 'Yapari-SemiBold',
-      src: yapariSemiBold
-    },
-  ]);
+  injectLocalFonts(context.config.sdkUrl);
   preloadAssets(context);
 
   registerWidget('cere-preloader', createWidget(Preloader, context));
