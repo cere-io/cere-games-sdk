@@ -66,6 +66,12 @@ export const STATIC_BASE_URL = {
   prod: 'https://assets.cms.freeport.cere.network',
 };
 
+export const SDK_CDN_URL = {
+  dev: `https://games-sdk.dev.cere.io/sdk/${SDK_VERSION}`,
+  stage: `https://games-sdk.stage.cere.io/sdk/${SDK_VERSION}`,
+  prod: `https://games-sdk.cere.io/sdk/${SDK_VERSION}`,
+};
+
 export const STATIC_ASSETS: StaticBaseUrlType = {
   dev: {
     crown: `${STATIC_BASE_URL.dev}/crown_image_ceeef25fb4.png`,

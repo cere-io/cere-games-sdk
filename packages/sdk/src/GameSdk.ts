@@ -12,6 +12,7 @@ import {
   NEW_WALLET_REWARD,
   SDK_VERSION,
   STATIC_ASSETS,
+  SDK_CDN_URL,
 } from './constants';
 import { GamesApi, Session, SessionEvent } from './api';
 import { Analytics } from './Analytics';
@@ -67,7 +68,7 @@ export class GamesSDK {
   private readonly reporting = new Reporting({ env: this.env, ...this.options.reporting });
   private readonly analytics = new Analytics();
 
-  private readonly ui = UI.createContext({
+  protected readonly ui = UI.createContext({
     reporting: this.reporting,
 
     config: {
@@ -76,6 +77,7 @@ export class GamesSDK {
       gamePortalUrl: GAME_PORTAL_URL[this.env],
       staticBaseUrl: STATIC_BASE_URL[this.env],
       staticAssets: STATIC_ASSETS[this.env],
+      sdkUrl: SDK_CDN_URL[this.env],
     },
   });
 

@@ -6,6 +6,8 @@ const Dotenv = require('dotenv-webpack');
 const { version: sdkVersion } = require('@cere/games-sdk/package.json');
 
 const buildDir = path.resolve(__dirname, '../build');
+const sdkSourceDir = path.resolve(__dirname, 'sdk');
+const sdkDistDir = path.resolve(buildDir, 'sdk');
 const examplesSourceDir = path.resolve(__dirname, 'examples');
 const examplesDistDir = path.resolve(buildDir, 'examples');
 
@@ -15,12 +17,12 @@ const injectVars = (vars) => (content) =>
   }, content.toString());
 
 const createSdkEntry = (version) => ({
-  import: path.resolve(__dirname, 'sdk/index.ts'),
+  import: path.resolve(sdkSourceDir, 'index.ts'),
   filename: `sdk/${version}/bundle.umd.js`,
   library: { name: 'CereGamesSDK', type: 'umd' },
 });
 
-module.exports = ({ WEBPACK_BUILD }) => {
+module.exports = () => {
   return {
     mode: 'production',
     entry: {
@@ -66,6 +68,11 @@ module.exports = ({ WEBPACK_BUILD }) => {
               BUILD_TIME: new Date().getTime(),
             }),
           },
+          {
+            context: path.resolve(sdkSourceDir, 'assets'),
+            from: '**/*',
+            to: path.resolve(sdkDistDir, sdkVersion, 'assets'),
+          },
         ],
       }),
 
@@ -108,10 +115,16 @@ module.exports = ({ WEBPACK_BUILD }) => {
         writeToDisk: true,
       },
 
-      static: {
-        directory: examplesDistDir,
-        publicPath: '/examples',
-      },
+      static: [
+        {
+          directory: examplesDistDir,
+          publicPath: '/examples',
+        },
+        {
+          directory: path.resolve(sdkDistDir, sdkVersion, 'assets'),
+          publicPath: `/sdk/${sdkVersion}`,
+        },
+      ],
     },
   };
 };
