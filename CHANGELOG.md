@@ -2,7 +2,7 @@
 
 ### vNext
 
--
+- Move static assets from SDK bundle to SDK CDN deployment
 
 ### v0.5.0
 

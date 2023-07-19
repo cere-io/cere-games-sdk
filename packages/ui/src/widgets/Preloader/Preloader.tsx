@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
 
-import { preloaderImage } from '../../assets';
 import { Button, ProgressiveImg, Spinner, Stack, Typography } from '../../components';
-import { useAsyncCallback, useGameInfo, useMediaQuery } from '../../hooks';
+import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery } from '../../hooks';
 
 const ImageBlock = styled.div(
   {
@@ -17,16 +16,14 @@ const ImageBlock = styled.div(
       height: 130,
     },
   },
-  ({ hasPreloader, loading }: { hasPreloader: boolean; loading: boolean }) =>
+  ({ loading }: { loading: boolean }) =>
     loading
       ? {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
         }
-      : {
-          backgroundImage: hasPreloader ? undefined : `url(${preloaderImage})`,
-        },
+      : {},
 );
 
 const Widget = styled(Stack)({
@@ -55,14 +52,15 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [handleStartClick, isBusy] = useAsyncCallback(onStartClick);
   const { loading, preloader } = useGameInfo();
+  const { sdkUrl: cdnUrl } = useConfigContext();
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="center">
-      <ImageBlock hasPreloader={!!preloader.url} loading={loading}>
+      <ImageBlock loading={loading}>
         {loading ? (
           <Spinner size="25" />
         ) : (
-          preloader.url && <ProgressiveImg src={preloader.url} alt="Preloader image" />
+          <ProgressiveImg src={preloader.url || `${cdnUrl}/assets/default-preloader.png`} alt="Preloader image" />
         )}
       </ImageBlock>
 
