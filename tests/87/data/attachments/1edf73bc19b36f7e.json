@@ -1,0 +1,23 @@
+[
+  {
+    "url": "https://www.google-analytics.com/j/collect?v=1&_v=j101&a=1265821178&t=pageview&_s=1&dl=http%3A%2F%2Fhost.docker.internal%2Fexamples%2Fmetaverse-dash-run%2F&ul=en-us&de=UTF-8&dt=Metaverse%20Dash%20Run&sd=24-bit&sr=1920x1080&vp=1920x1080&je=0&_u=YADAAEABAAAAACAAI~&jid=1899915294&gjid=659479169&cid=78035141.1689740569&tid=UA-167490397-1&_gid=403321808.1689740569&_r=1&_slc=1&gtm=45He37h0n81MSJX7Q6&z=98035987",
+    "method": "POST",
+    "headers": {
+      "content-type": "text/plain"
+    },
+    "body": "",
+    "pending": false,
+    "response": {
+      "headers": {
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-length": "4",
+        "content-type": "text/plain",
+        "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+        "last-modified": "Sun, 17 May 1998 03:00:00 GMT",
+        "pragma": "no-cache"
+      },
+      "body": "2d,x",
+      "statusCode": 200
+    }
+  }
+]
