@@ -2,7 +2,7 @@ import { Context } from './createContext';
 import { createWidget } from './createWidget';
 import { registerWidget } from './registerWidget';
 import { injectFonts, injectLocalFonts } from './injectFonts';
-import { Leaderboard, Preloader, Modal, ConnectWallet, FullscreenModal, SignUp } from './widgets';
+import { Leaderboard, Preloader, Modal, ConnectWallet, FullscreenModal, SignUp, InsertCoin } from './widgets';
 import { preloadAssets } from './preloadAssets';
 
 export const register = async (context: Context) => {
@@ -16,6 +16,7 @@ export const register = async (context: Context) => {
   registerWidget('cere-fullscreen-modal', createWidget(FullscreenModal, context));
   registerWidget('cere-connect-wallet', createWidget(ConnectWallet, context));
   registerWidget('cere-signup', createWidget(SignUp, context));
+  registerWidget('cere-insert-coin', createWidget(InsertCoin, context));
 };
 
 export * from './createModal';

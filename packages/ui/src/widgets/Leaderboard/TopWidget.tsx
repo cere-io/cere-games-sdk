@@ -69,7 +69,7 @@ const NFTImage = styled.img({
   top: '-110px',
 });
 
-export const TopWidget = ({ amountOfDaysLeft = 1, onPlayAgain, disabled }: TopWidgetProps): JSX.Element => {
+export const TopWidget = ({ amountOfDaysLeft = 1, onPlayAgain }: TopWidgetProps): JSX.Element => {
   const { sdkUrl: cdnUrl } = useConfigContext();
 
   return (
@@ -82,7 +82,7 @@ export const TopWidget = ({ amountOfDaysLeft = 1, onPlayAgain, disabled }: TopWi
           <Typography>Weekly tournament</Typography>
           <UniqueNFT>TOP 20 wins UNIQUE NFT</UniqueNFT>
         </Text>
-        <PlayAgain onClick={disabled ? () => onPlayAgain : () => null}>
+        <PlayAgain onClick={onPlayAgain}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <RepeatIcon />
             <PlayAgainText>Play Again</PlayAgainText>
