@@ -2,9 +2,10 @@ import type {
   PreloaderProps,
   LeaderboardProps,
   ModalProps,
-  ConnectWalletProps,
+  EarnScreenProps,
   FullscreenModalProps,
   SignUpProps,
+  InsertCoinProps,
 } from './widgets';
 
 export interface WidgetType<P = {}> extends HTMLElement {
@@ -17,10 +18,10 @@ export type WidgetMap = {
   'cere-leaderboard': WidgetType<LeaderboardProps>;
   'cere-preloader': WidgetType<PreloaderProps>;
   'cere-signup': WidgetType<SignUpProps>;
-  'cere-insert-coin': WidgetType<{}>;
+  'cere-insert-coin': WidgetType<InsertCoinProps>;
   'cere-modal': WidgetType<ModalProps>;
   'cere-fullscreen-modal': WidgetType<FullscreenModalProps>;
-  'cere-connect-wallet': WidgetType<ConnectWalletProps>;
+  'cere-earn-screen': WidgetType<EarnScreenProps>;
 };
 
 export type Widget<T extends keyof WidgetMap> = WidgetMap[T];

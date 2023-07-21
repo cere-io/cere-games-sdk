@@ -65,9 +65,9 @@ export const Steps = (): JSX.Element => {
       {mockData.map(({ number, text }, index) => (
         <StepContainer direction="row">
           <NumberWrapper>
-            <Number variant="body1" uppercase align="center" fontWight="semi-bold">
+            <Number variant="body1" align="center" fontWight="semi-bold">
               {number}
-              <Typography align="center" fontWight="regular" style={{ fontSize: isMobile ? '11px' : '15px' }}>
+              <Typography align="center" fontWight="regular" style={{ fontSize: isMobile ? '13px' : '16px' }}>
                 {text}
               </Typography>
             </Number>
