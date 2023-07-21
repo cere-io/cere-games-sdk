@@ -18,7 +18,7 @@ const WidgetWrapper = styled(ModalWrapper)({
 });
 
 const DaysLeft = styled.div({
-  padding: '7px 15px',
+  padding: '7px 15px 7px 32px',
   background: 'rgba(133, 70, 183, 1)',
   fontFamily: 'Yapari-SemiBold',
   borderRadius: 8,
