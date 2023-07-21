@@ -17,12 +17,12 @@ module.exports = {
         use: [{ loader: 'ts-loader' }],
       },
       {
-        test: /\.png/,
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/inline',
       },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.png'],
   },
 };

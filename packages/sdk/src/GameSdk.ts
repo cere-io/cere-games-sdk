@@ -24,16 +24,29 @@ type ShowLeaderboardOptions = {
   onPlayAgain?: () => AsyncResult;
   onBeforeLoad?: () => AsyncResult;
   onTweet?: () => AsyncResult;
+  withTopWidget?: boolean;
+  onShowSignUp?: () => void;
 };
 
 type ShowPreloaderOptions = {
   onStart?: () => AsyncResult;
 };
 
+type InsertCoinOptions = {
+  topUpBalance?: () => AsyncResult;
+  tryMoreUrl?: string;
+};
+
 type ShowConnectWalletOptions = {
   onConnect?: (accounts: WalletAccount[], isNew: boolean) => AsyncResult;
   onComplete?: () => AsyncResult;
   score?: number;
+  onShowLeaderboard?: () => void;
+  onShowSignUp?: () => void;
+};
+
+type ShowSignUpOptions = {
+  onConnect?: (accounts: WalletAccount[], isNew: boolean) => AsyncResult;
 };
 
 export type GameInfo = {
@@ -237,7 +250,80 @@ export class GamesSDK {
     };
   }
 
-  showLeaderboard({ onPlayAgain, onBeforeLoad }: ShowLeaderboardOptions = {}) {
+  async connectWallet({ onConnect }: any) {
+    try {
+      await this.wallet.connect();
+      const [{ email, isNewUser }, accounts] = await Promise.all([
+        this.wallet.getUserInfo(),
+        this.wallet.getAccounts(),
+      ]);
+
+      this.ui.wallet.isNewUser = isNewUser;
+
+      await onConnect?.(accounts, isNewUser);
+
+      this.analytics.trackEvent(ANALYTICS_EVENTS.claimTokens, { userEmail: email });
+      this.analytics.trackEvent(ANALYTICS_EVENTS.walletCompleted, { userEmail: email });
+
+      if (isNewUser) {
+        this.analytics.trackEvent(ANALYTICS_EVENTS.accountCreated, { userEmail: email });
+      }
+    } catch (error) {
+      this.reporting.error(error);
+    }
+  }
+
+  showSignUp({ onConnect }: ShowSignUpOptions) {
+    const signUp = document.createElement('cere-signup');
+    const { open, ...modal } = UI.createModal(signUp, { hasClose: false });
+
+    signUp.update({
+      // TODO ask someone about this part, need to make it reusable
+      onConnect: async () => {
+        try {
+          modal.close();
+          await this.wallet.connect();
+          const [{ email, isNewUser }, accounts] = await Promise.all([
+            this.wallet.getUserInfo(),
+            this.wallet.getAccounts(),
+          ]);
+
+          this.ui.wallet.isNewUser = isNewUser;
+
+          await onConnect?.(accounts, isNewUser);
+
+          this.analytics.trackEvent(ANALYTICS_EVENTS.claimTokens, { userEmail: email });
+          this.analytics.trackEvent(ANALYTICS_EVENTS.walletCompleted, { userEmail: email });
+
+          if (isNewUser) {
+            this.analytics.trackEvent(ANALYTICS_EVENTS.accountCreated, { userEmail: email });
+          }
+        } catch (error) {
+          this.reporting.error(error);
+        }
+      },
+    });
+
+    return {
+      open,
+    };
+  }
+
+  showInsertCoin() {
+    const insertCoin = document.createElement('cere-insert-coin');
+    const { open, ...modal } = UI.createModal(insertCoin, { hasClose: false });
+    insertCoin.update({
+      tryMoreUrl: () => window.open(GAME_PORTAL_URL.prod),
+      topUpBalance: () => {
+        console.log(this.ui.wallet, 'this.ui.wallet');
+      },
+    });
+    return {
+      open,
+    };
+  }
+
+  showLeaderboard({ onPlayAgain, onBeforeLoad, withTopWidget }: ShowLeaderboardOptions = {}) {
     const { open, ...modal } = UI.createFullscreenModal(
       async () => {
         const leaderboard = document.createElement('cere-leaderboard');
@@ -249,11 +335,24 @@ export class GamesSDK {
         leaderboard.update({
           activeTournament,
           data,
+          withTopWidget: true,
           onPlayAgain: async () => {
-            const { email } = await this.wallet.getUserInfo();
-            this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });
-            await this.payForSession();
-            await onPlayAgain?.();
+            const { balance, address } = this.ui.wallet;
+            if (address) {
+              if (balance && balance > this.ui.config.sessionPrice) {
+                const { email } = await this.wallet.getUserInfo();
+                this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });
+                await this.payForSession();
+                await onPlayAgain?.();
+              } else {
+                const { open } = this.showInsertCoin();
+                open();
+                modal.close();
+              }
+            } else {
+              this.connectWallet({});
+              modal.close();
+            }
           },
           onTweet: async (score) => {
             const response = await this.api.getTweet({
@@ -268,12 +367,17 @@ export class GamesSDK {
             this.analytics.trackEvent(ANALYTICS_EVENTS.highScoreTweet, { userEmail: email });
             return response;
           },
+          onShowSignUp: () => {
+            const { open } = this.showSignUp({});
+            open();
+            modal.close();
+          },
           serviceUrl: GAME_SERVICE_URL[this.env],
         });
 
         return leaderboard;
       },
-      { isLeaderBoard: true },
+      { isLeaderBoard: true, withTopWidget },
     );
 
     open();
@@ -283,7 +387,7 @@ export class GamesSDK {
 
   async showConnectWallet({ onConnect, onComplete, score }: ShowConnectWalletOptions = {}) {
     const connectWallet = document.createElement('cere-connect-wallet');
-    const { open, ...modal } = UI.createFullscreenModal(connectWallet, { hasClose: true });
+    const { open, ...modal } = UI.createModal(connectWallet, { hasClose: false });
 
     connectWallet.update({
       score,
@@ -314,11 +418,22 @@ export class GamesSDK {
           this.reporting.error(error);
         }
       },
+      onShowLeaderboard: () => {
+        this.showLeaderboard({ withTopWidget: false });
+        modal.close();
+      },
+      onShowSignUp: async () => {
+        const { open } = this.showSignUp({
+          onConnect,
+        });
+        open();
+        modal.close();
+      },
     });
 
     open();
 
-    return modal;
+    return { modal, onConnect };
   }
 
   async saveScore(score: number) {

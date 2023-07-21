@@ -11,3 +11,12 @@ export function injectFonts() {
     document.head.appendChild(font);
   });
 }
+
+export async function injectLocalFonts(fontUrl: string) {
+    const font = new FontFace(
+      'Yapari-SemiBold',
+      `url(${fontUrl}/assets/Yapari-SemiBold.ttf)`
+    )
+    await font.load()
+    document.fonts.add(font)
+}

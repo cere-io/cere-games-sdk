@@ -8,3 +8,11 @@ export * from './CurrentPlayerIcon';
 export * from './InsertLinkIcon';
 export * from './TwitterIcon';
 export * from './ArrowTopIcon';
+export * from './ArrowRightIcon';
+export * from './TrophyWhiteIcon';
+export * from './BalanceIcon';
+export * from './TrophyRedIcon';
+export * from './GameIcon';
+export * from './LockIcon';
+export * from './CurrentPlayerIconWhite';
+
