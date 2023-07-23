@@ -56,8 +56,7 @@ export const FullscreenModal = ({
   hasClose = false,
   loading = false,
   isLeaderBoard,
-}: // withTopWidget
-FullscreenModalProps) => {
+}: FullscreenModalProps) => {
   return (
     <FullScreenBackDrop>
       {loading ? (

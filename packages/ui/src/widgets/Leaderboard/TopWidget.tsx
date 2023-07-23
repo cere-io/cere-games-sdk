@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button } from '../../components';
 import { useConfigContext } from '../../hooks';
 import { RepeatIcon } from '../../icons';
@@ -67,6 +68,10 @@ const NFTImage = styled.img({
   height: 280,
   right: '-60px',
   top: '-110px',
+  '@media (max-width: 600px)': {
+    width: 156,
+    height: 243,
+  },
 });
 
 export const TopWidget = ({ amountOfDaysLeft = 1, onPlayAgain }: TopWidgetProps): JSX.Element => {

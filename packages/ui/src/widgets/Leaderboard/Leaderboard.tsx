@@ -61,19 +61,24 @@ const Address = styled.div({
   fontSize: 14,
 });
 
-const SignUpButton = styled(Button)({
-  width: 280,
+const SignUpButton = styled.button({
+  width: 229,
   height: 52,
   borderRadius: 4,
   border: '1px solid #F32758',
   background: '#1B0B2A',
   padding: '15px 16px',
   fontFamily: 'Lexend',
-  fontSize: 16,
+  fontSize: 15,
   fontStyle: 'normal',
   fontWeight: 600,
   textTransform: 'capitalize',
   margin: '6px auto 16px auto',
+  color: '#FFF',
+  lineHeight: '22px',
+  '&:hover': {
+    cursor: 'pointer',
+  },
 });
 
 export const Leaderboard = ({

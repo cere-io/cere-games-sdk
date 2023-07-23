@@ -5,8 +5,7 @@ import { CloseIcon } from '../../icons';
 import { Backdrop } from '../Backdrop';
 import { Spinner } from '../Spinner';
 import { Stack } from '../Stack';
-
-import { useConfigContext } from '../../hooks'
+import { useConfigContext } from '../../hooks';
 
 export type ModalProps = PropsWithChildren<{
   hasClose?: boolean;
@@ -43,8 +42,8 @@ export const ModalWrapper = styled.div<ModalProps>(({ theme, layer }) => ({
   position: 'relative',
   zIndex: 1,
   borderRadius: theme.borderRadius(3),
-  padding: `${theme.spacing(3)} ${theme.spacing(3)} ${theme.spacing(4)} ${theme.spacing(3)}`,
-  margin: theme.spacing(4),
+  padding: theme.spacing(3, 3, 4, 3),
+  margin: theme.spacing(-2, 4, 4, 4),
   '@media (max-width: 600px), (max-height: 440px)': {
     padding: theme.spacing(2),
     margin: theme.spacing(1),
@@ -84,7 +83,7 @@ export const Content = styled.div({
 });
 
 export const Modal = ({ children, onRequestClose, hasClose = false, loading = false }: ModalProps) => {
-  const { sdkUrl: cdnUrl } = useConfigContext()
+  const { sdkUrl: cdnUrl } = useConfigContext();
 
   return (
     <Backdrop>
@@ -103,4 +102,4 @@ export const Modal = ({ children, onRequestClose, hasClose = false, loading = fa
       )}
     </Backdrop>
   );
-}
+};

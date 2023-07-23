@@ -7,7 +7,7 @@ export const TableHeader = ({ columns }: TableHeaderProps) => (
   <TableRow
     header
     columns={columns.map((column, index) => (
-      <Typography uppercase color="secondary" variant="caption">
+      <Typography color="secondary" variant="caption">
         {column}
       </Typography>
     ))}

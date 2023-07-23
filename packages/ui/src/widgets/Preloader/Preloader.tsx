@@ -50,7 +50,7 @@ const StartButton = styled(Button)(
   },
   ({ loading }) => ({
     background: loading ? '#161D30' : '#F32758',
-    borderRadius: loading ? 12 : 4,
+    borderRadius: 4,
   }),
 );
 
@@ -68,9 +68,9 @@ export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="center">
       <ImageBlock loading={loading}>
-        {preloader.url && <ProgressiveImg src={`${cdnUrl}/assets/default-preloader.png`} alt="Preloader image" />}
+        {/*{preloader.url && <ProgressiveImg src={`${cdnUrl}/assets/default-preloader.png`} alt="Preloader image" />}*/}
         {/*  TODO remove after review */}
-        {/*{preloader.url && <ProgressiveImg src={preloader.url || `${cdnUrl}/assets/default-preloader.png`} alt="Preloader image" />}*/}
+        <ProgressiveImg src={preloader.url || `${cdnUrl}/assets/default-preloader.png`} alt="Preloader image" />
       </ImageBlock>
       {!loading && (
         <Title align="center" variant="h2">
