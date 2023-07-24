@@ -193,7 +193,7 @@ export class GamesSDK {
     await this.api.saveSessionTX(txHash, [ethAccount.address, cereAccount.address]);
   }
 
-  private async startSession() {
+  async startSession() {
     this.session = await this.api.startSession();
     this.sessionEvents = [];
 
@@ -283,7 +283,7 @@ export class GamesSDK {
 
   async showConnectWallet({ onConnect, onComplete, score }: ShowConnectWalletOptions = {}) {
     const connectWallet = document.createElement('cere-connect-wallet');
-    const { open, ...modal } = UI.createFullscreenModal(connectWallet, { hasClose: true });
+    const { open, ...modal } = UI.createFullscreenModal(connectWallet);
 
     connectWallet.update({
       score,

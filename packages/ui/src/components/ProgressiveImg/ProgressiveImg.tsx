@@ -36,7 +36,6 @@ export const ProgressiveImg = ({ src, ...props }: ProgressiveImgProps) => {
       };
     }
   }, [src]);
-
   return (
     <StyledStack align="center">
       {isLoading ? <Spinner size="25" /> : <StyledImage src={src} alt={props.alt || ''} className="image" />}
