@@ -27,11 +27,9 @@ const TryMoreGames = styled(Button)({
 
 const Widget = styled(Stack)({
   position: 'relative',
-  maxWidth: 600,
-  minWidth: 440,
+  width: 392,
   '@media (max-width: 600px)': {
-    maxWidth: 345,
-    minWidth: 345,
+    width: 'auto',
   },
 });
 
@@ -44,8 +42,9 @@ const HeaderTitle = styled(Typography)({
 });
 
 const Header = styled(Stack)({
-  width: 393,
+  width: '100%',
   height: 90,
+  marginTop: 12,
 });
 
 const HeaderText = styled(Typography)({
@@ -69,7 +68,12 @@ export const InsertCoin = ({ tryMoreUrl, topUpBalance }: InsertCoinProps) => {
           insert coin
         </HeaderTitle>
         <HeaderText align="center">
-          {balance < sessionPrice ? `Your balance is ${balance} tokens. Top up your balance to play more.` : null}
+          {balance < sessionPrice ? (
+            <>
+              <Typography align="center">Your balance is 0 tokens.</Typography>
+              <Typography align="center">Top up your balance to play more.</Typography>
+            </>
+          ) : null}
         </HeaderText>
       </Header>
       <Stack spacing={2} style={{ marginTop: 36 }}>

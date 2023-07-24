@@ -50,6 +50,9 @@ const LeaderboardTitle = styled(Typography)({
   linHeight: 32,
   textTransform: 'uppercase',
   textAlign: 'center',
+  '@media (max-width: 600px)': {
+    fontSize: 13,
+  },
 });
 
 const Address = styled.div({

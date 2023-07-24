@@ -1,9 +1,9 @@
-import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
+import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
 
-import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from "../../hooks";
-import { Button, Stack, Typography } from "../../components";
-import { RepeatIcon } from "../../icons";
+import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
+import { Button, Stack, Typography } from '../../components';
+import { RepeatIcon } from '../../icons';
 
 export type EarnScreenProps = {
   onConnect?: () => Promise<void> | void;
@@ -13,53 +13,51 @@ export type EarnScreenProps = {
 };
 
 const Connect = styled(Button)({
-  marginBottom: "20px!important",
+  marginBottom: '20px!important',
   fontSize: 16,
-  fontWeight: "24px",
+  fontWeight: '24px',
   borderRadius: 4,
-  background: "rgba(243, 39, 88, 1)"
+  background: 'rgba(243, 39, 88, 1)',
 });
 
 const ViewLeaderBoard = styled(Button)({
-  background: "transparent",
-  border: "1px solid rgba(255, 255, 255, 1)",
+  background: 'transparent',
+  border: '1px solid rgba(255, 255, 255, 1)',
   borderRadius: 4,
   fontSize: 16,
   fontWeight: 600,
-  fontFamily: "Lexend, sans-serif"
+  fontFamily: 'Lexend, sans-serif',
 });
 
 const Widget = styled(Stack)({
-  position: "relative",
-  maxWidth: 600,
-  minWidth: 440,
-  "@media (max-width: 600px)": {
-    maxWidth: 345,
-    minWidth: 345
-  }
+  position: 'relative',
+  width: 392,
+  '@media (max-width: 600px)': {
+    width: 'auto',
+  },
 });
 
 const HeaderTitle = styled(Typography)({
-  fontFamily: "Yapari-SemiBold, sans-serif",
-  color: "#FFF",
+  fontFamily: 'Yapari-SemiBold, sans-serif',
+  color: '#FFF',
   fontSize: 24,
-  fontStyle: "normal",
-  fontWeight: 600
-});
-
-const PlayAgainText = styled(Typography)({
-  marginLeft: 12
+  fontStyle: 'normal',
+  fontWeight: 600,
 });
 
 const HeaderSubTitle = styled(HeaderTitle)({
-  fontStyle: "normal",
-  fontSize: "46px",
-  lineHeight: "55px",
-  textTransform: "uppercase"
+  fontStyle: 'normal',
+  fontSize: '48px',
+  lineHeight: '55px',
+  textTransform: 'uppercase',
+});
+
+const PlayAgainText = styled(Typography)({
+  marginLeft: 12,
 });
 
 export const EarnScreen = ({ onConnect, score, onShowLeaderboard, onShowSignUp }: EarnScreenProps) => {
-  const isLandscape = useMediaQuery("(max-height: 440px)");
+  const isLandscape = useMediaQuery('(max-height: 440px)');
   const [showConfetti, setShow] = useState(true);
   const { isReady, connecting } = useWalletContext();
   const { newWalletReward, sessionPrice, staticAssets } = useConfigContext();
@@ -90,7 +88,7 @@ export const EarnScreen = ({ onConnect, score, onShowLeaderboard, onShowSignUp }
       </Stack>
       <Stack spacing={2}>
         <Connect loading={isBusy} onClick={onShowSignUp}>
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <RepeatIcon />
             <PlayAgainText uppercase={false}>{sessionPrice} $CERE To Play Again</PlayAgainText>
           </div>

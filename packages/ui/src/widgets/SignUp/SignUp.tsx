@@ -30,21 +30,20 @@ const mockAds: Ads[] = [
 ];
 
 const Widget = styled(Stack)({
-  maxWidth: 345,
-  minHeight: 340,
-  maxHeight: 357,
-
+  width: 'auto',
   '@media (min-width: 600px)': {
-    minWidth: 441,
-    maxHeight: 340,
+    width: 393,
   },
 });
 
 const SignUpButton = styled(Button)({
-  marginTop: 'auto',
+  marginTop: 36,
   borderRadius: 4,
   background: '#F32758',
   fontSize: 16,
+  '@media (max-width: 600px)': {
+    marginTop: 24,
+  },
 });
 
 const Title = styled(Typography)({
@@ -58,6 +57,7 @@ const Title = styled(Typography)({
   width: 393,
   '@media (max-width: 600px)': {
     fontSize: 24,
+    width: 'auto',
   },
 });
 
@@ -72,6 +72,7 @@ const SubTitle = styled(Typography)({
   width: 393,
   '@media (max-width: 600px)': {
     fontSize: 24,
+    width: 'auto',
   },
 });
 
@@ -86,7 +87,7 @@ const SignUpAds = styled.div({
   padding: '20px 53px 19px 53px',
   margin: '14px 0 0 0',
   '@media (max-width: 600px)': {
-    width: 317,
+    width: '100%',
     height: 143,
     padding: '20px 29px 19px 29px',
   },

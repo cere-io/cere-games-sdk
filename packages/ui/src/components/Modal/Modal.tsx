@@ -6,12 +6,14 @@ import { Backdrop } from '../Backdrop';
 import { Spinner } from '../Spinner';
 import { Stack } from '../Stack';
 import { useConfigContext } from '../../hooks';
+import { Spacing } from '../../theme/toShorthand';
 
 export type ModalProps = PropsWithChildren<{
   hasClose?: boolean;
   loading?: boolean;
   onRequestClose?: () => void;
   layer?: string;
+  padding?: Spacing;
 }>;
 
 const Header = styled(Stack)(({ theme }) => ({
@@ -36,7 +38,7 @@ const Close = styled(CloseIcon)(({ theme }) => ({
   position: 'absolute',
 }));
 
-export const ModalWrapper = styled.div<ModalProps>(({ theme, layer }) => ({
+export const ModalWrapper = styled.div<ModalProps>(({ theme, layer, padding }) => ({
   background: 'linear-gradient(180deg, #010107 23.96%, #2C325B 100%)',
   boxShadow: '0px 5px 40px rgba(0, 0, 0, 0.4)',
   position: 'relative',
@@ -45,7 +47,7 @@ export const ModalWrapper = styled.div<ModalProps>(({ theme, layer }) => ({
   padding: theme.spacing(3, 3, 4, 3),
   margin: theme.spacing(-2, 4, 4, 4),
   '@media (max-width: 600px), (max-height: 440px)': {
-    padding: theme.spacing(2),
+    padding: padding ? theme.spacing(...padding) : theme.spacing(2),
     margin: theme.spacing(1),
   },
   '&:before': {
