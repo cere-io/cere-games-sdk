@@ -30,7 +30,7 @@ module.exports = () => {
     },
 
     output: {
-      clean: true,
+      clean: false, // Do not clean the output folder since we need to keep previous SDK versions
       path: buildDir,
     },
 
