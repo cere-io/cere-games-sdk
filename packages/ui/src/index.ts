@@ -1,13 +1,12 @@
 import { Context } from './createContext';
 import { createWidget } from './createWidget';
 import { registerWidget } from './registerWidget';
-import { injectFonts, injectLocalFonts } from './injectFonts';
+import { injectFonts } from './injectFonts';
 import { Leaderboard, Preloader, Modal, EarnScreen, FullscreenModal, SignUp, InsertCoin } from './widgets';
 import { preloadAssets } from './preloadAssets';
 
 export const register = async (context: Context) => {
-  injectFonts();
-  injectLocalFonts(context.config.sdkUrl);
+  injectFonts(context);
   preloadAssets(context);
 
   registerWidget('cere-preloader', createWidget(Preloader, context));
