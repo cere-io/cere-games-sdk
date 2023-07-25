@@ -44,7 +44,7 @@ const Content = styled.div<FullscreenModalProps>(({ theme, isLeaderBoard }) => (
 
   '@media (max-width: 600px)': {
     width: 'auto',
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
     margin: 0,
     borderRadius: 0,
   },
@@ -56,12 +56,19 @@ export const FullscreenModal = ({
   hasClose = false,
   loading = false,
   isLeaderBoard,
-}: // withTopWidget
-FullscreenModalProps) => {
+}: FullscreenModalProps) => {
   return (
     <FullScreenBackDrop>
       {loading ? (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 'inherit' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100vw',
+            height: '100vh',
+          }}
+        >
           <Spinner size={40} />
         </div>
       ) : (
