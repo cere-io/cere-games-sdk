@@ -12,13 +12,13 @@ const Container = styled.div({
   right: 39,
   top: 32,
   display: 'grid',
-  gridTemplateColumns: '32px auto 32px',
+  gridTemplateColumns: 'auto auto 32px',
   columnGap: 12,
   alignItems: 'center',
   padding: '12px 16px',
-  background: '#ffffff',
+  background: 'linear-gradient(180deg, #010107 23.96%, #2C325B 100%)',
   boxShadow: '0px 3px 8px rgba(0, 0, 0, 0.1)',
-  borderRadius: 12,
+  borderRadius: 24,
   '& > span': {
     fontSize: 32,
   },
@@ -28,6 +28,12 @@ const Container = styled.div({
     right: 0,
     width: '100%',
   },
+});
+
+const CloseIconWrapper = styled.div({
+  position: 'absolute',
+  top: '-10px',
+  right: '-10px',
 });
 
 const CloseAlert = styled(CloseIcon)(() => ({
@@ -54,6 +60,41 @@ const ProgressContainer = styled.div({
   borderRadius: '0 0 12px 12px',
   marginLeft: 6,
   background: '#D6D6D6',
+});
+
+const TextContainer = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+});
+
+const Title = styled(Typography)({
+  color: '#FFF',
+  fontFamily: 'Lexend',
+  fontSize: 14,
+  fontStyle: 'normal',
+  fontWeight: '400',
+  lineHeight: 'normal',
+});
+
+const StyledImage = styled.img({
+  height: 73,
+  width: 72,
+  objectFit: 'cover',
+  borderRadius: 12,
+  '@media (max-height: 440px)': {
+    height: 130,
+  },
+});
+
+const SubTitle = styled(Typography)({
+  color: '#FFF',
+  fontFamily: 'Yapari-SemiBold',
+  fontSize: 20,
+  fontStyle: 'normal',
+  fontWeight: '600',
+  lineHeight: 'normal',
+  textTransform: 'uppercase',
+  marginTop: 4,
 });
 
 const ProgressBar = styled.div(() => ({
@@ -89,7 +130,7 @@ const ProgressBar = styled.div(() => ({
 
 export const Alert = () => {
   const descriptionId = useId();
-  const { newWalletReward } = useConfigContext();
+  const { sdkUrl: cdnUrl } = useConfigContext();
   const { balance, isNewUser } = useWalletContext();
   const [visible, setVisibility] = useState(true);
 
@@ -99,14 +140,24 @@ export const Alert = () => {
 
   return (
     <Container role="alert" aria-describedby={descriptionId}>
-      <span>🎉</span>
-      <StyledTypography id={descriptionId} variant="body2" color="text-primary">
-        You received <b>{newWalletReward} $CERE</b> tokens for setting up your wallet!
-      </StyledTypography>
-      <CloseAlert aria-label="Close" onClick={() => setVisibility(false)} />
-      <ProgressContainer>
-        <ProgressBar onAnimationEnd={() => setVisibility(false)} />
-      </ProgressContainer>
+      <StyledImage src={`${cdnUrl}/assets/alert.png`} />
+      <TextContainer>
+        <Title id={descriptionId} variant="body2">
+          Achivement unlocked
+        </Title>
+        <SubTitle id={descriptionId} variant="body2">
+          NeWBIE way
+        </SubTitle>
+      </TextContainer>
+      <CloseIconWrapper>
+        <CloseAlert
+          aria-label="Close"
+          onClick={() => {
+            console.log('asdasfd');
+            setVisibility(false);
+          }}
+        />
+      </CloseIconWrapper>
     </Container>
   );
 };

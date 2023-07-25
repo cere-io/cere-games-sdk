@@ -60,7 +60,15 @@ export const FullscreenModal = ({
   return (
     <FullScreenBackDrop>
       {loading ? (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 'inherit' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100vw',
+            height: '100vh',
+          }}
+        >
           <Spinner size={40} />
         </div>
       ) : (

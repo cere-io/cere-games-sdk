@@ -11,6 +11,7 @@ import {
   RadialGradientBackGround,
   Content,
   Truncate,
+  Alert,
 } from '../../components';
 import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
 import { TopWidget } from './TopWidget';
@@ -119,6 +120,7 @@ export const Leaderboard = ({
 
   return (
     <>
+      <Alert />
       {withTopWidget && <TopWidget onPlayAgain={handlePlayAgain} disabled={balance < sessionPrice} />}
       <ModalWrapper layer={`${cdnUrl}/assets/layer.svg`}>
         <RadialGradientBackGround />

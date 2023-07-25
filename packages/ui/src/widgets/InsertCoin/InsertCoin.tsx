@@ -59,7 +59,7 @@ const HeaderText = styled(Typography)({
 
 export const InsertCoin = ({ tryMoreUrl, topUpBalance }: InsertCoinProps) => {
   const { balance = 0 } = useWalletContext();
-  const { sessionPrice } = useConfigContext();
+  const { sessionPrice } = useConfigContext(); // TODO need to change maybe
 
   return (
     <Widget align="stretch">
@@ -68,12 +68,8 @@ export const InsertCoin = ({ tryMoreUrl, topUpBalance }: InsertCoinProps) => {
           insert coin
         </HeaderTitle>
         <HeaderText align="center">
-          {balance < sessionPrice ? (
-            <>
-              <Typography align="center">Your balance is 0 tokens.</Typography>
-              <Typography align="center">Top up your balance to play more.</Typography>
-            </>
-          ) : null}
+          <Typography align="center">Your balance is 0 tokens.</Typography>
+          <Typography align="center">Top up your balance to play more.</Typography>
         </HeaderText>
       </Header>
       <Stack spacing={2} style={{ marginTop: 36 }}>

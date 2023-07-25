@@ -39,6 +39,11 @@ const CurrentPlayer = styled.div({
   columnGap: 8,
 });
 
+const EmptySpace = styled.div({
+  width: 20,
+  height: 20,
+});
+
 const rankColors: RankProps['rankColor'][] = ['gold', 'silver', 'bronze'];
 
 export const TableDataRow = ({ data, active, hasReward }: TableDataRowProps) => {
@@ -47,7 +52,7 @@ export const TableDataRow = ({ data, active, hasReward }: TableDataRowProps) => 
 
   const rewardTsx = useMemo(() => {
     if (!hasReward) {
-      return <div style={{ width: '20px', height: '20px' }}>{null}</div>;
+      return <EmptySpace>{null}</EmptySpace>;
     }
     // return <Prize src={staticAssets.mysteryBox} />; // TODO ask if image come from backend
     return <TrophyWhiteIcon />;
