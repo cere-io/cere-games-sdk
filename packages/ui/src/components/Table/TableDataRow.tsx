@@ -47,7 +47,7 @@ export const TableDataRow = ({ data, active, hasReward }: TableDataRowProps) => 
 
   const rewardTsx = useMemo(() => {
     if (!hasReward) {
-      return null;
+      return <div style={{ width: '20px', height: '20px' }}>{null}</div>;
     }
     // return <Prize src={staticAssets.mysteryBox} />; // TODO ask if image come from backend
     return <TrophyWhiteIcon />;

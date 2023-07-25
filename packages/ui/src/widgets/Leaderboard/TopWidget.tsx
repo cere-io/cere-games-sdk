@@ -53,7 +53,7 @@ const UniqueNFT = styled(Typography)({
   '@media (max-width: 600px)': {
     width: 186,
     height: 72,
-    fontSize: 18,
+    fontSize: 19,
   },
 });
 

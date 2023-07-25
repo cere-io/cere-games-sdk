@@ -1,6 +1,7 @@
 import { ReactNode, AriaRole } from 'react';
 import styled from '@emotion/styled';
 
+import { useMediaQuery } from '../../hooks';
 import { Stack } from '../Stack';
 
 export type TableRowProps = {
@@ -18,6 +19,7 @@ const Row = styled(Stack)(({ theme }) => ({
 }));
 
 export const TableRow = ({ columns, header = false }: TableRowProps) => {
+  const isMobile = useMediaQuery('(max-width: 440px)');
   const columnRole: AriaRole = header ? 'columnheader' : 'cell';
 
   return (
@@ -25,7 +27,7 @@ export const TableRow = ({ columns, header = false }: TableRowProps) => {
       <Column role={columnRole} style={{ width: 90 }}>
         {columns[0]}
       </Column>
-      <Column role={columnRole} style={{ flex: 1 }}>
+      <Column role={columnRole} style={{ flex: isMobile ? '55%' : 1 }}>
         {columns[1]}
       </Column>
       <Column role={columnRole} style={{ justifyContent: 'end' }}>
