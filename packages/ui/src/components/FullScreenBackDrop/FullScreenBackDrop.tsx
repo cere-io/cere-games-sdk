@@ -13,10 +13,11 @@ const Overlay = styled.div({
   flexDirection: 'column',
   overflowY: 'auto',
   overflowX: 'visible',
-  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
   WebkitTapHighlightColor: 'transparent',
   overscrollBehavior: 'contain',
   zIndex: 999,
+  overflow: 'hidden',
 });
 
 const Content = styled.div(({ theme }) => ({

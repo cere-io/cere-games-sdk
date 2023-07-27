@@ -4,6 +4,13 @@
 
 - Move static assets from SDK bundle to SDK CDN deployment
 
+### v0.6.0
+
+> Special version containing new design from feature branch `feature/new-design`. It might not be released for some time.  
+> In case it will never be released the next `vNext` version should be `v0.7.0`
+
+- Update design and user flow
+
 ### v0.5.0
 
 - [[Feature]](https://www.notion.so/cere/Gaming-API-Implement-link-shortener-for-Twitter-message-3dd6bfdd26004bac8e18e4d25c64fc1d?pvs=4)Implementation auto generated picture in tweet
