@@ -1,3 +1,5 @@
+import report from '@wdio/allure-reporter';
+
 import { PreloaderModal, ConnectWalletModal, CereWalletAuth, LeaderboardModal, CereWalletApprove } from '../objects';
 
 describe('New user flow', () => {
@@ -10,6 +12,8 @@ describe('New user flow', () => {
   let rewardAmount = 0;
   let walletAddress = '';
   let score = 0;
+  let gamePlayPrice = 0;
+  let walletBalance = 0;
 
   step('Open the game via direct link', async () => {
     await browser.url('metaverse-dash-run');
@@ -42,13 +46,15 @@ describe('New user flow', () => {
     await walletAuth.switchToFrame();
 
     await walletAuth.newWalletButton.click();
-    await walletAuth.enterRandomEmail();
+    const email = await walletAuth.enterRandomEmail();
     await walletAuth.signUpButton.click();
     await walletAuth.enterOTP('555555');
     await walletAuth.verifyButton.click();
 
     await walletAuth.switchFromFrame();
     await walletAuth.waitUntilClosed();
+
+    report.addArgument('Email', email);
   });
 
   step('Wait for Leaderboard modal to appear', async () => {
@@ -59,9 +65,9 @@ describe('New user flow', () => {
   });
 
   it('Current user ballanсe should be 0', async () => {
-    const balance = await leaderboardModal.getBalance();
+    walletBalance = await leaderboardModal.getBalance();
 
-    expect(balance).toEqual(0);
+    expect(walletBalance).toEqual(0);
   });
 
   it('Current user should be higlighted in the leaderboard', async () => {
@@ -80,9 +86,15 @@ describe('New user flow', () => {
   });
 
   it('Current user ballanse should equal to reward amount', async () => {
-    const balance = await leaderboardModal.getBalance();
+    walletBalance = await leaderboardModal.getBalance();
 
-    await expect(balance).toEqual(rewardAmount);
+    await expect(walletBalance).toEqual(rewardAmount);
+  });
+
+  it('Game place price should be displayed and positive', async () => {
+    gamePlayPrice = await leaderboardModal.getGamePlayPrice();
+
+    await expect(gamePlayPrice).toBeGreaterThan(0);
   });
 
   step('Press `Play again` button', async () => {
@@ -101,5 +113,25 @@ describe('New user flow', () => {
 
   it('The page should reload and preloader appear', async () => {
     await preloader.element.waitForDisplayed();
+  });
+
+  step('Start second game session', async () => {
+    await preloader.startButton.click();
+  });
+
+  step('Play the game until the Leaderboard modal appears', async () => {
+    await leaderboardModal.element.waitForDisplayed();
+  });
+
+  it('The game play price should be deducted from the balance', async () => {
+    const newBalance = await browser.waitUntil(
+      () => leaderboardModal.getBalance().then((balance) => balance !== walletBalance && balance),
+      {
+        timeout: 30000,
+        timeoutMsg: 'The balance has not been changed after 30 sec',
+      },
+    );
+
+    await expect(newBalance).toEqual(walletBalance - gamePlayPrice);
   });
 });

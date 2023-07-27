@@ -6,6 +6,8 @@ const Dotenv = require('dotenv-webpack');
 const { version: sdkVersion } = require('@cere/games-sdk/package.json');
 
 const buildDir = path.resolve(__dirname, '../build');
+const sdkSourceDir = path.resolve(__dirname, 'sdk');
+const sdkDistDir = path.resolve(buildDir, 'sdk');
 const examplesSourceDir = path.resolve(__dirname, 'examples');
 const examplesDistDir = path.resolve(buildDir, 'examples');
 
@@ -15,12 +17,12 @@ const injectVars = (vars) => (content) =>
   }, content.toString());
 
 const createSdkEntry = (version) => ({
-  import: path.resolve(__dirname, 'sdk/index.ts'),
+  import: path.resolve(sdkSourceDir, 'index.ts'),
   filename: `sdk/${version}/bundle.umd.js`,
   library: { name: 'CereGamesSDK', type: 'umd' },
 });
 
-module.exports = ({ WEBPACK_BUILD }) => {
+module.exports = () => {
   return {
     mode: 'production',
     entry: {
@@ -28,7 +30,7 @@ module.exports = ({ WEBPACK_BUILD }) => {
     },
 
     output: {
-      clean: true,
+      clean: false, // Do not clean the output folder since we need to keep previous SDK versions
       path: buildDir,
     },
 
@@ -40,8 +42,12 @@ module.exports = ({ WEBPACK_BUILD }) => {
           use: [{ loader: 'ts-loader' }],
         },
         {
-          test: /\.png/,
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: 'asset/inline',
+        },
+        {
+          test: /\.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+          type: 'asset/resource',
         },
       ],
     },
@@ -65,6 +71,11 @@ module.exports = ({ WEBPACK_BUILD }) => {
             transform: injectVars({
               BUILD_TIME: new Date().getTime(),
             }),
+          },
+          {
+            context: path.resolve(sdkSourceDir, 'assets'),
+            from: '**/*',
+            to: path.resolve(sdkDistDir, sdkVersion, 'assets'),
           },
         ],
       }),
@@ -108,10 +119,16 @@ module.exports = ({ WEBPACK_BUILD }) => {
         writeToDisk: true,
       },
 
-      static: {
-        directory: examplesDistDir,
-        publicPath: '/examples',
-      },
+      static: [
+        {
+          directory: examplesDistDir,
+          publicPath: '/examples',
+        },
+        {
+          directory: path.resolve(sdkDistDir, sdkVersion, 'assets'),
+          publicPath: `/sdk/${sdkVersion}`,
+        },
+      ],
     },
   };
 };

@@ -5,8 +5,8 @@ import { Truncate } from '../Truncate';
 import { Typography } from '../Typography';
 import { Rank, RankProps } from './Rank';
 import { TableRow } from './TableRow';
-import { CurrentPlayerIcon } from '../../icons';
-import { useConfigContext } from '../../hooks';
+import { CurrentPlayerIconWhite, TrophyWhiteIcon } from '../../icons';
+import { useConfigContext, useMediaQuery } from '../../hooks';
 
 type Data = {
   rank: number;
@@ -27,7 +27,7 @@ const Wrapper = styled.div<Pick<TableDataRowProps, 'active'>>(({ theme, active =
 
   ...(active && {
     borderRadius: theme.borderRadius(2),
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    background: 'rgba(133, 70, 183, 0.50)',
     marginBottom: 1,
   }),
 }));
@@ -39,21 +39,23 @@ const CurrentPlayer = styled.div({
   columnGap: 8,
 });
 
-const Prize = styled.img({
-  width: 36,
-  height: 36,
+const EmptySpace = styled.div({
+  width: 20,
+  height: 20,
 });
 
 const rankColors: RankProps['rankColor'][] = ['gold', 'silver', 'bronze'];
 
 export const TableDataRow = ({ data, active, hasReward }: TableDataRowProps) => {
   const { staticAssets } = useConfigContext();
+  const isMobile = useMediaQuery('(max-width: 600px)');
 
   const rewardTsx = useMemo(() => {
     if (!hasReward) {
-      return null;
+      return <EmptySpace>{null}</EmptySpace>;
     }
-    return <Prize src={staticAssets.mysteryBox} />;
+    // return <Prize src={staticAssets.mysteryBox} />; // TODO ask if image come from backend
+    return <TrophyWhiteIcon />;
   }, [hasReward, staticAssets]);
 
   return (
@@ -63,8 +65,8 @@ export const TableDataRow = ({ data, active, hasReward }: TableDataRowProps) => 
           <Rank rankColor={rankColors[data.rank - 1]}>{data.rank}</Rank>,
           <Typography variant="body2">
             <CurrentPlayer>
-              <Truncate aria-label="Address" variant="hex" maxLength={10} text={data.address} />
-              {active && <CurrentPlayerIcon />}
+              <Truncate aria-label="Address" variant="hex" maxLength={8} text={data.address} />
+              {active && !isMobile && <CurrentPlayerIconWhite />}
             </CurrentPlayer>
           </Typography>,
           rewardTsx,

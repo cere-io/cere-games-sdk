@@ -13,6 +13,7 @@ export type ConfigContext = {
   newWalletReward: number;
   gamePortalUrl: string;
   staticBaseUrl: string;
+  sdkUrl: string;
   staticAssets: {
     crown: string;
     animation: string;
@@ -67,6 +68,7 @@ const defaultState: ContextState = {
     newWalletReward: 0,
     gamePortalUrl: '',
     staticBaseUrl: '',
+    sdkUrl: '',
     staticAssets: {
       crown: '',
       animation: '',

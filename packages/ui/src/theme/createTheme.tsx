@@ -26,7 +26,6 @@ export const createTheme = (): Theme => ({
 
   typography: {
     fontFamily: 'Lexend, sans-serif',
-
     fontWeight: {
       bold: 700,
       'semi-bold': 600,

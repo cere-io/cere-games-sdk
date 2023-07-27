@@ -11,6 +11,7 @@ const bundleRoot = path.resolve(rootDir, 'build');
 export const chromeCapability: WebDriver.DesiredCapabilities = {
   browserName: 'chrome',
   acceptInsecureCerts: true,
+  pageLoadStrategy: 'eager',
 
   'goog:chromeOptions': {
     args: [
