@@ -1,5 +1,10 @@
 ## Release Notes:
 
+### v0.6.0
+
+- Update design and user flow
+- Move static assets from SDK bundle to SDK CDN deployment
+
 ### v0.5.0
 
 - Auto generate picture in tweet
