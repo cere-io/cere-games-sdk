@@ -172,6 +172,9 @@ export class GamesSDK {
     await this.wallet.init({
       context: {
         app: gameInfo,
+        whiteLabel: {
+          backgroundImage: '',
+        },
       },
       connectOptions: {
         mode: 'modal',
