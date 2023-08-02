@@ -31,7 +31,7 @@ const HeaderTitle = styled(Typography)({
   fontStyle: 'normal',
   fontWeight: 600,
   '@media (max-width: 600px)': {
-    fontSize: 16,
+    fontSize: 20,
   },
 });
 
@@ -47,12 +47,18 @@ const HeaderSubTitle = styled(HeaderTitle)({
   marginTop: 15,
   '@media (max-width: 600px)': {
     width: 'auto',
+    maxWidth: 300,
+    fontWeight: 200,
+    fontSize: '16px',
   },
 });
 
 const PlayAgainText = styled(Typography)({
   marginLeft: 12,
   fontSize: 20,
+  '@media (max-width: 600px)': {
+    fontWeight: 400,
+  },
 });
 
 const Magnet = styled.div({
