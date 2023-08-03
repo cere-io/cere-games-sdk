@@ -38,7 +38,7 @@ type EarnScreenOptions = {
   onComplete?: () => AsyncResult;
   score?: number;
   onShowLeaderboard?: () => void;
-  onShowSignUp?: () => void;
+  onShowWallet?: () => void;
 };
 
 export type GameInfo = {
@@ -352,13 +352,13 @@ export class GamesSDK {
     const { open, ...modal } = UI.createModal(earnScreenModal, { hasClose: false });
 
     earnScreenModal.update({
-      onShowSignUp: async () => {
-        const { open } = this.showSignUp({
-          onConnect,
-          onComplete,
-        });
-        open();
-        modal.close();
+      onShowWallet: async () => {
+        try {
+          modal.close();
+          await this.connectWallet({ onConnect, onComplete });
+        } catch (error) {
+          this.reporting.error(error);
+        }
       },
     });
 
