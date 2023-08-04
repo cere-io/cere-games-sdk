@@ -4,7 +4,7 @@ import { useConfigContext, useMediaQuery } from '../../hooks';
 import { Button, Stack, Typography, ProgressiveImg } from '../../components';
 
 export type EarnScreenProps = {
-  onShowSignUp?: () => void;
+  onShowWallet?: () => void;
 };
 
 const Connect = styled(Button)({
@@ -77,7 +77,7 @@ const Light = styled.div({
   height: 125,
 });
 
-export const EarnScreen = ({ onShowSignUp }: EarnScreenProps) => {
+export const EarnScreen = ({ onShowWallet }: EarnScreenProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const { sdkUrl: cdnUrl, newWalletReward } = useConfigContext();
 
@@ -98,7 +98,7 @@ export const EarnScreen = ({ onShowSignUp }: EarnScreenProps) => {
           You've been awarded {newWalletReward} $CERE tokens. Sign up now and claim your reward!
         </HeaderSubTitle>
       </Stack>
-      <Connect onClick={onShowSignUp}>
+      <Connect onClick={onShowWallet}>
         <PlayAgainText uppercase={false}>Sign Up</PlayAgainText>
       </Connect>
     </Widget>
