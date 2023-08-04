@@ -4,6 +4,10 @@
 
 -
 
+### v0.6.1
+
+- Change widget logic
+
 ### v0.6.0
 
 - Update design and user flow
