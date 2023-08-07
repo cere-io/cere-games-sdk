@@ -11,7 +11,7 @@ const Overlay = styled.div({
   left: 0,
   display: 'flex',
   flexDirection: 'column',
-  overflow: 'auto',
+  overflow: 'hidden',
   backgroundColor: 'rgba(0, 0, 0, 0.5)',
   WebkitTapHighlightColor: 'transparent',
   overscrollBehavior: 'contain',

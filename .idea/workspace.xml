@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d65cadc7-b360-4934-94f6-ec0deda125d4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/packages/ui/src/widgets/InsertCoin/InsertCoin.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/ui/src/widgets/InsertCoin/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/sdk/src/GameSdk.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/sdk/src/GameSdk.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/fonts/Yapari-SemiBold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/fonts/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/widgets/Leaderboard/TopWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/widgets/Leaderboard/TopWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/ui/src/widgets/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/widgets/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/sdk/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/packages/sdk/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/sdk/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/sdk/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,24 +33,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/rodionkukhty/Desktop/rodion/work/cere/cere-games-sdk/web/sdk/assets&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;nodejs.jest.jest_package&quot;: &quot;/Users/rodionkukhty/Desktop/rodion/work/cere/cere-games-sdk/node_modules/react-scripts&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/rodionkukhty/Desktop/rodion/work/cere/cere-games-sdk/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/rodionkukhty/Desktop/rodion/work/cere/cere-games-sdk/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "release/0.6.1",
+    "last_opened_file_path": "/Users/rodionkukhty/Desktop/rodion/work/cere/cere-games-sdk/web/sdk/assets",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "/Users/rodionkukhty/Desktop/rodion/work/cere/cere-games-sdk/node_modules/react-scripts",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/rodionkukhty/Desktop/rodion/work/cere/cere-games-sdk/node_modules/prettier",
+    "settings.editor.selected.configurable": "actions.on.save",
+    "ts.external.directory.path": "/Users/antonmazhuto/Documents/Work/cere-network/cere-games-sdk/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/web/sdk/assets" />
@@ -61,7 +64,6 @@
   <component name="RunManager" selected="npm.start">
     <configuration name="New user flow" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$/tests/wdio" />
       <envs />
@@ -124,7 +126,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

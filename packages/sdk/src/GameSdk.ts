@@ -38,7 +38,7 @@ type EarnScreenOptions = {
   onComplete?: () => AsyncResult;
   score?: number;
   onShowLeaderboard?: () => void;
-  onShowSignUp?: () => void;
+  onShowWallet?: () => void;
 };
 
 export type GameInfo = {
@@ -348,22 +348,17 @@ export class GamesSDK {
   }
 
   async earnScreen({ onConnect, onComplete, score }: EarnScreenOptions = {}) {
-    const connectWallet = document.createElement('cere-earn-screen');
-    const { open, ...modal } = UI.createModal(connectWallet, { hasClose: false });
+    const earnScreenModal = document.createElement('cere-earn-screen');
+    const { open, ...modal } = UI.createModal(earnScreenModal, { hasClose: false });
 
-    connectWallet.update({
-      score,
-      onShowLeaderboard: () => {
-        this.showLeaderboard({ withTopWidget: false, onComplete, onConnect });
-        modal.close();
-      },
-      onShowSignUp: async () => {
-        const { open } = this.showSignUp({
-          onConnect,
-          onComplete,
-        });
-        open();
-        modal.close();
+    earnScreenModal.update({
+      onShowWallet: async () => {
+        try {
+          modal.close();
+          await this.connectWallet({ onConnect, onComplete });
+        } catch (error) {
+          this.reporting.error(error);
+        }
       },
     });
 
