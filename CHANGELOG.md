@@ -2,7 +2,7 @@
 
 ### vNext
 
--
+- Add `lerna` to automate new version publish
 
 ### v0.6.1
 

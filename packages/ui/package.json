@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/cere-io/cere-games-sdk/tree/master/packages/ui",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@emotion/cache": "^11.10.5",
     "@emotion/react": "^11.10.5",

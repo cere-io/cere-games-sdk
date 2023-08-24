@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/cere-io/cere-games-sdk/tree/master/packages/sdk",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "webpack"
   },
