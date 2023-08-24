@@ -1,13 +1,17 @@
 import styled from '@emotion/styled';
+import { useCallback } from 'react';
 
 import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button } from '../../components';
-import { useConfigContext } from '../../hooks';
-import { RepeatIcon } from '../../icons';
+import { useConfigContext, useWalletContext } from '../../hooks';
+import { RepeatIcon, TwitterIcon } from '../../icons';
 
 type TopWidgetProps = {
   amountOfDaysLeft?: number;
   onPlayAgain: () => void;
   disabled?: boolean;
+  tournamentTitle: string;
+  onTweet?: (score: number) => Promise<{ tweetBody: string }>;
+  score?: number;
 };
 
 const WidgetWrapper = styled(ModalWrapper)({
@@ -74,6 +78,29 @@ const PlayAgainText = styled(Typography)({
   fontSize: 14,
 });
 
+const TweetButton = styled(Button)({
+  background: 'transparent',
+  marginTop: '37px!important',
+  border: '1px solid #FFFFFF',
+  height: 36,
+  minHeight: 36,
+  fontSize: 14,
+  fontWeight: '22px',
+  borderRadius: 4,
+  '& > div': {
+    padding: '0 6px',
+  },
+});
+
+const GamePortalButton = styled(Typography)({
+  marginTop: '11px',
+  color: 'rgba(255, 255, 255, 0.6)',
+  fontSize: '12px',
+  lineHeight: '15px',
+  fontWeight: 400,
+  textDecoration: 'underline',
+});
+
 const NFTImage = styled.img({
   position: 'absolute',
   width: 180,
@@ -88,8 +115,32 @@ const NFTImage = styled.img({
   },
 });
 
-export const TopWidget = ({ amountOfDaysLeft = 1, onPlayAgain }: TopWidgetProps): JSX.Element => {
-  const { sdkUrl: cdnUrl } = useConfigContext();
+const Row = styled.div(({ columns, columnGap }: { columns: string; columnGap: number }) => ({
+  position: 'relative',
+  display: 'grid',
+  gridTemplateColumns: columns,
+  columnGap,
+  alignItems: 'center',
+}));
+
+export const TopWidget = ({
+  amountOfDaysLeft = 1,
+  onPlayAgain,
+  tournamentTitle,
+  onTweet,
+  score,
+}: TopWidgetProps): JSX.Element => {
+  const { sdkUrl: cdnUrl, gamePortalUrl } = useConfigContext();
+  const { address, isReady } = useWalletContext();
+
+  const handleOpenGamePortal = useCallback(() => {
+    window.open(gamePortalUrl, '_blank')?.focus();
+  }, [gamePortalUrl]);
+
+  const handleShareClick = useCallback(async () => {
+    const tweet = await onTweet?.(score as number);
+    window.open(`https://twitter.com/intent/tweet?${tweet?.tweetBody}`, '_system', 'width=600,height=600');
+  }, [onTweet, score]);
 
   return (
     <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]}>
@@ -98,15 +149,26 @@ export const TopWidget = ({ amountOfDaysLeft = 1, onPlayAgain }: TopWidgetProps)
         <DaysLeft>{amountOfDaysLeft} day left</DaysLeft>
         <NFTImage src={`${cdnUrl}/assets/nft.png`} />
         <Text>
-          <Typography>Weekly tournament</Typography>
+          <Typography>{tournamentTitle}</Typography>
           <UniqueNFT>TOP 20 WINS UNIQUE NFT</UniqueNFT>
         </Text>
-        <PlayAgain onClick={onPlayAgain}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <RepeatIcon />
-            <PlayAgainText>Play Again</PlayAgainText>
-          </div>
-        </PlayAgain>
+        <Row columns={'146px 99px'} columnGap={8}>
+          <PlayAgain onClick={onPlayAgain}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <RepeatIcon />
+              <PlayAgainText>Play Again</PlayAgainText>
+            </div>
+          </PlayAgain>
+          <TweetButton
+            disabled={!isReady || !address}
+            icon={<TwitterIcon color="#FFF" />}
+            variant="outlined"
+            onClick={handleShareClick}
+          >
+            Tweet
+          </TweetButton>
+        </Row>
+        <GamePortalButton onClick={handleOpenGamePortal}>Go to Cere game portal →</GamePortalButton>
       </Content>
     </WidgetWrapper>
   );

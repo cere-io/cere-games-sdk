@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import {
-  Button,
   Stack,
   Table,
   TableProps,
@@ -13,7 +12,7 @@ import {
   Truncate,
   Alert,
 } from '../../components';
-import { useAsyncCallback, useConfigContext, useMediaQuery, useWalletContext } from '../../hooks';
+import { useAsyncCallback, useConfigContext, useWalletContext } from '../../hooks';
 import { TopWidget } from './TopWidget';
 
 type TournamentType = {
@@ -33,15 +32,6 @@ export type LeaderboardProps = Pick<TableProps, 'data'> & {
   withTopWidget?: boolean;
   onShowSignUp?: () => void;
 };
-
-const Widget = styled.div({
-  maxWidth: 600,
-
-  '@media (max-width: 600px)': {
-    position: 'relative',
-    width: 'auto',
-  },
-});
 
 const LeaderboardTitle = styled(Typography)({
   fontFamily: 'Yapari-SemiBold',
@@ -93,20 +83,11 @@ export const Leaderboard = ({
   withTopWidget,
   onShowSignUp,
 }: LeaderboardProps) => {
-  const { sessionPrice, gamePortalUrl, staticAssets, sdkUrl: cdnUrl } = useConfigContext();
-  const { address, balance = 0, isReady } = useWalletContext();
+  const { sessionPrice, sdkUrl: cdnUrl } = useConfigContext();
+  const { address, balance = 0 } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
-  const isMobile = useMediaQuery('(max-width: 600px)');
 
-  const [handlePlayAgain, isBusy] = useAsyncCallback(onPlayAgain);
-  const handleOpenGamePortal = useCallback(() => {
-    window.location.href = gamePortalUrl;
-  }, [gamePortalUrl]);
-
-  const handleShareClick = useCallback(async () => {
-    const tweet = await onTweet?.(playerData?.score as number);
-    window.open(`https://twitter.com/intent/tweet?${tweet?.tweetBody}`, '_system', 'width=600,height=600');
-  }, [onTweet, playerData?.score]);
+  const [handlePlayAgain] = useAsyncCallback(onPlayAgain);
 
   const dayDifference = useMemo(() => {
     if (!activeTournament) {
@@ -121,7 +102,16 @@ export const Leaderboard = ({
   return (
     <>
       <Alert />
-      {withTopWidget && <TopWidget onPlayAgain={handlePlayAgain} disabled={balance < sessionPrice} />}
+      {withTopWidget && (
+        <TopWidget
+          tournamentTitle={`${activeTournament ? activeTournament.title : 'Weekly'} tournament`}
+          amountOfDaysLeft={dayDifference ? dayDifference : 1}
+          onPlayAgain={handlePlayAgain}
+          onTweet={onTweet}
+          disabled={balance < sessionPrice}
+          score={playerData?.score}
+        />
+      )}
       <ModalWrapper layer={`${cdnUrl}/assets/layer.svg`}>
         <RadialGradientBackGround />
         <Content>
