@@ -1,6 +1,6 @@
 {
   "name": "@cere-games-sdk/wdio",
-  "version": "0.6.2-rc.0",
+  "version": "0.6.2",
   "private": true,
   "scripts": {
     "start": "wdio run ./wdio.conf.ts",
