@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useCallback } from 'react';
 
 import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button } from '../../components';
-import { useConfigContext, useWalletContext } from '../../hooks';
+import { useConfigContext, useGameInfo, useWalletContext } from '../../hooks';
 import { RepeatIcon, TwitterIcon } from '../../icons';
 
 type TopWidgetProps = {
@@ -94,6 +94,7 @@ const TweetButton = styled(Button)({
 
 const GamePortalButton = styled(Typography)({
   cursor: 'pointer',
+  width: 'fit-content',
   marginTop: '11px',
   color: 'rgba(255, 255, 255, 0.6)',
   fontSize: '12px',
@@ -133,15 +134,17 @@ export const TopWidget = ({
 }: TopWidgetProps): JSX.Element => {
   const { sdkUrl: cdnUrl, gamePortalUrl } = useConfigContext();
   const { address, isReady } = useWalletContext();
+  const gameInfo = useGameInfo();
 
   const handleOpenGamePortal = useCallback(() => {
     window.open(gamePortalUrl, '_blank')?.focus();
   }, [gamePortalUrl]);
 
   const handleShareClick = useCallback(async () => {
-    const tweet = await onTweet?.(score as number);
-    window.open(`https://twitter.com/intent/tweet?${tweet?.tweetBody}`, '_system', 'width=600,height=600');
-  }, [onTweet, score]);
+    await onTweet?.(score as number);
+    const tweetBody = `text=Do you think you can beat my ${gameInfo.name} high-score?%0a%0a${address}%0a%0aMy score: ${score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer`;
+    window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
+  }, [address, gameInfo.name, onTweet, score]);
 
   return (
     <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]}>
@@ -166,7 +169,7 @@ export const TopWidget = ({
             variant="outlined"
             onClick={handleShareClick}
           >
-            Tweet
+            Share
           </TweetButton>
         </Row>
         <GamePortalButton onClick={handleOpenGamePortal}>Go to Cere game portal →</GamePortalButton>
