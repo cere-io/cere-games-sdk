@@ -93,6 +93,7 @@ const TweetButton = styled(Button)({
 });
 
 const GamePortalButton = styled(Typography)({
+  cursor: 'pointer',
   marginTop: '11px',
   color: 'rgba(255, 255, 255, 0.6)',
   fontSize: '12px',
