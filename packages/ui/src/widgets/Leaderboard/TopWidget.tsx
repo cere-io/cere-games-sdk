@@ -94,6 +94,7 @@ const TweetButton = styled(Button)({
 
 const GamePortalButton = styled(Typography)({
   cursor: 'pointer',
+  width: 'fit-content',
   marginTop: '11px',
   color: 'rgba(255, 255, 255, 0.6)',
   fontSize: '12px',
@@ -139,9 +140,10 @@ export const TopWidget = ({
   }, [gamePortalUrl]);
 
   const handleShareClick = useCallback(async () => {
-    const tweet = await onTweet?.(score as number);
-    window.open(`https://twitter.com/intent/tweet?${tweet?.tweetBody}`, '_system', 'width=600,height=600');
-  }, [onTweet, score]);
+    await onTweet?.(score as number);
+    const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score?%0a%0a${address}%0a%0aMy score: ${score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer`;
+    window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
+  }, [address, onTweet, score]);
 
   return (
     <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]}>
@@ -166,7 +168,7 @@ export const TopWidget = ({
             variant="outlined"
             onClick={handleShareClick}
           >
-            Tweet
+            Share
           </TweetButton>
         </Row>
         <GamePortalButton onClick={handleOpenGamePortal}>Go to Cere game portal →</GamePortalButton>
