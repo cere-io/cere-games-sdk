@@ -2,6 +2,7 @@
 
 ### vNext
 
+- Clear Cere Wallet cache when Games SDK version increased
 - Add `lerna` to automate new version publish
 
 ### v0.6.1
