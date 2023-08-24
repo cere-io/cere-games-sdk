@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useCallback } from 'react';
 
 import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button } from '../../components';
-import { useConfigContext, useWalletContext } from '../../hooks';
+import { useConfigContext, useGameInfo, useWalletContext } from '../../hooks';
 import { RepeatIcon, TwitterIcon } from '../../icons';
 
 type TopWidgetProps = {
@@ -134,6 +134,7 @@ export const TopWidget = ({
 }: TopWidgetProps): JSX.Element => {
   const { sdkUrl: cdnUrl, gamePortalUrl } = useConfigContext();
   const { address, isReady } = useWalletContext();
+  const gameInfo = useGameInfo();
 
   const handleOpenGamePortal = useCallback(() => {
     window.open(gamePortalUrl, '_blank')?.focus();
@@ -141,9 +142,9 @@ export const TopWidget = ({
 
   const handleShareClick = useCallback(async () => {
     await onTweet?.(score as number);
-    const tweetBody = `text=Do you think you can beat my Metaverse Dash Run high-score?%0a%0a${address}%0a%0aMy score: ${score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer`;
+    const tweetBody = `text=Do you think you can beat my ${gameInfo.name} high-score?%0a%0a${address}%0a%0aMy score: ${score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
-  }, [address, onTweet, score]);
+  }, [address, gameInfo.name, onTweet, score]);
 
   return (
     <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]}>
