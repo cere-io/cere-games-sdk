@@ -1,6 +1,7 @@
 {
   "name": "@cere-games-sdk/playground",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "start": "craco start"
   },
