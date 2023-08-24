@@ -2,7 +2,7 @@
 
 ### vNext
 
--
+- Update Cere Wallet SDK
 
 ### v0.6.1
 

@@ -2,7 +2,7 @@
 
 ### vNext
 
--
+- Clear Cere Wallet cache when Games SDK version increased
 
 ### v0.6.1
 
