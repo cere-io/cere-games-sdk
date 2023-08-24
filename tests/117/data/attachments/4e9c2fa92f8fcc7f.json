@@ -1,0 +1,116 @@
+[
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1692882965501 1:566516 \"CERE Games SDK: version 0.6.2-rc.0\"",
+    "source": "console-api",
+    "timestamp": 1692883021009
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1692882965501 0:1956 \"Release: v1.0.0+build.141\"",
+    "source": "console-api",
+    "timestamp": 1692883021058
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1692882965501 0:304546 \"Chat bubble plugins.\\nDeveloped by: Duc Le - https://www.linkedin.com/in/ducle95\"",
+    "source": "console-api",
+    "timestamp": 1692883021143
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1692882965501 0:206743 \"serving universal version ...\"",
+    "source": "console-api",
+    "timestamp": 1692883021153
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1692882965501 0:235746 \"Initiating sound handler\"",
+    "source": "console-api",
+    "timestamp": 1692883021157
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1692882965501 0 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu",
+    "source": "other",
+    "timestamp": 1692883021251
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1692882965501 1:492150 \"Cere Games SDK: Suspend host events\"",
+    "source": "console-api",
+    "timestamp": 1692883021330
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1692882965501 1:492220 \"Cere Games SDK: Resume host events\"",
+    "source": "console-api",
+    "timestamp": 1692883021453
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1692882965501 1:492150 \"Cere Games SDK: Suspend host events\"",
+    "source": "console-api",
+    "timestamp": 1692883021453
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - Failed to decode downloaded font: http://host.docker.internal:4567/examples/metaverse-dash-run/media/fonts/arcadeclassic.woff2",
+    "source": "other",
+    "timestamp": 1692883021492
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - OTS parsing error: invalid sfntVersion: -2147367933",
+    "source": "other",
+    "timestamp": 1692883021492
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - Failed to decode downloaded font: http://host.docker.internal:4567/examples/metaverse-dash-run/media/fonts/arcadeclassic.woff2",
+    "source": "other",
+    "timestamp": 1692883021493
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - OTS parsing error: invalid sfntVersion: -2147367933",
+    "source": "other",
+    "timestamp": 1692883021494
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - Failed to decode downloaded font: http://host.docker.internal:4567/examples/metaverse-dash-run/media/fonts/arcadeclassic.woff2",
+    "source": "other",
+    "timestamp": 1692883021494
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - OTS parsing error: invalid sfntVersion: -2147367933",
+    "source": "other",
+    "timestamp": 1692883021494
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - Failed to decode downloaded font: http://host.docker.internal:4567/examples/metaverse-dash-run/media/fonts/arcadeclassic.woff2",
+    "source": "other",
+    "timestamp": 1692883021495
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ - OTS parsing error: invalid sfntVersion: -2147367933",
+    "source": "other",
+    "timestamp": 1692883021495
+  },
+  {
+    "level": "SEVERE",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/media/audio/land.ogg - Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "source": "network",
+    "timestamp": 1692883021512
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.f9fa0aa4.js 1:63948 \"Popup (Outgoing)\" \"context.93d1424b0e03c8f03a2d91041e809ec5\" Object",
+    "source": "console-api",
+    "timestamp": 1692883022688
+  }
+]
