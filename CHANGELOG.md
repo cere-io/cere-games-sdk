@@ -4,6 +4,12 @@
 
 -
 
+### v0.6.2
+
+- Clear Cere Wallet cache when Games SDK version increased
+- Add `lerna` to automate new version publish
+- Added share twitter button and game portal
+
 ### v0.6.1
 
 - Change widget logic

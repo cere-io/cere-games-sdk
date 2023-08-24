@@ -41,7 +41,8 @@ nvm exec npm run build
 6. Publish the packages to NPM:
 
 ```bash
-nvm exec npm run sdk:publish
+nvm exec npm run release # creates new release (pushes commit and tag)
+nvm exec npm run release:publish # publishes packages (usually done by CI)
 ```
 
 ## Auto tests

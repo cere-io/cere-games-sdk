@@ -1,4 +1,4 @@
-import { BN, EmbedWallet, WalletAccount, WalletBalance, WalletStatus } from '@cere/embed-wallet';
+import { BN, EmbedWallet, WalletAccount, WalletBalance, WalletStatus, WALLET_CLIENT_VERSION } from '@cere/embed-wallet';
 import * as UI from '@cere/games-sdk-ui';
 
 import {
@@ -89,6 +89,7 @@ export class GamesSDK {
   readonly wallet = new EmbedWallet({
     env: this.env,
     appId: this.options.gameId,
+    clientVersion: `${WALLET_CLIENT_VERSION}+${SDK_VERSION}`, // Semver with metadata to burst wallet IFRAME cache
   });
 
   private readonly api = new GamesApi({

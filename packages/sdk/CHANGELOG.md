@@ -4,6 +4,10 @@
 
 -
 
+### v0.6.2
+
+- Update Cere Wallet SDK
+
 ### v0.6.1
 
 - Change widget logic
