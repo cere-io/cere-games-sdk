@@ -21,7 +21,7 @@ import { Reporting, ReportingOptions } from './Reporting';
 type AsyncResult<T = void> = Promise<T> | T;
 
 type ShowLeaderboardOptions = {
-  onPlayAgain?: () => AsyncResult;
+  onPlayAgain?: (close: () => void) => AsyncResult;
   onBeforeLoad?: () => AsyncResult;
   withTopWidget?: boolean;
   onShowSignUp?: () => void;
@@ -235,7 +235,12 @@ export class GamesSDK {
       },
       navigateToNextScreen: () => {
         modal.close();
-        this.showLeaderboard({ onPlayAgain: async () => await onStart?.() });
+        this.showLeaderboard({
+          onPlayAgain: async (close?: () => void) => {
+            await onStart?.();
+            close?.();
+          },
+        });
       },
     });
 
@@ -323,7 +328,7 @@ export class GamesSDK {
                 const { email } = await this.wallet.getUserInfo();
                 this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });
                 await this.payForSession();
-                await onPlayAgain?.();
+                await onPlayAgain?.(modal.close);
               } else {
                 const { open } = this.showInsertCoin();
                 open();
