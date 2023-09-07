@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
+import { useMemo } from 'react';
 
 import { Button, ProgressiveImg, Stack, Typography, Steps } from '../../components';
-import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery } from '../../hooks';
+import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery, useWalletContext } from '../../hooks';
 
 const ImageBlock = styled.div(
   {
@@ -57,13 +58,21 @@ const StartButton = styled(Button)(
 export type PreloaderProps = {
   ready?: boolean;
   onStartClick?: () => Promise<void> | void;
+  navigateToNextScreen?: () => void;
 };
 
-export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
+export const Preloader = ({ ready = false, onStartClick, navigateToNextScreen }: PreloaderProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [handleStartClick, isBusy] = useAsyncCallback(onStartClick);
   const { loading, preloader } = useGameInfo();
   const { sdkUrl: cdnUrl } = useConfigContext();
+  const { isReady, address } = useWalletContext();
+
+  const walletStatus = useMemo(() => (isReady ? 'READY' : 'NOT_READY'), [isReady]);
+
+  if (walletStatus === 'READY' && address) {
+    navigateToNextScreen?.();
+  }
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="center">
