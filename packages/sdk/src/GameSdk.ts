@@ -235,7 +235,7 @@ export class GamesSDK {
       },
       navigateToNextScreen: () => {
         modal.close();
-        this.showLeaderboard({ onPlayAgain: () => window.location.reload() });
+        this.showLeaderboard({ onPlayAgain: async () => await onStart?.() });
       },
     });
 
