@@ -18,19 +18,33 @@ export type TableDataRowProps = {
   active?: boolean;
   data: Data;
   hasReward?: boolean;
+  shouldChangeStyle?: boolean;
 };
 
-const Wrapper = styled.div<Pick<TableDataRowProps, 'active'>>(({ theme, active = false }) => ({
-  backgroundColor: 'rgba(233, 204, 255, 0.05)',
-  borderRadius: theme.borderRadius(2),
-  marginBottom: 1,
-
-  ...(active && {
+const Wrapper = styled.div<Pick<TableDataRowProps, 'active' | 'shouldChangeStyle'>>(
+  ({ theme, active = false, shouldChangeStyle = false }) => ({
+    backgroundColor: 'rgba(233, 204, 255, 0.05)',
     borderRadius: theme.borderRadius(2),
-    background: 'rgba(133, 70, 183, 0.50)',
     marginBottom: 1,
+
+    ...(active && {
+      position: 'sticky',
+      top: 0,
+    }),
+    ...(active &&
+      !shouldChangeStyle && {
+        borderRadius: theme.borderRadius(2),
+        background: 'rgba(133, 70, 183, 0.50)',
+        marginBottom: 1,
+      }),
+    ...(active &&
+      shouldChangeStyle && {
+        borderRadius: theme.borderRadius(2),
+        background: 'rgba(133, 70, 183, 1)',
+        marginBottom: 1,
+      }),
   }),
-}));
+);
 
 const CurrentPlayer = styled.div({
   display: 'grid',
@@ -46,20 +60,18 @@ const EmptySpace = styled.div({
 
 const rankColors: RankProps['rankColor'][] = ['gold', 'silver', 'bronze'];
 
-export const TableDataRow = ({ data, active, hasReward }: TableDataRowProps) => {
-  const { staticAssets } = useConfigContext();
+export const TableDataRow = ({ data, active, hasReward, shouldChangeStyle }: TableDataRowProps) => {
   const isMobile = useMediaQuery('(max-width: 600px)');
 
   const rewardTsx = useMemo(() => {
     if (!hasReward) {
       return <EmptySpace>{null}</EmptySpace>;
     }
-    // return <Prize src={staticAssets.mysteryBox} />; // TODO ask if image come from backend
     return <TrophyWhiteIcon />;
-  }, [hasReward, staticAssets]);
+  }, [hasReward]);
 
   return (
-    <Wrapper active={active} role="row" aria-selected={active}>
+    <Wrapper active={active} shouldChangeStyle={shouldChangeStyle} role="row" aria-selected={active}>
       <TableRow
         columns={[
           <Rank rankColor={rankColors[data.rank - 1]}>{data.rank}</Rank>,
