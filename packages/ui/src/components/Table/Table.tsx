@@ -45,6 +45,7 @@ const ScrollToTop = styled(Button)({
 
 export const Table = ({ data, activeAddress, hasTournament }: TableProps) => {
   const [showScrollToTop, setShow] = useState(false);
+  const [shouldChangeStyle, setChangeStyle] = useState(false);
   const activeRow = useMemo(() => data.find((row) => row.address === activeAddress), [data, activeAddress]);
   const rows = useMemo(() => data.filter((row) => row !== activeRow), [activeRow, data]);
 
@@ -58,6 +59,12 @@ export const Table = ({ data, activeAddress, hasTournament }: TableProps) => {
       setShow(true);
     } else {
       setShow(false);
+    }
+
+    if (containerRef.current.scrollTop > 44) {
+      setChangeStyle(true);
+    } else {
+      setChangeStyle(false);
     }
   }, []);
 
@@ -82,6 +89,7 @@ export const Table = ({ data, activeAddress, hasTournament }: TableProps) => {
         <TableDataRow
           hasReward={activeRow.rank <= (hasTournament ? MAX_RANK_WITH_GIFT_WITH_TOURNAMENT : MAX_RANK_WITH_GIFT)}
           active
+          shouldChangeStyle={shouldChangeStyle}
           data={activeRow}
         />
       )}
