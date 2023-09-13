@@ -105,6 +105,7 @@ export const Leaderboard = ({
       {withTopWidget && (
         <TopWidget
           tournamentTitle={`${activeTournament ? activeTournament.title : 'Weekly'} tournament`}
+          tournamentSubtitle={activeTournament ? activeTournament.subtitle : 'TOP 20 WINS UNIQUE NFT'}
           amountOfDaysLeft={dayDifference ? dayDifference : 1}
           onPlayAgain={handlePlayAgain}
           onTweet={onTweet}

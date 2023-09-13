@@ -10,6 +10,7 @@ type TopWidgetProps = {
   onPlayAgain: () => void;
   disabled?: boolean;
   tournamentTitle: string;
+  tournamentSubtitle: string;
   onTweet?: (score: number) => Promise<{ tweetBody: string }>;
   score?: number;
 };
@@ -129,6 +130,7 @@ export const TopWidget = ({
   amountOfDaysLeft = 1,
   onPlayAgain,
   tournamentTitle,
+  tournamentSubtitle,
   onTweet,
   score,
 }: TopWidgetProps): JSX.Element => {
@@ -154,7 +156,7 @@ export const TopWidget = ({
         <NFTImage src={`${cdnUrl}/assets/nft.png`} />
         <Text>
           <Typography>{tournamentTitle}</Typography>
-          <UniqueNFT>TOP 20 WINS UNIQUE NFT</UniqueNFT>
+          <UniqueNFT>{tournamentSubtitle}</UniqueNFT>
         </Text>
         <Row columns={'146px 99px'} columnGap={8}>
           <PlayAgain onClick={onPlayAgain}>
