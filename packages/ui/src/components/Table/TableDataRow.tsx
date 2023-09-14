@@ -6,7 +6,7 @@ import { Typography } from '../Typography';
 import { Rank, RankProps } from './Rank';
 import { TableRow } from './TableRow';
 import { CurrentPlayerIconWhite, TrophyWhiteIcon } from '../../icons';
-import { useConfigContext, useMediaQuery } from '../../hooks';
+import { useMediaQuery } from '../../hooks';
 
 type Data = {
   rank: number;
