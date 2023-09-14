@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { useMemo } from 'react';
 
 import { Button, ProgressiveImg, Stack, Typography, Steps } from '../../components';
 import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery, useWalletContext } from '../../hooks';
@@ -58,20 +57,18 @@ const StartButton = styled(Button)(
 export type PreloaderProps = {
   ready?: boolean;
   onStartClick?: () => Promise<void> | void;
-  navigateToNextScreen?: () => void;
+  navigateLeaderBoardWidget?: () => void;
 };
 
-export const Preloader = ({ ready = false, onStartClick, navigateToNextScreen }: PreloaderProps) => {
+export const Preloader = ({ ready = false, onStartClick, navigateLeaderBoardWidget }: PreloaderProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [handleStartClick, isBusy] = useAsyncCallback(onStartClick);
   const { loading, preloader } = useGameInfo();
   const { sdkUrl: cdnUrl } = useConfigContext();
-  const { isReady, address } = useWalletContext();
+  const { address } = useWalletContext();
 
-  const walletStatus = useMemo(() => (isReady ? 'READY' : 'NOT_READY'), [isReady]);
-
-  if (walletStatus === 'READY' && address) {
-    navigateToNextScreen?.();
+  if (address || localStorage.getItem('userAddress')) {
+    navigateLeaderBoardWidget?.();
   }
 
   return (

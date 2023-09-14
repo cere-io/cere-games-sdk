@@ -233,7 +233,7 @@ export class GamesSDK {
         await onStart?.();
         modal.close();
       },
-      navigateToNextScreen: () => {
+      navigateLeaderBoardWidget: () => {
         modal.close();
         this.showLeaderboard({
           onPlayAgain: async (close?: () => void) => {
@@ -261,6 +261,9 @@ export class GamesSDK {
       ]);
 
       this.ui.wallet.isNewUser = isNewUser;
+      if (this.ui.wallet.address) {
+        localStorage.setItem('userAddress', this.ui.wallet.address);
+      }
 
       await onConnect?.(accounts, isNewUser);
 
