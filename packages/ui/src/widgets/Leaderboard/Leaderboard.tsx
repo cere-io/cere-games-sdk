@@ -75,6 +75,16 @@ const SignUpButton = styled.button({
   },
 });
 
+const Alerts = styled.div({
+  zIndex: 100,
+  position: 'absolute',
+  right: 39,
+  top: 32,
+  display: 'grid',
+  gridTemplateRows: '1fr 1fr',
+  gridRowGap: '5px',
+});
+
 export const Leaderboard = ({
   data,
   activeTournament,
@@ -101,9 +111,18 @@ export const Leaderboard = ({
 
   return (
     <>
-      <Alert />
+      <Alerts>
+        <Alert
+          title="CONGRATULATIONS"
+          subtitle="You have successfully sign up!
+Be top-3 player and share a prize"
+          skin="signUp"
+        />
+        <Alert title="Achivement unlocked" subtitle="NeWBIE way" skin="wallet" />
+      </Alerts>
       {withTopWidget && (
         <TopWidget
+          hasActiveTournament={Boolean(activeTournament)}
           tournamentTitle={`${activeTournament ? activeTournament.title : 'Weekly'} tournament`}
           tournamentSubtitle={activeTournament ? activeTournament.subtitle : 'TOP 20 WINS UNIQUE NFT'}
           amountOfDaysLeft={dayDifference ? dayDifference : 1}
@@ -111,6 +130,7 @@ export const Leaderboard = ({
           onTweet={onTweet}
           disabled={balance < sessionPrice}
           score={playerData?.score}
+          rank={playerData?.rank}
         />
       )}
       <ModalWrapper layer={`${cdnUrl}/assets/layer.svg`}>
