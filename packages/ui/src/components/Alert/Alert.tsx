@@ -4,13 +4,11 @@ import { useId, useState } from 'react';
 import { Typography } from '../Typography';
 import { CloseIcon } from '../../icons';
 import { useConfigContext, useWalletContext, useMediaQuery } from '../../hooks';
+import { AlertRewardIcon } from '../../icons/AlertRewardIcon';
 
-const Container = styled.div<{ visible: boolean }>(
+const Container = styled.div<{ visible: boolean; skin?: AlertProps['skin'] }>(
   {
-    zIndex: 100,
-    position: 'absolute',
-    right: 39,
-    top: 32,
+    position: 'relative',
     display: 'grid',
     gridTemplateColumns: 'auto auto 32px',
     columnGap: 12,
@@ -29,6 +27,7 @@ const Container = styled.div<{ visible: boolean }>(
       width: '100%',
     },
   },
+  ({ skin }) => skin === 'signUp' && { width: '322px', justifySelf: 'end' },
   ({ visible }) => ({
     visibility: visible ? 'visible' : 'hidden',
   }),
@@ -36,8 +35,8 @@ const Container = styled.div<{ visible: boolean }>(
 
 const CloseIconWrapper = styled.div({
   position: 'absolute',
-  top: '-10px',
-  right: '-10px',
+  top: '11px',
+  right: '11px',
 });
 
 const CloseAlert = styled(CloseIcon)(() => ({
@@ -54,14 +53,28 @@ const TextContainer = styled.div({
   flexDirection: 'column',
 });
 
-const Title = styled(Typography)({
+const Title = styled(Typography)(({ skin }: { skin?: AlertProps['skin'] }) => ({
   color: '#FFF',
-  fontFamily: 'Lexend',
-  fontSize: 14,
-  fontStyle: 'normal',
-  fontWeight: '400',
-  lineHeight: 'normal',
-});
+  ...(skin === 'wallet'
+    ? {
+        fontFamily: 'Lexend',
+        fontSize: 14,
+        fontStyle: 'normal',
+        fontWeight: '400',
+        lineHeight: 'normal',
+      }
+    : {
+        display: 'inline-flex',
+        alignItems: 'center',
+        fontFamily: 'Yapari-SemiBold',
+        fontSize: 16,
+        fontStyle: 'normal',
+        fontWeight: '600',
+        lineHeight: 'normal',
+        textTransform: 'uppercase',
+        '& > svg': { marginRight: '4px' },
+      }),
+}));
 
 const StyledImage = styled.img({
   height: 73,
@@ -73,37 +86,58 @@ const StyledImage = styled.img({
   },
 });
 
-const SubTitle = styled(Typography)({
+const SubTitle = styled(Typography)(({ skin }: { skin?: AlertProps['skin'] }) => ({
   color: '#FFF',
-  fontFamily: 'Yapari-SemiBold',
-  fontSize: 20,
-  fontStyle: 'normal',
-  fontWeight: '600',
-  lineHeight: 'normal',
-  textTransform: 'uppercase',
+  ...(skin === 'wallet'
+    ? {
+        fontFamily: 'Yapari-SemiBold',
+        fontSize: 20,
+        fontStyle: 'normal',
+        fontWeight: '600',
+        lineHeight: 'normal',
+        textTransform: 'uppercase',
+      }
+    : {
+        fontFamily: 'Lexend',
+        fontSize: 12,
+        fontStyle: 'normal',
+        fontWeight: '400',
+        lineHeight: '17px',
+      }),
   marginTop: 4,
+}));
+
+const AlertReward = styled(AlertRewardIcon)({
+  display: 'inline-block',
 });
 
-export const Alert = () => {
+export type AlertProps = {
+  title: string;
+  subtitle: string;
+  skin: 'wallet' | 'signUp';
+};
+
+export const Alert = ({ title, subtitle, skin }: AlertProps) => {
   const descriptionId = useId();
   const { sdkUrl: cdnUrl } = useConfigContext();
-  const { balance, isNewUser } = useWalletContext();
+  const { balance, isNewUser, address } = useWalletContext();
   const [visible, setVisibility] = useState(true);
   const isMobile = useMediaQuery('(max-width: 600px)');
 
-  if (!visible || !balance || !isNewUser || isMobile) {
+  if (!visible || (skin === 'wallet' ? !balance || !isNewUser : !address) || isMobile) {
     return null;
   }
 
   return (
-    <Container role="alert" aria-describedby={descriptionId} visible={visible}>
-      <StyledImage src={`${cdnUrl}/assets/alert.png`} />
+    <Container role="alert" aria-describedby={descriptionId} visible={visible} skin={skin}>
+      {skin !== 'signUp' && <StyledImage src={`${cdnUrl}/assets/alert.png`} />}
       <TextContainer>
         <Title id={descriptionId} variant="body2">
-          Achivement unlocked
+          {skin === 'signUp' && <AlertReward />}
+          {title}
         </Title>
         <SubTitle id={descriptionId} variant="body2">
-          NeWBIE way
+          {subtitle}
         </SubTitle>
       </TextContainer>
       <CloseIconWrapper
