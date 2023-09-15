@@ -68,21 +68,15 @@ export const Preloader = ({ ready = false, onStartClick, navigateLeaderBoardWidg
   const { sdkUrl: cdnUrl } = useConfigContext();
   const { address } = useWalletContext();
   const lsInfo = useMemo(() => {
-    const info = localStorage.getItem('game-info');
+    const info = localStorage.getItem(`game-info-${name}`);
     if (info) {
       return JSON.parse(info);
     }
     return;
-  }, []);
+  }, [name]);
 
   if (address || (lsInfo && lsInfo.address && lsInfo.name === name)) {
-    if (localStorage.getItem('firstTime') === 'true') {
-      debugger;
-      localStorage.removeItem('firstTime');
-    } else {
-      debugger;
-      navigateLeaderBoardWidget?.();
-    }
+    navigateLeaderBoardWidget?.();
   }
 
   return (

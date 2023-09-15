@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { useCallback } from 'react';
 
-import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button, Stack } from '../../components';
+import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button } from '../../components';
 import { useConfigContext, useGameInfo, useWalletContext } from '../../hooks';
 import { RepeatIcon, TwitterIcon } from '../../icons';
 
@@ -91,6 +91,7 @@ const PlayAgain = styled(Button)(({ tournament }: { tournament?: boolean }) => (
   padding: 0,
   background: 'rgba(243, 39, 88, 1)',
   ...(tournament && {
+    whiteSpace: 'nowrap',
     '@media (max-width: 600px)': {
       marginTop: '14px!important',
     },

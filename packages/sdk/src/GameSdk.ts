@@ -237,7 +237,6 @@ export class GamesSDK {
         modal.close();
         this.showLeaderboard({
           onPlayAgain: async (close?: () => void) => {
-            await onStart?.();
             close?.();
           },
         });
@@ -266,7 +265,7 @@ export class GamesSDK {
           address: this.ui.wallet.address,
           name: this.ui.gameInfo.name,
         };
-        localStorage.setItem('game-info', JSON.stringify(gameInfo));
+        localStorage.setItem(`game-info-${this.ui.gameInfo.name}`, JSON.stringify(gameInfo));
       }
 
       await onConnect?.(accounts, isNewUser);
@@ -334,7 +333,6 @@ export class GamesSDK {
               if (balance && balance > this.ui.config.sessionPrice) {
                 const { email } = await this.wallet.getUserInfo();
                 this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });
-                localStorage.setItem('firstTime', 'true');
                 await this.payForSession();
                 await onPlayAgain?.(modal.close);
               } else {
