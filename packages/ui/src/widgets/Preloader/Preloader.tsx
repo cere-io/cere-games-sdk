@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 import { Button, ProgressiveImg, Stack, Typography, Steps } from '../../components';
-import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery } from '../../hooks';
+import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery, useWalletContext } from '../../hooks';
 
 const ImageBlock = styled.div(
   {
@@ -57,13 +57,19 @@ const StartButton = styled(Button)(
 export type PreloaderProps = {
   ready?: boolean;
   onStartClick?: () => Promise<void> | void;
+  navigateLeaderBoardWidget?: () => void;
 };
 
-export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
+export const Preloader = ({ ready = false, onStartClick, navigateLeaderBoardWidget }: PreloaderProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [handleStartClick, isBusy] = useAsyncCallback(onStartClick);
   const { loading, preloader } = useGameInfo();
   const { sdkUrl: cdnUrl } = useConfigContext();
+  const { address } = useWalletContext();
+
+  if (address || localStorage.getItem('userAddress')) {
+    navigateLeaderBoardWidget?.();
+  }
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="center">
