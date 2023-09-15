@@ -229,7 +229,7 @@ export const TopWidget = ({
   }, [address, gameInfo.name, onTweet, score]);
 
   return (
-    <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]}>
+    <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]} tournament={hasActiveTournament}>
       <RadialGradientBackGround />
       <Content>
         {!hasActiveTournament ? (

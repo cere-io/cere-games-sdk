@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useMemo } from 'react';
 
 import { Button, ProgressiveImg, Stack, Typography, Steps } from '../../components';
 import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery, useWalletContext } from '../../hooks';
@@ -63,12 +64,25 @@ export type PreloaderProps = {
 export const Preloader = ({ ready = false, onStartClick, navigateLeaderBoardWidget }: PreloaderProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [handleStartClick, isBusy] = useAsyncCallback(onStartClick);
-  const { loading, preloader } = useGameInfo();
+  const { loading, preloader, name } = useGameInfo();
   const { sdkUrl: cdnUrl } = useConfigContext();
   const { address } = useWalletContext();
+  const lsInfo = useMemo(() => {
+    const info = localStorage.getItem('game-info');
+    if (info) {
+      return JSON.parse(info);
+    }
+    return;
+  }, []);
 
-  if (address || localStorage.getItem('userAddress')) {
-    navigateLeaderBoardWidget?.();
+  if (address || (lsInfo && lsInfo.address && lsInfo.name === name)) {
+    if (localStorage.getItem('firstTime') === 'true') {
+      debugger;
+      localStorage.removeItem('firstTime');
+    } else {
+      debugger;
+      navigateLeaderBoardWidget?.();
+    }
   }
 
   return (

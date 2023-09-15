@@ -262,7 +262,11 @@ export class GamesSDK {
 
       this.ui.wallet.isNewUser = isNewUser;
       if (this.ui.wallet.address) {
-        localStorage.setItem('userAddress', this.ui.wallet.address);
+        const gameInfo = {
+          address: this.ui.wallet.address,
+          name: this.ui.gameInfo.name,
+        };
+        localStorage.setItem('game-info', JSON.stringify(gameInfo));
       }
 
       await onConnect?.(accounts, isNewUser);
@@ -330,6 +334,7 @@ export class GamesSDK {
               if (balance && balance > this.ui.config.sessionPrice) {
                 const { email } = await this.wallet.getUserInfo();
                 this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });
+                localStorage.setItem('firstTime', 'true');
                 await this.payForSession();
                 await onPlayAgain?.(modal.close);
               } else {
