@@ -29,6 +29,7 @@ type ShowLeaderboardOptions = {
 
 type ShowPreloaderOptions = {
   onStart?: () => AsyncResult;
+  onPlayAgain?: () => AsyncResult;
 };
 
 type ConnectWalletOptions = Pick<EarnScreenOptions, 'onConnect' | 'onComplete'>;
@@ -220,7 +221,7 @@ export class GamesSDK {
     this.sessionEvents.push({ timestamp: Date.now(), ...event });
   }
 
-  showPreloader({ onStart }: ShowPreloaderOptions = {}) {
+  showPreloader({ onStart, onPlayAgain }: ShowPreloaderOptions = {}) {
     const preloader = document.createElement('cere-preloader');
     const { open, ...modal } = UI.createModal(preloader);
 
@@ -237,7 +238,7 @@ export class GamesSDK {
         modal.close();
         this.showLeaderboard({
           onPlayAgain: async (close?: () => void) => {
-            await onStart?.();
+            await onPlayAgain?.();
             close?.();
           },
         });
@@ -262,7 +263,11 @@ export class GamesSDK {
 
       this.ui.wallet.isNewUser = isNewUser;
       if (this.ui.wallet.address) {
-        localStorage.setItem('userAddress', this.ui.wallet.address);
+        const gameInfo = {
+          address: this.ui.wallet.address,
+          name: this.ui.gameInfo.name,
+        };
+        localStorage.setItem(`game-info-${this.ui.gameInfo.name}`, JSON.stringify(gameInfo));
       }
 
       await onConnect?.(accounts, isNewUser);
@@ -332,6 +337,7 @@ export class GamesSDK {
                 this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });
                 await this.payForSession();
                 await onPlayAgain?.(modal.close);
+                modal.close();
               } else {
                 const { open } = this.showInsertCoin();
                 open();

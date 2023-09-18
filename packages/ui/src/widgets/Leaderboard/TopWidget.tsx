@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 import { useCallback } from 'react';
 
-import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button, Stack } from '../../components';
+import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button } from '../../components';
 import { useConfigContext, useGameInfo, useWalletContext } from '../../hooks';
 import { RepeatIcon, TwitterIcon } from '../../icons';
+
+const DISCORD_URL = '';
 
 type TopWidgetProps = {
   amountOfDaysLeft?: number;
@@ -17,14 +19,15 @@ type TopWidgetProps = {
   rank?: number;
 };
 
-const WidgetWrapper = styled(ModalWrapper)({
+const WidgetWrapper = styled(ModalWrapper)(({ tournament }: { tournament?: boolean }) => ({
+  padding: '36px 24px 32px 24px',
   width: 490,
   minHeight: 265,
   '@media (max-width: 600px)': {
     width: 'auto',
-    maxHeight: 325,
+    maxHeight: tournament ? '100%' : 325,
   },
-});
+}));
 
 const DaysLeft = styled.div(({ tournament }: { tournament?: boolean }) => ({
   padding: '7px 15px 7px 32px',
@@ -46,11 +49,11 @@ const DaysLeft = styled.div(({ tournament }: { tournament?: boolean }) => ({
         top: '0',
         left: '0',
         width: '151px',
-        margin: '4px auto 24px auto',
+        margin: '4px auto 14px auto',
       }
     : {}),
   '@media (max-width: 600px)': {
-    left: '-30px',
+    left: tournament ? '0px' : '-30px',
   },
 }));
 
@@ -63,16 +66,19 @@ const Text = styled.div({
   },
 });
 
-const UniqueNFT = styled(Typography)({
+const UniqueNFT = styled(Typography)(({ tournament }: { tournament?: boolean }) => ({
   fontFamily: 'Yapari-SemiBold',
   fontWeight: 600,
   fontSize: 24,
+  ...(tournament && {
+    textTransform: 'uppercase',
+  }),
   '@media (max-width: 600px)': {
-    width: 186,
-    height: 72,
+    width: 287,
     fontSize: 19,
+    margin: '0 auto',
   },
-});
+}));
 
 const PlayAgain = styled(Button)(({ tournament }: { tournament?: boolean }) => ({
   marginTop: tournament ? '20px!important' : '37px!important',
@@ -84,6 +90,12 @@ const PlayAgain = styled(Button)(({ tournament }: { tournament?: boolean }) => (
   borderRadius: 4,
   padding: 0,
   background: 'rgba(243, 39, 88, 1)',
+  ...(tournament && {
+    whiteSpace: 'nowrap',
+    '@media (max-width: 600px)': {
+      marginTop: '14px!important',
+    },
+  }),
 }));
 
 const PlayAgainText = styled(Typography)({
@@ -102,7 +114,15 @@ const TweetButton = styled(Button)(({ tournament }: { tournament?: boolean }) =>
   borderRadius: 4,
   '& > div': {
     padding: '0 6px',
+    ...(tournament && {
+      whiteSpace: 'nowrap',
+    }),
   },
+  ...(tournament && {
+    '@media (max-width: 600px)': {
+      marginTop: '14px!important',
+    },
+  }),
 }));
 
 const GamePortalButton = styled(Typography)(({ tournament }: { tournament?: boolean }) => ({
@@ -138,7 +158,7 @@ const RewardsRow = styled.div({
   gridTemplateColumns: 'repeat(3, 1fr)',
   alignItems: 'center',
   justifyContent: 'space-between',
-  marginTop: '18px',
+  marginTop: '14px',
   marginBottom: '20px',
   '& > div': {
     justifySelf: 'center',
@@ -199,6 +219,10 @@ export const TopWidget = ({
     window.open(gamePortalUrl, '_blank')?.focus();
   }, [gamePortalUrl]);
 
+  const handleOpenDiscord = useCallback(() => {
+    window.open(DISCORD_URL, '_blank')?.focus();
+  }, []);
+
   const handleShareClick = useCallback(async () => {
     await onTweet?.(score as number);
     const tweetBody = `text=Do you think you can beat my ${gameInfo.name} high-score?%0a%0a${address}%0a%0aMy score: ${score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer`;
@@ -206,7 +230,7 @@ export const TopWidget = ({
   }, [address, gameInfo.name, onTweet, score]);
 
   return (
-    <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]}>
+    <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]} tournament={hasActiveTournament}>
       <RadialGradientBackGround />
       <Content>
         {!hasActiveTournament ? (
@@ -237,9 +261,11 @@ export const TopWidget = ({
           </>
         ) : (
           <>
+            <UniqueNFT align="center" tournament>
+              {tournamentSubtitle}
+            </UniqueNFT>
             <Typography align="center">{tournamentTitle}</Typography>
             <DaysLeft tournament={hasActiveTournament}>{amountOfDaysLeft} day left</DaysLeft>
-            <UniqueNFT align="center">{tournamentSubtitle}</UniqueNFT>
             <RewardsRow>
               <RewardColumn>
                 <span>1st prize</span>
@@ -277,8 +303,8 @@ export const TopWidget = ({
                 Share
               </TweetButton>
             </Row>
-            <GamePortalButton tournament={hasActiveTournament} onClick={handleOpenGamePortal}>
-              Go to Cere game portal →
+            <GamePortalButton tournament={hasActiveTournament} onClick={handleOpenDiscord}>
+              Learn more on Discord →
             </GamePortalButton>
           </>
         )}

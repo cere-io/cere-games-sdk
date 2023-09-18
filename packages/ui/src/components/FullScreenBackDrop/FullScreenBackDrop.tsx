@@ -17,7 +17,6 @@ const Overlay = styled.div({
   WebkitTapHighlightColor: 'transparent',
   overscrollBehavior: 'contain',
   zIndex: 999,
-  overflow: 'hidden',
 });
 
 const Content = styled.div(({ theme }) => ({

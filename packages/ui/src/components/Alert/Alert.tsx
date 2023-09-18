@@ -27,7 +27,13 @@ const Container = styled.div<{ visible: boolean; skin?: AlertProps['skin'] }>(
       width: '100%',
     },
   },
-  ({ skin }) => skin === 'signUp' && { width: '322px', justifySelf: 'end' },
+  ({ skin }) =>
+    skin === 'signUp' && {
+      width: '322px',
+      justifySelf: 'end',
+      padding: '24px 20px 20px 20px',
+      whiteSpace: 'pre-wrap',
+    },
   ({ visible }) => ({
     visibility: visible ? 'visible' : 'hidden',
   }),
