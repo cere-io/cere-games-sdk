@@ -75,7 +75,7 @@ export const Preloader = ({ ready = false, onStartClick, navigateLeaderBoardWidg
     return;
   }, [name]);
 
-  if (address || (lsInfo && lsInfo.address && lsInfo.name === name)) {
+  if (lsInfo && lsInfo.name === name && (address || lsInfo.address)) {
     navigateLeaderBoardWidget?.();
   }
 

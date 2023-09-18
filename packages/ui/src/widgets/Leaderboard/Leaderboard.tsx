@@ -123,7 +123,7 @@ Be top-3 player and share a prize"
       {withTopWidget && (
         <TopWidget
           hasActiveTournament={Boolean(activeTournament)}
-          tournamentTitle={`${activeTournament ? activeTournament.title : 'Weekly'} tournament`}
+          tournamentTitle={`${activeTournament ? activeTournament.title : 'Weekly tournament'}`}
           tournamentSubtitle={activeTournament ? activeTournament.subtitle : 'TOP 20 WINS UNIQUE NFT'}
           amountOfDaysLeft={dayDifference ? dayDifference : 1}
           onPlayAgain={handlePlayAgain}

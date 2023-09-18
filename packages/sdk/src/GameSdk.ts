@@ -237,6 +237,7 @@ export class GamesSDK {
         modal.close();
         this.showLeaderboard({
           onPlayAgain: async (close?: () => void) => {
+            await onStart?.();
             close?.();
           },
         });
