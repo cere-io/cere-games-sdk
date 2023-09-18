@@ -76,10 +76,7 @@ export const Preloader = ({ ready = false, onStartClick, navigateLeaderBoardWidg
   }, [name]);
 
   if (lsInfo && lsInfo.name === name && (address || lsInfo.address)) {
-    const playAgain = localStorage.getItem('play');
-    if (!playAgain && playAgain !== 'true') {
-      navigateLeaderBoardWidget?.();
-    }
+    navigateLeaderBoardWidget?.();
   }
 
   return (

@@ -237,7 +237,9 @@ export class GamesSDK {
       navigateLeaderBoardWidget: () => {
         modal.close();
         this.showLeaderboard({
-          onPlayAgain: onPlayAgain,
+          onPlayAgain: async () => {
+            await onPlayAgain?.();
+          },
         });
       },
     });
