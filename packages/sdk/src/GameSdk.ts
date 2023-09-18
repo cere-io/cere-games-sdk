@@ -337,6 +337,7 @@ export class GamesSDK {
                 this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });
                 await this.payForSession();
                 await onPlayAgain?.(modal.close);
+                modal.close();
               } else {
                 const { open } = this.showInsertCoin();
                 open();
