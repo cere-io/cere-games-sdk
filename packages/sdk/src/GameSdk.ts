@@ -335,7 +335,7 @@ export class GamesSDK {
                 const { email } = await this.wallet.getUserInfo();
                 this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });
                 await this.payForSession();
-                await onPlayAgain?.(modal.close);
+                await onPlayAgain?.(() => localStorage.setItem('playAgain', 'true'));
               } else {
                 const { open } = this.showInsertCoin();
                 open();
