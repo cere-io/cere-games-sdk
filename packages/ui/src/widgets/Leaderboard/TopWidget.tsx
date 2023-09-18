@@ -25,7 +25,7 @@ const WidgetWrapper = styled(ModalWrapper)(({ tournament }: { tournament?: boole
   minHeight: 265,
   '@media (max-width: 600px)': {
     width: 'auto',
-    maxHeight: tournament ? 'auto' : 325,
+    maxHeight: tournament ? '100%' : 325,
   },
 }));
 
