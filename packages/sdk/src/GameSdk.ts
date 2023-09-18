@@ -29,6 +29,7 @@ type ShowLeaderboardOptions = {
 
 type ShowPreloaderOptions = {
   onStart?: () => AsyncResult;
+  onPlayAgain?: () => AsyncResult;
 };
 
 type ConnectWalletOptions = Pick<EarnScreenOptions, 'onConnect' | 'onComplete'>;
@@ -220,7 +221,7 @@ export class GamesSDK {
     this.sessionEvents.push({ timestamp: Date.now(), ...event });
   }
 
-  showPreloader({ onStart }: ShowPreloaderOptions = {}) {
+  showPreloader({ onStart, onPlayAgain }: ShowPreloaderOptions = {}) {
     const preloader = document.createElement('cere-preloader');
     const { open, ...modal } = UI.createModal(preloader);
 
@@ -236,9 +237,7 @@ export class GamesSDK {
       navigateLeaderBoardWidget: () => {
         modal.close();
         this.showLeaderboard({
-          onPlayAgain: async () => {
-            await onStart?.();
-          },
+          onPlayAgain: onPlayAgain,
         });
       },
     });
