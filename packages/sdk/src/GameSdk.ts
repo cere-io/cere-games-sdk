@@ -305,12 +305,25 @@ export class GamesSDK {
   }
 
   showInsertCoin() {
-    const insertCoin = document.createElement('cere-insert-coin');
-    const { open } = UI.createModal(insertCoin, { hasClose: false });
-    insertCoin.update({
-      tryMoreUrl: () => window.open(GAME_PORTAL_URL.prod),
-      topUpBalance: () => this.wallet.showWallet('topup'),
-    });
+    const { open } = UI.createModal(
+      async () => {
+        const insertCoin = document.createElement('cere-insert-coin');
+        let data;
+        try {
+          data = await this.api.getLeaderboard();
+        } catch (e) {
+          this.reporting.error(e);
+        }
+
+        insertCoin.update({
+          data: data,
+          topUpBalance: () => this.wallet.showWallet('topup'),
+        });
+        return insertCoin;
+      },
+      { hasClose: false },
+    );
+
     return {
       open,
     };
