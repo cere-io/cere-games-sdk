@@ -1,0 +1,176 @@
+[
+  {
+    "level": "WARNING",
+    "message": "https://static.hotjar.com/c/hotjar-3525968.js?sv=7 2:6887 \"Hotjar not launching due to suspicious userAgent:\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/116.0.5845.110 Safari/537.36\"",
+    "source": "console-api",
+    "timestamp": 1695121332974
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.53b264d6.js 1:65107 \"Popup (Outgoing)\" \"context.fff6ae4705a2360d16964a276b11ecbd\" Object",
+    "source": "console-api",
+    "timestamp": 1695121333560
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/ 45:20 \" *** Game Loaded ***\"",
+    "source": "console-api",
+    "timestamp": 1695121333581
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1695121289439 0:443506 \"MarketJSGameCenter settings not defined in game settings\"",
+    "source": "console-api",
+    "timestamp": 1695121333583
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1695121289439 0:258672 \"Plug in Storage Manager\"",
+    "source": "console-api",
+    "timestamp": 1695121333583
+  },
+  {
+    "level": "WARNING",
+    "message": "http://host.docker.internal:4567/examples/metaverse-dash-run/game.js?v=1695121289439 0 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu",
+    "source": "other",
+    "timestamp": 1695121333588
+  },
+  {
+    "level": "WARNING",
+    "message": "https://web-sdk.smartlook.com/es6/init.155fbbf6eb953d4d4f25.js 1:2138 \"[🎥 Smartlook] Smartlook is stopped. Automation framework is detected.\"",
+    "source": "console-api",
+    "timestamp": 1695121333899
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.53b264d6.js 1:65107 \"Popup (Outgoing)\" \"network.fff6ae4705a2360d16964a276b11ecbd\" Object",
+    "source": "console-api",
+    "timestamp": 1695121334428
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.53b264d6.js 1:65107 \"Popup (Outgoing)\" \"activity.fff6ae4705a2360d16964a276b11ecbd\" Object",
+    "source": "console-api",
+    "timestamp": 1695121334430
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.53b264d6.js 1:65107 \"Popup (Outgoing)\" \"context.fff6ae4705a2360d16964a276b11ecbd\" Object",
+    "source": "console-api",
+    "timestamp": 1695121334431
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.53b264d6.js 1:65107 \"Popup (Outgoing)\" \"account.fff6ae4705a2360d16964a276b11ecbd\" Object",
+    "source": "console-api",
+    "timestamp": 1695121334438
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.15fb7d1a.chunk.js 0:1993 \"Wallet (Outgoing)\" Object",
+    "source": "console-api",
+    "timestamp": 1695121334455
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1695121289439 1:334103 \"setupWeb3 running\"",
+    "source": "console-api",
+    "timestamp": 1695121334554
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1695121289439 1:336650 \"Torus - injected provider\"",
+    "source": "console-api",
+    "timestamp": 1695121334554
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.53b264d6.js 1:65227 \"Popup (Incoming)\" \"context.fff6ae4705a2360d16964a276b11ecbd\" Object",
+    "source": "console-api",
+    "timestamp": 1695121334585
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.53b264d6.js 1:65107 \"Popup (Outgoing)\" \"context.fff6ae4705a2360d16964a276b11ecbd\" Object",
+    "source": "console-api",
+    "timestamp": 1695121334586
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.53b264d6.js 1:65227 \"Popup (Incoming)\" \"context.fff6ae4705a2360d16964a276b11ecbd\" Object",
+    "source": "console-api",
+    "timestamp": 1695121334751
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.15fb7d1a.chunk.js 0:1879 \"Wallet (Incoming)\" Object",
+    "source": "console-api",
+    "timestamp": 1695121334766
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.53b264d6.js 1:65107 \"Popup (Outgoing)\" \"context.fff6ae4705a2360d16964a276b11ecbd\" Object",
+    "source": "console-api",
+    "timestamp": 1695121334773
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.15fb7d1a.chunk.js 0:1993 \"Wallet (Outgoing)\" Object",
+    "source": "console-api",
+    "timestamp": 1695121334775
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/main.53b264d6.js 1:65227 \"Popup (Incoming)\" \"context.fff6ae4705a2360d16964a276b11ecbd\" Object",
+    "source": "console-api",
+    "timestamp": 1695121334810
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1695121289439 1:492220 \"Cere Games SDK: Resume host events\"",
+    "source": "console-api",
+    "timestamp": 1695121334812
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1695121289439 1:492150 \"Cere Games SDK: Suspend host events\"",
+    "source": "console-api",
+    "timestamp": 1695121334812
+  },
+  {
+    "level": "WARNING",
+    "message": "https://static.hotjar.com/c/hotjar-2133914.js?sv=7 2:6887 \"Hotjar not launching due to suspicious userAgent:\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/116.0.5845.110 Safari/537.36\"",
+    "source": "console-api",
+    "timestamp": 1695121334884
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.15fb7d1a.chunk.js 0:4588 \"RPC (Request)\" Object",
+    "source": "console-api",
+    "timestamp": 1695121335134
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.15fb7d1a.chunk.js 0:4625 \"RPC (Response)\" Object",
+    "source": "console-api",
+    "timestamp": 1695121335134
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.15fb7d1a.chunk.js 0:4588 \"RPC (Request)\" Object",
+    "source": "console-api",
+    "timestamp": 1695121335136
+  },
+  {
+    "level": "DEBUG",
+    "message": "https://wallet.dev.cere.io/static/js/EmbedWalletRouter.15fb7d1a.chunk.js 0:4625 \"RPC (Response)\" Object",
+    "source": "console-api",
+    "timestamp": 1695121335136
+  },
+  {
+    "level": "INFO",
+    "message": "http://host.docker.internal:4567/sdk/latest/bundle.umd.js?v=1695121289439 1:313717 \"initialized state\"",
+    "source": "console-api",
+    "timestamp": 1695121335429
+  }
+]
