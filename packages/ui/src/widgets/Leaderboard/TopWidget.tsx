@@ -5,8 +5,6 @@ import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button } f
 import { useConfigContext, useGameInfo, useWalletContext } from '../../hooks';
 import { RepeatIcon, TwitterIcon } from '../../icons';
 
-const DISCORD_URL = '';
-
 type TopWidgetProps = {
   amountOfDaysLeft?: number;
   onPlayAgain: () => void;
@@ -219,10 +217,6 @@ export const TopWidget = ({
     window.open(gamePortalUrl, '_blank')?.focus();
   }, [gamePortalUrl]);
 
-  const handleOpenDiscord = useCallback(() => {
-    window.open(DISCORD_URL, '_blank')?.focus();
-  }, []);
-
   const handleShareClick = useCallback(async () => {
     await onTweet?.(score as number);
     const tweetBody = `text=Do you think you can beat my ${gameInfo.name} high-score?%0a%0a${address}%0a%0aMy score: ${score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer`;
@@ -303,8 +297,8 @@ export const TopWidget = ({
                 Share
               </TweetButton>
             </Row>
-            <GamePortalButton tournament={hasActiveTournament} onClick={handleOpenDiscord}>
-              Learn more on Discord →
+            <GamePortalButton tournament={hasActiveTournament} onClick={handleOpenGamePortal}>
+              Go to Cere game portal →
             </GamePortalButton>
           </>
         )}

@@ -41,10 +41,6 @@ const Title = styled(Typography)({
   marginBottom: '24px !important',
 });
 
-const StyledTypography = styled(Typography)({
-  whiteSpace: 'pre-line',
-});
-
 const StartButton = styled(Button)(
   {
     marginTop: 'auto',
@@ -82,8 +78,6 @@ export const Preloader = ({ ready = false, onStartClick, navigateLeaderBoardWidg
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="center">
       <ImageBlock loading={loading}>
-        {/*{preloader.url && <ProgressiveImg src={`${cdnUrl}/assets/default-preloader.png`} alt="Preloader image" />}*/}
-        {/*  TODO remove after review */}
         <ProgressiveImg src={preloader.url || `${cdnUrl}/assets/default-preloader.png`} alt="Preloader image" />
       </ImageBlock>
       {!loading && (

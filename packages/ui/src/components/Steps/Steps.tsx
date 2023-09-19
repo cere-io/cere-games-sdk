@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { useMediaQuery } from '../../hooks';
+import { useGameInfo, useMediaQuery } from '../../hooks';
 import { Stack, Typography } from '../../components';
 import { ArrowRightIcon } from '../../icons';
 
@@ -42,23 +42,24 @@ interface StepsProps {
   text: string;
 }
 
-const mockData: StepsProps[] = [
-  {
-    number: '01',
-    text: 'Play Metaverse Dash Run',
-  },
-  {
-    number: '02',
-    text: 'Create a Cere wallet',
-  },
-  {
-    number: '03',
-    text: 'Claim your $CERE tokens',
-  },
-];
-
 export const Steps = (): JSX.Element => {
   const isMobile = useMediaQuery('(max-width: 600px)');
+  const { name } = useGameInfo();
+
+  const mockData: StepsProps[] = [
+    {
+      number: '01',
+      text: name || 'Play Metaverse Dash Run',
+    },
+    {
+      number: '02',
+      text: 'Create a Cere wallet',
+    },
+    {
+      number: '03',
+      text: 'Claim your $CERE tokens',
+    },
+  ];
 
   return (
     <Container direction="row" margin={[0, 0, 4, 0]} align="start">
