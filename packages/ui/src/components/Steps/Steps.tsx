@@ -46,8 +46,6 @@ export const Steps = (): JSX.Element => {
   const isMobile = useMediaQuery('(max-width: 600px)');
   const { name } = useGameInfo();
 
-  console.log(name, 'name');
-
   const mockData: StepsProps[] = [
     {
       number: '01',
