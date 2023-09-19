@@ -49,15 +49,15 @@ export const Steps = (): JSX.Element => {
   const mockData: StepsProps[] = [
     {
       number: '01',
-      text: name || 'Play Metaverse Dash Run',
+      text: `Play ${name}` || 'Play Metaverse Dash Run',
     },
     {
       number: '02',
-      text: 'Create a Cere wallet',
+      text: 'Create your account',
     },
     {
       number: '03',
-      text: 'Claim your $CERE tokens',
+      text: 'Be top-3 and get a prize',
     },
   ];
 
