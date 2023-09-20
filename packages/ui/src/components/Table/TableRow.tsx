@@ -7,23 +7,25 @@ import { Stack } from '../Stack';
 export type TableRowProps = {
   header?: boolean;
   columns: ReactNode[];
+  activeAddress?: boolean;
 };
 
 const Column = styled.div({
   display: 'flex',
 });
 
-const Row = styled(Stack)(({ theme }) => ({
+const Row = styled(Stack)<{ activeAddress?: boolean }>(({ theme, activeAddress }) => ({
   height: 44,
   padding: theme.spacing(0, 2),
+  filter: activeAddress ? 'none' : 'blur(5px)',
 }));
 
-export const TableRow = ({ columns, header = false }: TableRowProps) => {
+export const TableRow = ({ columns, header = false, activeAddress }: TableRowProps) => {
   const isMobile = useMediaQuery('(max-width: 440px)');
   const columnRole: AriaRole = header ? 'columnheader' : 'cell';
 
   return (
-    <Row role="row" direction="row" align="center">
+    <Row role="row" activeAddress={activeAddress} direction="row" align="center">
       <Column role={columnRole} style={{ width: 90 }}>
         {columns[0]}
       </Column>
