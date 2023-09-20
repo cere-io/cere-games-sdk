@@ -89,14 +89,13 @@ export const Table = ({ data, activeAddress, hasTournament }: TableProps) => {
         <TableDataRow
           hasReward={activeRow.rank <= (hasTournament ? MAX_RANK_WITH_GIFT_WITH_TOURNAMENT : MAX_RANK_WITH_GIFT)}
           active
-          activeAddress={activeAddress}
           shouldChangeStyle={shouldChangeStyle}
           data={activeRow}
         />
       )}
       {rows.map((row) => (
         <TableDataRow
-          activeAddress={activeAddress}
+          active={Boolean(activeAddress)}
           key={row.address}
           data={row}
           hasReward={row.rank <= (hasTournament ? MAX_RANK_WITH_GIFT_WITH_TOURNAMENT : MAX_RANK_WITH_GIFT)}

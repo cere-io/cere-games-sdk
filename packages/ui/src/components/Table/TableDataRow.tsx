@@ -61,7 +61,7 @@ const EmptySpace = styled.div({
 
 const rankColors: RankProps['rankColor'][] = ['gold', 'silver', 'bronze'];
 
-export const TableDataRow = ({ data, active, hasReward, shouldChangeStyle, activeAddress }: TableDataRowProps) => {
+export const TableDataRow = ({ data, active, hasReward, shouldChangeStyle }: TableDataRowProps) => {
   const isMobile = useMediaQuery('(max-width: 600px)');
 
   const rewardTsx = useMemo(() => {
@@ -74,7 +74,7 @@ export const TableDataRow = ({ data, active, hasReward, shouldChangeStyle, activ
   return (
     <Wrapper active={active} shouldChangeStyle={shouldChangeStyle} role="row" aria-selected={active}>
       <TableRow
-        activeAddress={Boolean(activeAddress)}
+        activeAddress={Boolean(active)}
         columns={[
           <Rank rankColor={rankColors[data.rank - 1]}>{data.rank}</Rank>,
           <Typography variant="body2">
