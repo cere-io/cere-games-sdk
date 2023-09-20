@@ -4,6 +4,25 @@
 
 -
 
+### v0.6.3
+
+- [[Feature](https://www.notion.so/Release-September-18-604831108ac940268f4c52bad61a9421?pvs=21)] Added new logic for
+  already authorized user
+- [[Feature](https://www.notion.so/Release-September-18-604831108ac940268f4c52bad61a9421?pvs=21)] Added sticky user row
+  on leaderboard
+- [[Feature](https://www.notion.so/Release-September-18-604831108ac940268f4c52bad61a9421?pvs=21)] Added new leaderboard
+  layout when active tournament exists
+- [[Bug](https://www.notion.so/Release-September-18-604831108ac940268f4c52bad61a9421?pvs=21)] Subtitle is not changing
+  for tournament Leaderboard
+- [[Bug](https://www.notion.so/Release-September-18-604831108ac940268f4c52bad61a9421?pvs=21)] New leaderboard bugs
+- [[Bug](https://www.notion.so/Release-September-18-604831108ac940268f4c52bad61a9421?pvs=21)] After first clicking on
+  “Play again” button user doesn’t start a new game
+- [[Bug](https://www.notion.so/Release-September-18-604831108ac940268f4c52bad61a9421?pvs=21)] If user has already
+  authorized in one game, then when opening another game user sees Leaderboard
+- [[Bug](https://www.notion.so/Release-September-18-604831108ac940268f4c52bad61a9421?pvs=21)] Don’t display word
+  “tournament” in tournament title on Leaderboard if tournament is created in Freeport
+- [[Bug](https://www.notion.so/Release-September-18-604831108ac940268f4c52bad61a9421?pvs=21)] Leaderboard doesn’t scroll
+
 ### v0.6.2
 
 - Clear Cere Wallet cache when Games SDK version increased

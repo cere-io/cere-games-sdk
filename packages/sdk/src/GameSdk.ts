@@ -21,7 +21,7 @@ import { Reporting, ReportingOptions } from './Reporting';
 type AsyncResult<T = void> = Promise<T> | T;
 
 type ShowLeaderboardOptions = {
-  onPlayAgain?: () => AsyncResult;
+  onPlayAgain?: (close: () => void) => AsyncResult;
   onBeforeLoad?: () => AsyncResult;
   withTopWidget?: boolean;
   onShowSignUp?: () => void;
@@ -29,6 +29,7 @@ type ShowLeaderboardOptions = {
 
 type ShowPreloaderOptions = {
   onStart?: () => AsyncResult;
+  onPlayAgain?: () => AsyncResult;
 };
 
 type ConnectWalletOptions = Pick<EarnScreenOptions, 'onConnect' | 'onComplete'>;
@@ -220,7 +221,7 @@ export class GamesSDK {
     this.sessionEvents.push({ timestamp: Date.now(), ...event });
   }
 
-  showPreloader({ onStart }: ShowPreloaderOptions = {}) {
+  showPreloader({ onStart, onPlayAgain }: ShowPreloaderOptions = {}) {
     const preloader = document.createElement('cere-preloader');
     const { open, ...modal } = UI.createModal(preloader);
 
@@ -232,6 +233,15 @@ export class GamesSDK {
         this.analytics.trackEvent(ANALYTICS_EVENTS.startGame);
         await onStart?.();
         modal.close();
+      },
+      navigateLeaderBoardWidget: () => {
+        modal.close();
+        this.showLeaderboard({
+          onPlayAgain: async (close?: () => void) => {
+            await onPlayAgain?.();
+            close?.();
+          },
+        });
       },
     });
 
@@ -252,6 +262,13 @@ export class GamesSDK {
       ]);
 
       this.ui.wallet.isNewUser = isNewUser;
+      if (this.ui.wallet.address) {
+        const gameInfo = {
+          address: this.ui.wallet.address,
+          name: this.ui.gameInfo.name,
+        };
+        localStorage.setItem(`game-info-${this.ui.gameInfo.name}`, JSON.stringify(gameInfo));
+      }
 
       await onConnect?.(accounts, isNewUser);
 
@@ -288,12 +305,25 @@ export class GamesSDK {
   }
 
   showInsertCoin() {
-    const insertCoin = document.createElement('cere-insert-coin');
-    const { open } = UI.createModal(insertCoin, { hasClose: false });
-    insertCoin.update({
-      tryMoreUrl: () => window.open(GAME_PORTAL_URL.prod),
-      topUpBalance: () => this.wallet.showWallet('topup'),
-    });
+    const { open } = UI.createModal(
+      async () => {
+        const insertCoin = document.createElement('cere-insert-coin');
+        let data;
+        try {
+          data = await this.api.getLeaderboard();
+        } catch (e) {
+          this.reporting.error(e);
+        }
+
+        insertCoin.update({
+          data: data,
+          topUpBalance: () => this.wallet.showWallet('topup'),
+        });
+        return insertCoin;
+      },
+      { hasClose: false },
+    );
+
     return {
       open,
     };
@@ -319,7 +349,8 @@ export class GamesSDK {
                 const { email } = await this.wallet.getUserInfo();
                 this.analytics.trackEvent(ANALYTICS_EVENTS.clickPlayAgain, { userEmail: email });
                 await this.payForSession();
-                await onPlayAgain?.();
+                await onPlayAgain?.(modal.close);
+                modal.close();
               } else {
                 const { open } = this.showInsertCoin();
                 open();

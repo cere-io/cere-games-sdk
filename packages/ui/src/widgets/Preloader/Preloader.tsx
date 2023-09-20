@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
+import { useMemo } from 'react';
 
 import { Button, ProgressiveImg, Stack, Typography, Steps } from '../../components';
-import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery } from '../../hooks';
+import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery, useWalletContext } from '../../hooks';
 
 const ImageBlock = styled.div(
   {
@@ -40,10 +41,6 @@ const Title = styled(Typography)({
   marginBottom: '24px !important',
 });
 
-const StyledTypography = styled(Typography)({
-  whiteSpace: 'pre-line',
-});
-
 const StartButton = styled(Button)(
   {
     marginTop: 'auto',
@@ -57,19 +54,30 @@ const StartButton = styled(Button)(
 export type PreloaderProps = {
   ready?: boolean;
   onStartClick?: () => Promise<void> | void;
+  navigateLeaderBoardWidget?: () => void;
 };
 
-export const Preloader = ({ ready = false, onStartClick }: PreloaderProps) => {
+export const Preloader = ({ ready = false, onStartClick, navigateLeaderBoardWidget }: PreloaderProps) => {
   const isLandscape = useMediaQuery('(max-height: 440px)');
   const [handleStartClick, isBusy] = useAsyncCallback(onStartClick);
-  const { loading, preloader } = useGameInfo();
+  const { loading, preloader, name } = useGameInfo();
   const { sdkUrl: cdnUrl } = useConfigContext();
+  const { address } = useWalletContext();
+  const lsInfo = useMemo(() => {
+    const info = localStorage.getItem(`game-info-${name}`);
+    if (info) {
+      return JSON.parse(info);
+    }
+    return;
+  }, [name]);
+
+  if (lsInfo && lsInfo.name === name && (address || lsInfo.address)) {
+    navigateLeaderBoardWidget?.();
+  }
 
   return (
     <Widget spacing={isLandscape ? 2 : 4} align="center">
       <ImageBlock loading={loading}>
-        {/*{preloader.url && <ProgressiveImg src={`${cdnUrl}/assets/default-preloader.png`} alt="Preloader image" />}*/}
-        {/*  TODO remove after review */}
         <ProgressiveImg src={preloader.url || `${cdnUrl}/assets/default-preloader.png`} alt="Preloader image" />
       </ImageBlock>
       {!loading && (
