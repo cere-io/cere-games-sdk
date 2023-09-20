@@ -3,10 +3,10 @@ import { TableRow, TableRowProps } from './TableRow';
 
 export type TableHeaderProps = TableRowProps;
 
-export const TableHeader = ({ columns }: TableHeaderProps) => (
+export const TableHeader = ({ columns, active }: TableHeaderProps) => (
   <TableRow
     header
-    activeAddress
+    active
     columns={columns.map((column, index) => (
       <Typography color="secondary" variant="caption">
         {column}

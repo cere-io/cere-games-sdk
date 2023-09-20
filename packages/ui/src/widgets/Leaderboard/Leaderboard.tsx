@@ -85,14 +85,7 @@ const Alerts = styled.div({
   gridRowGap: '5px',
 });
 
-export const Leaderboard = ({
-  data,
-  activeTournament,
-  onPlayAgain,
-  onTweet,
-  withTopWidget,
-  onShowSignUp,
-}: LeaderboardProps) => {
+export const Leaderboard = ({ data, activeTournament, onPlayAgain, onTweet, withTopWidget }: LeaderboardProps) => {
   const { sessionPrice, sdkUrl: cdnUrl } = useConfigContext();
   const { address, balance = 0 } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);

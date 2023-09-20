@@ -84,18 +84,19 @@ export const Table = ({ data, activeAddress, hasTournament }: TableProps) => {
   };
   return (
     <Container ref={containerRef} role="table">
-      <TableHeader columns={['Rank', 'Player', 'Prize', 'Score']} />
+      <TableHeader columns={['Rank', 'Player', 'Prize', 'Score']} active={Boolean(activeAddress)} />
       {activeRow && (
         <TableDataRow
           hasReward={activeRow.rank <= (hasTournament ? MAX_RANK_WITH_GIFT_WITH_TOURNAMENT : MAX_RANK_WITH_GIFT)}
           active
+          activeAddress
           shouldChangeStyle={shouldChangeStyle}
           data={activeRow}
         />
       )}
       {rows.map((row) => (
         <TableDataRow
-          active={Boolean(activeAddress)}
+          activeAddress={Boolean(activeAddress)}
           key={row.address}
           data={row}
           hasReward={row.rank <= (hasTournament ? MAX_RANK_WITH_GIFT_WITH_TOURNAMENT : MAX_RANK_WITH_GIFT)}
