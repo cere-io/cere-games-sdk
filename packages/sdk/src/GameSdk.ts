@@ -430,8 +430,7 @@ export class GamesSDK {
     }
 
     await new Promise<void>((resolve) =>
-      this.earnScreen({
-        score,
+      this.showLeaderboard({
         onConnect: save,
         onComplete: resolve,
       }),

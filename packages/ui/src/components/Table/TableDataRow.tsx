@@ -19,6 +19,7 @@ export type TableDataRowProps = {
   data: Data;
   hasReward?: boolean;
   shouldChangeStyle?: boolean;
+  activeAddress?: boolean;
 };
 
 const Wrapper = styled.div<Pick<TableDataRowProps, 'active' | 'shouldChangeStyle'>>(
@@ -60,7 +61,7 @@ const EmptySpace = styled.div({
 
 const rankColors: RankProps['rankColor'][] = ['gold', 'silver', 'bronze'];
 
-export const TableDataRow = ({ data, active, hasReward, shouldChangeStyle }: TableDataRowProps) => {
+export const TableDataRow = ({ data, active, hasReward, shouldChangeStyle, activeAddress }: TableDataRowProps) => {
   const isMobile = useMediaQuery('(max-width: 600px)');
 
   const rewardTsx = useMemo(() => {
@@ -73,6 +74,7 @@ export const TableDataRow = ({ data, active, hasReward, shouldChangeStyle }: Tab
   return (
     <Wrapper active={active} shouldChangeStyle={shouldChangeStyle} role="row" aria-selected={active}>
       <TableRow
+        active={Boolean(activeAddress)}
         columns={[
           <Rank rankColor={rankColors[data.rank - 1]}>{data.rank}</Rank>,
           <Typography variant="body2">
