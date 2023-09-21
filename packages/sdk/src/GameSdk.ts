@@ -238,6 +238,7 @@ export class GamesSDK {
         modal.close();
         this.showLeaderboard({
           onPlayAgain: async (close?: () => void) => {
+            this.startSession(); // Create and store game session in background
             await onPlayAgain?.();
             close?.();
           },
