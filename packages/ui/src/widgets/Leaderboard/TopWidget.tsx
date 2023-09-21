@@ -227,59 +227,35 @@ export const TopWidget = ({
     <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]} tournament={hasActiveTournament}>
       <RadialGradientBackGround />
       <Content>
-        {!hasActiveTournament ? (
-          <>
-            <DaysLeft>{amountOfDaysLeft} day left</DaysLeft>
-            <NFTImage src={`${cdnUrl}/assets/nft.png`} />
-            <Text>
-              <Typography>{tournamentTitle}</Typography>
-              <UniqueNFT>{tournamentSubtitle}</UniqueNFT>
-            </Text>
-            <Row columns={'146px 99px'} columnGap={8}>
-              <PlayAgain onClick={onPlayAgain}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <RepeatIcon />
-                  <PlayAgainText>Play Again</PlayAgainText>
-                </div>
-              </PlayAgain>
-              <TweetButton
-                disabled={!isReady || !address}
-                icon={<TwitterIcon color="#FFF" />}
-                variant="outlined"
-                onClick={handleShareClick}
-              >
-                Share
-              </TweetButton>
-            </Row>
-            <GamePortalButton onClick={handleOpenGamePortal}>Go to Cere game portal →</GamePortalButton>
-          </>
-        ) : (
-          <>
-            <UniqueNFT align="center" tournament>
-              {tournamentSubtitle}
-            </UniqueNFT>
-            <Typography align="center">{tournamentTitle}</Typography>
-            <DaysLeft tournament={hasActiveTournament}>{amountOfDaysLeft} day left</DaysLeft>
-            <RewardsRow>
-              <RewardColumn>
-                <span>1st prize</span>
-                <img src={`${cdnUrl}/assets/first-place-reward.svg`} alt="First place reward" />
-                <span>USDT</span>
-              </RewardColumn>
-              <RewardColumn>
-                <span>2nd prize</span>
-                <img src={`${cdnUrl}/assets/second-place-reward.svg`} alt="Second place reward" />
-                <span>USDT</span>
-              </RewardColumn>
-              <RewardColumn>
-                <span>3rd prize</span>
-                <img src={`${cdnUrl}/assets/third-place-reward.svg`} alt="Third place reward" />
-                <span>USDT</span>
-              </RewardColumn>
-            </RewardsRow>
+        <>
+          <UniqueNFT align="center" tournament>
+            {tournamentSubtitle}
+          </UniqueNFT>
+          <Typography align="center">{tournamentTitle}</Typography>
+          <DaysLeft tournament={hasActiveTournament}>{amountOfDaysLeft} day left</DaysLeft>
+          <RewardsRow>
+            <RewardColumn>
+              <span>1st prize</span>
+              <img src={`${cdnUrl}/assets/first-place-reward.svg`} alt="First place reward" />
+              <span>USDT</span>
+            </RewardColumn>
+            <RewardColumn>
+              <span>2nd prize</span>
+              <img src={`${cdnUrl}/assets/second-place-reward.svg`} alt="Second place reward" />
+              <span>USDT</span>
+            </RewardColumn>
+            <RewardColumn>
+              <span>3rd prize</span>
+              <img src={`${cdnUrl}/assets/third-place-reward.svg`} alt="Third place reward" />
+              <span>USDT</span>
+            </RewardColumn>
+          </RewardsRow>
+          {rank && (
             <Typography align="center">
               Your rank <Rank>{rank}</Rank>
             </Typography>
+          )}
+          {address && (
             <Row columns={'130px 130px'} columnGap={6} justify="center">
               <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -297,11 +273,11 @@ export const TopWidget = ({
                 Share
               </TweetButton>
             </Row>
-            <GamePortalButton tournament={hasActiveTournament} onClick={handleOpenGamePortal}>
-              Go to Cere game portal →
-            </GamePortalButton>
-          </>
-        )}
+          )}
+          <GamePortalButton tournament={hasActiveTournament} onClick={handleOpenGamePortal}>
+            Go to Cere game portal →
+          </GamePortalButton>
+        </>
       </Content>
     </WidgetWrapper>
   );

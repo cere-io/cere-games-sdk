@@ -56,11 +56,11 @@ const Address = styled.div({
 });
 
 const SignUpButton = styled.button({
-  width: 229,
+  width: 141,
   height: 52,
   borderRadius: 4,
   border: '1px solid #F32758',
-  background: '#1B0B2A',
+  background: 'rgba(243, 39, 88, 1)',
   padding: '15px 16px',
   fontFamily: 'Lexend',
   fontSize: 15,
@@ -85,14 +85,7 @@ const Alerts = styled.div({
   gridRowGap: '5px',
 });
 
-export const Leaderboard = ({
-  data,
-  activeTournament,
-  onPlayAgain,
-  onTweet,
-  withTopWidget,
-  onShowSignUp,
-}: LeaderboardProps) => {
+export const Leaderboard = ({ data, activeTournament, onPlayAgain, onTweet, withTopWidget }: LeaderboardProps) => {
   const { sessionPrice, sdkUrl: cdnUrl } = useConfigContext();
   const { address, balance = 0 } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
@@ -136,19 +129,17 @@ Be top-3 player and share a prize"
       <ModalWrapper layer={`${cdnUrl}/assets/layer.svg`}>
         <RadialGradientBackGround />
         <Content>
-          {playerData ? (
+          {playerData && (
             <Stack direction="row" spacing="space-between">
               <LeaderboardTitle>leaderboard</LeaderboardTitle>
               <Address>
                 <Truncate text={playerData.address} maxLength={8} />
               </Address>
             </Stack>
-          ) : (
-            <LeaderboardTitle>leaderboard</LeaderboardTitle>
           )}
           {!playerData && (
             <Stack align="center">
-              <SignUpButton onClick={onShowSignUp}>Sign Up to unlock score</SignUpButton>
+              <SignUpButton onClick={handlePlayAgain}>Sign Up Now!</SignUpButton>
             </Stack>
           )}
           <Table data={data} activeAddress={address} hasTournament={Boolean(activeTournament)} />
