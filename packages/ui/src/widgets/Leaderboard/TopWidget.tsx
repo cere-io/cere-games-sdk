@@ -35,7 +35,7 @@ const DaysLeft = styled.div(({ tournament }: { tournament?: boolean }) => ({
   fontWeight: 600,
   fontSize: 14,
   textAlign: 'center',
-  position: 'absolute',
+  display: 'none',
   left: '-30px',
   top: '-80px',
   minWidth: 168,
@@ -44,6 +44,7 @@ const DaysLeft = styled.div(({ tournament }: { tournament?: boolean }) => ({
     ? {
         padding: '7px 15px',
         position: 'relative',
+        display: 'block',
         top: '0',
         left: '0',
         width: '151px',
