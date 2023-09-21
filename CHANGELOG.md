@@ -4,6 +4,11 @@
 
 -
 
+### v0.6.4
+
+- [[Bug]](https://www.notion.so/cere/Score-doesn-t-update-on-Leaderboard-156d4e51984c4c9c9eabca01e7c8955e?pvs=4) Fix
+  user session on playAgain
+
 ### v0.6.3
 
 - [[Feature](https://www.notion.so/Release-September-18-604831108ac940268f4c52bad61a9421?pvs=21)] Added new logic for
