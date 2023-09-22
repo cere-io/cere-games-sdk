@@ -258,7 +258,7 @@ export const TopWidget = ({
             </Typography>
           )}
           {address && (
-            <Row columns={'130px 130px'} columnGap={6} justify="center">
+            <Row columns={'auto 130px'} columnGap={6} justify="center">
               <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <RepeatIcon />
