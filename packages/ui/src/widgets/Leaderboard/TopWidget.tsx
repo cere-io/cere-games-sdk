@@ -126,7 +126,7 @@ const TweetButton = styled(Button)(({ tournament }: { tournament?: boolean }) =>
 }));
 
 const GamePortalButton = styled(Typography)(({ tournament }: { tournament?: boolean }) => ({
-  cursor: 'pointer',
+  cursor: 'pointer', // TODO remove via ternary
   width: 'auto',
   textAlign: 'center',
   marginTop: '11px',
@@ -252,9 +252,11 @@ export const TopWidget = ({
               <img src={`${cdnUrl}/assets/third-place-reward.svg`} alt="Third place reward" />
             </RewardColumn>
           </RewardsRow>
-          <Typography align="center">
-            Your rank <Rank>{rank}</Rank>
-          </Typography>
+          {address && (
+            <Typography align="center">
+              Your rank <Rank>{rank}</Rank>
+            </Typography>
+          )}
           {address && (
             <Row columns={'130px 130px'} columnGap={6} justify="center">
               <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament}>
