@@ -213,21 +213,15 @@ export const TopWidget = ({
   score,
   rank,
 }: TopWidgetProps): JSX.Element => {
-  const { sdkUrl: cdnUrl, gamePortalUrl } = useConfigContext();
+  const { sdkUrl: cdnUrl } = useConfigContext();
   const { address, isReady } = useWalletContext();
   const gameInfo = useGameInfo();
-
-  const handleOpenGamePortal = useCallback(() => {
-    window.open(gamePortalUrl, '_blank')?.focus();
-  }, [gamePortalUrl]);
 
   const handleShareClick = useCallback(async () => {
     await onTweet?.(score as number);
     const tweetBody = `text=Do you think you can beat my ${gameInfo.name} high-score?%0a%0a${address}%0a%0aMy score: ${score}%0a%0aPlay it straight from your browser here: ${window.location.href}%0a%0a&hashtags=metaversadash,web3,gamer`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
   }, [address, gameInfo.name, onTweet, score]);
-
-  console.log(rank, 'rank');
 
   return (
     <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]} tournament={hasActiveTournament}>
