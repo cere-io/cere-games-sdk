@@ -31,6 +31,7 @@ export const ANALYTICS_EVENTS = {
   startGame: 'CLICK_START_GAME',
   claimTokens: 'CLAIM_TOKENS_BTN',
   confirmTransaction: 'CONFIRM_TRANSACTION_BTN',
+  signUp: 'SIGNUP_LEADERBOARD',
 };
 
 /**
