@@ -125,7 +125,8 @@ const TweetButton = styled(Button)(({ tournament }: { tournament?: boolean }) =>
 
 const GamePortalButton = styled(Typography)(({ tournament }: { tournament?: boolean }) => ({
   cursor: 'pointer',
-  width: 'fit-content',
+  width: 'auto',
+  textAlign: 'center',
   marginTop: '11px',
   color: 'rgba(255, 255, 255, 0.6)',
   fontSize: '12px',
@@ -135,6 +136,9 @@ const GamePortalButton = styled(Typography)(({ tournament }: { tournament?: bool
   ...(tournament && {
     margin: '12px auto 0 auto',
   }),
+  '@media (max-width: 400px)': {
+    marginTop: 9,
+  },
 }));
 
 const NFTImage = styled.img({
@@ -209,13 +213,9 @@ export const TopWidget = ({
   score,
   rank,
 }: TopWidgetProps): JSX.Element => {
-  const { sdkUrl: cdnUrl, gamePortalUrl } = useConfigContext();
+  const { sdkUrl: cdnUrl } = useConfigContext();
   const { address, isReady } = useWalletContext();
   const gameInfo = useGameInfo();
-
-  const handleOpenGamePortal = useCallback(() => {
-    window.open(gamePortalUrl, '_blank')?.focus();
-  }, [gamePortalUrl]);
 
   const handleShareClick = useCallback(async () => {
     await onTweet?.(score as number);
@@ -237,24 +237,19 @@ export const TopWidget = ({
             <RewardColumn>
               <span>1st prize</span>
               <img src={`${cdnUrl}/assets/first-place-reward.svg`} alt="First place reward" />
-              <span>USDT</span>
             </RewardColumn>
             <RewardColumn>
               <span>2nd prize</span>
               <img src={`${cdnUrl}/assets/second-place-reward.svg`} alt="Second place reward" />
-              <span>USDT</span>
             </RewardColumn>
             <RewardColumn>
               <span>3rd prize</span>
               <img src={`${cdnUrl}/assets/third-place-reward.svg`} alt="Third place reward" />
-              <span>USDT</span>
             </RewardColumn>
           </RewardsRow>
-          {rank && (
-            <Typography align="center">
-              Your rank <Rank>{rank}</Rank>
-            </Typography>
-          )}
+          <Typography align="center">
+            Your rank <Rank>{rank}</Rank>
+          </Typography>
           {address && (
             <Row columns={'130px 130px'} columnGap={6} justify="center">
               <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament}>
@@ -274,8 +269,8 @@ export const TopWidget = ({
               </TweetButton>
             </Row>
           )}
-          <GamePortalButton tournament={hasActiveTournament} onClick={handleOpenGamePortal}>
-            Go to Cere game portal →
+          <GamePortalButton tournament={hasActiveTournament}>
+            Was your score good enough to win? Sign up to see
           </GamePortalButton>
         </>
       </Content>
