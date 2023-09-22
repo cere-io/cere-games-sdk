@@ -34,6 +34,7 @@ const DaysLeft = styled.div(({ tournament }: { tournament?: boolean }) => ({
   borderRadius: 8,
   fontWeight: 600,
   fontSize: 14,
+  display: 'none',
   textAlign: 'center',
   position: 'absolute',
   left: '-30px',
@@ -44,6 +45,7 @@ const DaysLeft = styled.div(({ tournament }: { tournament?: boolean }) => ({
     ? {
         padding: '7px 15px',
         position: 'relative',
+        display: 'block',
         top: '0',
         left: '0',
         width: '151px',
@@ -124,7 +126,7 @@ const TweetButton = styled(Button)(({ tournament }: { tournament?: boolean }) =>
 }));
 
 const GamePortalButton = styled(Typography)(({ tournament }: { tournament?: boolean }) => ({
-  cursor: 'pointer',
+  cursor: 'pointer', // TODO remove via ternary
   width: 'auto',
   textAlign: 'center',
   marginTop: '11px',
@@ -132,7 +134,6 @@ const GamePortalButton = styled(Typography)(({ tournament }: { tournament?: bool
   fontSize: '12px',
   lineHeight: '15px',
   fontWeight: 400,
-  textDecoration: 'underline',
   ...(tournament && {
     margin: '12px auto 0 auto',
   }),
@@ -213,9 +214,13 @@ export const TopWidget = ({
   score,
   rank,
 }: TopWidgetProps): JSX.Element => {
-  const { sdkUrl: cdnUrl } = useConfigContext();
+  const { sdkUrl: cdnUrl, gamePortalUrl } = useConfigContext();
   const { address, isReady } = useWalletContext();
   const gameInfo = useGameInfo();
+
+  const handleOpenGamePortal = useCallback(() => {
+    window.open(gamePortalUrl, '_blank')?.focus();
+  }, [gamePortalUrl]);
 
   const handleShareClick = useCallback(async () => {
     await onTweet?.(score as number);
@@ -247,9 +252,11 @@ export const TopWidget = ({
               <img src={`${cdnUrl}/assets/third-place-reward.svg`} alt="Third place reward" />
             </RewardColumn>
           </RewardsRow>
-          <Typography align="center">
-            Your rank <Rank>{rank}</Rank>
-          </Typography>
+          {address && (
+            <Typography align="center">
+              Your rank <Rank>{rank}</Rank>
+            </Typography>
+          )}
           {address && (
             <Row columns={'130px 130px'} columnGap={6} justify="center">
               <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament}>
@@ -269,8 +276,8 @@ export const TopWidget = ({
               </TweetButton>
             </Row>
           )}
-          <GamePortalButton tournament={hasActiveTournament}>
-            Was your score good enough to win? Sign up to see
+          <GamePortalButton tournament={hasActiveTournament} onClick={address ? handleOpenGamePortal : () => null}>
+            {address ? 'Go to Cere game portal →' : 'Was your score good enough to win? Sign up to see'}
           </GamePortalButton>
         </>
       </Content>
