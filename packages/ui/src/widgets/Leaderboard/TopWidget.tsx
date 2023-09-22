@@ -36,18 +36,12 @@ const DaysLeft = styled.div(({ tournament }: { tournament?: boolean }) => ({
   fontSize: 14,
   display: 'none',
   textAlign: 'center',
-  position: 'absolute',
-  left: '-30px',
-  top: '-80px',
   minWidth: 168,
   textTransform: 'uppercase',
   ...(tournament
     ? {
         padding: '7px 15px',
-        position: 'relative',
         display: 'block',
-        top: '0',
-        left: '0',
         width: '151px',
         margin: '4px auto 14px auto',
       }
@@ -258,7 +252,7 @@ export const TopWidget = ({
             </Typography>
           )}
           {address && (
-            <Row columns={'130px 130px'} columnGap={6} justify="center">
+            <Row columns={'auto 130px'} columnGap={6} justify="center">
               <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <RepeatIcon />
