@@ -56,7 +56,7 @@ const Address = styled.div({
 });
 
 const SignUpButton = styled.button({
-  width: 141,
+  width: 'auto',
   height: 52,
   borderRadius: 4,
   border: '1px solid #F32758',
@@ -139,7 +139,7 @@ Be top-3 player and share a prize"
           )}
           {!playerData && (
             <Stack align="center">
-              <SignUpButton onClick={handlePlayAgain}>Sign Up Now!</SignUpButton>
+              <SignUpButton onClick={handlePlayAgain}>Sign up & reveal your rank</SignUpButton>
             </Stack>
           )}
           <Table data={data} activeAddress={address} hasTournament={Boolean(activeTournament)} />
