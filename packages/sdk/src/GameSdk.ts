@@ -359,6 +359,7 @@ export class GamesSDK {
               }
             } else {
               modal.close();
+              this.analytics.trackEvent(ANALYTICS_EVENTS.signUp);
               await this.connectWallet({ onComplete, onConnect });
             }
           },
