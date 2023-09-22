@@ -19,8 +19,8 @@ export const SDK_VERSION = pkg.version;
 /**
  * Game session price in $CERE tokens
  */
-export const GAME_SESSION_PRICE = 0.5;
-export const NEW_WALLET_REWARD = 5;
+export const GAME_SESSION_PRICE = 1;
+export const NEW_WALLET_REWARD = 10;
 
 export const GMT_ID = 'GTM-MSJX7Q6';
 export const ANALYTICS_EVENTS = {
