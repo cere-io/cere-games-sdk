@@ -275,7 +275,7 @@ export const TopWidget = ({
               </TweetButton>
             </Row>
           )}
-          <GamePortalButton tournament={hasActiveTournament} onClick={handleOpenGamePortal}>
+          <GamePortalButton tournament={hasActiveTournament}>
             Was your score good enough to win? Sign up to see
           </GamePortalButton>
         </>
