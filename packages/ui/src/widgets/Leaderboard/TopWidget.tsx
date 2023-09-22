@@ -23,7 +23,7 @@ const WidgetWrapper = styled(ModalWrapper)(({ tournament }: { tournament?: boole
   minHeight: 265,
   '@media (max-width: 600px)': {
     width: 'auto',
-    maxHeight: tournament ? '100%' : 'auto',
+    maxHeight: tournament ? '100%' : 325,
   },
 }));
 
@@ -36,18 +36,12 @@ const DaysLeft = styled.div(({ tournament }: { tournament?: boolean }) => ({
   fontSize: 14,
   display: 'none',
   textAlign: 'center',
-  position: 'absolute',
-  left: '-30px',
-  top: '-80px',
   minWidth: 168,
   textTransform: 'uppercase',
   ...(tournament
     ? {
         padding: '7px 15px',
-        position: 'relative',
         display: 'block',
-        top: '0',
-        left: '0',
         width: '151px',
         margin: '4px auto 14px auto',
       }
