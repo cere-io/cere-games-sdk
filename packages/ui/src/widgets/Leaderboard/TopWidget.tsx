@@ -34,18 +34,14 @@ const DaysLeft = styled.div(({ tournament }: { tournament?: boolean }) => ({
   borderRadius: 8,
   fontWeight: 600,
   fontSize: 14,
+  display: 'none',
   textAlign: 'center',
-  position: 'absolute',
-  left: '-30px',
-  top: '-80px',
   minWidth: 168,
   textTransform: 'uppercase',
   ...(tournament
     ? {
         padding: '7px 15px',
-        position: 'relative',
-        top: '0',
-        left: '0',
+        display: 'block',
         width: '151px',
         margin: '4px auto 14px auto',
       }
@@ -124,17 +120,20 @@ const TweetButton = styled(Button)(({ tournament }: { tournament?: boolean }) =>
 }));
 
 const GamePortalButton = styled(Typography)(({ tournament }: { tournament?: boolean }) => ({
-  cursor: 'pointer',
-  width: 'fit-content',
+  cursor: 'pointer', // TODO remove via ternary
+  width: 'auto',
+  textAlign: 'center',
   marginTop: '11px',
   color: 'rgba(255, 255, 255, 0.6)',
   fontSize: '12px',
   lineHeight: '15px',
   fontWeight: 400,
-  textDecoration: 'underline',
   ...(tournament && {
     margin: '12px auto 0 auto',
   }),
+  '@media (max-width: 400px)': {
+    marginTop: 9,
+  },
 }));
 
 const NFTImage = styled.img({
@@ -237,26 +236,23 @@ export const TopWidget = ({
             <RewardColumn>
               <span>1st prize</span>
               <img src={`${cdnUrl}/assets/first-place-reward.svg`} alt="First place reward" />
-              <span>USDT</span>
             </RewardColumn>
             <RewardColumn>
               <span>2nd prize</span>
               <img src={`${cdnUrl}/assets/second-place-reward.svg`} alt="Second place reward" />
-              <span>USDT</span>
             </RewardColumn>
             <RewardColumn>
               <span>3rd prize</span>
               <img src={`${cdnUrl}/assets/third-place-reward.svg`} alt="Third place reward" />
-              <span>USDT</span>
             </RewardColumn>
           </RewardsRow>
-          {rank && (
+          {address && (
             <Typography align="center">
               Your rank <Rank>{rank}</Rank>
             </Typography>
           )}
           {address && (
-            <Row columns={'130px 130px'} columnGap={6} justify="center">
+            <Row columns={'auto 130px'} columnGap={6} justify="center">
               <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <RepeatIcon />
@@ -274,8 +270,8 @@ export const TopWidget = ({
               </TweetButton>
             </Row>
           )}
-          <GamePortalButton tournament={hasActiveTournament} onClick={handleOpenGamePortal}>
-            Go to Cere game portal →
+          <GamePortalButton tournament={hasActiveTournament} onClick={address ? handleOpenGamePortal : () => null}>
+            {address ? 'Go to Cere game portal →' : 'Was your score good enough to win? Sign up to see'}
           </GamePortalButton>
         </>
       </Content>
