@@ -15,6 +15,7 @@ type TopWidgetProps = {
   onTweet?: (score: number) => Promise<{ tweetBody: string }>;
   score?: number;
   rank?: number;
+  currentScore?: number;
 };
 
 const WidgetWrapper = styled(ModalWrapper)(({ tournament }: { tournament?: boolean }) => ({
@@ -207,6 +208,7 @@ export const TopWidget = ({
   onTweet,
   score,
   rank,
+  currentScore,
 }: TopWidgetProps): JSX.Element => {
   const { sdkUrl: cdnUrl, gamePortalUrl } = useConfigContext();
   const { address, isReady } = useWalletContext();
@@ -246,6 +248,11 @@ export const TopWidget = ({
               <img src={`${cdnUrl}/assets/third-place-reward.svg`} alt="Third place reward" />
             </RewardColumn>
           </RewardsRow>
+          {!address && currentScore && (
+            <Typography align="center">
+              Your score <Rank>{currentScore}</Rank>
+            </Typography>
+          )}
           {address && (
             <Typography align="center">
               Your rank <Rank>{rank}</Rank>

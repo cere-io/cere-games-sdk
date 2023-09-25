@@ -25,6 +25,7 @@ type ShowLeaderboardOptions = {
   onBeforeLoad?: () => AsyncResult;
   withTopWidget?: boolean;
   onShowSignUp?: () => void;
+  currentScore?: number;
 } & ConnectWalletOptions;
 
 type ShowPreloaderOptions = {
@@ -330,7 +331,14 @@ export class GamesSDK {
     };
   }
 
-  showLeaderboard({ onPlayAgain, onBeforeLoad, withTopWidget, onComplete, onConnect }: ShowLeaderboardOptions = {}) {
+  showLeaderboard({
+    onPlayAgain,
+    onBeforeLoad,
+    withTopWidget,
+    onComplete,
+    onConnect,
+    currentScore,
+  }: ShowLeaderboardOptions = {}) {
     const { open, ...modal } = UI.createFullscreenModal(
       async () => {
         const leaderboard = document.createElement('cere-leaderboard');
@@ -369,6 +377,7 @@ export class GamesSDK {
             modal.close();
           },
           serviceUrl: GAME_SERVICE_URL[this.env],
+          currentScore: currentScore,
         });
 
         return leaderboard;
@@ -435,6 +444,7 @@ export class GamesSDK {
       this.showLeaderboard({
         onConnect: save,
         onComplete: resolve,
+        currentScore: score,
       }),
     );
   }
