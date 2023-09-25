@@ -31,6 +31,7 @@ export type LeaderboardProps = Pick<TableProps, 'data'> & {
   serviceUrl: string;
   withTopWidget?: boolean;
   onShowSignUp?: () => void;
+  currentScore?: number;
 };
 
 const LeaderboardTitle = styled(Typography)({
@@ -85,7 +86,14 @@ const Alerts = styled.div({
   gridRowGap: '5px',
 });
 
-export const Leaderboard = ({ data, activeTournament, onPlayAgain, onTweet, withTopWidget }: LeaderboardProps) => {
+export const Leaderboard = ({
+  data,
+  activeTournament,
+  onPlayAgain,
+  onTweet,
+  withTopWidget,
+  currentScore,
+}: LeaderboardProps) => {
   const { sessionPrice, sdkUrl: cdnUrl } = useConfigContext();
   const { address, balance = 0 } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
@@ -123,6 +131,7 @@ Be top-3 player and share a prize"
           onTweet={onTweet}
           disabled={balance < sessionPrice}
           score={playerData?.score}
+          currentScore={currentScore}
           rank={playerData?.rank}
         />
       )}
