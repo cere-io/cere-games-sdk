@@ -4,6 +4,14 @@
 
 -
 
+### v0.6.6
+
+- Added current score to leaderboard
+
+### v0.6.5
+
+- Fix some layout issues
+
 ### v0.6.4
 
 - [[Bug]](https://www.notion.so/cere/Score-doesn-t-update-on-Leaderboard-156d4e51984c4c9c9eabca01e7c8955e?pvs=4) Fix

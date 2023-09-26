@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Candy Jam</title>
+  <meta http-equiv='Content-type' content='text/html; charset=utf-8' />
+  <!--
+  Use the meta tag below for landscape games on mobile because the apple browser has a weird identification of screen size giving some pixels for a small white bar
+  -->
+  <meta
+    name='viewport'
+    content='initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no, minimal-ui'
+  />
+  <!--
+  Use the meta tag below for portrait if there are problems in portrait
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+  -->
+  <meta name='apple-mobile-web-app-capable' content='yes' />
+
+  <script type='text/javascript' src='../../sdk/latest/bundle.umd.js?v=%BUILD_TIME%'></script>
+  <script type='text/javascript'>
+    const logoUrl = new URL('media/graphics/promo/icons/128x128.png', window.location.href);
+
+    gamesSDK = new CereGamesSDK.GamesSDK({
+      gameId: 'candy-jam',
+      gameInfo: {
+        name: 'Candy Jam',
+        tags: ['candyjam', 'web3', 'gamer'],
+        url: window.location.href,
+        logoUrl: logoUrl.toString(),
+      },
+
+      reporting: {
+        sentryPublicKey: '39761830833c4c90a67a6336ac897582',
+      },
+
+      onWalletDisconnect: () => window.location.reload(),
+      onReady: (sdk) => {
+        gamesSdkPreloader = sdk.showPreloader({
+          onStart() {
+            this.gameControl = ig.game.getEntitiesByType(EntityIngameGameControl)[0];
+            this.gameControl.state = this.gameControl.states.GAMESTART;
+          },
+          onPlayAgain: () => {
+            this.gameControl = ig.game.getEntitiesByType(EntityIngameGameControl)[0];
+            this.gameControl.state = this.gameControl.states.END;
+            this.gameControl.state = this.gameControl.states.GAMEOVER;
+            this.gameControl.state = this.gameControl.states.MENU;
+            this.gameControl.state = this.gameControl.states.GAMESTART;
+          },
+        });
+      },
+    });
+
+    gamesSDK.init();
+  </script>
+
+  <link rel='stylesheet' type='text/css' href='game.css?v=1695292367' />
+  <link rel='shortcut icon' href='media/graphics/misc/favicon.ico' />
+  <script type='text/javascript' src='game.js?v=1695292367'></script>
+  <!-- APICode -->
+
+  <script type='text/javascript'>
+    function _loadGame() {
+      console.log(' *** Game Loaded ***');
+
+      gamesSdkPreloader.setReady();
+    }
+
+    function _startGame() {
+      console.log(' *** Game Started ***');
+
+      gamesSdkPreloader.setReady();
+    }
+
+    function _endGame(level, score) {
+      console.log(' *** Game Ended ***');
+      console.log(' *** Level: ' + level + ' ***');
+      console.log(' *** Score: ' + score + ' ***');
+
+      gamesSDK.saveScore(+score).then(() => {
+        gamesSDK.showLeaderboard({
+          onPlayAgain: () => {
+            console.log('@@@@@@@@CLICKED@@@@@@@');
+            // this.gameControl = ig.game.getEntitiesByType(EntityIngameGameControl)[0];
+            // this.gameControl.state = this.gameControl.states.END;
+            // this.gameControl.state = this.gameControl.states.MENU;
+            // this.gameControl.state = this.gameControl.states.GAMESTART;
+          },
+        });
+      });
+    }
+  </script>
+</head>
+
+<body onload='setTimeout(window.scrollTo(0,1),1);'>
+<div id='ajaxbar'>
+  <div id='game'>
+    <canvas id='canvas'></canvas>
+  </div>
+  <div id='orientate'><img src='media/graphics/orientate/landscape.png' /></div>
+  <div id='play' class='play' onclick=''></div>
+</div>
+</body>
+</html>

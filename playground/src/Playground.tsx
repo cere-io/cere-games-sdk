@@ -62,6 +62,7 @@ export const Playground = () => {
 
     const modal = sdk.showLeaderboard({
       onPlayAgain: () => modal.close(),
+      currentScore: 25,
     });
   }, [sdk]);
 
