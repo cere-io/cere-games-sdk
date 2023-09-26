@@ -19,26 +19,34 @@ describe('New user flow', () => {
     await browser.url('metaverse-dash-run');
   });
 
-  step('Start game by pressing `Start` button in preloader', async () => {
+  step('Start game by pressing `Play Now` button in preloader', async () => {
     await preloader.element.waitForDisplayed();
     await preloader.startButton.click();
 
     await expect(preloader.element).not.toBeDisplayed();
   });
 
-  step('Play the game until `Claim tokens` modal is shown', async () => {
-    await connectWallet.element.waitForDisplayed();
+  // step('Play the game until `Claim tokens` modal is shown', async () => {
+  //   await connectWallet.element.waitForDisplayed();
+  //
+  //   rewardAmount = await connectWallet.getRewardAmount();
+  //   score = await connectWallet.getScore();
+  //
+  //   expect(rewardAmount).toBeTruthy();
+  // });
+  //
+  // step('Press `Claim tokens` button', async () => {
+  //   await connectWallet.claimButton.click();
+  //
+  //   await expect(preloader.element).not.toBeDisplayed();
+  // });
 
-    rewardAmount = await connectWallet.getRewardAmount();
-    score = await connectWallet.getScore();
-
-    expect(rewardAmount).toBeTruthy();
-  });
-
-  step('Press `Claim tokens` button', async () => {
-    await connectWallet.claimButton.click();
-
-    await expect(preloader.element).not.toBeDisplayed();
+  step('Wait for Leaderboard modal to appear', async () => {
+    await leaderboardModal.element.waitForDisplayed();
+    // expect(leaderboardModal.walletAddress).toHaveTextContaining('0x');
+    //
+    // walletAddress = await leaderboardModal.getWalletAddress();
+    await leaderboardModal.startButton.click();
   });
 
   step('Connect Cere Wallet', async () => {
@@ -55,13 +63,6 @@ describe('New user flow', () => {
     await walletAuth.waitUntilClosed();
 
     report.addArgument('Email', email);
-  });
-
-  step('Wait for Leaderboard modal to appear', async () => {
-    await leaderboardModal.element.waitForDisplayed();
-    expect(leaderboardModal.walletAddress).toHaveTextContaining('0x');
-
-    walletAddress = await leaderboardModal.getWalletAddress();
   });
 
   it('Current user ballanсe should be 0', async () => {

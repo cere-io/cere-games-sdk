@@ -6,6 +6,6 @@ export class PreloaderModal extends Widget {
   }
 
   get startButton() {
-    return this.shadowRoot.findByRole$('button', { name: /start/i });
+    return this.shadowRoot.findByRole$('button', { name: /Play Now/i });
   }
 }

@@ -26,7 +26,11 @@ export class LeaderboardModal extends Widget {
   }
 
   get playAgainButton() {
-    return this.shadowRoot.findByRole$('button', { name: /play again/i });
+    return this.shadowRoot.findByRole$('button', { name: /sign up & reveal your score/i });
+  }
+
+  get startButton() {
+    return this.shadowRoot.findByRole$('button', { name: /Sign up & reveal your rank/ });
   }
 
   async getRewardNotificationAmount() {

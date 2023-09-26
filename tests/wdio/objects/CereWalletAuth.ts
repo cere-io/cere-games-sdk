@@ -2,7 +2,7 @@ import { CereWallet } from './CereWallet';
 
 export class CereWalletAuth extends CereWallet {
   get newWalletButton() {
-    return browser.findByRole$('button', { name: 'Create a new wallet' });
+    return browser.findByRole$('button', { name: 'Continue' });
   }
 
   get emailInput() {

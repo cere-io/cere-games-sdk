@@ -232,7 +232,9 @@ export const TopWidget = ({
           <UniqueNFT align="center" tournament>
             {tournamentSubtitle}
           </UniqueNFT>
-          <Typography align="center">{tournamentTitle}</Typography>
+          <Typography aria-label="wallet address" align="center">
+            {tournamentTitle}
+          </Typography>
           <DaysLeft tournament={hasActiveTournament}>{amountOfDaysLeft} day left</DaysLeft>
           <RewardsRow>
             <RewardColumn>
