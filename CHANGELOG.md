@@ -4,6 +4,10 @@
 
 -
 
+### v0.6.7
+
+- Small layout fix
+
 ### v0.6.6
 
 - Added current score to leaderboard
