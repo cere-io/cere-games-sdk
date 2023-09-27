@@ -4,6 +4,10 @@
 
 -
 
+### v0.6.8
+
+- Text update
+
 ### v0.6.7
 
 - Small layout fix
