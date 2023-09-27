@@ -115,8 +115,8 @@ export const Leaderboard = ({
       <Alerts>
         <Alert
           title="CONGRATULATIONS"
-          subtitle="You have successfully sign up!
-Be top-3 player and share a prize"
+          subtitle="You have successfully signed up!
+Be a top 3 player to win a prize"
           skin="signUp"
         />
         <Alert title="Achivement unlocked" subtitle="NeWBIE way" skin="wallet" />
