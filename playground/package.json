@@ -1,12 +1,12 @@
 {
   "name": "@cere-games-sdk/playground",
-  "version": "0.6.6",
+  "version": "0.6.7",
   "private": true,
   "scripts": {
     "start": "craco start"
   },
   "dependencies": {
-    "@cere/games-sdk": "0.6.6",
+    "@cere/games-sdk": "0.6.7",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/lab": "^5.0.0-alpha.119",
