@@ -225,7 +225,7 @@ export const TopWidget = ({
       gameInfo.name
     } high-score?%0a%0a${address}%0a%0aMy score: ${score}%0a%0aPlay it straight from your browser here: ${
       window.location.origin + window.location.pathname + '?umt=ref_tweet'
-    }%0a%0a&hashtags=metaversadash,web3,gamer`;
+    }%0a%0a&hashtags=${gameInfo.tags ? gameInfo.tags.join(',') : 'web3,gamer'}`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
   }, [address, gameInfo.name, onTweet, score]);
 
