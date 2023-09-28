@@ -4,6 +4,18 @@
 
 -
 
+### v0.6.9
+
+- Fix gameUrl in tweet
+
+### v0.6.8
+
+- Text update
+
+### v0.6.7
+
+- Small layout fix
+
 ### v0.6.6
 
 - Added current score to leaderboard
