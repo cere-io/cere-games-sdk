@@ -4,6 +4,10 @@
 
 -
 
+### v0.6.9
+
+- Fix gameUrl in tweet
+
 ### v0.6.8
 
 - Text update
