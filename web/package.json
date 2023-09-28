@@ -1,13 +1,13 @@
 {
   "name": "@cere-games-sdk/web",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "private": true,
   "scripts": {
     "start": "webpack serve --open /examples",
     "bundle": "webpack"
   },
   "dependencies": {
-    "@cere/games-sdk": "0.7.0"
+    "@cere/games-sdk": "0.7.1"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",

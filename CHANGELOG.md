@@ -4,6 +4,10 @@
 
 -
 
+### v0.7.1
+
+- Added utm parameter in tweet
+
 ### v0.7.0
 
 - Fix tweet tags
