@@ -24,7 +24,7 @@ const WidgetWrapper = styled(ModalWrapper)(({ tournament }: { tournament?: boole
   minHeight: 265,
   '@media (max-width: 600px)': {
     width: 'auto',
-    maxHeight: tournament ? '100%' : 325,
+    maxHeight: tournament ? '100%' : 'auto',
   },
 }));
 
@@ -236,9 +236,7 @@ export const TopWidget = ({
           <UniqueNFT align="center" tournament>
             {tournamentSubtitle}
           </UniqueNFT>
-          <Typography aria-label="wallet address" align="center">
-            {tournamentTitle}
-          </Typography>
+          <Typography align="center">{tournamentTitle}</Typography>
           <DaysLeft tournament={hasActiveTournament}>{amountOfDaysLeft} day left</DaysLeft>
           <RewardsRow>
             <RewardColumn>
@@ -255,7 +253,7 @@ export const TopWidget = ({
             </RewardColumn>
           </RewardsRow>
           {!address && currentScore && (
-            <Typography align="center" role="heading">
+            <Typography align="center">
               Your score <Rank>{currentScore}</Rank>
             </Typography>
           )}
@@ -266,7 +264,7 @@ export const TopWidget = ({
           )}
           {address && (
             <Row columns={'auto 130px'} columnGap={6} justify="center">
-              <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament} role="button">
+              <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <RepeatIcon />
                   <PlayAgainText>Play Again</PlayAgainText>
