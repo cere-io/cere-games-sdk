@@ -27,26 +27,10 @@ describe('New user flow', () => {
     await expect(preloader.element).not.toBeDisplayed();
   });
 
-  // step('Play the game until `Claim tokens` modal is shown', async () => {
-  //   await connectWallet.element.waitForDisplayed();
-  //
-  //   rewardAmount = await connectWallet.getRewardAmount();
-  //   score = await connectWallet.getScore();
-  //
-  //   expect(rewardAmount).toBeTruthy();
-  // });
-
-  // step('Press `Claim tokens` button', async () => {
-  //   await connectWallet.claimButton.click();
-  //
-  //   await expect(preloader.element).not.toBeDisplayed();
-  // });
-
   step('Wait for Leaderboard modal to appear', async () => {
     await leaderboardModal.element.waitForDisplayed();
-    expect(leaderboardModal.walletAddress).toHaveTextContaining('0x');
-    //
-    // walletAddress = await leaderboardModal.getWalletAddress();
+
+    expect(leaderboardModal.score).toBeGreaterThan(0);
     await leaderboardModal.signUpButton.click();
   });
 
@@ -73,6 +57,12 @@ describe('New user flow', () => {
     // await leaderboardModal.playAgainButton.click();
   });
 
+  it('Reward notification should eventually appear', async () => {
+    const title = await leaderboardModal.getRewardNotificationTitle();
+
+    await expect(title).toEqual(alertTitle);
+  });
+
   // it('Current user ballanсe should be 0', async () => {
   // walletBalance = await leaderboardModal.getBalance();
 
@@ -90,12 +80,6 @@ describe('New user flow', () => {
   //   address: walletAddress,
   // });
   // });
-
-  it('Reward notification should eventually appear', async () => {
-    const title = await leaderboardModal.getRewardNotificationTitle();
-
-    await expect(title).toEqual(alertTitle);
-  });
 
   // it('Current user ballanse should equal to reward amount', async () => {
   //   walletBalance = await leaderboardModal.getBalance();

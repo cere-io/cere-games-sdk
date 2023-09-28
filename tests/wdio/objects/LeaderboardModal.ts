@@ -34,7 +34,7 @@ export class LeaderboardModal extends Widget {
   }
 
   get score() {
-    return this.shadowRoot.findByRole('heading', {
+    return this.shadowRoot.findByRole$('heading', {
       name: / Your score (\d)/,
     });
   }
@@ -53,13 +53,6 @@ export class LeaderboardModal extends Widget {
 
     return element.getAttribute('title');
   }
-
-  // async getBalance() {
-  //   const text = await this.tokensBalance.getText();
-  //   const [match, amount] = text.match(/tokens balance: (\d+\.\d{2})/i) || [];
-  //
-  //   return match ? +amount : undefined;
-  // }
 
   async getGamePlayPrice() {
     const text = await this.tokensToPlay.getText();
