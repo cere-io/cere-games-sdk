@@ -17,32 +17,35 @@ export class LeaderboardModal extends Widget {
     return this.table.findByRole$('row', { selected: true });
   }
 
-  get tokensBalance() {
-    return this.shadowRoot.findByText$(/tokens balance: (\d+\.\d{2})/i);
-  }
+  // get tokensBalance() {
+  //   return this.shadowRoot.findByText$(/tokens balance: (\d+\.\d{2})/i);
+  // }
 
   get tokensToPlay() {
     return this.shadowRoot.findByText$(/(\d+) tokens to play/i);
   }
 
   get playAgainButton() {
-    return this.shadowRoot.findByRole$('button', { name: /sign up & reveal your score/i });
+    return this.shadowRoot.findByRole$('button', { name: /Play Again/ });
   }
 
-  get startButton() {
+  get signUpButton() {
     return this.shadowRoot.findByRole$('button', { name: /Sign up & reveal your rank/ });
   }
 
-  async getRewardNotificationAmount() {
+  get score() {
+    return this.shadowRoot.findByRole('heading', {
+      name: / Your score (\d)/,
+    });
+  }
+
+  async getRewardNotificationTitle() {
     const notification = await browser.waitUntil(() => this.shadowRoot.queryByRole('alert'), {
       timeout: 30000,
       timeoutMsg: 'The reward notification did not appear in time',
     });
 
-    const text = await notification.getText();
-    const [match, amount] = text.match(/(\d+) \$CERE tokens/i) || [];
-
-    return match ? +amount : undefined;
+    return await notification.getText();
   }
 
   async getWalletAddress() {
@@ -51,12 +54,12 @@ export class LeaderboardModal extends Widget {
     return element.getAttribute('title');
   }
 
-  async getBalance() {
-    const text = await this.tokensBalance.getText();
-    const [match, amount] = text.match(/tokens balance: (\d+\.\d{2})/i) || [];
-
-    return match ? +amount : undefined;
-  }
+  // async getBalance() {
+  //   const text = await this.tokensBalance.getText();
+  //   const [match, amount] = text.match(/tokens balance: (\d+\.\d{2})/i) || [];
+  //
+  //   return match ? +amount : undefined;
+  // }
 
   async getGamePlayPrice() {
     const text = await this.tokensToPlay.getText();

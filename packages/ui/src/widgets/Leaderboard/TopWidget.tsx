@@ -251,7 +251,7 @@ export const TopWidget = ({
             </RewardColumn>
           </RewardsRow>
           {!address && currentScore && (
-            <Typography align="center">
+            <Typography align="center" role="heading">
               Your score <Rank>{currentScore}</Rank>
             </Typography>
           )}
@@ -262,7 +262,7 @@ export const TopWidget = ({
           )}
           {address && (
             <Row columns={'auto 130px'} columnGap={6} justify="center">
-              <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament}>
+              <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament} role="button">
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <RepeatIcon />
                   <PlayAgainText>Play Again</PlayAgainText>

@@ -1,16 +1,12 @@
 import { CereWallet } from './CereWallet';
 
 export class CereWalletAuth extends CereWallet {
-  get newWalletButton() {
+  get continueButton() {
     return browser.findByRole$('button', { name: 'Continue' });
   }
 
   get emailInput() {
-    return browser.findByRole$('textbox', { name: 'Email' });
-  }
-
-  get signUpButton() {
-    return browser.findByRole$('button', { name: 'Sign Up' });
+    return browser.findByRole$('textbox', { name: '' }); //TODO should be "Email",
   }
 
   get verifyButton() {
