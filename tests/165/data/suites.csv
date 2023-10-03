@@ -1,0 +1,8 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Oct 03 08:55:20 GMT 2023","Tue Oct 03 08:55:22 GMT 2023","2265","","New user flow","","","","Open the game via direct link",""
+"passed","Tue Oct 03 08:55:22 GMT 2023","Tue Oct 03 08:55:25 GMT 2023","3120","","New user flow","","","","Start game by pressing `Play Now` button in preloader",""
+"skipped","Tue Oct 03 08:55:37 GMT 2023","Tue Oct 03 08:55:37 GMT 2023","1","","New user flow","","","","Connect Cere Wallet",""
+"skipped","Tue Oct 03 08:55:37 GMT 2023","Tue Oct 03 08:55:37 GMT 2023","7","","New user flow","","","","Current user should be highlighted in the leaderboard",""
+"skipped","Tue Oct 03 08:55:37 GMT 2023","Tue Oct 03 08:55:37 GMT 2023","1","","New user flow","","","","Wait for Leaderboard modal to appear",""
+"skipped","Tue Oct 03 08:55:37 GMT 2023","Tue Oct 03 08:55:37 GMT 2023","1","","New user flow","","","","Reward notification should eventually appear",""
+"skipped","Tue Oct 03 08:55:37 GMT 2023","Tue Oct 03 08:55:37 GMT 2023","1","","New user flow","","","","Press `Play again` button",""
