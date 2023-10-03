@@ -5,7 +5,7 @@ export class PreloaderModal extends Widget {
     return $('cere-modal cere-preloader');
   }
 
-  get startButton() {
-    return this.shadowRoot.findByRole$('button', { name: /start/i });
+  get playNowButton() {
+    return this.shadowRoot.findByRole$('button', { name: /Play Now/i });
   }
 }

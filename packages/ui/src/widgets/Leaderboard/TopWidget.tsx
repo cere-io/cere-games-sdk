@@ -236,7 +236,9 @@ export const TopWidget = ({
           <UniqueNFT align="center" tournament>
             {tournamentSubtitle}
           </UniqueNFT>
-          <Typography align="center">{tournamentTitle}</Typography>
+          <Typography aria-label="wallet address" align="center">
+            {tournamentTitle}
+          </Typography>
           <DaysLeft tournament={hasActiveTournament}>{amountOfDaysLeft} day left</DaysLeft>
           <RewardsRow>
             <RewardColumn>
@@ -254,17 +256,17 @@ export const TopWidget = ({
           </RewardsRow>
           {!address && currentScore && (
             <Typography align="center">
-              Your score <Rank>{currentScore}</Rank>
+              Your score <Rank role="score">{currentScore}</Rank>
             </Typography>
           )}
           {address && (
             <Typography align="center">
-              Your rank <Rank>{rank}</Rank>
+              Your rank <Rank role="rank">{rank}</Rank>
             </Typography>
           )}
           {address && (
             <Row columns={'auto 130px'} columnGap={6} justify="center">
-              <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament}>
+              <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament} role="button">
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <RepeatIcon />
                   <PlayAgainText>Play Again</PlayAgainText>

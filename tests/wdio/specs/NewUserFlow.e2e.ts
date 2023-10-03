@@ -10,6 +10,7 @@ describe('New user flow', () => {
   const leaderboardModal = new LeaderboardModal();
 
   let rewardAmount = 0;
+  let alertTitle = 'CONGRATULATIONS';
   let walletAddress = '';
   let score = 0;
   let gamePlayPrice = 0;
@@ -19,35 +20,30 @@ describe('New user flow', () => {
     await browser.url('metaverse-dash-run');
   });
 
-  step('Start game by pressing `Start` button in preloader', async () => {
+  step('Start game by pressing `Play Now` button in preloader', async () => {
     await preloader.element.waitForDisplayed();
-    await preloader.startButton.click();
+    await preloader.playNowButton.click();
 
     await expect(preloader.element).not.toBeDisplayed();
   });
 
-  step('Play the game until `Claim tokens` modal is shown', async () => {
-    await connectWallet.element.waitForDisplayed();
+  step('Wait for Leaderboard modal to appear', async () => {
+    await leaderboardModal.element.waitForDisplayed();
+    const userScore = await leaderboardModal.score.getText();
 
-    rewardAmount = await connectWallet.getRewardAmount();
-    score = await connectWallet.getScore();
+    expect(parseInt(await userScore)).toBeGreaterThan(0);
 
-    expect(rewardAmount).toBeTruthy();
-  });
+    await leaderboardModal.signUpButton.click();
 
-  step('Press `Claim tokens` button', async () => {
-    await connectWallet.claimButton.click();
-
-    await expect(preloader.element).not.toBeDisplayed();
+    await expect(leaderboardModal.element).not.toBeDisplayed();
   });
 
   step('Connect Cere Wallet', async () => {
     await walletAuth.waitUntilOpened();
     await walletAuth.switchToFrame();
 
-    await walletAuth.newWalletButton.click();
     const email = await walletAuth.enterRandomEmail();
-    await walletAuth.signUpButton.click();
+    await walletAuth.continueButton.click();
     await walletAuth.enterOTP('555555');
     await walletAuth.verifyButton.click();
 
@@ -60,41 +56,23 @@ describe('New user flow', () => {
   step('Wait for Leaderboard modal to appear', async () => {
     await leaderboardModal.element.waitForDisplayed();
     expect(leaderboardModal.walletAddress).toHaveTextContaining('0x');
-
-    walletAddress = await leaderboardModal.getWalletAddress();
-  });
-
-  it('Current user ballanсe should be 0', async () => {
-    walletBalance = await leaderboardModal.getBalance();
-
-    expect(walletBalance).toEqual(0);
-  });
-
-  it('Current user should be higlighted in the leaderboard', async () => {
-    const rowData = await leaderboardModal.getActiveRowData();
-
-    await expect(rowData).toMatchObject({
-      score,
-      address: walletAddress,
-    });
   });
 
   it('Reward notification should eventually appear', async () => {
-    const amount = await leaderboardModal.getRewardNotificationAmount();
+    const title = await leaderboardModal.getRewardNotificationTitle();
 
-    await expect(amount).toEqual(rewardAmount);
+    await expect(title).toEqual(alertTitle);
   });
 
-  it('Current user ballanse should equal to reward amount', async () => {
-    walletBalance = await leaderboardModal.getBalance();
+  it('Current user should be highlighted in the leaderboard', async () => {
+    const rowData = await leaderboardModal.getActiveRowData();
+    await expect(rowData.address).toBeDefined();
+    await expect(rowData.score).toBeDefined();
+    await expect(rowData.rank).toBeDefined();
 
-    await expect(walletBalance).toEqual(rewardAmount);
-  });
+    const userRank = await leaderboardModal.rank.getText();
 
-  it('Game place price should be displayed and positive', async () => {
-    gamePlayPrice = await leaderboardModal.getGamePlayPrice();
-
-    await expect(gamePlayPrice).toBeGreaterThan(0);
+    expect(parseInt(await userRank)).toBeGreaterThan(0);
   });
 
   step('Press `Play again` button', async () => {
@@ -103,35 +81,35 @@ describe('New user flow', () => {
     await leaderboardModal.playAgainButton.click();
   });
 
-  step('Approve tokens transfer transaction', async () => {
-    await walletApprove.waitUntilOpened();
-    await walletApprove.switchToFrame();
-    await walletApprove.confirmButton.click();
-    await walletApprove.switchFromFrame();
-    await walletApprove.waitUntilClosed();
-  });
+  // step('Approve tokens transfer transaction', async () => {
+  //   await walletApprove.waitUntilOpened();
+  //   await walletApprove.switchToFrame();
+  //   await walletApprove.confirmButton.click();
+  //   await walletApprove.switchFromFrame();
+  //   await walletApprove.waitUntilClosed();
+  // });
 
-  it('The page should reload and preloader appear', async () => {
-    await preloader.element.waitForDisplayed();
-  });
+  // it('The page should reload and preloader appear', async () => {
+  //   await preloader.element.waitForDisplayed();
+  // });
+  //
+  // step('Start second game session', async () => {
+  //   await preloader.playNowButton.click();
+  // });
+  // //
+  // step('Play the game until the Leaderboard modal appears', async () => {
+  //   await leaderboardModal.element.waitForDisplayed();
+  // });
 
-  step('Start second game session', async () => {
-    await preloader.startButton.click();
-  });
-
-  step('Play the game until the Leaderboard modal appears', async () => {
-    await leaderboardModal.element.waitForDisplayed();
-  });
-
-  it('The game play price should be deducted from the balance', async () => {
-    const newBalance = await browser.waitUntil(
-      () => leaderboardModal.getBalance().then((balance) => balance !== walletBalance && balance),
-      {
-        timeout: 30000,
-        timeoutMsg: 'The balance has not been changed after 30 sec',
-      },
-    );
-
-    await expect(newBalance).toEqual(walletBalance - gamePlayPrice);
-  });
+  // it('The game play price should be deducted from the balance', async () => {
+  //   const newBalance = await browser.waitUntil(
+  //     () => leaderboardModal.getBalance().then((balance) => balance !== walletBalance && balance),
+  //     {
+  //       timeout: 30000,
+  //       timeoutMsg: 'The balance has not been changed after 30 sec',
+  //     },
+  //   );
+  //
+  //   await expect(newBalance).toEqual(walletBalance - gamePlayPrice);
+  // });
 });

@@ -10,15 +10,15 @@ export class ConnectWalletModal extends Widget {
   }
 
   get score() {
-    return this.shadowRoot.findByRole$('heading', { name: /Your score: \d+/i });
+    return this.shadowRoot.queryByRole('score');
   }
 
-  async getScore() {
-    const text = await this.score.getText();
-    const [match, amount] = text.match(/(\d+)/i) || [];
-
-    return match ? +amount : undefined;
-  }
+  // async getScore() {
+  //   const text = await this.score.getText();
+  //   const [match, amount] = text.match(/(\d+)/i) || [];
+  //
+  //   return match ? +amount : undefined;
+  // }
 
   async getRewardAmount() {
     const text = await this.claimButton.getText();
