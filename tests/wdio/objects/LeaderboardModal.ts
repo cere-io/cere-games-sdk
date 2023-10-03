@@ -17,14 +17,6 @@ export class LeaderboardModal extends Widget {
     return this.table.findByRole$('row', { selected: true });
   }
 
-  // get tokensBalance() {
-  //   return this.shadowRoot.findByText$(/tokens balance: (\d+\.\d{2})/i);
-  // }
-
-  get tokensToPlay() {
-    return this.shadowRoot.findByText$(/(\d+) tokens to play/i);
-  }
-
   get playAgainButton() {
     return this.shadowRoot.findByRole$('button', { name: /Play Again/ });
   }
@@ -34,18 +26,20 @@ export class LeaderboardModal extends Widget {
   }
 
   get score() {
-    return this.shadowRoot.findByRole$('heading', {
-      name: / Your score (\d)/,
-    });
+    return this.shadowRoot.findByRole$('score');
+  }
+
+  get rank() {
+    return this.shadowRoot.findByRole$('rank');
   }
 
   async getRewardNotificationTitle() {
-    const notification = await browser.waitUntil(() => this.shadowRoot.queryByRole('alert'), {
+    const notification = await browser.waitUntil(() => this.shadowRoot.queryByRole('alertNotification'), {
       timeout: 30000,
       timeoutMsg: 'The reward notification did not appear in time',
     });
 
-    return await notification.getText();
+    return notification.getText();
   }
 
   async getWalletAddress() {
@@ -54,16 +48,8 @@ export class LeaderboardModal extends Widget {
     return element.getAttribute('title');
   }
 
-  async getGamePlayPrice() {
-    const text = await this.tokensToPlay.getText();
-    const [match, amount] = text.match(/(\d+) tokens to play/i) || [];
-
-    return match ? +amount : undefined;
-  }
-
   async getActiveRowData() {
     const [rank, player, , score] = await this.activeRow.getAllByRole$('cell');
-
     return {
       score: await score.getText().then(Number),
       rank: await rank.getText().then(Number),

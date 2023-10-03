@@ -138,7 +138,7 @@ export const Alert = ({ title, subtitle, skin }: AlertProps) => {
     <Container aria-describedby={descriptionId} visible={visible} skin={skin}>
       {skin !== 'signUp' && <StyledImage src={`${cdnUrl}/assets/alert.png`} />}
       <TextContainer>
-        <Title role="alert" id={descriptionId} variant="body2">
+        <Title role="alertNotification" id={descriptionId} variant="body2">
           {skin === 'signUp' && <AlertReward />}
           {title}
         </Title>

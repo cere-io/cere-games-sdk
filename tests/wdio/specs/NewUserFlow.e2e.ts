@@ -29,9 +29,13 @@ describe('New user flow', () => {
 
   step('Wait for Leaderboard modal to appear', async () => {
     await leaderboardModal.element.waitForDisplayed();
+    const userScore = await leaderboardModal.score.getText();
 
-    expect(leaderboardModal.score).toBeGreaterThan(0);
+    expect(parseInt(await userScore)).toBeGreaterThan(0);
+
     await leaderboardModal.signUpButton.click();
+
+    await expect(leaderboardModal.element).not.toBeDisplayed();
   });
 
   step('Connect Cere Wallet', async () => {
@@ -52,9 +56,6 @@ describe('New user flow', () => {
   step('Wait for Leaderboard modal to appear', async () => {
     await leaderboardModal.element.waitForDisplayed();
     expect(leaderboardModal.walletAddress).toHaveTextContaining('0x');
-    //
-    // walletAddress = await leaderboardModal.getWalletAddress();
-    // await leaderboardModal.playAgainButton.click();
   });
 
   it('Reward notification should eventually appear', async () => {
@@ -63,35 +64,16 @@ describe('New user flow', () => {
     await expect(title).toEqual(alertTitle);
   });
 
-  // it('Current user ballanсe should be 0', async () => {
-  // walletBalance = await leaderboardModal.getBalance();
+  it('Current user should be highlighted in the leaderboard', async () => {
+    const rowData = await leaderboardModal.getActiveRowData();
+    await expect(rowData.address).toBeDefined();
+    await expect(rowData.score).toBeDefined();
+    await expect(rowData.rank).toBeDefined();
 
-  // expect(walletBalance).toEqual(5);
-  // });
+    const userRank = await leaderboardModal.rank.getText();
 
-  // it('Current user should be highlighted in the leaderboard', async () => {
-  // const rowData = await leaderboardModal.getActiveRowData();
-  // await expect(rowData.address).toHaveTextContaining('0x');
-
-  // await expect(rowData).toBeDisplayed()
-
-  // await expect(rowData).toMatchObject({
-  //   score,
-  //   address: walletAddress,
-  // });
-  // });
-
-  // it('Current user ballanse should equal to reward amount', async () => {
-  //   walletBalance = await leaderboardModal.getBalance();
-  //
-  //   await expect(walletBalance).toEqual(rewardAmount);
-  // });
-
-  // it('Game place price should be displayed and positive', async () => {
-  //   gamePlayPrice = await leaderboardModal.getGamePlayPrice();
-  //
-  //   await expect(gamePlayPrice).toBeGreaterThan(0);
-  // });
+    expect(parseInt(await userRank)).toBeGreaterThan(0);
+  });
 
   step('Press `Play again` button', async () => {
     await expect(leaderboardModal.playAgainButton).toBeClickable();
@@ -110,11 +92,11 @@ describe('New user flow', () => {
   // it('The page should reload and preloader appear', async () => {
   //   await preloader.element.waitForDisplayed();
   // });
-
+  //
   // step('Start second game session', async () => {
   //   await preloader.playNowButton.click();
   // });
-  //
+  // //
   // step('Play the game until the Leaderboard modal appears', async () => {
   //   await leaderboardModal.element.waitForDisplayed();
   // });

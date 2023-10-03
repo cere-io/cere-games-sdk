@@ -251,13 +251,13 @@ export const TopWidget = ({
             </RewardColumn>
           </RewardsRow>
           {!address && currentScore && (
-            <Typography align="center" role="heading">
-              Your score <Rank>{currentScore}</Rank>
+            <Typography align="center">
+              Your score <Rank role="score">{currentScore}</Rank>
             </Typography>
           )}
           {address && (
             <Typography align="center">
-              Your rank <Rank>{rank}</Rank>
+              Your rank <Rank role="rank">{rank}</Rank>
             </Typography>
           )}
           {address && (

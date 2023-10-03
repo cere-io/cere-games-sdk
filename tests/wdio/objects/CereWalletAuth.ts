@@ -6,7 +6,7 @@ export class CereWalletAuth extends CereWallet {
   }
 
   get emailInput() {
-    return browser.findByRole$('textbox', { name: '' }); //TODO should be "Email",
+    return browser.findByRole$('textbox', { name: '' }); //TODO should be "Email", empty only in games
   }
 
   get verifyButton() {
