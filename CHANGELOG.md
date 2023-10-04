@@ -4,6 +4,14 @@
 
 -
 
+### v0.7.1
+
+- Added utm parameter in tweet
+
+### v0.7.0
+
+- Fix tweet tags
+
 ### v0.6.9
 
 - Fix gameUrl in tweet
