@@ -11,7 +11,9 @@ import {
   Content,
   Truncate,
   Alert,
+  Button,
 } from '../../components';
+import { CopyIcon } from '../../icons';
 import { useAsyncCallback, useConfigContext, useWalletContext } from '../../hooks';
 import { TopWidget } from './TopWidget';
 
@@ -48,12 +50,25 @@ const LeaderboardTitle = styled(Typography)({
 });
 
 const Address = styled.div({
-  width: 105,
+  width: 'auto',
   height: 36,
   padding: '8px 16px',
   background: 'rgba(233, 204, 255, 0.1)',
   borderRadius: 4,
   fontSize: 14,
+  display: 'flex',
+});
+
+const CopyButton = styled(Button)({
+  width: 14,
+  minHeight: 14,
+  background: 'transparent',
+  padding: '8px 16px',
+  display: 'flex',
+  alignItems: 'center',
+  '@media (max-width: 600px)': {
+    padding: '12px 16px',
+  },
 });
 
 const SignUpButton = styled.button({
@@ -100,6 +115,16 @@ export const Leaderboard = ({
 
   const [handlePlayAgain] = useAsyncCallback(onPlayAgain);
 
+  const copyButton = async () => {
+    try {
+      if (address) {
+        await navigator.clipboard.writeText(address);
+      }
+    } catch (err) {
+      console.log('error');
+    }
+  };
+
   const dayDifference = useMemo(() => {
     if (!activeTournament) {
       return undefined;
@@ -143,6 +168,9 @@ Be a top 3 player to win a prize"
               <LeaderboardTitle>leaderboard</LeaderboardTitle>
               <Address>
                 <Truncate text={playerData.address} maxLength={8} />
+                <CopyButton onClick={copyButton}>
+                  <CopyIcon />
+                </CopyButton>
               </Address>
             </Stack>
           )}
