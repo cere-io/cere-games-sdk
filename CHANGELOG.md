@@ -4,6 +4,11 @@
 
 -
 
+### v0.7.2
+
+- Added plural versions of the words
+- Fixed tournament dayDifference
+
 ### v0.7.1
 
 - Added utm parameter in tweet
