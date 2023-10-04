@@ -107,7 +107,7 @@ export const Leaderboard = ({
     const tournamentEndDate = new Date(activeTournament.endDate);
     const dateNow = new Date();
     const diffInTime = tournamentEndDate.getTime() - dateNow.getTime();
-    return Math.ceil(Math.abs(diffInTime / (1000 * 3600 * 24)));
+    return diffInTime > 0 ? Math.ceil(Math.abs(diffInTime / (1000 * 3600 * 24))) : 0;
   }, [activeTournament]);
 
   return (
@@ -126,7 +126,7 @@ Be a top 3 player to win a prize"
           hasActiveTournament={Boolean(activeTournament)}
           tournamentTitle={`${activeTournament ? activeTournament.title : 'Weekly tournament'}`}
           tournamentSubtitle={activeTournament ? activeTournament.subtitle : 'TOP 20 WINS UNIQUE NFT'}
-          amountOfDaysLeft={dayDifference ? dayDifference : 1}
+          amountOfDaysLeft={Boolean(dayDifference) ? dayDifference : 0}
           onPlayAgain={handlePlayAgain}
           onTweet={onTweet}
           disabled={balance < sessionPrice}

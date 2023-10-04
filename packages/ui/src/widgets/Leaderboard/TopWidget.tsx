@@ -35,6 +35,7 @@ const DaysLeft = styled.div(({ tournament }: { tournament?: boolean }) => ({
   borderRadius: 8,
   fontWeight: 600,
   fontSize: 14,
+  whiteSpace: 'nowrap',
   display: 'none',
   textAlign: 'center',
   minWidth: 168,
@@ -228,16 +229,24 @@ export const TopWidget = ({
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
   }, [address, gameInfo.name, gameInfo.tags, onTweet, score]);
 
+  const pluralizeWord = (singularWord: string, pluralWord: string, count: number) => {
+    return count > 1 || count === 0 ? pluralWord : singularWord;
+  };
+
   return (
     <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]} tournament={hasActiveTournament}>
       <RadialGradientBackGround />
       <Content>
         <>
           <UniqueNFT align="center" tournament>
-            {tournamentSubtitle}
+            {amountOfDaysLeft === 0 ? 'Sorry, this tournament is over' : tournamentSubtitle}
           </UniqueNFT>
-          <Typography align="center">{tournamentTitle}</Typography>
-          <DaysLeft tournament={hasActiveTournament}>{amountOfDaysLeft} day left</DaysLeft>
+          <Typography align="center">
+            {amountOfDaysLeft === 0 ? 'Keep playing to practice for the next one' : tournamentTitle}
+          </Typography>
+          <DaysLeft tournament={hasActiveTournament}>
+            {amountOfDaysLeft} {pluralizeWord('day', 'days', amountOfDaysLeft)} left
+          </DaysLeft>
           <RewardsRow>
             <RewardColumn>
               <span>1st prize</span>
