@@ -27,7 +27,7 @@ type TournamentType = {
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
   activeTournament: TournamentType | undefined;
   onPlayAgain?: () => Promise<void> | void;
-  onTweet?: (score: number) => Promise<{ tweetBody: string }>;
+  onTweet?: () => Promise<void>;
   serviceUrl: string;
   withTopWidget?: boolean;
   onShowSignUp?: () => void;

@@ -130,6 +130,11 @@ export class GamesApi {
     return data;
   }
 
+  async askForTokensAfterTweet(address: string) {
+    const endpoint = this.createEndpoint('whatever'); // TODO refactor after get endpoint
+    return this.post(endpoint, { address });
+  }
+
   async getTweet(data: {
     serviceUrl: string;
     score: number;

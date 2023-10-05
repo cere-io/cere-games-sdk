@@ -22,6 +22,7 @@ type AsyncResult<T = void> = Promise<T> | T;
 
 type ShowLeaderboardOptions = {
   onPlayAgain?: (close: () => void) => AsyncResult;
+  onTweet?: () => AsyncResult;
   onBeforeLoad?: () => AsyncResult;
   withTopWidget?: boolean;
   onShowSignUp?: () => void;
@@ -346,13 +347,18 @@ export class GamesSDK {
         await onBeforeLoad?.();
         const data = await this.api.getLeaderboard();
         const activeTournament = await this.api.getActiveTournamentData();
+        const { address, balance } = this.ui.wallet;
 
         leaderboard.update({
           activeTournament,
           data,
           withTopWidget: true,
+          onTweet: async () => {
+            if (address) {
+              await this.api.askForTokensAfterTweet(address);
+            }
+          },
           onPlayAgain: async () => {
-            const { balance, address } = this.ui.wallet;
             if (address) {
               if (balance && balance > this.ui.config.sessionPrice) {
                 const { email } = await this.wallet.getUserInfo();

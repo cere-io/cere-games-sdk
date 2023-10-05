@@ -12,7 +12,7 @@ type TopWidgetProps = {
   tournamentTitle: string;
   tournamentSubtitle: string;
   hasActiveTournament?: boolean;
-  onTweet?: (score: number) => Promise<{ tweetBody: string }>;
+  onTweet?: () => Promise<void>;
   score?: number;
   rank?: number;
   currentScore?: number;
@@ -220,7 +220,7 @@ export const TopWidget = ({
   }, [gamePortalUrl]);
 
   const handleShareClick = useCallback(async () => {
-    await onTweet?.(score as number);
+    await onTweet?.();
     const tweetBody = `text=Do you think you can beat my ${
       gameInfo.name
     } high-score?%0a%0a${address}%0a%0aMy score: ${score}%0a%0aPlay it straight from your browser here: ${
