@@ -15,3 +15,4 @@ export * from './GameIcon';
 export * from './LockIcon';
 export * from './CurrentPlayerIconWhite';
 export * from './CopyIcon';
+export * from './CopiedIcon';
