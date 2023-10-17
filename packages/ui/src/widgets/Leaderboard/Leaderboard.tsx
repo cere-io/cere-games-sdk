@@ -140,16 +140,19 @@ Be a top 3 player to win a prize"
       <ModalWrapper layer={`${cdnUrl}/assets/layer.svg`}>
         <RadialGradientBackGround />
         <Content>
-          {playerData && (
+          {/*TODO change address to playerData in the future*/}
+          {address && (
             <Stack direction="row" spacing="space-between">
               <LeaderboardTitle>leaderboard</LeaderboardTitle>
               <Address>
-                <Truncate text={playerData.address} maxLength={8} />
+                {/*TODO change address to playerData.address in the future*/}
+                <Truncate text={address} maxLength={8} />
                 <CopyButton />
               </Address>
             </Stack>
           )}
-          {!playerData && (
+          {/*TODO change address to playerData in the future*/}
+          {!address && (
             <Stack align="center">
               <SignUpButton onClick={handlePlayAgain}>Sign up & reveal your rank</SignUpButton>
             </Stack>
