@@ -11,6 +11,7 @@ import {
   Content,
   Truncate,
   Alert,
+  CopyButton,
 } from '../../components';
 import { useAsyncCallback, useConfigContext, useWalletContext } from '../../hooks';
 import { TopWidget } from './TopWidget';
@@ -48,12 +49,13 @@ const LeaderboardTitle = styled(Typography)({
 });
 
 const Address = styled.div({
-  width: 105,
+  width: 'auto',
   height: 36,
   padding: '8px 16px',
   background: 'rgba(233, 204, 255, 0.1)',
   borderRadius: 4,
   fontSize: 14,
+  display: 'flex',
 });
 
 const SignUpButton = styled.button({
@@ -138,15 +140,19 @@ Be a top 3 player to win a prize"
       <ModalWrapper layer={`${cdnUrl}/assets/layer.svg`}>
         <RadialGradientBackGround />
         <Content>
-          {playerData && (
+          {/*TODO change address to playerData in the future*/}
+          {address && (
             <Stack direction="row" spacing="space-between">
               <LeaderboardTitle>leaderboard</LeaderboardTitle>
               <Address>
-                <Truncate text={playerData.address} maxLength={8} />
+                {/*TODO change address to playerData.address in the future*/}
+                <Truncate text={address} maxLength={8} />
+                <CopyButton />
               </Address>
             </Stack>
           )}
-          {!playerData && (
+          {/*TODO change address to playerData in the future*/}
+          {!address && (
             <Stack align="center">
               <SignUpButton onClick={handlePlayAgain}>Sign up & reveal your rank</SignUpButton>
             </Stack>
