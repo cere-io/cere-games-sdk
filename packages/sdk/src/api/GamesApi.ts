@@ -77,7 +77,7 @@ export class GamesApi {
     }));
   }
 
-  async saveScore(walletId: string, score: number, { sessionId }: Session) {
+  async saveScore(walletId: string, score: number, email: string, { sessionId }: Session) {
     const endpoint = this.createEndpoint('/leader-board');
 
     await this.post(endpoint, {
