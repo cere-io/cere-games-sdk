@@ -37,39 +37,28 @@ const Number = styled(Typography)({
   },
 });
 
-interface StepsProps {
-  number: string;
-  text: string;
-}
-
 export const Steps = (): JSX.Element => {
   const isMobile = useMediaQuery('(max-width: 600px)');
-  const { name } = useGameInfo();
+  const {
+    name,
+    preloader: { description },
+  } = useGameInfo();
 
-  const mockData: StepsProps[] = [
-    {
-      number: '01',
-      text: `Play ${name}` || 'Play Metaverse Dash Run',
-    },
-    {
-      number: '02',
-      text: 'Create your account',
-    },
-    {
-      number: '03',
-      text: 'Be top-3 and get a prize',
-    },
+  const mockData: string[] = [
+    `Play ${name}` || 'Play Metaverse Dash Run',
+    'Create your account',
+    'Be top-3 and get a prize',
   ];
 
   return (
     <Container direction="row" margin={[0, 0, 4, 0]} align="start">
-      {mockData.map(({ number, text }, index) => (
+      {description?.map((text, index) => (
         <StepContainer direction="row">
           <NumberWrapper>
             <Number variant="body1" align="center" fontWight="semi-bold">
-              {number}
+              {`0${index + 1}`}
               <Typography align="center" fontWight="regular" style={{ fontSize: isMobile ? '13px' : '16px' }}>
-                {text}
+                {text || mockData[index]}
               </Typography>
             </Number>
           </NumberWrapper>

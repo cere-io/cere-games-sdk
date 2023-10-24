@@ -40,7 +40,7 @@ export type GameInfoContext = {
   preloader: {
     url?: string;
     title?: string;
-    description?: string;
+    description?: string[];
   };
 };
 

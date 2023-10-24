@@ -266,7 +266,7 @@ export const TopWidget = ({
               Your score <Rank>{currentScore}</Rank>
             </Typography>
           )}
-          {address && (
+          {rank && (
             <Typography align="center">
               Your rank <Rank>{rank}</Rank>
             </Typography>
