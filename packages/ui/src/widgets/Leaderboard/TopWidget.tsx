@@ -4,6 +4,7 @@ import { useCallback } from 'react';
 import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button } from '../../components';
 import { useConfigContext, useGameInfo, useWalletContext } from '../../hooks';
 import { RepeatIcon, TwitterIcon } from '../../icons';
+import { TournamentImagesType } from './Leaderboard';
 
 type TopWidgetProps = {
   amountOfDaysLeft?: number;
@@ -11,6 +12,7 @@ type TopWidgetProps = {
   disabled?: boolean;
   tournamentTitle: string;
   tournamentSubtitle: string;
+  tournamentImages?: TournamentImagesType[];
   hasActiveTournament?: boolean;
   onTweet?: (score: number) => Promise<{ tweetBody: string }>;
   score?: number;
@@ -210,6 +212,7 @@ export const TopWidget = ({
   score,
   rank,
   currentScore,
+  tournamentImages,
 }: TopWidgetProps): JSX.Element => {
   const { sdkUrl: cdnUrl, gamePortalUrl } = useConfigContext();
   const { address, isReady } = useWalletContext();
@@ -233,6 +236,8 @@ export const TopWidget = ({
     return count > 1 || count === 0 ? pluralWord : singularWord;
   };
 
+  const places: string[] = ['1st prize', '2nd prize', '3rd prize'];
+
   return (
     <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]} tournament={hasActiveTournament}>
       <RadialGradientBackGround />
@@ -248,18 +253,13 @@ export const TopWidget = ({
             {amountOfDaysLeft} {pluralizeWord('day', 'days', amountOfDaysLeft)} left
           </DaysLeft>
           <RewardsRow>
-            <RewardColumn>
-              <span>1st prize</span>
-              <img src={`${cdnUrl}/assets/first-place-reward.svg`} alt="First place reward" />
-            </RewardColumn>
-            <RewardColumn>
-              <span>2nd prize</span>
-              <img src={`${cdnUrl}/assets/second-place-reward.svg`} alt="Second place reward" />
-            </RewardColumn>
-            <RewardColumn>
-              <span>3rd prize</span>
-              <img src={`${cdnUrl}/assets/third-place-reward.svg`} alt="Third place reward" />
-            </RewardColumn>
+            {tournamentImages?.map(({ path }, index) => (
+              <RewardColumn>
+                <span>{places[index]}</span>
+                {/*TODO ask about size and alt text*/}
+                <img src={path} width="100px" height="100px" alt={places[index]} />
+              </RewardColumn>
+            ))}
           </RewardsRow>
           {!address && currentScore && (
             <Typography align="center">
