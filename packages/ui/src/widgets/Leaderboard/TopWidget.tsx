@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { useCallback } from 'react';
 
-import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button } from '../../components';
+import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button, PlayAgainButton } from '../../components';
 import { useConfigContext, useGameInfo, useWalletContext } from '../../hooks';
-import { RepeatIcon, TwitterIcon } from '../../icons';
+import { TwitterIcon } from '../../icons';
 import { TournamentImagesType } from './Leaderboard';
 import { SingleCup } from './SingleCup';
 
@@ -78,29 +78,6 @@ const UniqueNFT = styled(Typography)(({ tournament }: { tournament?: boolean }) 
     margin: '0 auto',
   },
 }));
-
-export const PlayAgain = styled(Button)(({ tournament }: { tournament?: boolean }) => ({
-  marginTop: tournament ? '20px!important' : '37px!important',
-  maxWidth: 146,
-  height: 36,
-  minHeight: 36,
-  fontSize: 14,
-  fontWeight: '24px',
-  borderRadius: 4,
-  padding: 0,
-  background: 'rgba(243, 39, 88, 1)',
-  ...(tournament && {
-    whiteSpace: 'nowrap',
-    '@media (max-width: 600px)': {
-      marginTop: '14px!important',
-    },
-  }),
-}));
-
-export const PlayAgainText = styled(Typography)({
-  marginLeft: 6,
-  fontSize: 14,
-});
 
 const TweetButton = styled(Button)(({ tournament }: { tournament?: boolean }) => ({
   background: 'transparent',
@@ -245,7 +222,15 @@ export const TopWidget = ({
     <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]} tournament={hasActiveTournament}>
       <RadialGradientBackGround />
       <Content>
-        {mainImage ? (
+        {tournamentImages?.length === 0 || mainImage ? (
+          <SingleCup
+            handleOpenGamePortal={handleOpenGamePortal}
+            handleShareClick={handleShareClick}
+            onPlayAgain={onPlayAgain}
+            daysLeft={` ${amountOfDaysLeft} ${pluralizeWord('day', 'days', amountOfDaysLeft)} left`}
+            mainImage={mainImage}
+          />
+        ) : (
           <>
             <UniqueNFT align="center" tournament>
               {amountOfDaysLeft === 0 ? 'Sorry, this tournament is over' : tournamentSubtitle}
@@ -277,12 +262,11 @@ export const TopWidget = ({
             )}
             {address && (
               <Row columns={'auto 130px'} columnGap={6} justify="center">
-                <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament}>
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <RepeatIcon />
-                    <PlayAgainText>Play Again</PlayAgainText>
-                  </div>
-                </PlayAgain>
+                <PlayAgainButton
+                  onPlayAgain={onPlayAgain}
+                  tournament={hasActiveTournament}
+                  playAgainText="Play Again"
+                />
                 <TweetButton
                   tournament={hasActiveTournament}
                   disabled={!isReady || !address}
@@ -298,14 +282,6 @@ export const TopWidget = ({
               {address ? 'Go to Cere game portal →' : 'Was your score good enough to win? Sign up to see'}
             </GamePortalButton>
           </>
-        ) : (
-          <SingleCup
-            handleOpenGamePortal={handleOpenGamePortal}
-            handleShareClick={handleShareClick}
-            onPlayAgain={onPlayAgain}
-            daysLeft={` ${amountOfDaysLeft} ${pluralizeWord('day', 'days', amountOfDaysLeft)} left`}
-            mainImage={mainImage}
-          />
         )}
       </Content>
     </WidgetWrapper>

@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
-import { Button, Typography } from '../../components';
-import { PlayAgain, PlayAgainText } from './TopWidget';
-import { RepeatIcon, TwitterIcon } from '../../icons';
+import { Button, PlayAgainButton, Typography } from '../../components';
+import { TwitterIcon } from '../../icons';
 import { useConfigContext } from '../../hooks';
 import { TournamentImagesType } from './Leaderboard';
 
@@ -123,12 +122,7 @@ export const SingleCup = ({
           <SubTitle>Weekly tournament</SubTitle>
           <Title>Let’s win & get a prize</Title>
           <Buttons>
-            <PlayAgain onClick={onPlayAgain}>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <RepeatIcon />
-                <PlayAgainText>Play Again</PlayAgainText>
-              </div>
-            </PlayAgain>
+            <PlayAgainButton onPlayAgain={onPlayAgain} tournament={false} playAgainText="Play Again" />
             <CereTweetButton icon={<TwitterIcon color="#FFF" />} variant="outlined" onClick={handleShareClick}>
               Share
             </CereTweetButton>
