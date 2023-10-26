@@ -16,12 +16,20 @@ import {
 import { useAsyncCallback, useConfigContext, useWalletContext } from '../../hooks';
 import { TopWidget } from './TopWidget';
 
+export type TournamentImagesType = {
+  guid: string;
+  id: string;
+  mainImage: boolean;
+  path: string;
+};
+
 type TournamentType = {
   id: number;
   title: string;
   subtitle: string;
   startDate: Date;
   endDate: Date;
+  images: TournamentImagesType[];
   status: 'DISABLED' | 'ENABLED';
 };
 
@@ -135,6 +143,7 @@ Be a top 3 player to win a prize"
           score={playerData?.score}
           currentScore={currentScore}
           rank={playerData?.rank}
+          tournamentImages={activeTournament?.images}
         />
       )}
       <ModalWrapper layer={`${cdnUrl}/assets/layer.svg`}>
