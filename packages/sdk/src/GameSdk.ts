@@ -61,6 +61,11 @@ export type SdkOptions = {
 
 export type InitParams = Pick<SdkOptions, 'gameInfo'>;
 
+type LocationData = {
+  latitude: number;
+  longitude: number;
+};
+
 const balanceToFloat = (balance: BN, decimals: BN, precision: number) => {
   const bnPrecision = new BN(precision);
   const amount = balance.div(new BN(10).pow(decimals.sub(bnPrecision)));
@@ -343,13 +348,17 @@ export class GamesSDK {
       async () => {
         const leaderboard = document.createElement('cere-leaderboard');
 
+        const [ethAddress] = await this.wallet.getAccounts();
+
         await onBeforeLoad?.();
         const data = await this.api.getLeaderboard();
         const activeTournament = await this.api.getActiveTournamentData();
+        const walletResults = ethAddress ? await this.api.getLeaderboardByWallet(ethAddress.address) : [];
 
         leaderboard.update({
           activeTournament,
           data,
+          walletResults,
           withTopWidget: true,
           onPlayAgain: async () => {
             const { balance, address } = this.ui.wallet;
@@ -419,6 +428,15 @@ export class GamesSDK {
     });
 
     const save = async () => {
+      const location = await this.getLocation();
+      if (location) {
+        this.addSessionEvent({
+          eventType: 'LOCATION_ADDED',
+          payload: {
+            value: location,
+          },
+        });
+      }
       const [ethAddress] = await this.wallet.getAccounts();
       const { email } = await this.wallet.getUserInfo();
 
@@ -429,7 +447,7 @@ export class GamesSDK {
       }
 
       await this.saveSession();
-      await this.api.saveScore(ethAddress.address, score, email, this.session);
+      await this.api.saveScore(ethAddress.address, score, email, this.session, location?.latitude, location?.longitude);
     };
 
     /**
@@ -448,5 +466,23 @@ export class GamesSDK {
         currentScore: score,
       }),
     );
+  }
+
+  async getLocation(): Promise<LocationData | undefined> {
+    if (navigator.geolocation) {
+      try {
+        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+        const { latitude, longitude } = position.coords;
+        return { latitude, longitude };
+      } catch (error) {
+        console.error('Error getting location:', error);
+        return undefined;
+      }
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+      return undefined;
+    }
   }
 }

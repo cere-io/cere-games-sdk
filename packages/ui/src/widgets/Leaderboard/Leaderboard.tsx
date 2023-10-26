@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { LeaderBoard } from '@cere/games-sdk/src/api';
 
 import {
   Stack,
@@ -12,6 +13,10 @@ import {
   Truncate,
   Alert,
   CopyButton,
+  Tabs,
+  Tab,
+  CustomTabPanel,
+  WalletResults,
 } from '../../components';
 import { useAsyncCallback, useConfigContext, useWalletContext } from '../../hooks';
 import { TopWidget } from './TopWidget';
@@ -41,6 +46,7 @@ export type LeaderboardProps = Pick<TableProps, 'data'> & {
   withTopWidget?: boolean;
   onShowSignUp?: () => void;
   currentScore?: number;
+  walletResults?: LeaderBoard;
 };
 
 const LeaderboardTitle = styled(Typography)({
@@ -103,10 +109,12 @@ export const Leaderboard = ({
   onTweet,
   withTopWidget,
   currentScore,
+  walletResults,
 }: LeaderboardProps) => {
   const { sessionPrice, sdkUrl: cdnUrl } = useConfigContext();
   const { address, balance = 0 } = useWalletContext();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
+  const [tabValue, setTabValue] = useState<number>(0);
 
   const [handlePlayAgain] = useAsyncCallback(onPlayAgain);
 
@@ -119,6 +127,12 @@ export const Leaderboard = ({
     const diffInTime = tournamentEndDate.getTime() - dateNow.getTime();
     return diffInTime > 0 ? Math.ceil(Math.abs(diffInTime / (1000 * 3600 * 24))) : 0;
   }, [activeTournament]);
+
+  const handleChangeTabs = (newValue: number) => {
+    setTabValue(newValue);
+  };
+
+  const currentData = useMemo(() => data.find((row) => row.address === address), [data, address]);
 
   return (
     <>
@@ -166,7 +180,18 @@ Be a top 3 player to win a prize"
               <SignUpButton onClick={handlePlayAgain}>Sign up & reveal your rank</SignUpButton>
             </Stack>
           )}
-          <Table data={data} activeAddress={address} hasTournament={Boolean(activeTournament)} />
+          {address && (
+            <Tabs value={tabValue} onChange={handleChangeTabs}>
+              <Tab isActive={tabValue === 0} label="All" />
+              <Tab isActive={tabValue === 1} label="My games" />
+            </Tabs>
+          )}
+          <CustomTabPanel value={tabValue} index={0}>
+            <Table data={data} activeAddress={address} hasTournament={Boolean(activeTournament)} />
+          </CustomTabPanel>
+          <CustomTabPanel value={tabValue} index={1}>
+            <WalletResults rank={currentData?.rank} results={walletResults} />
+          </CustomTabPanel>
         </Content>
       </ModalWrapper>
     </>
