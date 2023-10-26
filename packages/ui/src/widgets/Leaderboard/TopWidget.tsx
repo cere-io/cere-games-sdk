@@ -239,13 +239,13 @@ export const TopWidget = ({
   };
 
   const places: string[] = ['1st prize', '2nd prize', '3rd prize'];
-  const isMainImage = tournamentImages?.find((image) => image.mainImage);
+  const mainImage = tournamentImages?.find((image) => image.mainImage);
 
   return (
     <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]} tournament={hasActiveTournament}>
       <RadialGradientBackGround />
       <Content>
-        {isMainImage ? (
+        {mainImage ? (
           <>
             <UniqueNFT align="center" tournament>
               {amountOfDaysLeft === 0 ? 'Sorry, this tournament is over' : tournamentSubtitle}
@@ -304,7 +304,7 @@ export const TopWidget = ({
             handleShareClick={handleShareClick}
             onPlayAgain={onPlayAgain}
             daysLeft={` ${amountOfDaysLeft} ${pluralizeWord('day', 'days', amountOfDaysLeft)} left`}
-            mainImage={isMainImage}
+            mainImage={mainImage}
           />
         )}
       </Content>
