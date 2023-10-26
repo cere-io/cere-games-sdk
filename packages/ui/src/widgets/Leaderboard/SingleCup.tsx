@@ -10,7 +10,7 @@ type SingleCupProps = {
   handleShareClick: () => void;
   onPlayAgain: () => void;
   daysLeft: string;
-  mainImage?: TournamentImagesType[];
+  mainImage?: TournamentImagesType | undefined;
 };
 
 const Container = styled.div({
@@ -21,18 +21,24 @@ const Container = styled.div({
 
 const SubTitle = styled(Typography)({
   fontSize: '16px',
+  '@media (max-width: 600px)': {
+    fontSize: '14px',
+  },
 });
 
 const Title = styled(Typography)({
   fontSize: '24px',
   fontFamily: 'Yapari-SemiBold',
+  '@media (max-width: 600px)': {
+    fontSize: '16px',
+  },
 });
 
 const Buttons = styled.div({
   display: 'flex',
 });
 
-const DaysLeft = styled.div(({ tournament }: { tournament?: boolean }) => ({
+const DaysLeft = styled.div({
   position: 'absolute',
   padding: '7px 15px 7px 32px',
   background: 'rgba(133, 70, 183, 1)',
@@ -50,7 +56,7 @@ const DaysLeft = styled.div(({ tournament }: { tournament?: boolean }) => ({
   '@media (max-width: 600px)': {
     top: -50,
   },
-}));
+});
 
 export const CereGamePortal = styled(Typography)(({ tournament }: { tournament?: boolean }) => ({
   cursor: 'pointer',
@@ -93,6 +99,14 @@ export const CereTweetButton = styled(Button)(({ tournament }: { tournament?: bo
   }),
 }));
 
+const Image = styled.img({
+  width: '139px',
+  height: '164px',
+  '@media (max-width: 600px)': {
+    objectFit: 'contain',
+  },
+});
+
 export const SingleCup = ({
   handleOpenGamePortal,
   handleShareClick,
@@ -122,9 +136,9 @@ export const SingleCup = ({
           <CereGamePortal onClick={handleOpenGamePortal}>Go to Cere game portal →</CereGamePortal>
         </div>
         {mainImage ? (
-          mainImage.map(({ path }) => <img src={path} alt="cup" height="auto" width="100%" />)
+          <Image src={mainImage.path} alt="cup" />
         ) : (
-          <img width="100%" height="auto" src={`${cdnUrl}/assets/red-cup.png`} alt="cup" />
+          <Image src={`${cdnUrl}/assets/red-cup.png`} alt="cup" />
         )}
       </Container>
     </>
