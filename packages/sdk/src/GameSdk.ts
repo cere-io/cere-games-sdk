@@ -420,23 +420,18 @@ export class GamesSDK {
   }
 
   async saveScore(score: number) {
+    const location = await this.getLocation();
     this.addSessionEvent({
       eventType: 'SCORE_EARNED',
       payload: {
-        value: score,
+        value: {
+          score,
+          ...(location !== undefined && location),
+        },
       },
     });
 
     const save = async () => {
-      const location = await this.getLocation();
-      if (location) {
-        this.addSessionEvent({
-          eventType: 'LOCATION_ADDED',
-          payload: {
-            value: location,
-          },
-        });
-      }
       const [ethAddress] = await this.wallet.getAccounts();
       const { email } = await this.wallet.getUserInfo();
 
