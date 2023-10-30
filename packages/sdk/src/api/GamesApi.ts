@@ -101,6 +101,7 @@ export class GamesApi {
       score,
       sessionId,
       walletId,
+      email,
       gameId: this.options.gameId,
       email,
     };
