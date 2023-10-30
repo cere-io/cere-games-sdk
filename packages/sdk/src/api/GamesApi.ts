@@ -103,7 +103,6 @@ export class GamesApi {
       walletId,
       email,
       gameId: this.options.gameId,
-      email,
     };
 
     if (latitude) {
