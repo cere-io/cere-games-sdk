@@ -18,7 +18,7 @@ import {
   CustomTabPanel,
   WalletResults,
 } from '../../components';
-import { useAsyncCallback, useConfigContext, useWalletContext } from '../../hooks';
+import { useAsyncCallback, useConfigContext, useGameInfo, useWalletContext } from '../../hooks';
 import { TopWidget } from './TopWidget';
 
 export type TournamentImagesType = {
@@ -46,7 +46,8 @@ export type LeaderboardProps = Pick<TableProps, 'data'> & {
   withTopWidget?: boolean;
   onShowSignUp?: () => void;
   currentScore?: number;
-  walletResults?: LeaderBoard;
+  ownResults?: LeaderBoard;
+  geoResults?: LeaderBoard;
 };
 
 const LeaderboardTitle = styled(Typography)({
@@ -109,10 +110,12 @@ export const Leaderboard = ({
   onTweet,
   withTopWidget,
   currentScore,
-  walletResults,
+  ownResults,
+  geoResults,
 }: LeaderboardProps) => {
   const { sessionPrice, sdkUrl: cdnUrl } = useConfigContext();
   const { address, balance = 0 } = useWalletContext();
+  const { geolocationAllowed } = useGameInfo();
   const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
   const [tabValue, setTabValue] = useState<number>(0);
 
@@ -133,6 +136,8 @@ export const Leaderboard = ({
   };
 
   const currentData = useMemo(() => data.find((row) => row.address === address), [data, address]);
+
+  console.log('geoResults', geoResults);
 
   return (
     <>
@@ -180,7 +185,7 @@ Be a top 3 player to win a prize"
               <SignUpButton onClick={handlePlayAgain}>Sign up & reveal your rank</SignUpButton>
             </Stack>
           )}
-          {address && (
+          {address && geolocationAllowed && (
             <Tabs value={tabValue} onChange={handleChangeTabs}>
               <Tab isActive={tabValue === 0} label="All" />
               <Tab isActive={tabValue === 1} label="My games" />
@@ -190,7 +195,7 @@ Be a top 3 player to win a prize"
             <Table data={data} activeAddress={address} hasTournament={Boolean(activeTournament)} />
           </CustomTabPanel>
           <CustomTabPanel value={tabValue} index={1}>
-            <WalletResults rank={currentData?.rank} results={walletResults} />
+            <WalletResults rank={currentData?.rank} results={ownResults} />
           </CustomTabPanel>
         </Content>
       </ModalWrapper>

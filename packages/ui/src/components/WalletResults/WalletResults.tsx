@@ -75,18 +75,21 @@ export const WalletResults = ({ results, rank }: { results?: LeaderBoard; rank?:
   return (
     <Container ref={containerRef} role="table">
       <TableHeader columns={['Score', 'Rank', 'Date']} />
-      {results?.map((result) => (
-        <Wrapper key={result.id} role="row">
-          <TableRow
-            active={Boolean(rank)}
-            columns={[
-              <Typography>{result.score}</Typography>,
-              <Typography>{rank}</Typography>,
-              <Typography>{new Date(result.updatedAt as string).toDateString()}</Typography>,
-            ]}
-          />
-        </Wrapper>
-      ))}
+      {(!results || results.length === 0) && <div>There are no results yet</div>}
+      {results &&
+        results.length > 0 &&
+        results?.map((result) => (
+          <Wrapper key={result.id} role="row">
+            <TableRow
+              active={Boolean(rank)}
+              columns={[
+                <Typography>{result.score}</Typography>,
+                <Typography>{rank}</Typography>,
+                <Typography>{new Date(result.updatedAt as string).toDateString()}</Typography>,
+              ]}
+            />
+          </Wrapper>
+        ))}
       {showScrollToTop && (
         <ScrollToTop icon={<ArrowTopIcon />} onClick={handleClick}>
           Top

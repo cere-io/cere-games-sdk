@@ -178,4 +178,13 @@ export class GamesApi {
     const data: LeaderBoard = await response.json();
     return data;
   }
+
+  async getLeaderboardByGeo(longitude: number, latitude: number) {
+    const endpoint = this.createEndpoint(
+      `/leader-board/tournament/game-id/${this.options.gameId}?longitude=${longitude}&latitude=${latitude}`,
+    );
+    const response = await fetch(endpoint);
+    const data: LeaderBoard = await response.json();
+    return data;
+  }
 }

@@ -14,7 +14,7 @@ import {
   STATIC_ASSETS,
   SDK_CDN_URL,
 } from './constants';
-import { GamesApi, Session, SessionEvent } from './api';
+import { GamesApi, LeaderBoard, Session, SessionEvent } from './api';
 import { Analytics } from './Analytics';
 import { Reporting, ReportingOptions } from './Reporting';
 
@@ -351,14 +351,33 @@ export class GamesSDK {
         const [ethAddress] = await this.wallet.getAccounts();
 
         await onBeforeLoad?.();
+
+        let geolocation: LocationData | undefined;
+        if (ethAddress) {
+          geolocation = await this.getLocation();
+        }
+
+        if (geolocation?.latitude && geolocation.longitude) {
+          this.ui.gameInfo.geolocationAllowed = true;
+        }
         const data = await this.api.getLeaderboard();
         const activeTournament = await this.api.getActiveTournamentData();
-        const walletResults = ethAddress ? await this.api.getLeaderboardByWallet(ethAddress.address) : [];
+
+        let ownResults: LeaderBoard = [];
+        let geoResults: LeaderBoard = [];
+
+        if (ethAddress) {
+          ownResults = await this.api.getLeaderboardByWallet(ethAddress.address);
+          geoResults = geolocation
+            ? await this.api.getLeaderboardByGeo(geolocation.longitude, geolocation.latitude)
+            : [];
+        }
 
         leaderboard.update({
           activeTournament,
           data,
-          walletResults,
+          ownResults,
+          geoResults,
           withTopWidget: true,
           onPlayAgain: async () => {
             const { balance, address } = this.ui.wallet;
