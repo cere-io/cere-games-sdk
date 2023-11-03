@@ -364,13 +364,22 @@ export class GamesSDK {
         const activeTournament = await this.api.getActiveTournamentData();
 
         let ownResults: LeaderBoard = [];
-        let geoResults: LeaderBoard = [];
+        let geoResults:
+          | {
+              geoTitle: string;
+              result: {
+                rank: number;
+                address: string;
+                score: number;
+              }[];
+            }
+          | undefined = undefined;
 
         if (ethAddress) {
           ownResults = await this.api.getLeaderboardByWallet(ethAddress.address);
           geoResults = geolocation
             ? await this.api.getLeaderboardByGeo(geolocation.longitude, geolocation.latitude)
-            : [];
+            : undefined;
         }
 
         leaderboard.update({

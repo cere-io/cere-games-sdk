@@ -20,6 +20,7 @@ import {
 } from '../../components';
 import { useAsyncCallback, useConfigContext, useGameInfo, useWalletContext } from '../../hooks';
 import { TopWidget } from './TopWidget';
+import { TableDataRowProps } from '../../components/Table/TableDataRow';
 
 export type TournamentImagesType = {
   guid: string;
@@ -47,7 +48,7 @@ export type LeaderboardProps = Pick<TableProps, 'data'> & {
   onShowSignUp?: () => void;
   currentScore?: number;
   ownResults?: LeaderBoard;
-  geoResults?: LeaderBoard;
+  geoResults?: { geoTitle: string; result: TableDataRowProps['data'][] };
 };
 
 const LeaderboardTitle = styled(Typography)({
@@ -116,7 +117,7 @@ export const Leaderboard = ({
   const { sessionPrice, sdkUrl: cdnUrl } = useConfigContext();
   const { address, balance = 0 } = useWalletContext();
   const { geolocationAllowed } = useGameInfo();
-  const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
+  const playerData = useMemo(() => data?.find((row) => row.address === address), [data, address]);
   const [tabValue, setTabValue] = useState<number>(0);
 
   const [handlePlayAgain] = useAsyncCallback(onPlayAgain);
@@ -135,9 +136,7 @@ export const Leaderboard = ({
     setTabValue(newValue);
   };
 
-  const currentData = useMemo(() => data.find((row) => row.address === address), [data, address]);
-
-  console.log('geoResults', geoResults);
+  const currentData = useMemo(() => data?.find((row) => row.address === address), [data, address]);
 
   return (
     <>
@@ -189,6 +188,7 @@ Be a top 3 player to win a prize"
             <Tabs value={tabValue} onChange={handleChangeTabs}>
               <Tab isActive={tabValue === 0} label="All" />
               <Tab isActive={tabValue === 1} label="My games" />
+              {geoResults && geoResults.geoTitle && <Tab isActive={tabValue === 2} label={geoResults.geoTitle} />}
             </Tabs>
           )}
           <CustomTabPanel value={tabValue} index={0}>
@@ -196,6 +196,9 @@ Be a top 3 player to win a prize"
           </CustomTabPanel>
           <CustomTabPanel value={tabValue} index={1}>
             <WalletResults rank={currentData?.rank} results={ownResults} />
+          </CustomTabPanel>
+          <CustomTabPanel value={tabValue} index={2}>
+            <Table data={geoResults?.result} activeAddress={address} hasTournament={Boolean(activeTournament)} />
           </CustomTabPanel>
         </Content>
       </ModalWrapper>

@@ -11,7 +11,7 @@ const MAX_RANK_WITH_GIFT_WITH_TOURNAMENT = 3;
 
 export type TableProps = {
   activeAddress?: string;
-  data: TableDataRowProps['data'][];
+  data?: TableDataRowProps['data'][];
   hasTournament: boolean;
 };
 
@@ -46,8 +46,8 @@ const ScrollToTop = styled(Button)({
 export const Table = ({ data, activeAddress, hasTournament }: TableProps) => {
   const [showScrollToTop, setShow] = useState(false);
   const [shouldChangeStyle, setChangeStyle] = useState(false);
-  const activeRow = useMemo(() => data.find((row) => row.address === activeAddress), [data, activeAddress]);
-  const rows = useMemo(() => data.filter((row) => row !== activeRow), [activeRow, data]);
+  const activeRow = useMemo(() => data?.find((row) => row.address === activeAddress), [data, activeAddress]);
+  const rows = useMemo(() => (data ? data.filter((row) => row !== activeRow) : []), [activeRow, data]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -82,6 +82,7 @@ export const Table = ({ data, activeAddress, hasTournament }: TableProps) => {
     }
     containerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
   return (
     <Container ref={containerRef} role="table">
       <TableHeader columns={['Rank', 'Player', 'Prize', 'Score']} active={Boolean(activeAddress)} />

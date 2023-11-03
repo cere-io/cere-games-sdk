@@ -184,7 +184,17 @@ export class GamesApi {
       `/leader-board/tournament/game-id/${this.options.gameId}?longitude=${longitude}&latitude=${latitude}`,
     );
     const response = await fetch(endpoint);
-    const data: LeaderBoard = await response.json();
-    return data;
+    const data: {
+      geoTitle: string;
+      result: LeaderBoard;
+    } = await response.json();
+    return {
+      ...data,
+      result: data.result.map(({ score, walletId }, index) => ({
+        score,
+        rank: index + 1,
+        address: walletId,
+      })),
+    };
   }
 }

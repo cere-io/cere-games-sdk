@@ -24,7 +24,7 @@ const TabButton = styled.button<{ isActive: boolean }>`
       color: #ffffff;
     }
   }
-  &:last-child {
+  &:not(:first-child) {
     margin-left: 5px;
   }
 `;
