@@ -29,6 +29,7 @@ export type Tournament = {
   endDate: Date;
   status: 'DISABLED' | 'ENABLED';
   images: TournamentImage[];
+  twitterHashTag?: string;
 };
 export type Game = {
   id: number;

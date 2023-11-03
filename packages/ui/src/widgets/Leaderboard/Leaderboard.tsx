@@ -37,6 +37,7 @@ type TournamentType = {
   endDate: Date;
   images: TournamentImagesType[];
   status: 'DISABLED' | 'ENABLED';
+  twitterHashTag?: string;
 };
 
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
@@ -162,6 +163,7 @@ Be a top 3 player to win a prize"
           currentScore={currentScore}
           rank={playerData?.rank}
           tournamentImages={activeTournament?.images}
+          twitterHashTag={activeTournament?.twitterHashTag}
         />
       )}
       <ModalWrapper layer={`${cdnUrl}/assets/layer.svg`}>
