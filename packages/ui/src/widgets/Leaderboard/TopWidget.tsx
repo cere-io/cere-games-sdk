@@ -211,7 +211,7 @@ export const TopWidget = ({
       window.location.origin + window.location.pathname + '?utm=ref_tweet'
     }%0a%0a&hashtags=${gameInfo.tags ? gameInfo.tags.join(',') : 'web3,gamer'}${
       twitterHashTag ? `,${twitterHashTag}` : ''
-    }}`;
+    }`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
   }, [address, gameInfo.name, gameInfo.tags, onTweet, score, twitterHashTag]);
 
