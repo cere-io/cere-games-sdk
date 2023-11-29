@@ -11,3 +11,5 @@ export * from './Alert';
 export * from './WalletBenefits';
 export * from './ProgressiveImg';
 export * from './Steps';
+export * from './CopyButton';
+export * from './PlayAgainButton';

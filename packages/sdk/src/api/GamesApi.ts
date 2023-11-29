@@ -10,6 +10,13 @@ type LeaderBoardRecord = {
   gameId: string;
 };
 
+type TournamentImage = {
+  guid: string;
+  id: string;
+  mainImage: boolean;
+  path: string;
+};
+
 export type LeaderBoard = LeaderBoardRecord[];
 export type Rank = number;
 export type Tournament = {
@@ -19,6 +26,7 @@ export type Tournament = {
   startDate: Date;
   endDate: Date;
   status: 'DISABLED' | 'ENABLED';
+  images: TournamentImage[];
 };
 export type Game = {
   id: number;
@@ -77,13 +85,14 @@ export class GamesApi {
     }));
   }
 
-  async saveScore(walletId: string, score: number, { sessionId }: Session) {
+  async saveScore(walletId: string, score: number, email: string, { sessionId }: Session) {
     const endpoint = this.createEndpoint('/leader-board');
 
     await this.post(endpoint, {
       score,
       sessionId,
       walletId,
+      email,
       gameId: this.options.gameId,
     });
   }

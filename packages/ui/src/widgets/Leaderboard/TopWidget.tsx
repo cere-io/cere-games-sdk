@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 import { useCallback } from 'react';
 
-import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button } from '../../components';
+import { ModalWrapper, RadialGradientBackGround, Content, Typography, Button, PlayAgainButton } from '../../components';
 import { useConfigContext, useGameInfo, useWalletContext } from '../../hooks';
-import { RepeatIcon, TwitterIcon } from '../../icons';
+import { TwitterIcon } from '../../icons';
+import { TournamentImagesType } from './Leaderboard';
+import { SingleCup } from './SingleCup';
 
 type TopWidgetProps = {
   amountOfDaysLeft?: number;
@@ -11,6 +13,7 @@ type TopWidgetProps = {
   disabled?: boolean;
   tournamentTitle: string;
   tournamentSubtitle: string;
+  tournamentImages?: TournamentImagesType[];
   hasActiveTournament?: boolean;
   onTweet?: (score: number) => Promise<{ tweetBody: string }>;
   score?: number;
@@ -76,29 +79,6 @@ const UniqueNFT = styled(Typography)(({ tournament }: { tournament?: boolean }) 
   },
 }));
 
-const PlayAgain = styled(Button)(({ tournament }: { tournament?: boolean }) => ({
-  marginTop: tournament ? '20px!important' : '37px!important',
-  maxWidth: 146,
-  height: 36,
-  minHeight: 36,
-  fontSize: 14,
-  fontWeight: '24px',
-  borderRadius: 4,
-  padding: 0,
-  background: 'rgba(243, 39, 88, 1)',
-  ...(tournament && {
-    whiteSpace: 'nowrap',
-    '@media (max-width: 600px)': {
-      marginTop: '14px!important',
-    },
-  }),
-}));
-
-const PlayAgainText = styled(Typography)({
-  marginLeft: 6,
-  fontSize: 14,
-});
-
 const TweetButton = styled(Button)(({ tournament }: { tournament?: boolean }) => ({
   background: 'transparent',
   marginTop: tournament ? '20px!important' : '37px!important',
@@ -155,6 +135,7 @@ const NFTImage = styled.img({
 const RewardsRow = styled.div({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
+  columnGap: '20px',
   alignItems: 'center',
   justifyContent: 'space-between',
   marginTop: '14px',
@@ -210,6 +191,7 @@ export const TopWidget = ({
   score,
   rank,
   currentScore,
+  tournamentImages,
 }: TopWidgetProps): JSX.Element => {
   const { sdkUrl: cdnUrl, gamePortalUrl } = useConfigContext();
   const { address, isReady } = useWalletContext();
@@ -233,67 +215,74 @@ export const TopWidget = ({
     return count > 1 || count === 0 ? pluralWord : singularWord;
   };
 
+  const places: string[] = ['1st prize', '2nd prize', '3rd prize'];
+  const mainImage = tournamentImages?.find((image) => image.mainImage);
+
   return (
     <WidgetWrapper layer={`${cdnUrl}/assets/layer.svg`} padding={[3, 3, 3, 3]} tournament={hasActiveTournament}>
       <RadialGradientBackGround />
       <Content>
-        <>
-          <UniqueNFT align="center" tournament>
-            {amountOfDaysLeft === 0 ? 'Sorry, this tournament is over' : tournamentSubtitle}
-          </UniqueNFT>
-          <Typography align="center">
-            {amountOfDaysLeft === 0 ? 'Keep playing to practice for the next one' : tournamentTitle}
-          </Typography>
-          <DaysLeft tournament={hasActiveTournament}>
-            {amountOfDaysLeft} {pluralizeWord('day', 'days', amountOfDaysLeft)} left
-          </DaysLeft>
-          <RewardsRow>
-            <RewardColumn>
-              <span>1st prize</span>
-              <img src={`${cdnUrl}/assets/first-place-reward.svg`} alt="First place reward" />
-            </RewardColumn>
-            <RewardColumn>
-              <span>2nd prize</span>
-              <img src={`${cdnUrl}/assets/second-place-reward.svg`} alt="Second place reward" />
-            </RewardColumn>
-            <RewardColumn>
-              <span>3rd prize</span>
-              <img src={`${cdnUrl}/assets/third-place-reward.svg`} alt="Third place reward" />
-            </RewardColumn>
-          </RewardsRow>
-          {!address && currentScore && (
+        {tournamentImages?.length === 0 || mainImage ? (
+          <SingleCup
+            handleOpenGamePortal={handleOpenGamePortal}
+            handleShareClick={handleShareClick}
+            onPlayAgain={onPlayAgain}
+            daysLeft={` ${amountOfDaysLeft} ${pluralizeWord('day', 'days', amountOfDaysLeft)} left`}
+            mainImage={mainImage}
+          />
+        ) : (
+          <>
+            <UniqueNFT align="center" tournament>
+              {amountOfDaysLeft === 0 ? 'Sorry, this tournament is over' : tournamentSubtitle}
+            </UniqueNFT>
             <Typography align="center">
-              Your score <Rank>{currentScore}</Rank>
+              {amountOfDaysLeft === 0 ? 'Keep playing to practice for the next one' : tournamentTitle}
             </Typography>
-          )}
-          {address && (
-            <Typography align="center">
-              Your rank <Rank>{rank}</Rank>
-            </Typography>
-          )}
-          {address && (
-            <Row columns={'auto 130px'} columnGap={6} justify="center">
-              <PlayAgain onClick={onPlayAgain} tournament={hasActiveTournament}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <RepeatIcon />
-                  <PlayAgainText>Play Again</PlayAgainText>
-                </div>
-              </PlayAgain>
-              <TweetButton
-                tournament={hasActiveTournament}
-                disabled={!isReady || !address}
-                icon={<TwitterIcon color="#FFF" />}
-                variant="outlined"
-                onClick={handleShareClick}
-              >
-                Share
-              </TweetButton>
-            </Row>
-          )}
-          <GamePortalButton tournament={hasActiveTournament} onClick={address ? handleOpenGamePortal : () => null}>
-            {address ? 'Go to Cere game portal →' : 'Was your score good enough to win? Sign up to see'}
-          </GamePortalButton>
-        </>
+            <DaysLeft tournament={hasActiveTournament}>
+              {amountOfDaysLeft} {pluralizeWord('day', 'days', amountOfDaysLeft)} left
+            </DaysLeft>
+            <RewardsRow>
+              {tournamentImages?.map(({ path }, index) => (
+                <RewardColumn key={index}>
+                  <span>{places[index]}</span>
+                  {/*TODO ask about size and alt text*/}
+                  <img src={path} width="100%" height="auto" alt={places[index]} />
+                </RewardColumn>
+              ))}
+            </RewardsRow>
+            {!address && currentScore && (
+              <Typography align="center">
+                Your score <Rank>{currentScore}</Rank>
+              </Typography>
+            )}
+            {rank && (
+              <Typography align="center">
+                Your rank <Rank>{rank}</Rank>
+              </Typography>
+            )}
+            {address && (
+              <Row columns={'auto 130px'} columnGap={6} justify="center">
+                <PlayAgainButton
+                  onPlayAgain={onPlayAgain}
+                  tournament={hasActiveTournament}
+                  playAgainText="Play Again"
+                />
+                <TweetButton
+                  tournament={hasActiveTournament}
+                  disabled={!isReady || !address}
+                  icon={<TwitterIcon color="#FFF" />}
+                  variant="outlined"
+                  onClick={handleShareClick}
+                >
+                  Share
+                </TweetButton>
+              </Row>
+            )}
+            <GamePortalButton tournament={hasActiveTournament} onClick={address ? handleOpenGamePortal : () => null}>
+              {address ? 'Go to Cere game portal →' : 'Was your score good enough to win? Sign up to see'}
+            </GamePortalButton>
+          </>
+        )}
       </Content>
     </WidgetWrapper>
   );

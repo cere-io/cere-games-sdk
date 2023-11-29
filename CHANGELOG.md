@@ -4,6 +4,11 @@
 
 -
 
+### v0.7.3
+
+- Added new variant of TopWidget with single image from freeport
+- Added email field to the save method in sdk
+
 ### v0.7.2
 
 - Added plural versions of the words

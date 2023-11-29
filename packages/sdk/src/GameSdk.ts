@@ -420,6 +420,7 @@ export class GamesSDK {
 
     const save = async () => {
       const [ethAddress] = await this.wallet.getAccounts();
+      const { email } = await this.wallet.getUserInfo();
 
       if (!this.session) {
         this.reporting.message(`Attempt to save score without sessionId`);
@@ -428,7 +429,7 @@ export class GamesSDK {
       }
 
       await this.saveSession();
-      await this.api.saveScore(ethAddress.address, score, this.session);
+      await this.api.saveScore(ethAddress.address, score, email, this.session);
     };
 
     /**
