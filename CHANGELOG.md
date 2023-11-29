@@ -2,6 +2,10 @@
 
 ### vNext
 
+-
+
+### v0.7.3
+
 - Added new variant of TopWidget with single image from freeport
 - Added email field to the save method in sdk
 
