@@ -12,4 +12,6 @@ export * from './WalletBenefits';
 export * from './ProgressiveImg';
 export * from './Steps';
 export * from './CopyButton';
+export * from './Tab';
 export * from './PlayAgainButton';
+export * from './WalletResults';

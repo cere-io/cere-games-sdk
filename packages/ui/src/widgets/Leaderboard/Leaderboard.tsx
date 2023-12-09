@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { LeaderBoard } from '@cere/games-sdk/src/api';
 
 import {
   Stack,
@@ -12,9 +13,14 @@ import {
   Truncate,
   Alert,
   CopyButton,
+  Tabs,
+  Tab,
+  CustomTabPanel,
+  WalletResults,
 } from '../../components';
-import { useAsyncCallback, useConfigContext, useWalletContext } from '../../hooks';
+import { useAsyncCallback, useConfigContext, useGameInfo, useWalletContext } from '../../hooks';
 import { TopWidget } from './TopWidget';
+import { TableDataRowProps } from '../../components/Table/TableDataRow';
 
 export type TournamentImagesType = {
   guid: string;
@@ -31,6 +37,7 @@ type TournamentType = {
   endDate: Date;
   images: TournamentImagesType[];
   status: 'DISABLED' | 'ENABLED';
+  twitterHashTag?: string;
 };
 
 export type LeaderboardProps = Pick<TableProps, 'data'> & {
@@ -41,6 +48,8 @@ export type LeaderboardProps = Pick<TableProps, 'data'> & {
   withTopWidget?: boolean;
   onShowSignUp?: () => void;
   currentScore?: number;
+  ownResults?: LeaderBoard;
+  geoResults?: { geoTitle: string; result: TableDataRowProps['data'][] };
 };
 
 const LeaderboardTitle = styled(Typography)({
@@ -103,10 +112,14 @@ export const Leaderboard = ({
   onTweet,
   withTopWidget,
   currentScore,
+  ownResults,
+  geoResults,
 }: LeaderboardProps) => {
   const { sessionPrice, sdkUrl: cdnUrl } = useConfigContext();
   const { address, balance = 0 } = useWalletContext();
-  const playerData = useMemo(() => data.find((row) => row.address === address), [data, address]);
+  const { geolocationAllowed } = useGameInfo();
+  const playerData = useMemo(() => data?.find((row) => row.address === address), [data, address]);
+  const [tabValue, setTabValue] = useState<number>(0);
 
   const [handlePlayAgain] = useAsyncCallback(onPlayAgain);
 
@@ -119,6 +132,12 @@ export const Leaderboard = ({
     const diffInTime = tournamentEndDate.getTime() - dateNow.getTime();
     return diffInTime > 0 ? Math.ceil(Math.abs(diffInTime / (1000 * 3600 * 24))) : 0;
   }, [activeTournament]);
+
+  const handleChangeTabs = (newValue: number) => {
+    setTabValue(newValue);
+  };
+
+  const currentData = useMemo(() => data?.find((row) => row.address === address), [data, address]);
 
   return (
     <>
@@ -144,6 +163,7 @@ Be a top 3 player to win a prize"
           currentScore={currentScore}
           rank={playerData?.rank}
           tournamentImages={activeTournament?.images}
+          twitterHashTag={activeTournament?.twitterHashTag}
         />
       )}
       <ModalWrapper layer={`${cdnUrl}/assets/layer.svg`}>
@@ -166,7 +186,22 @@ Be a top 3 player to win a prize"
               <SignUpButton onClick={handlePlayAgain}>Sign up & reveal your rank</SignUpButton>
             </Stack>
           )}
-          <Table data={data} activeAddress={address} hasTournament={Boolean(activeTournament)} />
+          {address && geolocationAllowed && (
+            <Tabs value={tabValue} onChange={handleChangeTabs}>
+              <Tab isActive={tabValue === 0} label="All" />
+              <Tab isActive={tabValue === 1} label="My games" />
+              {geoResults && geoResults.geoTitle && <Tab isActive={tabValue === 2} label={geoResults.geoTitle} />}
+            </Tabs>
+          )}
+          <CustomTabPanel value={tabValue} index={0}>
+            <Table data={data} activeAddress={address} hasTournament={Boolean(activeTournament)} />
+          </CustomTabPanel>
+          <CustomTabPanel value={tabValue} index={1}>
+            <WalletResults rank={currentData?.rank} results={ownResults} />
+          </CustomTabPanel>
+          <CustomTabPanel value={tabValue} index={2}>
+            <Table data={geoResults?.result} activeAddress={address} hasTournament={Boolean(activeTournament)} />
+          </CustomTabPanel>
         </Content>
       </ModalWrapper>
     </>

@@ -14,7 +14,7 @@ import {
   STATIC_ASSETS,
   SDK_CDN_URL,
 } from './constants';
-import { GamesApi, Session, SessionEvent } from './api';
+import { GamesApi, LeaderBoard, Session, SessionEvent } from './api';
 import { Analytics } from './Analytics';
 import { Reporting, ReportingOptions } from './Reporting';
 
@@ -60,6 +60,11 @@ export type SdkOptions = {
 };
 
 export type InitParams = Pick<SdkOptions, 'gameInfo'>;
+
+type LocationData = {
+  latitude: number;
+  longitude: number;
+};
 
 const balanceToFloat = (balance: BN, decimals: BN, precision: number) => {
   const bnPrecision = new BN(precision);
@@ -343,13 +348,45 @@ export class GamesSDK {
       async () => {
         const leaderboard = document.createElement('cere-leaderboard');
 
+        const [ethAddress] = await this.wallet.getAccounts();
+
         await onBeforeLoad?.();
+
+        let geolocation: LocationData | undefined;
+        if (ethAddress) {
+          geolocation = await this.getLocation();
+        }
+
+        if (geolocation?.latitude && geolocation.longitude) {
+          this.ui.gameInfo.geolocationAllowed = true;
+        }
         const data = await this.api.getLeaderboard();
         const activeTournament = await this.api.getActiveTournamentData();
+
+        let ownResults: LeaderBoard = [];
+        let geoResults:
+          | {
+              geoTitle: string;
+              result: {
+                rank: number;
+                address: string;
+                score: number;
+              }[];
+            }
+          | undefined = undefined;
+
+        if (ethAddress) {
+          ownResults = await this.api.getLeaderboardByWallet(ethAddress.address);
+          geoResults = geolocation
+            ? await this.api.getLeaderboardByGeo(geolocation.longitude, geolocation.latitude)
+            : undefined;
+        }
 
         leaderboard.update({
           activeTournament,
           data,
+          ownResults,
+          geoResults,
           withTopWidget: true,
           onPlayAgain: async () => {
             const { balance, address } = this.ui.wallet;
@@ -411,10 +448,14 @@ export class GamesSDK {
   }
 
   async saveScore(score: number) {
+    const location = await this.getLocation();
     this.addSessionEvent({
       eventType: 'SCORE_EARNED',
       payload: {
-        value: score,
+        value: {
+          score,
+          ...(location !== undefined && location),
+        },
       },
     });
 
@@ -429,7 +470,7 @@ export class GamesSDK {
       }
 
       await this.saveSession();
-      await this.api.saveScore(ethAddress.address, score, email, this.session);
+      await this.api.saveScore(ethAddress.address, score, email, this.session, location?.latitude, location?.longitude);
     };
 
     /**
@@ -448,5 +489,23 @@ export class GamesSDK {
         currentScore: score,
       }),
     );
+  }
+
+  async getLocation(): Promise<LocationData | undefined> {
+    if (navigator.geolocation) {
+      try {
+        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+        const { latitude, longitude } = position.coords;
+        return { latitude, longitude };
+      } catch (error) {
+        console.error('Error getting location:', error);
+        return undefined;
+      }
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+      return undefined;
+    }
   }
 }

@@ -19,6 +19,7 @@ type TopWidgetProps = {
   score?: number;
   rank?: number;
   currentScore?: number;
+  twitterHashTag?: string;
 };
 
 const WidgetWrapper = styled(ModalWrapper)(({ tournament }: { tournament?: boolean }) => ({
@@ -192,6 +193,7 @@ export const TopWidget = ({
   rank,
   currentScore,
   tournamentImages,
+  twitterHashTag,
 }: TopWidgetProps): JSX.Element => {
   const { sdkUrl: cdnUrl, gamePortalUrl } = useConfigContext();
   const { address, isReady } = useWalletContext();
@@ -207,9 +209,11 @@ export const TopWidget = ({
       gameInfo.name
     } high-score?%0a%0a${address}%0a%0aMy score: ${score}%0a%0aPlay it straight from your browser here: ${
       window.location.origin + window.location.pathname + '?utm=ref_tweet'
-    }%0a%0a&hashtags=${gameInfo.tags ? gameInfo.tags.join(',') : 'web3,gamer'}`;
+    }%0a%0a&hashtags=${gameInfo.tags ? gameInfo.tags.join(',') : 'web3,gamer'}${
+      twitterHashTag ? `,${twitterHashTag}` : ''
+    }`;
     window.open(`https://twitter.com/intent/tweet?${tweetBody}`, '_system', 'width=600,height=600');
-  }, [address, gameInfo.name, gameInfo.tags, onTweet, score]);
+  }, [address, gameInfo.name, gameInfo.tags, onTweet, score, twitterHashTag]);
 
   const pluralizeWord = (singularWord: string, pluralWord: string, count: number) => {
     return count > 1 || count === 0 ? pluralWord : singularWord;

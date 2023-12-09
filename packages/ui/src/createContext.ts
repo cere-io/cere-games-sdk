@@ -42,6 +42,7 @@ export type GameInfoContext = {
     title?: string;
     description?: string[];
   };
+  geolocationAllowed?: boolean;
 };
 
 export type ContextState = {
@@ -89,6 +90,7 @@ const defaultState: ContextState = {
     name: '',
     tags: [''],
     preloader: {},
+    geolocationAllowed: false,
   },
 };
 

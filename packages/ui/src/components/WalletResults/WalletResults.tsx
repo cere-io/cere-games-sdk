@@ -1,19 +1,12 @@
+import { LeaderBoard } from '@cere/games-sdk/src/api';
 import styled from '@emotion/styled';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { TableDataRow, TableDataRowProps } from './TableDataRow';
-import { TableHeader } from './TableHeader';
 import { Button } from '../Button';
+import { TableHeader } from '../Table/TableHeader';
+import { TableRow } from '../Table/TableRow';
+import { Typography } from '../Typography';
 import { ArrowTopIcon } from '../../icons';
-
-const MAX_RANK_WITH_GIFT = 20;
-const MAX_RANK_WITH_GIFT_WITH_TOURNAMENT = 3;
-
-export type TableProps = {
-  activeAddress?: string;
-  data?: TableDataRowProps['data'][];
-  hasTournament: boolean;
-};
 
 const Container = styled.div({
   maxHeight: '412px',
@@ -43,14 +36,16 @@ const ScrollToTop = styled(Button)({
   },
 });
 
-export const Table = ({ data, activeAddress, hasTournament }: TableProps) => {
+const Wrapper = styled.div(({ theme }) => ({
+  backgroundColor: 'rgba(233, 204, 255, 0.05)',
+  borderRadius: theme.borderRadius(2),
+  marginBottom: 1,
+}));
+
+export const WalletResults = ({ results, rank }: { results?: LeaderBoard; rank?: number }) => {
   const [showScrollToTop, setShow] = useState(false);
-  const [shouldChangeStyle, setChangeStyle] = useState(false);
-  const activeRow = useMemo(() => data?.find((row) => row.address === activeAddress), [data, activeAddress]);
-  const rows = useMemo(() => (data ? data.filter((row) => row !== activeRow) : []), [activeRow, data]);
 
   const containerRef = useRef<HTMLDivElement>(null);
-
   const toggleVisible = useCallback(() => {
     if (!containerRef.current) {
       return;
@@ -59,12 +54,6 @@ export const Table = ({ data, activeAddress, hasTournament }: TableProps) => {
       setShow(true);
     } else {
       setShow(false);
-    }
-
-    if (containerRef.current.scrollTop > 44) {
-      setChangeStyle(true);
-    } else {
-      setChangeStyle(false);
     }
   }, []);
 
@@ -85,24 +74,22 @@ export const Table = ({ data, activeAddress, hasTournament }: TableProps) => {
 
   return (
     <Container ref={containerRef} role="table">
-      <TableHeader columns={['Rank', 'Player', 'Prize', 'Score']} active={Boolean(activeAddress)} />
-      {activeRow && (
-        <TableDataRow
-          hasReward={activeRow.rank <= (hasTournament ? MAX_RANK_WITH_GIFT_WITH_TOURNAMENT : MAX_RANK_WITH_GIFT)}
-          active
-          activeAddress
-          shouldChangeStyle={shouldChangeStyle}
-          data={activeRow}
-        />
-      )}
-      {rows.map((row) => (
-        <TableDataRow
-          activeAddress={Boolean(activeAddress)}
-          key={row.address}
-          data={row}
-          hasReward={row.rank <= (hasTournament ? MAX_RANK_WITH_GIFT_WITH_TOURNAMENT : MAX_RANK_WITH_GIFT)}
-        />
-      ))}
+      <TableHeader columns={['Score', 'Rank', 'Date']} />
+      {(!results || results.length === 0) && <div>There are no results yet</div>}
+      {results &&
+        results.length > 0 &&
+        results?.map((result) => (
+          <Wrapper key={result.id} role="row">
+            <TableRow
+              active={Boolean(rank)}
+              columns={[
+                <Typography>{result.score}</Typography>,
+                <Typography>{rank}</Typography>,
+                <Typography>{new Date(result.updatedAt as string).toDateString()}</Typography>,
+              ]}
+            />
+          </Wrapper>
+        ))}
       {showScrollToTop && (
         <ScrollToTop icon={<ArrowTopIcon />} onClick={handleClick}>
           Top

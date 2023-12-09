@@ -1,5 +1,5 @@
 export type SessionEvent<T = unknown> = {
-  eventType: 'SCORE_EARNED';
+  eventType: 'SCORE_EARNED' | 'LOCATION_ADDED';
   timestamp?: number;
   payload: T;
 };
@@ -8,6 +8,8 @@ type LeaderBoardRecord = {
   walletId: string;
   score: number;
   gameId: string;
+  updatedAt?: string;
+  id?: string;
 };
 
 type TournamentImage = {
@@ -27,6 +29,7 @@ export type Tournament = {
   endDate: Date;
   status: 'DISABLED' | 'ENABLED';
   images: TournamentImage[];
+  twitterHashTag?: string;
 };
 export type Game = {
   id: number;
@@ -85,16 +88,33 @@ export class GamesApi {
     }));
   }
 
-  async saveScore(walletId: string, score: number, email: string, { sessionId }: Session) {
+  async saveScore(
+    walletId: string,
+    score: number,
+    email: string,
+    { sessionId }: Session,
+    latitude?: number,
+    longitude?: number,
+  ) {
     const endpoint = this.createEndpoint('/leader-board');
 
-    await this.post(endpoint, {
+    const saveScoreData = {
       score,
       sessionId,
       walletId,
       email,
       gameId: this.options.gameId,
-    });
+    };
+
+    if (latitude) {
+      Object.assign(saveScoreData, { latitude });
+    }
+
+    if (longitude) {
+      Object.assign(saveScoreData, { longitude });
+    }
+
+    await this.post(endpoint, saveScoreData);
   }
 
   async getLeaderboardRank(score: number) {
@@ -151,5 +171,31 @@ export class GamesApi {
     const response = await this.post(endpoint, data);
     const tweetData: { tweetBody: string } = await response.json();
     return tweetData;
+  }
+
+  async getLeaderboardByWallet(walletId: string) {
+    const endpoint = this.createEndpoint(`/leader-board/game-code/${this.options.gameId}/wallet-id/${walletId}`);
+    const response = await fetch(endpoint);
+    const data: LeaderBoard = await response.json();
+    return data;
+  }
+
+  async getLeaderboardByGeo(longitude: number, latitude: number) {
+    const endpoint = this.createEndpoint(
+      `/leader-board/tournament/game-id/${this.options.gameId}?longitude=${longitude}&latitude=${latitude}`,
+    );
+    const response = await fetch(endpoint);
+    const data: {
+      geoTitle: string;
+      result: LeaderBoard;
+    } = await response.json();
+    return {
+      ...data,
+      result: data.result.map(({ score, walletId }, index) => ({
+        score,
+        rank: index + 1,
+        address: walletId,
+      })),
+    };
   }
 }
