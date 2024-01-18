@@ -1,6 +1,6 @@
 {
   "name": "@cere/games-sdk-ui",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Cere Games SDK UI Elements",
   "sideEffects": false,
   "main": "dist/bundle.umd.js",
