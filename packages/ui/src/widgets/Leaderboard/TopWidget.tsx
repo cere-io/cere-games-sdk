@@ -224,6 +224,8 @@ export const TopWidget = ({
       <Content>
         {tournamentImages?.length === 0 || mainImage ? (
           <SingleCup
+            tournamentSubtitle={tournamentSubtitle}
+            tournamentTitle={tournamentTitle}
             handleOpenGamePortal={handleOpenGamePortal}
             handleShareClick={handleShareClick}
             onPlayAgain={onPlayAgain}
