@@ -1,10 +1,13 @@
 import styled from '@emotion/styled';
+
 import { Button, PlayAgainButton, Typography } from '../../components';
 import { TwitterIcon } from '../../icons';
 import { useConfigContext } from '../../hooks';
 import { TournamentImagesType } from './Leaderboard';
 
 type SingleCupProps = {
+  tournamentTitle: string;
+  tournamentSubtitle: string;
   handleOpenGamePortal: () => void;
   handleShareClick: () => void;
   onPlayAgain: () => void;
@@ -107,6 +110,8 @@ const Image = styled.img({
 });
 
 export const SingleCup = ({
+  tournamentTitle,
+  tournamentSubtitle,
   handleOpenGamePortal,
   handleShareClick,
   onPlayAgain,
@@ -119,8 +124,8 @@ export const SingleCup = ({
       <Container>
         <DaysLeft>{daysLeft}</DaysLeft>
         <div>
-          <SubTitle>Weekly tournament</SubTitle>
-          <Title>Let’s win & get a prize</Title>
+          <SubTitle>{tournamentSubtitle}</SubTitle>
+          <Title>{tournamentTitle}</Title>
           <Buttons>
             <PlayAgainButton onPlayAgain={onPlayAgain} tournament={false} playAgainText="Play Again" />
             <CereTweetButton icon={<TwitterIcon color="#FFF" />} variant="outlined" onClick={handleShareClick}>
