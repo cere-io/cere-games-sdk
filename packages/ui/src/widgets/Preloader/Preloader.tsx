@@ -7,14 +7,14 @@ import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery, useWall
 const ImageBlock = styled.div(
   {
     alignSelf: 'stretch',
-    height: 280,
+    maxHeight: 280,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 12,
 
     '@media (max-height: 440px)': {
-      height: 130,
+      maxHeight: 130,
     },
   },
   ({ loading }: { loading: boolean }) =>
