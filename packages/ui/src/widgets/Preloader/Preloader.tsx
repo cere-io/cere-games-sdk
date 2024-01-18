@@ -6,7 +6,6 @@ import { useAsyncCallback, useConfigContext, useGameInfo, useMediaQuery, useWall
 
 const ImageBlock = styled.div(
   {
-    alignSelf: 'stretch',
     maxHeight: 280,
     backgroundSize: 'cover',
     backgroundPosition: 'center',

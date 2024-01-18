@@ -9,7 +9,6 @@ export type ProgressiveImgProps = Partial<ImgHTMLAttributes<HTMLImageElement>> &
 
 const StyledImage = styled.img({
   maxHeight: 280,
-  width: '100%',
   objectFit: 'cover',
   borderRadius: 12,
   '@media (max-height: 440px)': {
