@@ -4,6 +4,10 @@
 
 -
 
+### v0.7.4
+
+- Fix single cup title
+
 ### v0.7.3
 
 - Added new variant of TopWidget with single image from freeport
