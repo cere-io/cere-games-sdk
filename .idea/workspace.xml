@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d65cadc7-b360-4934-94f6-ec0deda125d4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +33,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "release/0.6.5",
+    "git-widget-placeholder": "release/0.7.4",
     "last_opened_file_path": "/Users/rodionkukhty/Desktop/rodion/work/cere/cere-games-sdk/web/sdk/assets",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
