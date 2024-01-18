@@ -4,6 +4,10 @@
 
 -
 
+### v0.7.6
+
+- Fixed preloader image
+
 ### v0.7.5
 
 - Fixed preloader images
