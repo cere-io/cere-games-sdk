@@ -4,9 +4,13 @@
 
 -
 
+### v0.7.5
+
+- Fixed preloader images
+
 ### v0.7.4
 
-- Fix single cup title
+- Fixed single cup title
 
 ### v0.7.3
 
