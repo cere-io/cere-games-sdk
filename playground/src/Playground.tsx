@@ -50,9 +50,17 @@ export const Playground = () => {
     });
   }, [sdk]);
 
+  const handleShowInsertCoin = useCallback(async () => {
+    const { open } = sdk.showInsertCoin();
+    open();
+  }, [sdk]);
+
+  const handleShowSignUp = useCallback(async () => {
+    await sdk.earnScreen({});
+  }, [sdk]);
+
   const handleConnectWallet = useCallback(async () => {
-    await sdk.earnScreen({
-      score: 25,
+    await sdk.connectWallet({
       onConnect: () => new Promise((resolve) => setTimeout(resolve, 1000)),
     });
   }, [sdk]);
@@ -78,6 +86,8 @@ export const Playground = () => {
         <Layout.Section title="Actions">
           <AsyncButton onClick={handleShowPreloader}>Show Preloader</AsyncButton>
           <AsyncButton onClick={handleShowLeaderboard}>Show Leaderboard</AsyncButton>
+          <AsyncButton onClick={handleShowInsertCoin}>Show Insert Coin</AsyncButton>
+          <AsyncButton onClick={handleShowSignUp}>Show Sign Up</AsyncButton>
           <AsyncButton onClick={handleConnectWallet}>Connect Wallet</AsyncButton>
           <AsyncButton onClick={handleSaveScore}>Save Score & Show Leaderboard</AsyncButton>
         </Layout.Section>
